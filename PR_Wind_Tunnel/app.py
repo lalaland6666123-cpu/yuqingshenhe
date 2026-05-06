@@ -744,10 +744,10 @@ def render_round3_swarm_danmaku_ui(raw_text):
         f"""
 <div style="background:linear-gradient(135deg,#1c1917 0%,#450a0a 100%);border:1px solid #dc2626;
 border-radius:10px;padding:14px 16px;margin:12px 0 20px 0;box-shadow:0 4px 18px rgba(220,38,38,0.25);">
-<p style="margin:0 0 10px 0;font-weight:700;color:#fecaca;font-size:16px;">
+<p style="margin:0 0 10px 0;font-weight:700;color:#ffffff;font-size:16px;">
 🚀 【全网情绪沸腾 / 实时弹幕涌入】
 </p>
-<pre style="white-space:pre-wrap;font-size:12.5px;line-height:1.65;margin:0;color:#fee2e2;
+<pre style="white-space:pre-wrap;font-size:12.5px;line-height:1.65;margin:0;color:#ffffff;
 font-family:system-ui,sans-serif;">{safe}</pre>
 </div>
 """,
