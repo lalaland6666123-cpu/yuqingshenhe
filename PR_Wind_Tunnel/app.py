@@ -16,6 +16,8 @@ from config import MODEL_NAME, QWEN_API_KEY, QWEN_BASE_URL, VL_MODEL_NAME
 
 HISTORY_FILE = "history_records.json"
 
+# 种子阵容人数上限；过小沙盘冷清，过大则每轮全员发言的 LLM 调用与耗时显著增加。
+SEED_ROSTER_CAP = 14
 
 client = OpenAI(api_key=QWEN_API_KEY, base_url=QWEN_BASE_URL)
 
@@ -493,7 +495,8 @@ def generate_seed_roster(event_desc, network_mood, pr_draft):
     system_prompt = (
         "你是舆情模拟引擎，只输出 JSON。"
         "你现在是全局总控智能体(Master Agent)。在生成具体角色前，你必须先阐述你的排兵布阵逻辑。"
-        "请先判断事件的性质（政务、商业、娱乐圈或社会热点），再生成 5~7 个种子智能体；角色必须与性质严格匹配。"
+        "请先判断事件的性质（政务、商业、娱乐圈或社会热点），再生成 10~14 个种子智能体；角色必须与性质严格匹配。"
+        "阵容须呈现「全网热议、多方混战」：覆盖锐评大V、路透搬运、本地围观、反讽段子手、科普考据、对立阵营意见领袖、行业观察、营销号带节奏等多路网民画像，立场与权重拉开梯度，禁止几张嘴同质化复读。"
         "请先评估该事件的【公关防御难度】。"
         "【强制支持者规则】除「极其恶劣的政务造假/公然作秀糊弄公众」（如一眼假的官方PS通报、政务通报造假）外，"
         "无论风险多高，种子阵容中**必须至少包含 1 名 stance 为 supportive 的角色**："
@@ -526,7 +529,7 @@ def generate_seed_roster(event_desc, network_mood, pr_draft):
         f"公关草稿：{pr_draft}\n"
         "请严格按要求输出上述 JSON 对象。"
     )
-    raw = _llm_json_array(system_prompt, user_prompt, max_tokens=700, temperature=0.4)
+    raw = _llm_json_array(system_prompt, user_prompt, max_tokens=3200, temperature=0.4)
     parsed = safe_json_loads(raw, default_value={})
 
     master_agent_reasoning = {}
@@ -573,7 +576,7 @@ def generate_seed_roster(event_desc, network_mood, pr_draft):
                 cleaned[-1] = fan
             else:
                 cleaned.append(fan)
-            cleaned = cleaned[:3]
+            cleaned = cleaned[:SEED_ROSTER_CAP]
 
     if len(cleaned) < 2:
         if _is_gov_context(event_desc):
@@ -633,7 +636,7 @@ def generate_seed_roster(event_desc, network_mood, pr_draft):
             "strategy_argument": str(mr.get("strategy_argument", "") or "").strip(),
             "evolution_prediction": str(mr.get("evolution_prediction", "") or "").strip(),
         },
-        "roster": cleaned[:3],
+        "roster": cleaned[:SEED_ROSTER_CAP],
     }
 
 
