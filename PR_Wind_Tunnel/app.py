@@ -3,6 +3,7 @@ import json
 import os
 import time
 import base64
+import random
 import re
 from datetime import datetime
 
@@ -497,27 +498,23 @@ def generate_seed_roster(event_desc, network_mood, pr_draft):
         "你现在是全局总控智能体(Master Agent)。在生成具体角色前，你必须先阐述你的排兵布阵逻辑。"
         "请先判断事件的性质（政务、商业、娱乐圈或社会热点），再生成 10~14 个种子智能体；角色必须与性质严格匹配。"
         "阵容须呈现「全网热议、多方混战」：覆盖锐评大V、路透搬运、本地围观、反讽段子手、科普考据、对立阵营意见领袖、行业观察、营销号带节奏等多路网民画像，立场与权重拉开梯度，禁止几张嘴同质化复读。"
+        "【乐子人强制规则】：你的名单中**必须包含 2~3 名「网络乐子人/反串黑段子手/阴阳怪气网民」**，他们看热闹不嫌事大，专门喜欢改编官方话术。"
         "请先评估该事件的【公关防御难度】。"
         "【强制支持者规则】除「极其恶劣的政务造假/公然作秀糊弄公众」（如一眼假的官方PS通报、政务通报造假）外，"
         "无论风险多高，种子阵容中**必须至少包含 1 名 stance 为 supportive 的角色**："
         "商业语境须为「品牌死忠粉/口味粉/长期用户」，代表危机爆发初期仍站队的一方；"
         "政务（非上述极端造假）语境可为「仍愿意等候调查、反对造谣的温和认同者」，不得使用饭圈话术。"
-        "仅当事件同时满足：政务属性 + 上述极端造假/作秀性质时，才允许完全不生成 supportive，其余立场以 hostile 与少量 neutral 为主。"
-        "若属有争议、有粉丝基础的商业或娱乐事件，可在「1 名 supportive 早期支持者」之外，再按常理分配 hostile/neutral，禁止凭空出现大规模洗地军团。"
-        "若为政务事件：必须生成类似「当地宣传部门」「涉事单位回应人」及群众侧角色，绝对不能出现「品牌客服」等商业错位话术（但允许前述 1 名非饭圈 supportive）。"
-        "若为商业事件：可生成「品牌公关」「消费者」「行业观察者」等，且须含 1 名 supportive 老粉/口味粉。"
-        "若为娱乐圈或社会热点：生成符合该圈层语境的角色。"
         "每个智能体字段：name, persona, weight, stance, role_type。"
         "weight 必须是 100~1000 的整数。"
         "stance 仅可为 supportive/neutral/hostile。"
         "role_type 仅可为 official（官方/涉事主体口径）、influencer（大V或强意见领袖）、bystander（路人或围观者）。"
         "请返回如下 JSON 结构："
-        '{'
+        "{"
         '  "master_agent_reasoning": {'
-        '    "trigger_anchor": "一句话概括当前事件最核心的舆情毒点（如：视觉中发现‘像狗一样’的侮辱性词汇）",'
-        '    "rag_evidence": "结合匹配到的历史案例（如：李佳琦事件），指出历史规律（如：此类傲慢会引发网民极度背刺感，产生400%负面情绪）",'
-        '    "strategy_argument": "基于上述论据，解释你为什么配置接下来的这些角色阵营（如：因此本局配置80%极端敌意角色，测试系统压力阈值）",'
-        '    "evolution_prediction": "用一句话预判舆情演化的最可能分支（如：大V二次剪辑扩散->品牌被扣傲慢帽子->官方通报被嘲讽甩锅）"'
+        '    "trigger_anchor": "一句话概括当前事件最核心的舆情毒点",'
+        '    "rag_evidence": "结合匹配到的历史案例，指出历史规律",'
+        '    "strategy_argument": "基于上述论据，解释你为什么配置接下来的这些角色阵营",'
+        '    "evolution_prediction": "用一句话预判舆情演化的最可能分支"'
         "  },"
         '  "roster": [ {现有的角色结构} ]'
         "}"
@@ -529,7 +526,9 @@ def generate_seed_roster(event_desc, network_mood, pr_draft):
         f"公关草稿：{pr_draft}\n"
         "请严格按要求输出上述 JSON 对象。"
     )
-    raw = _llm_json_array(system_prompt, user_prompt, max_tokens=3200, temperature=0.4)
+    raw = _llm_json_array(
+        system_prompt, user_prompt, max_tokens=3200, temperature=0.6
+    )
     parsed = safe_json_loads(raw, default_value={})
 
     master_agent_reasoning = {}
@@ -539,7 +538,6 @@ def generate_seed_roster(event_desc, network_mood, pr_draft):
         master_agent_reasoning = parsed.get("master_agent_reasoning") or {}
         roster = parsed.get("roster") or []
     elif isinstance(parsed, list):
-        # 兼容旧模型/波动：仍可能只返回数组
         roster = parsed
 
     cleaned = []
@@ -572,13 +570,10 @@ def generate_seed_roster(event_desc, network_mood, pr_draft):
     if not _is_extreme_gov_fraud(event_desc) and cleaned:
         if not any(a.get("stance") == "supportive" for a in cleaned):
             fan = _default_supportive_fan_agent(event_desc)
-            if len(cleaned) >= 3:
-                cleaned[-1] = fan
-            else:
-                cleaned.append(fan)
+            cleaned.append(fan)
             cleaned = cleaned[:SEED_ROSTER_CAP]
 
-    if len(cleaned) < 2:
+    if len(cleaned) < 5:
         if _is_gov_context(event_desc):
             cleaned = [
                 {
@@ -602,6 +597,20 @@ def generate_seed_roster(event_desc, network_mood, pr_draft):
                     "stance": "supportive",
                     "role_type": "bystander",
                 },
+                {
+                    "name": "阴阳怪气乐子人",
+                    "persona": "擅长提炼官方通报里的病句和雷人词汇进行造句模仿的段子手",
+                    "weight": 400,
+                    "stance": "hostile",
+                    "role_type": "bystander",
+                },
+                {
+                    "name": "愤怒的围观群众",
+                    "persona": "对官方极度不信任、情绪暴躁的路人",
+                    "weight": 550,
+                    "stance": "hostile",
+                    "role_type": "bystander",
+                },
             ]
         else:
             cleaned = [
@@ -613,18 +622,32 @@ def generate_seed_roster(event_desc, network_mood, pr_draft):
                     "role_type": "official",
                 },
                 {
-                    "name": "消费者代表",
-                    "persona": "因产品或服务体验受损而发声的用户",
+                    "name": "维权消费者",
+                    "persona": "因产品或服务体验受损极其愤怒的用户",
                     "weight": 610,
                     "stance": "hostile",
                     "role_type": "bystander",
                 },
                 {
                     "name": "十年老粉用户",
-                    "persona": "长期复购、对品牌有感情，遇事本能想先替品牌说两句的用户",
+                    "persona": "长期复购，遇事本能想先替品牌说两句",
                     "weight": 500,
                     "stance": "supportive",
                     "role_type": "bystander",
+                },
+                {
+                    "name": "反串黑段子手",
+                    "persona": "看热闹不嫌事大，最喜欢把官方的公关原话编成段子、做成梗图嘲讽",
+                    "weight": 550,
+                    "stance": "hostile",
+                    "role_type": "bystander",
+                },
+                {
+                    "name": "行业理中客大V",
+                    "persona": "喜欢深度拆解商业逻辑，语气带着爹味和优越感",
+                    "weight": 580,
+                    "stance": "neutral",
+                    "role_type": "influencer",
                 },
             ]
 
@@ -743,12 +766,12 @@ def render_round3_swarm_danmaku_ui(raw_text):
     st.markdown(
         f"""
 <div style="background:linear-gradient(135deg,#1c1917 0%,#450a0a 100%);border:1px solid #dc2626;
-border-radius:10px;padding:14px 16px;margin:12px 0 20px 0;box-shadow:0 4px 18px rgba(220,38,38,0.25);">
-<p style="margin:0 0 10px 0;font-weight:700;color:#ffffff;font-size:16px;">
+border-radius:10px;padding:14px 16px;margin:12px 0 20px 0;box-shadow:0 4px 18px rgba(220,38,38,0.25);color:#ffffff;">
+<p style="margin:0 0 10px 0;font-weight:700;color:#ffffff !important;font-size:16px;">
 🚀 【全网情绪沸腾 / 实时弹幕涌入】
 </p>
-<pre style="white-space:pre-wrap;font-size:12.5px;line-height:1.65;margin:0;color:#ffffff;
-font-family:system-ui,sans-serif;">{safe}</pre>
+<div style="white-space:pre-wrap;font-size:12.5px;line-height:1.65;margin:0;color:#ffffff !important;
+font-family:system-ui,sans-serif;">{safe}</div>
 </div>
 """,
         unsafe_allow_html=True,
@@ -932,18 +955,31 @@ def run_dynamic_sandbox(
     primary_catalyst_name = ""
     catalyst_names = set()
 
+    # 句式盲盒库：强制每个人使用不同的语法结构，减轻同回合内的语境复读
+    TEXT_STYLES = [
+        "【句式强制：极短反问】字数极少，只用反问句式，带有强烈的嘲讽感。（例：就这？你管这叫公关？）",
+        "【句式强制：正话反说】表面夸奖实际阴阳怪气，多用夸张的赞美词。（例：真棒呢，建议全行业推广，赢麻了。）",
+        "【句式强制：痛心疾首】不骂人，而是表达深深的失望和心寒，像个老母亲。（例：看着你们一步步走到今天，太让人寒心了。）",
+        "【句式强制：暴躁输出】全是情绪宣泄，多用感叹号和语气词（如卧槽、绝了、真特么）。",
+        "【句式强制：纯吃瓜乐子】不表达立场，纯粹前排看戏，多用emoji。（例：前排兜售瓜子可乐🤡打起来打起来）",
+        "【句式强制：抠字眼杠精】死死抓住官方通报里的某一个特定词语进行放大抬杠。",
+        "【句式强制：转移视线】扯到竞品或者其他无关的事情上进行拉踩对比。",
+        "【句式强制：比喻/排比】使用荒诞搞笑的比喻来形容这件事情。",
+        "【句式强制：高冷理中客】用居高临下、类似专家点评的客观冷漠语气，显得很专业。",
+    ]
+
     for round_idx in range(1, 5):
         st.markdown(f"### Round {round_idx}")
 
         if round_idx == 2:
             catalyst_specs = generate_dynamic_catalyst_agents(event_desc, network_mood)
             injected = []
-            for i, spec in enumerate(catalyst_specs):
+            for j, spec in enumerate(catalyst_specs):
                 injected.append(
                     {
                         "name": spec["name"],
                         "persona": spec["persona"],
-                        "weight": 500000 if i == 0 else 100000,
+                        "weight": 500000 if j == 0 else 100000,
                         "stance": "hostile",
                         "role_type": "influencer",
                     }
@@ -970,8 +1006,10 @@ def run_dynamic_sandbox(
                         break
 
         current_round_responses = []
+        style_order = list(TEXT_STYLES)
+        random.shuffle(style_order)
 
-        for agent in agents:
+        for i, agent in enumerate(agents):
             rt_agent = agent.get("role_type", "bystander")
             if rt_agent == "official" and round_idx not in (1, 4):
                 continue
@@ -981,12 +1019,11 @@ def run_dynamic_sandbox(
             if round_idx == 3 and rt_agent != "official":
                 context_text += (
                     "\n--- 广场态势 ---\n"
-                    "本话题下，上一轮由头部对立账号带起的代表性高赞口径已在广场出现（见上方热评摘选）。"
-                    "请继续围绕公共话题与证据链条独立发帖，带话题标签式输出情绪，严禁点名@人或回贴式吵架。"
+                    "本话题下，上一轮的代表性高赞口径已在广场出现。请带话题标签独立发帖，严禁点名@人吵架。"
                 )
                 if latest_catalyst_speech:
                     context_text += (
-                        "\n（广场高热切口摘录，仅供对照舆论焦点，禁止据此点对点回怼。）\n「"
+                        "\n（广场高热切口摘录：）\n「"
                         + latest_catalyst_speech
                         + "」"
                     )
@@ -994,51 +1031,35 @@ def run_dynamic_sandbox(
             if round_idx == 4:
                 if rt_agent == "official":
                     context_text += (
-                        "\n【结局回合·官方】：发布最终蓝底白字通报，正视舆情、不得退缩或敷衍跑路。"
-                        "须体现调查进展或处置安排等严肃信息，仍须严格遵守输出格式硬控。"
+                        "\n【结局回合·官方】：发布最终蓝底白字通报，须正视舆情，体现处置安排。"
                     )
                 elif rt_agent == "influencer":
-                    context_text += "\n【最高指令】：给出你最后的总结性施压（广场发帖，不@人）。"
+                    context_text += "\n【最高指令】：给出你最后的总结性施压。"
                 else:
-                    context_text += "\n【最高指令】：吃瓜疲劳，留下一句退场白（广场发帖，不@人）。"
+                    context_text += "\n【最高指令】：吃瓜疲劳，留下一句退场白。"
 
             macro_bg = ""
             if zeitgeist_result and str(zeitgeist_result.get("risk_level", "")).strip() == "高":
                 zw = (zeitgeist_result.get("collateral_damage_warning") or "").strip()
                 if zw:
                     macro_bg = (
-                        "【大环境背景】：目前互联网上刚发生过类似敏感事件（如近期热议："
-                        f"{zw}"
-                        "），这让网民对此类话题极度敏感和暴躁。"
-                        "请在你的文本中自然映射或借题该氛围（官方通报须克制、可点到为止提及高度重视舆情反映）。"
+                        f"【大环境背景】：近期敏感热点（{zw}）让网民极度暴躁。你的文本需自然借题发挥。"
                     )
 
             if rt_agent == "official":
-                rag_tail = (
-                    _rag_official_memory_tail(matched_case)
-                    if matched_case
-                    else ""
-                )
+                rag_tail = _rag_official_memory_tail(matched_case) if matched_case else ""
                 system_prompt = (
-                    f"你执笔对外口径的官方身份：{agent['name']}（{agent['persona']}）。"
-                    "你只负责机构通报文本，不参与网民互怼，也不使用聊天语气。"
+                    f"你执笔官方身份：{agent['name']}（{agent['persona']}）。"
                     f"{OFFICIAL_OUTPUT_FORMAT_HARD}"
-                    f"{macro_bg}"
-                    f"{rag_tail}"
+                    f"{macro_bg}{rag_tail}"
                 )
-                if round_idx == 1:
-                    round_instruction = (
-                        "Round1 初步定调：请发布首份【关于XXX事件的情况说明/通报】，阐明已关注、正核查、将及时通报等官方态度。"
-                    )
-                else:
-                    round_instruction = (
-                        "Round4 最终通报：请发布终版蓝底白字通报，可回应调查进展、处置措施与下一步安排，态度冷静严谨。"
-                    )
+                round_instruction = (
+                    "Round1：发布首份【情况说明】，定调、核查。"
+                    if round_idx == 1
+                    else "Round4：发布终版通报，包含处置措施。"
+                )
                 user_prompt = (
-                    f"{context_text}\n"
-                    f"网络情绪总览：{network_mood}\n"
-                    f"内部参考草稿（勿口语化照抄，须改写为正式通报体）：{pr_draft}\n"
-                    f"{round_instruction}"
+                    f"{context_text}\n情绪：{network_mood}\n参考草稿：{pr_draft}\n{round_instruction}"
                 )
                 speech = chat_llm(
                     system_prompt,
@@ -1050,72 +1071,91 @@ def run_dynamic_sandbox(
                 phase = "初步定调" if round_idx == 1 else "最终通报"
                 render_official_announcement(agent, speech, round_idx, phase)
             else:
+                _blob = f"{agent.get('persona', '')}{agent.get('name', '')}"
+                _troll_keys = (
+                    "乐子人",
+                    "段子",
+                    "反串",
+                    "嘲讽",
+                    "梗",
+                    "阴阳怪气",
+                    "吃瓜",
+                )
+                is_troll = any(k in _blob for k in _troll_keys)
+                troll_snippet = ""
+                if is_troll:
+                    troll_snippet = (
+                        "【乐子人专属被动：贴脸开大】你必须提取涉事方/官方原话中极其离谱、傲慢或敷衍的词语作为靶子，"
+                        "直接改编成段子狠狠嘲讽。极其阴阳怪气，要有贴吧老哥那种一针见血的辛辣感！"
+                    )
+
+                personality_law = (
+                    f"【人设与立场绝对锁死】：你的立场是 {agent.get('stance', 'neutral')} ！"
+                    "若为 hostile，必须疯狂输出敌意或嘲讽；"
+                    "若为 neutral，必须装作纯路人理中客分析对错；"
+                    "若为 supportive，【绝对不能跟着别人骂品牌】，必须尽全力洗地、辩解，展现出极其嘴硬或卑微的粉丝/水军状态。"
+                    "绝不能像AI一样中立客观！"
+                )
+
+                forced_style = style_order[i % len(style_order)]
+
                 spiral_snippet = ""
                 if agent.get("stance") == "supportive":
                     if round_idx == 1:
                         spiral_snippet = (
-                            "【沉默的螺旋·Round1】你是品牌的死忠粉或长期支持者，你认为这只是一点小问题或小误会，"
-                            "请理直气壮地为品牌/当事方辩护（例如：只要好吃/好用就行，管那么多干嘛、别上纲上线）。"
+                            "【Round1】理直气壮为品牌辩护，认为网民大惊小怪。"
                         )
                     elif round_idx == 2:
                         spiral_snippet = (
-                            "【沉默的螺旋·Round2】大V已经下场带节奏，全网都在骂。你的底气开始不足，"
-                            "语气变得犹豫，试图和稀泥或转移话题，不再像上一轮那样硬气。"
+                            "【Round2】发现舆论控不住了，开始和稀泥、转移话题或说产品还是好用的。"
                         )
                     elif round_idx == 3:
                         spiral_snippet = (
-                            "【沉默的螺旋·Round3】舆论已经彻底失控。你感到害怕和无力，作为曾经的支持者，"
-                            "发出一句失望的叹息，或表示不想再管了、心累了。"
+                            "【Round3】感到心累，发出老粉的叹息，但依然不骂品牌。"
                         )
-                rag_crowd = ""
-                if matched_case and rt_agent in ("bystander", "influencer"):
-                    rag_crowd = _rag_crowd_memory_tail(matched_case)
-                round4_law = ROUND4_FINAL_BEHAVIOR_LAW if round_idx == 4 else ""
-                system_prompt = (
-                    f"账号人设：{agent['name']}。"
-                    f"人设摘要：{agent['persona']}。"
-                    f"立场倾向：{agent['stance']}。"
-                    f"传播权重：{agent['weight']}。"
-                    f"身份类型：{rt_agent}（非机构通报账号）。"
-                    "你在微博类公开广场的话题链路下独立发帖，不是微信群聊，也不是私聊。"
-                    f"{macro_bg}"
-                    f"{spiral_snippet}"
-                    f"{round4_law}"
-                    "发言须符合人设，与同话题下其他贴文风避免雷同套话。"
-                    f"{rag_crowd}"
-                )
-                round_instruction = "请发布一条广场动态（单条，勿换行堆砌长文）。"
-                if round_idx == 1:
-                    round_instruction = "Round1：试探性带话题发帖，观察广场风向。"
-                elif round_idx == 2:
-                    round_instruction = "Round2：话题热度抬升，请强化情绪与观点输出，仍遵守广场发帖原则。"
-                elif round_idx == 3:
-                    round_instruction = "Round3：焦灼对撞期，围绕话题与公共证据链输出，不点名吵架。"
-                elif round_idx == 4:
-                    round_instruction = "Round4：结局回合，请按上文最高指令完成最后一条广场动态。"
 
-                anti_echo = ""
+                rag_crowd = _rag_crowd_memory_tail(matched_case) if matched_case else ""
+
+                system_prompt = (
+                    f"账号：{agent['name']}。人设：{agent['persona']}。"
+                    f"{personality_law}"
+                    f"{troll_snippet}"
+                    f"{macro_bg}{spiral_snippet}{rag_crowd}"
+                )
+
+                round_instruction = (
+                    "Round1：试探性发帖观察。"
+                    if round_idx == 1
+                    else "Round2：强化观点输出。"
+                    if round_idx == 2
+                    else "Round3：焦灼对撞，输出辛辣点评。"
+                    if round_idx == 3
+                    else "Round4：看结局并退场发言。"
+                )
+
                 if current_round_responses:
                     joined = "\n".join(current_round_responses)
                     anti_echo = (
-                        "\n【最高优先级警告】以下是刚才别人发的帖子（本回合内已出现）：\n"
-                        f"{joined}\n"
-                        "你绝对不能重复他们的句式和核心词！你必须找一个全新的切入点！"
-                        "例如：别人骂态度，你就骂价格；别人骂质量，你就谈知情权；别人骂品牌，你就谈童年滤镜破灭。"
-                        "请输出极具个人特色的独立观点！"
+                        "\n【系统防碰撞最高指令：严禁排比复读！】\n"
+                        f"这是本回合前面人的发言：\n{joined}\n"
+                        "🔴 绝对禁止使用与上方类似的句式结构！绝对禁止使用重复的比喻！\n"
+                        f"🟢 必须严格遵守分配给你的风格格式：{forced_style}"
+                    )
+                else:
+                    anti_echo = (
+                        f"\n🟢 必须严格遵守分配给你的风格格式：{forced_style}"
                     )
 
                 user_prompt = (
                     f"{context_text}\n"
                     f"网络情绪：{network_mood}\n"
-                    f"涉事方公开表态参考（可引用嘲讽但不要假装私聊回复对方）：{pr_draft}\n"
+                    f"事件/官方表态参考：{pr_draft}\n"
                     f"{round_instruction}\n"
                     f"{PLAZA_SQUARE_RULE}"
                     f"{anti_echo}"
                 )
-                if round_idx == 4:
-                    user_prompt += "\n" + ROUND4_ANTI_COLLISION_TAIL
-                speech = chat_llm(system_prompt, user_prompt, max_tokens=80)
+
+                speech = chat_llm(system_prompt, user_prompt, max_tokens=150)
                 render_agent_bubble(agent, speech, round_idx)
 
             logs.append(
