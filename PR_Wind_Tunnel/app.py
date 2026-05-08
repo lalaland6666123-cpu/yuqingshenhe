@@ -791,6 +791,116 @@ def build_plaza_context(event_desc, logs_rows):
     return "\n".join(lines)
 
 
+def get_avatar_emoji(role_type, stance, persona, name):
+    """根据角色属性分配生动的头像"""
+    persona = str(persona or "")
+    name = str(name or "")
+    if role_type == "official":
+        return "👔"
+    if "乐子" in persona or "段子" in persona or "反串" in persona or "反串" in name:
+        return "🤡"
+    if "理中客" in persona or "大V" in persona or "专家" in persona:
+        return "🧐"
+    if "法" in persona or "考据" in persona:
+        return "🕵️‍♂️"
+    if stance == "hostile":
+        return "🤬"
+    if stance == "supportive":
+        return "🥺"
+    return "😶"
+
+
+def render_animated_bubble(agent, text, round_idx):
+    """渲染带有拟人小人和滑入动画效果的聊天气泡"""
+    rt = agent.get("role_type", "bystander")
+    stance = str(agent.get("stance", "neutral") or "neutral")
+    persona = str(agent.get("persona", "") or "")
+    name = str(agent.get("name", "") or "")
+
+    avatar = get_avatar_emoji(rt, stance, persona, name)
+
+    if stance == "hostile":
+        bg_color = "#3f1d1d"
+        border_color = "#ef4444"
+    elif stance == "supportive":
+        bg_color = "#143a24"
+        border_color = "#22c55e"
+    else:
+        bg_color = "#1f2937"
+        border_color = "#6b7280"
+
+    flex_dir = "row-reverse" if stance == "supportive" else "row"
+    align_items = "flex-end" if stance == "supportive" else "flex-start"
+
+    animation_css = """
+    <style>
+        @keyframes plazaPopIn {
+            0% { opacity: 0; transform: translateY(30px) scale(0.9); }
+            70% { transform: translateY(-5px) scale(1.02); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .plaza-character-container {
+            display: flex;
+            flex-direction: column;
+            align-items: var(--align-items);
+            animation: plazaPopIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            margin-bottom: 20px;
+        }
+        .plaza-bubble-header {
+            font-size: 12px; color: #9ca3af; margin-bottom: 4px; display: flex; gap: 8px; flex-wrap: wrap;
+        }
+        .plaza-main-content {
+            display: flex; align-items: flex-start; gap: 12px; flex-direction: var(--flex-dir);
+        }
+        .plaza-avatar {
+            font-size: 40px;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+            animation: plazaAvatarFloat 3s ease-in-out infinite;
+        }
+        @keyframes plazaAvatarFloat {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+            100% { transform: translateY(0px); }
+        }
+        .plaza-chat-bubble {
+            background-color: var(--bg-color);
+            border-left: 4px solid var(--border-color);
+            color: #f3f4f6;
+            padding: 12px 16px;
+            border-radius: 12px;
+            max-width: 85%;
+            font-size: 15px;
+            line-height: 1.6;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            white-space: pre-wrap;
+        }
+    </style>
+    """
+
+    safe_text = html.escape(text or "")
+    persona_preview = persona[:15] + ("…" if len(persona) > 15 else "")
+
+    html_code = f"""
+    {animation_css}
+    <div class="plaza-character-container" style="--align-items: {align_items};">
+        <div class="plaza-bubble-header">
+            <strong>{html.escape(name)}</strong>
+            <span>({html.escape(stance)})</span>
+            <span>Round {int(round_idx)}</span>
+            <span>📝 {html.escape(persona_preview)}</span>
+        </div>
+        <div class="plaza-main-content" style="--flex-dir: {flex_dir};">
+            <div class="plaza-avatar">{avatar}</div>
+            <div class="plaza-chat-bubble" style="--bg-color: {bg_color}; --border-color: {border_color};">
+                {safe_text}
+            </div>
+        </div>
+    </div>
+    """
+
+    st.markdown(html_code, unsafe_allow_html=True)
+
+
 def render_official_announcement(agent, text, round_idx, phase_label):
     st.markdown(
         f"**📢 官方蓝底白字通报** ｜ `{html.escape(agent.get('name', ''))}` ｜ "
@@ -1150,7 +1260,7 @@ def run_dynamic_sandbox(
 
                 speech = chat_llm(system_prompt, user_prompt, max_tokens=150)
                 speech = re.sub(r"#.*?#", "", speech or "").strip()
-                render_agent_bubble(agent, speech, round_idx)
+                render_animated_bubble(agent, speech, round_idx)
 
             logs.append(
                 {
