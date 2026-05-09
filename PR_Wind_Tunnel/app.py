@@ -902,9 +902,7 @@ def render_animated_bubble(agent, text, round_idx):
         </div>
         <div class="plaza-main-content" style="--flex-dir: {flex_dir};">
             <img class="plaza-pixel-avatar" src="{avatar_url}" alt="avatar">
-            <div class="plaza-chat-bubble" style="--bg-color: {bg_color}; --border-color: {border_color};">
-                {safe_text}
-            </div>
+            <div class="plaza-chat-bubble" style="--bg-color: {bg_color}; --border-color: {border_color};">{safe_text}</div>
         </div>
     </div>
     """
