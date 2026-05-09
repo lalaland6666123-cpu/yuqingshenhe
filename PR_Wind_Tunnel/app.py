@@ -1342,30 +1342,48 @@ def generate_report(event_desc, network_mood, pr_draft, visual_risk_desc, logs):
 
 
 def render_ai_town_replay(agents, logs):
-    """渲染 AI 小镇 2D 像素风对话回放动画"""
+    """渲染 AI 小镇 2D 像素风对话回放动画 (立体场景 + 全身NPC)"""
     import json
     import urllib.parse
+    import hashlib
+    import streamlit.components.v1 as components
+    
+    # 衣服颜色盘，用于给不同的 NPC 穿不同颜色的衣服
+    color_palette = ['#E53935', '#43A047', '#1E88E5', '#FDD835', '#8E24AA', '#F4511E', '#00ACC1', '#3949AB', '#6D4C41']
     
     agent_html = ""
-    rows, cols = 3, 5 
+    
+    # 将角色分布在河流上方和下方，避开河流区域 (55% - 70%)
+    y_tiers = [15, 35, 75, 90] 
+    
     for idx, agent in enumerate(agents):
         name = agent["name"]
         
-        # 🌟 核心魔法：使用 DiceBear 的像素风(pixel-art)接口，根据名字动态生成专属像素小人
-        # url 编码名字，防止特殊字符报错
+        # 使用名字的哈希值来固定分配衣服颜色，保证每次刷新同一个人的衣服颜色不变
+        color_idx = int(hashlib.md5(name.encode('utf-8')).hexdigest(), 16) % len(color_palette)
+        shirt_color = color_palette[color_idx]
+        
         safe_name = urllib.parse.quote(name)
-        # 这里使用 pixel-art 风格，也可以换成 adventurer 风格
         avatar_url = f"https://api.dicebear.com/9.x/pixel-art/svg?seed={safe_name}"
         
-        # 计算 X, Y 坐标
-        x = 15 + (idx % cols) * 18
-        y = 25 + (idx // cols) * 28
+        # 计算 X, Y 坐标 (根据层级排布，产生前后景立体感)
+        row = idx // 4
+        col = idx % 4
+        x = 10 + col * 22 + (row % 2) * 5  # 错开站位
+        y = y_tiers[row % 4]
         
-        # 生成小人的 HTML 节点（将 emoji 替换为 img 标签）
+        # 🌟 z-index 直接等于 y 坐标，这样站在前面(y更大)的人会自动遮挡后面的人，形成 3D 纵深感！
         agent_html += f"""
-        <div class="agent-sprite" id="sprite-{name}" style="left: {x}%; top: {y}%;">
+        <div class="agent-sprite" id="sprite-{name}" style="left: {x}%; top: {y}%; z-index: {y};">
             <div class="speech-bubble" id="bubble-{name}"></div>
-            <img class="agent-sprite-img" src="{avatar_url}" alt="{name}">
+            <div class="npc-model">
+                <img class="npc-head" src="{avatar_url}" alt="{name}">
+                <div class="npc-body" style="background-color: {shirt_color};"></div>
+                <div class="npc-legs">
+                    <div class="leg"></div>
+                    <div class="leg"></div>
+                </div>
+            </div>
             <div class="agent-shadow"></div>
             <div class="agent-name">{name}</div>
         </div>
@@ -1384,56 +1402,112 @@ def render_ai_town_replay(agents, logs):
     <style>
         body {{ margin: 0; overflow: hidden; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }}
         
-        /* 像素风草地广场背景 */
+        /* 🌟 扩大后的像素草地地图 */
         #ai-town-map {{
-            position: relative; width: 100%; height: 500px;
-            background-color: #639b4b; /* 星露谷风格草地绿 */
+            position: relative; width: 100%; height: 750px; /* 地图变得更大 */
+            background-color: #7BA35B; /* 星露谷风格草地绿 */
             background-image: 
-                linear-gradient(rgba(0,0,0,.08) 2px, transparent 2px),
-                linear-gradient(90deg, rgba(0,0,0,.08) 2px, transparent 2px);
-            background-size: 32px 32px;
+                linear-gradient(rgba(0,0,0,.05) 2px, transparent 2px),
+                linear-gradient(90deg, rgba(0,0,0,.05) 2px, transparent 2px);
+            background-size: 40px 40px;
             border-radius: 12px;
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.4);
-            border: 4px solid #3c5e2d;
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.3);
+            border: 6px solid #4a6336;
             overflow: hidden;
         }}
         
-        /* 信息控制栏 */
+        /* 🌟 纯 CSS 绘制的立体河流 */
+        .river {{
+            position: absolute; top: 52%; left: 0; width: 100%; height: 16%;
+            background: #42A5F5;
+            border-top: 6px solid #1E88E5;
+            border-bottom: 6px solid #1E88E5;
+            box-shadow: inset 0 10px 20px rgba(0,0,0,0.1), 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 52; /* 介于前后景之间 */
+            overflow: hidden;
+        }}
+        /* 河流水波纹动画 */
+        .river-wave {{
+            position: absolute; width: 60px; height: 4px; background: rgba(255,255,255,0.4);
+            border-radius: 2px; animation: flow linear infinite;
+        }}
+        .w1 {{ top: 20%; left: -60px; animation-duration: 4s; }}
+        .w2 {{ top: 60%; left: -60px; animation-duration: 3s; animation-delay: 1.5s; }}
+        .w3 {{ top: 40%; left: -60px; animation-duration: 5s; animation-delay: 0.5s; }}
+        @keyframes flow {{ 100% {{ transform: translateX(120vw); }} }}
+
+        /* 🌟 纯 CSS 绘制的立体小木屋 */
+        .house {{
+            position: absolute; width: 120px; height: 90px;
+            background: #8D6E63; border: 4px solid #5D4037;
+            border-radius: 4px; box-shadow: 20px 20px 0px rgba(0,0,0,0.15); /* 立体投影 */
+        }}
+        .house-roof {{
+            position: absolute; top: -50px; left: -14px;
+            width: 140px; height: 60px; background: #D84315; border: 4px solid #BF360C;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }}
+        .house-door {{
+            position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+            width: 30px; height: 45px; background: #4E342E; border: 3px solid #3E2723;
+            border-radius: 4px 4px 0 0;
+        }}
+        .house-window {{
+            position: absolute; top: 20px; width: 25px; height: 25px;
+            background: #81D4FA; border: 3px solid #5D4037; border-radius: 2px;
+        }}
+        
+        /* 摆放两座木屋 */
+        .h1 {{ top: 8%; left: 10%; z-index: 10; }}
+        .h2 {{ top: 22%; right: 15%; z-index: 25; }}
+
+        /* 底部控制面板 */
         #control-bar {{
             position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%);
-            background: rgba(30, 25, 20, 0.85); color: #f0e6d2; padding: 12px 24px;
-            border-radius: 6px; font-weight: bold; z-index: 100;
+            background: rgba(46, 36, 28, 0.95); color: #f0e6d2; padding: 12px 24px;
+            border-radius: 8px; font-weight: bold; z-index: 999;
             display: flex; gap: 20px; align-items: center;
-            border: 2px solid #a68453; /* RPG 木板边框风格 */
+            border: 3px solid #8D6E63; box-shadow: 0 8px 20px rgba(0,0,0,0.6);
         }}
         button {{
-            background: #4caf50; border: 2px solid #2e7d32; color: white; padding: 6px 16px;
-            border-radius: 4px; cursor: pointer; font-weight: bold; font-family: inherit;
+            background: #66BB6A; border: 3px solid #2E7D32; color: white; padding: 8px 18px;
+            border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 14px; text-transform: uppercase;
         }}
-        button:hover {{ background: #45a049; transform: scale(1.05); }}
+        button:hover {{ background: #4CAF50; transform: translateY(-2px); }}
         
+        /* 🌟 NPC 容器与发声动画 */
         .agent-sprite {{
             position: absolute; display: flex; flex-direction: column; align-items: center;
+            transition: all 0.3s;
+        }}
+        .agent-sprite.speaking .npc-model {{
+            transform: translateY(-12px) scale(1.1); /* 说话时跳跃放大 */
+        }}
+        
+        /* 🌟 拼装全身 NPC */
+        .npc-model {{
+            display: flex; flex-direction: column; align-items: center;
+            animation: idleBounce 1.5s infinite ease-in-out alternate;
             transition: transform 0.2s;
         }}
-        .agent-sprite.speaking {{
-            transform: translateY(-8px); z-index: 50;
+        /* 大头 */
+        .npc-head {{
+            width: 44px; height: 44px;
+            image-rendering: pixelated; z-index: 3;
+            filter: drop-shadow(0 2px 2px rgba(0,0,0,0.3));
         }}
-        
-        /* 🌟 真正的像素风小人图片样式 */
-        .agent-sprite-img {{
-            width: 56px; 
-            height: 56px;
-            /* 下面这行极其重要，强制浏览器不要平滑图片，保留像素颗粒感！ */
-            image-rendering: pixelated; 
-            z-index: 2;
-            animation: idleBounce 2s infinite ease-in-out alternate;
+        /* 身体 */
+        .npc-body {{
+            width: 26px; height: 18px; border-radius: 4px;
+            border: 3px solid #222; margin-top: -6px; z-index: 2;
         }}
-        
-        /* 小人脚底下的阴影 */
-        .agent-shadow {{
-            width: 30px; height: 10px; background: rgba(0,0,0,0.3);
-            border-radius: 50%; margin-top: -8px; z-index: 1;
+        /* 腿 */
+        .npc-legs {{
+            display: flex; gap: 4px; margin-top: -3px; z-index: 1;
+        }}
+        .leg {{
+            width: 8px; height: 12px; background: #3E2723;
+            border: 3px solid #222; border-radius: 2px;
         }}
         
         @keyframes idleBounce {{
@@ -1441,29 +1515,36 @@ def render_ai_town_replay(agents, logs):
             100% {{ transform: translateY(-4px); }}
         }}
         
+        /* 脚底阴影 */
+        .agent-shadow {{
+            width: 34px; height: 10px; background: rgba(0,0,0,0.35);
+            border-radius: 50%; margin-top: -5px; z-index: 0;
+        }}
+        
+        /* 名字牌 */
         .agent-name {{
-            background: rgba(0,0,0,0.7); color: white; font-size: 11px;
+            background: rgba(0,0,0,0.8); color: white; font-size: 12px;
             padding: 3px 8px; border-radius: 4px; margin-top: 6px;
-            border: 1px solid #444; z-index: 3; white-space: nowrap;
+            border: 1px solid #666; z-index: 4; white-space: nowrap;
         }}
         
         /* 游戏风对话气泡 */
         .speech-bubble {{
-            position: absolute; bottom: 85px; left: 50%; transform: translateX(-50%);
-            background: #fffdf5; color: #111; padding: 12px 16px;
-            border-radius: 8px; font-size: 13px; line-height: 1.5;
-            max-width: 220px; min-width: 140px;
-            box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+            position: absolute; bottom: 105px; left: 50%; transform: translateX(-50%);
+            background: #ffffff; color: #111; padding: 14px 18px;
+            border-radius: 10px; font-size: 14px; line-height: 1.6;
+            max-width: 260px; min-width: 160px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
             opacity: 0; visibility: hidden; transition: opacity 0.2s;
-            border: 3px solid #222; z-index: 60;
+            border: 4px solid #111; z-index: 900; font-weight: bold;
         }}
         .speech-bubble::after {{
-            content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%);
-            border-width: 10px 10px 0; border-style: solid; border-color: #222 transparent transparent transparent;
+            content: ''; position: absolute; bottom: -14px; left: 50%; transform: translateX(-50%);
+            border-width: 14px 14px 0; border-style: solid; border-color: #111 transparent transparent transparent;
         }}
         .speech-bubble::before {{
-            content: ''; position: absolute; bottom: -6px; left: 50%; transform: translateX(-50%);
-            border-width: 8px 8px 0; border-style: solid; border-color: #fffdf5 transparent transparent transparent;
+            content: ''; position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%);
+            border-width: 10px 10px 0; border-style: solid; border-color: #ffffff transparent transparent transparent;
             z-index: 1;
         }}
         .speech-bubble.show {{ opacity: 1; visibility: visible; }}
@@ -1471,10 +1552,32 @@ def render_ai_town_replay(agents, logs):
     </head>
     <body>
     <div id="ai-town-map">
+        <!-- 装饰：木屋 -->
+        <div class="house h1">
+            <div class="house-roof"></div>
+            <div class="house-window" style="left: 10px;"></div>
+            <div class="house-window" style="right: 10px;"></div>
+            <div class="house-door"></div>
+        </div>
+        <div class="house h2">
+            <div class="house-roof"></div>
+            <div class="house-window" style="left: 10px;"></div>
+            <div class="house-door" style="left: 70%;"></div>
+        </div>
+        
+        <!-- 装饰：河流 -->
+        <div class="river">
+            <div class="river-wave w1"></div>
+            <div class="river-wave w2"></div>
+            <div class="river-wave w3"></div>
+        </div>
+
+        <!-- 注入的全身 NPC -->
         {agent_html}
+        
         <div id="control-bar">
-            <span id="round-info">等待推演完成...</span>
-            <button onclick="playLog()">▶️ 播放对线回放</button>
+            <span id="round-info">广场准备就绪，点击开始 ➡️</span>
+            <button onclick="playLog()">▶️ 播放推演回放</button>
         </div>
     </div>
 
@@ -1513,7 +1616,7 @@ def render_ai_town_replay(agents, logs):
                 if (currentIndex >= logs.length) {{
                     clearInterval(playInterval);
                     isPlaying = false;
-                    document.getElementById('round-info').innerText = "🏁 推演播放完毕";
+                    document.getElementById('round-info').innerText = "🏁 对线推演结束";
                     setTimeout(() => {{
                         document.querySelectorAll('.speech-bubble').forEach(b => b.classList.remove('show'));
                         document.querySelectorAll('.agent-sprite').forEach(s => s.classList.remove('speaking'));
@@ -1521,15 +1624,14 @@ def render_ai_town_replay(agents, logs):
                     return;
                 }}
                 showBubble(logs[currentIndex]);
-            }}, 3500);
+            }}, 3500); 
         }}
     </script>
     </body>
     </html>
     """
     
-    import streamlit.components.v1 as components
-    components.html(html_code, height=520)
+    components.html(html_code, height=770)
 
 
 def main():
