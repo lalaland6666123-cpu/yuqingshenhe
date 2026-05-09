@@ -811,13 +811,18 @@ def get_avatar_emoji(role_type, stance, persona, name):
 
 
 def render_animated_bubble(agent, text, round_idx):
-    """渲染带有拟人小人和滑入动画效果的聊天气泡"""
+    """渲染带有像素风 NPC 小人和滑入动画效果的聊天气泡"""
+    import urllib.parse
+    
     rt = agent.get("role_type", "bystander")
     stance = str(agent.get("stance", "neutral") or "neutral")
     persona = str(agent.get("persona", "") or "")
-    name = str(agent.get("name", "") or "")
+    name = str(agent.get("name", "NPC") or "NPC")
 
-    avatar = get_avatar_emoji(rt, stance, persona, name)
+    # 🌟 核心改动：使用 DiceBear 像素接口替换原来的 Emoji 头像
+    # 这样这里的头像和下面广场上的小人就完全对应上了
+    safe_name = urllib.parse.quote(name)
+    avatar_url = f"https://api.dicebear.com/9.x/pixel-art/svg?seed={safe_name}"
 
     if stance == "hostile":
         bg_color = "#3f1d1d"
@@ -852,16 +857,21 @@ def render_animated_bubble(agent, text, round_idx):
         .plaza-main-content {
             display: flex; align-items: flex-start; gap: 12px; flex-direction: var(--flex-dir);
         }
-        .plaza-avatar {
-            font-size: 40px;
-            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
-            animation: plazaAvatarFloat 3s ease-in-out infinite;
+        
+        /* 🌟 针对像素图片的 CSS 优化 */
+        .plaza-pixel-avatar {
+            width: 56px;
+            height: 56px;
+            image-rendering: pixelated; /* 强制像素颗粒感，不模糊 */
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.4));
+            animation: plazaAvatarFloat 2.5s ease-in-out infinite alternate;
         }
+        
         @keyframes plazaAvatarFloat {
             0% { transform: translateY(0px); }
-            50% { transform: translateY(-5px); }
-            100% { transform: translateY(0px); }
+            100% { transform: translateY(-6px); }
         }
+        
         .plaza-chat-bubble {
             background-color: var(--bg-color);
             border-left: 4px solid var(--border-color);
@@ -880,6 +890,7 @@ def render_animated_bubble(agent, text, round_idx):
     safe_text = html.escape(text or "")
     persona_preview = persona[:15] + ("…" if len(persona) > 15 else "")
 
+    # 这里把原本的 <div class="plaza-avatar">{avatar}</div> 换成了 <img> 标签
     html_code = f"""
     {animation_css}
     <div class="plaza-character-container" style="--align-items: {align_items};">
@@ -890,7 +901,7 @@ def render_animated_bubble(agent, text, round_idx):
             <span>📝 {html.escape(persona_preview)}</span>
         </div>
         <div class="plaza-main-content" style="--flex-dir: {flex_dir};">
-            <div class="plaza-avatar">{avatar}</div>
+            <img class="plaza-pixel-avatar" src="{avatar_url}" alt="avatar">
             <div class="plaza-chat-bubble" style="--bg-color: {bg_color}; --border-color: {border_color};">
                 {safe_text}
             </div>
@@ -1110,171 +1121,171 @@ def run_dynamic_sandbox(
         current_round_responses = []
 
         for i, agent in enumerate(agents):
-            rt_agent = agent.get("role_type", "bystander")
-            if rt_agent == "official" and round_idx not in (1, 4):
-                continue
+                rt_agent = agent.get("role_type", "bystander")
+                if rt_agent == "official" and round_idx not in (1, 4):
+                    continue
 
-            context_text = build_plaza_context(event_desc, logs[-8:])
+                context_text = build_plaza_context(event_desc, logs[-8:])
 
-            if round_idx == 3 and rt_agent != "official":
-                context_text += (
-                    "\n--- 广场态势 ---\n"
-                    "本话题下，上一轮的代表性高赞口径已出现。请独立发帖，严禁带#话题标签#，严禁@人吵架。"
-                )
-                if latest_catalyst_speech:
+                if round_idx == 3 and rt_agent != "official":
                     context_text += (
-                        "\n（广场高热切口摘录：）\n「" + latest_catalyst_speech + "」"
+                        "\n--- 广场态势 ---\n"
+                        "本话题下，上一轮的代表性高赞口径已出现。请独立发帖，严禁带#话题标签#，严禁@人吵架。"
                     )
-
-            if round_idx == 4:
-                if rt_agent == "official":
-                    context_text += (
-                        "\n【结局回合·官方】：发布最终蓝底白字通报，须正视舆情，清晰写明【具体的处理结果】（如是否发货、怎么赔偿等）。"
-                    )
-                elif rt_agent == "influencer":
-                    context_text += (
-                        "\n【最高指令】：看一眼官方的处理结果，给出你最后的总结性表态。"
-                    )
-                else:
-                    context_text += (
-                        "\n【最高指令】：看一眼官方的处理结果，留下一句退场白。"
-                    )
-
-            macro_bg = ""
-            if zeitgeist_result and str(zeitgeist_result.get("risk_level", "")).strip() == "高":
-                zw = (zeitgeist_result.get("collateral_damage_warning") or "").strip()
-                if zw:
-                    macro_bg = (
-                        f"【大环境背景】：近期敏感热点（{zw}）让网民极度暴躁。你的文本需自然借题发挥。"
-                    )
-
-            if rt_agent == "official":
-                rag_tail = _rag_official_memory_tail(matched_case) if matched_case else ""
-                system_prompt = (
-                    f"你执笔官方身份：{agent['name']}（{agent['persona']}）。"
-                    f"{OFFICIAL_OUTPUT_FORMAT_HARD}"
-                    f"{macro_bg}{rag_tail}"
-                )
-                round_instruction = (
-                    "Round1：发布首份【情况说明】，定调、核查。"
-                    if round_idx == 1
-                    else "Round4：发布终版通报，必须包含【具体的最终处置措施】。"
-                )
-                user_prompt = (
-                    f"{context_text}\n情绪：{network_mood}\n参考草稿：{pr_draft}\n{round_instruction}"
-                )
-                speech = chat_llm(
-                    system_prompt,
-                    user_prompt,
-                    max_tokens=400,
-                    skip_mandatory_chat_rule=True,
-                    collapse_newlines=False,
-                )
-                phase = "初步定调" if round_idx == 1 else "最终通报"
-                render_official_announcement(agent, speech, round_idx, phase)
-            else:
-                _troll_blob = f"{agent.get('persona', '')}{agent.get('name', '')}"
-                is_troll = any(
-                    k in _troll_blob
-                    for k in (
-                        "乐子人",
-                        "段子",
-                        "反串",
-                        "嘲讽",
-                        "梗",
-                        "阴阳怪气",
-                        "吃瓜",
-                    )
-                )
-                troll_snippet = ""
-                if is_troll:
-                    troll_snippet = (
-                        "【专属被动】提取涉事方话术中离谱的词语直接改编成段子或梗嘲讽（若结局是大反转的极好公关，则改为造梗式夸奖）。"
-                    )
+                    if latest_catalyst_speech:
+                        context_text += (
+                            "\n（广场高热切口摘录：）\n「" + latest_catalyst_speech + "」"
+                        )
 
                 if round_idx == 4:
-                    personality_law = (
-                        "【进入结局阶段，请立刻忘掉你之前的敌对或中立人设！严格依据官方的最终处理结果决定你的态度！不要为了黑而黑！】"
+                    if rt_agent == "official":
+                        context_text += (
+                            "\n【结局回合·官方】：发布最终蓝底白字通报，须正视舆情，清晰写明【具体的处理结果】（如是否发货、怎么赔偿等）。"
+                        )
+                    elif rt_agent == "influencer":
+                        context_text += (
+                            "\n【最高指令】：看一眼官方的处理结果，给出你最后的总结性表态。"
+                        )
+                    else:
+                        context_text += (
+                            "\n【最高指令】：看一眼官方的处理结果，留下一句退场白。"
+                        )
+
+                macro_bg = ""
+                if zeitgeist_result and str(zeitgeist_result.get("risk_level", "")).strip() == "高":
+                    zw = (zeitgeist_result.get("collateral_damage_warning") or "").strip()
+                    if zw:
+                        macro_bg = (
+                            f"【大环境背景】：近期敏感热点（{zw}）让网民极度暴躁。你的文本需自然借题发挥。"
+                        )
+
+                if rt_agent == "official":
+                    rag_tail = _rag_official_memory_tail(matched_case) if matched_case else ""
+                    system_prompt = (
+                        f"你执笔官方身份：{agent['name']}（{agent['persona']}）。"
+                        f"{OFFICIAL_OUTPUT_FORMAT_HARD}"
+                        f"{macro_bg}{rag_tail}"
                     )
+                    round_instruction = (
+                        "Round1：发布首份【情况说明】，定调、核查。"
+                        if round_idx == 1
+                        else "Round4：发布终版通报，必须包含【具体的最终处置措施】。"
+                    )
+                    user_prompt = (
+                        f"{context_text}\n情绪：{network_mood}\n参考草稿：{pr_draft}\n{round_instruction}"
+                    )
+                    speech = chat_llm(
+                        system_prompt,
+                        user_prompt,
+                        max_tokens=400,
+                        skip_mandatory_chat_rule=True,
+                        collapse_newlines=False,
+                    )
+                    phase = "初步定调" if round_idx == 1 else "最终通报"
+                    render_official_announcement(agent, speech, round_idx, phase)
                 else:
-                    personality_law = (
-                        f"【人设与立场绝对锁死】：你的立场是 {agent.get('stance', 'neutral')} ！"
-                        "若为 hostile，必须疯狂输出敌意；"
-                        "若为 neutral，装作纯路人理中客；"
-                        "若为 supportive，绝对不能跟着骂，必须尽力洗地或嘴硬。"
+                    _troll_blob = f"{agent.get('persona', '')}{agent.get('name', '')}"
+                    is_troll = any(
+                        k in _troll_blob
+                        for k in (
+                            "乐子人",
+                            "段子",
+                            "反串",
+                            "嘲讽",
+                            "梗",
+                            "阴阳怪气",
+                            "吃瓜",
+                        )
+                    )
+                    troll_snippet = ""
+                    if is_troll:
+                        troll_snippet = (
+                            "【专属被动】提取涉事方话术中离谱的词语直接改编成段子或梗嘲讽（若结局是大反转的极好公关，则改为造梗式夸奖）。"
+                        )
+
+                    if round_idx == 4:
+                        personality_law = (
+                            "【进入结局阶段，请立刻忘掉你之前的敌对或中立人设！严格依据官方的最终处理结果决定你的态度！不要为了黑而黑！】"
+                        )
+                    else:
+                        personality_law = (
+                            f"【人设与立场绝对锁死】：你的立场是 {agent.get('stance', 'neutral')} ！"
+                            "若为 hostile，必须疯狂输出敌意；"
+                            "若为 neutral，装作纯路人理中客；"
+                            "若为 supportive，绝对不能跟着骂，必须尽力洗地或嘴硬。"
+                        )
+
+                    forced_style = TEXT_STYLES[i % len(TEXT_STYLES)]
+
+                    spiral_snippet = ""
+                    if agent.get("stance") == "supportive":
+                        if round_idx == 1:
+                            spiral_snippet = "【Round1】理直气壮为品牌辩护。"
+                        elif round_idx == 2:
+                            spiral_snippet = "【Round2】舆论失控，开始和稀泥、转移话题。"
+                        elif round_idx == 3:
+                            spiral_snippet = "【Round3】感到心累，发出老粉的叹息，但不骂品牌。"
+
+                    rag_crowd = _rag_crowd_memory_tail(matched_case) if matched_case else ""
+                    round4_law = ROUND4_FINAL_BEHAVIOR_LAW if round_idx == 4 else ""
+
+                    system_prompt = (
+                        f"账号：{agent['name']}。人设：{agent['persona']}。"
+                        f"{personality_law}"
+                        f"{troll_snippet}"
+                        f"{macro_bg}{spiral_snippet}{round4_law}{rag_crowd}"
                     )
 
-                forced_style = TEXT_STYLES[i % len(TEXT_STYLES)]
-
-                spiral_snippet = ""
-                if agent.get("stance") == "supportive":
-                    if round_idx == 1:
-                        spiral_snippet = "【Round1】理直气壮为品牌辩护。"
-                    elif round_idx == 2:
-                        spiral_snippet = "【Round2】舆论失控，开始和稀泥、转移话题。"
-                    elif round_idx == 3:
-                        spiral_snippet = "【Round3】感到心累，发出老粉的叹息，但不骂品牌。"
-
-                rag_crowd = _rag_crowd_memory_tail(matched_case) if matched_case else ""
-                round4_law = ROUND4_FINAL_BEHAVIOR_LAW if round_idx == 4 else ""
-
-                system_prompt = (
-                    f"账号：{agent['name']}。人设：{agent['persona']}。"
-                    f"{personality_law}"
-                    f"{troll_snippet}"
-                    f"{macro_bg}{spiral_snippet}{round4_law}{rag_crowd}"
-                )
-
-                round_instruction = (
-                    "Round1：试探性发帖观察。"
-                    if round_idx == 1
-                    else "Round2：强化观点输出。"
-                    if round_idx == 2
-                    else "Round3：焦灼对撞，输出点评。"
-                    if round_idx == 3
-                    else "Round4：看结局定态度。"
-                )
-
-                if current_round_responses:
-                    joined = "\n".join(current_round_responses)
-                    anti_echo = (
-                        "\n【系统防碰撞最高指令：严禁排比复读！】\n"
-                        f"前面人的发言：\n{joined}\n"
-                        "🔴 绝对禁止使用与上方类似的切入角度和句式！\n"
-                        f"🟢 必须严格遵守分配给你的风格格式：{forced_style}"
-                    )
-                else:
-                    anti_echo = (
-                        f"\n🟢 必须严格遵守分配给你的风格格式：{forced_style}"
+                    round_instruction = (
+                        "Round1：试探性发帖观察。"
+                        if round_idx == 1
+                        else "Round2：强化观点输出。"
+                        if round_idx == 2
+                        else "Round3：焦灼对撞，输出点评。"
+                        if round_idx == 3
+                        else "Round4：看结局定态度。"
                     )
 
-                user_prompt = (
-                    f"{context_text}\n"
-                    f"网络情绪：{network_mood}\n"
-                    f"事件/官方草稿：{pr_draft}\n"
-                    f"{round_instruction}\n"
-                    f"{PLAZA_SQUARE_RULE}\n"
-                    "【强警告】：输出内容中不允许出现任何类似 #xxx# 的话题标签！直接输出说话内容即可！"
-                    f"{anti_echo}"
+                    if current_round_responses:
+                        joined = "\n".join(current_round_responses)
+                        anti_echo = (
+                            "\n【系统防碰撞最高指令：严禁排比复读！】\n"
+                            f"前面人的发言：\n{joined}\n"
+                            "🔴 绝对禁止使用与上方类似的切入角度和句式！\n"
+                            f"🟢 必须严格遵守分配给你的风格格式：{forced_style}"
+                        )
+                    else:
+                        anti_echo = (
+                            f"\n🟢 必须严格遵守分配给你的风格格式：{forced_style}"
+                        )
+
+                    user_prompt = (
+                        f"{context_text}\n"
+                        f"网络情绪：{network_mood}\n"
+                        f"事件/官方草稿：{pr_draft}\n"
+                        f"{round_instruction}\n"
+                        f"{PLAZA_SQUARE_RULE}\n"
+                        "【强警告】：输出内容中不允许出现任何类似 #xxx# 的话题标签！直接输出说话内容即可！"
+                        f"{anti_echo}"
+                    )
+
+                    speech = chat_llm(system_prompt, user_prompt, max_tokens=150)
+                    speech = re.sub(r"#.*?#", "", speech or "").strip()
+                    render_animated_bubble(agent, speech, round_idx)
+
+                logs.append(
+                    {
+                        "round": round_idx,
+                        "name": agent["name"],
+                        "persona": agent["persona"],
+                        "weight": agent["weight"],
+                        "stance": agent["stance"],
+                        "role_type": agent.get("role_type", "bystander"),
+                        "speech": speech,
+                        "ts": int(time.time()),
+                    }
                 )
-
-                speech = chat_llm(system_prompt, user_prompt, max_tokens=150)
-                speech = re.sub(r"#.*?#", "", speech or "").strip()
-                render_animated_bubble(agent, speech, round_idx)
-
-            logs.append(
-                {
-                    "round": round_idx,
-                    "name": agent["name"],
-                    "persona": agent["persona"],
-                    "weight": agent["weight"],
-                    "stance": agent["stance"],
-                    "role_type": agent.get("role_type", "bystander"),
-                    "speech": speech,
-                    "ts": int(time.time()),
-                }
-            )
-            current_round_responses.append(f"@{agent['name']}：{speech}")
+                current_round_responses.append(f"@{agent['name']}：{speech}")
 
         if round_idx == 3:
             swarm_raw = generate_round3_swarm_danmaku_text(
@@ -1330,6 +1341,197 @@ def generate_report(event_desc, network_mood, pr_draft, visual_risk_desc, logs):
         return parsed
     except Exception as e:
         return {"_parse_error": f"报告 JSON 解析失败：{str(e)}", "_raw": cleaned[:800]}
+
+
+def render_ai_town_replay(agents, logs):
+    """渲染 AI 小镇 2D 像素风对话回放动画"""
+    import json
+    import urllib.parse
+    
+    agent_html = ""
+    rows, cols = 3, 5 
+    for idx, agent in enumerate(agents):
+        name = agent["name"]
+        
+        # 🌟 核心魔法：使用 DiceBear 的像素风(pixel-art)接口，根据名字动态生成专属像素小人
+        # url 编码名字，防止特殊字符报错
+        safe_name = urllib.parse.quote(name)
+        # 这里使用 pixel-art 风格，也可以换成 adventurer 风格
+        avatar_url = f"https://api.dicebear.com/9.x/pixel-art/svg?seed={safe_name}"
+        
+        # 计算 X, Y 坐标
+        x = 15 + (idx % cols) * 18
+        y = 25 + (idx // cols) * 28
+        
+        # 生成小人的 HTML 节点（将 emoji 替换为 img 标签）
+        agent_html += f"""
+        <div class="agent-sprite" id="sprite-{name}" style="left: {x}%; top: {y}%;">
+            <div class="speech-bubble" id="bubble-{name}"></div>
+            <img class="agent-sprite-img" src="{avatar_url}" alt="{name}">
+            <div class="agent-shadow"></div>
+            <div class="agent-name">{name}</div>
+        </div>
+        """
+
+    safe_logs = json.dumps([{
+        "name": log["name"],
+        "speech": log["speech"],
+        "round": log["round"]
+    } for log in logs], ensure_ascii=False)
+
+    html_code = f"""
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <style>
+        body {{ margin: 0; overflow: hidden; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }}
+        
+        /* 像素风草地广场背景 */
+        #ai-town-map {{
+            position: relative; width: 100%; height: 500px;
+            background-color: #639b4b; /* 星露谷风格草地绿 */
+            background-image: 
+                linear-gradient(rgba(0,0,0,.08) 2px, transparent 2px),
+                linear-gradient(90deg, rgba(0,0,0,.08) 2px, transparent 2px);
+            background-size: 32px 32px;
+            border-radius: 12px;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.4);
+            border: 4px solid #3c5e2d;
+            overflow: hidden;
+        }}
+        
+        /* 信息控制栏 */
+        #control-bar {{
+            position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%);
+            background: rgba(30, 25, 20, 0.85); color: #f0e6d2; padding: 12px 24px;
+            border-radius: 6px; font-weight: bold; z-index: 100;
+            display: flex; gap: 20px; align-items: center;
+            border: 2px solid #a68453; /* RPG 木板边框风格 */
+        }}
+        button {{
+            background: #4caf50; border: 2px solid #2e7d32; color: white; padding: 6px 16px;
+            border-radius: 4px; cursor: pointer; font-weight: bold; font-family: inherit;
+        }}
+        button:hover {{ background: #45a049; transform: scale(1.05); }}
+        
+        .agent-sprite {{
+            position: absolute; display: flex; flex-direction: column; align-items: center;
+            transition: transform 0.2s;
+        }}
+        .agent-sprite.speaking {{
+            transform: translateY(-8px); z-index: 50;
+        }}
+        
+        /* 🌟 真正的像素风小人图片样式 */
+        .agent-sprite-img {{
+            width: 56px; 
+            height: 56px;
+            /* 下面这行极其重要，强制浏览器不要平滑图片，保留像素颗粒感！ */
+            image-rendering: pixelated; 
+            z-index: 2;
+            animation: idleBounce 2s infinite ease-in-out alternate;
+        }}
+        
+        /* 小人脚底下的阴影 */
+        .agent-shadow {{
+            width: 30px; height: 10px; background: rgba(0,0,0,0.3);
+            border-radius: 50%; margin-top: -8px; z-index: 1;
+        }}
+        
+        @keyframes idleBounce {{
+            0% {{ transform: translateY(0); }}
+            100% {{ transform: translateY(-4px); }}
+        }}
+        
+        .agent-name {{
+            background: rgba(0,0,0,0.7); color: white; font-size: 11px;
+            padding: 3px 8px; border-radius: 4px; margin-top: 6px;
+            border: 1px solid #444; z-index: 3; white-space: nowrap;
+        }}
+        
+        /* 游戏风对话气泡 */
+        .speech-bubble {{
+            position: absolute; bottom: 85px; left: 50%; transform: translateX(-50%);
+            background: #fffdf5; color: #111; padding: 12px 16px;
+            border-radius: 8px; font-size: 13px; line-height: 1.5;
+            max-width: 220px; min-width: 140px;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+            opacity: 0; visibility: hidden; transition: opacity 0.2s;
+            border: 3px solid #222; z-index: 60;
+        }}
+        .speech-bubble::after {{
+            content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%);
+            border-width: 10px 10px 0; border-style: solid; border-color: #222 transparent transparent transparent;
+        }}
+        .speech-bubble::before {{
+            content: ''; position: absolute; bottom: -6px; left: 50%; transform: translateX(-50%);
+            border-width: 8px 8px 0; border-style: solid; border-color: #fffdf5 transparent transparent transparent;
+            z-index: 1;
+        }}
+        .speech-bubble.show {{ opacity: 1; visibility: visible; }}
+    </style>
+    </head>
+    <body>
+    <div id="ai-town-map">
+        {agent_html}
+        <div id="control-bar">
+            <span id="round-info">等待推演完成...</span>
+            <button onclick="playLog()">▶️ 播放对线回放</button>
+        </div>
+    </div>
+
+    <script>
+        const logs = {safe_logs};
+        let currentIndex = 0;
+        let isPlaying = false;
+        let playInterval;
+
+        function showBubble(log) {{
+            document.querySelectorAll('.speech-bubble').forEach(b => b.classList.remove('show'));
+            document.querySelectorAll('.agent-sprite').forEach(s => s.classList.remove('speaking'));
+
+            const name = log.name;
+            const sprite = document.getElementById('sprite-' + name);
+            const bubble = document.getElementById('bubble-' + name);
+            
+            if(sprite && bubble) {{
+                bubble.innerText = log.speech;
+                bubble.classList.add('show');
+                sprite.classList.add('speaking');
+                
+                document.getElementById('round-info').innerText = `[Round ${{log.round}}] ${{name}} 发言中...`;
+            }}
+        }}
+
+        function playLog() {{
+            if (isPlaying) return;
+            if (logs.length === 0) return;
+            isPlaying = true;
+            currentIndex = 0;
+            
+            showBubble(logs[currentIndex]);
+            playInterval = setInterval(() => {{
+                currentIndex++;
+                if (currentIndex >= logs.length) {{
+                    clearInterval(playInterval);
+                    isPlaying = false;
+                    document.getElementById('round-info').innerText = "🏁 推演播放完毕";
+                    setTimeout(() => {{
+                        document.querySelectorAll('.speech-bubble').forEach(b => b.classList.remove('show'));
+                        document.querySelectorAll('.agent-sprite').forEach(s => s.classList.remove('speaking'));
+                    }}, 3000);
+                    return;
+                }}
+                showBubble(logs[currentIndex]);
+            }}, 3500);
+        }}
+    </script>
+    </body>
+    </html>
+    """
+    
+    import streamlit.components.v1 as components
+    components.html(html_code, height=520)
 
 
 def main():
@@ -1565,6 +1767,10 @@ def main():
                 zeitgeist_result=zeitgeist_result,
                 matched_case=matched_case,
             )
+            
+            # 👇 只需在沙盘推演结束后，把小镇渲染出来
+            st.markdown("### 🗺️ 广场态势可视化 (像素 RPG 视角)")
+            render_ai_town_replay(agents, logs)
 
         prog.progress(90, text="生成审查报告...")
         with tab2:
