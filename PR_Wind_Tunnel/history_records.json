@@ -12205,5 +12205,630 @@
       },
       "rewrite_suggestion": "尊敬的用户们：\n\n首先，我们对此次‘双十一’大促期间发生的标价错误表示诚挚的歉意。由于后台设置失误，导致原价99元一箱的抽纸被标成了9.9元，给大家带来了困扰。\n\n经过慎重考虑，我们决定照常发货，履行所有已生成的订单。尽管这对我们来说是一次巨大的经济损失，但我们深知诚信和责任的重要性。我们希望通过这次行动，向大家展示我们的诚意和担当。\n\n感谢每一位支持我们的用户，您的信任是我们前进的动力。未来我们将加强内部管理，避免类似事件再次发生。如果您有任何疑问或建议，请随时联系我们。\n\n再次感谢您的理解和支持！\n\n某国民级老牌纸巾品牌团队"
     }
+  },
+  {
+    "timestamp": "2026-05-09 15:35:34",
+    "event_desc": "某国民级老牌纸巾品牌在“双十一”大促期间，由于电商运营新人的后台设置失误，原本99元一箱的抽纸被标成了9.9元。短短半小时内，被大量“羊毛党”和普通消费者狂刷了20万单，预计直接经济损失高达近两千万元。目前#某品牌标错价被薅羊毛#已经冲上热搜，全网都在观望该品牌会不会像其他电商一样“以标错价为由强行取消订单、拒绝发货”",
+    "visual_risks": "",
+    "sandbox_log": [
+      {
+        "round": 1,
+        "name": "品牌官方声明",
+        "persona": "代表公司立场发布正式公告",
+        "weight": 800,
+        "stance": "neutral",
+        "role_type": "official",
+        "speech": "【关于“双十一”大促期间价格设置失误的情况说明】\n\n针对近期网络上热议的我品牌在“双十一”大促期间因价格设置失误导致大量订单的问题，我单位高度重视，并迅速展开内部核查。经初步调查，确认是由于电商运营新人的操作失误，将原价99元一箱的抽纸错误标为9.9元，从而引发大量订单。\n\n我们深知此次事件对消费者及品牌声誉可能产生的影响。目前，我们正积极与相关部门沟通，以期尽快给出妥善解决方案。同时，我们也将在后续工作中加强内部管理，避免类似问题再次发生。感谢广大消费者一直以来的支持与理解，我们将继续努力为您提供优质的产品和服务。\n\n敬请关注后续官方通报。",
+        "ts": 1778311833
+      },
+      {
+        "round": 1,
+        "name": "电商运营专家",
+        "persona": "分析此类事件对电商品牌的影响",
+        "weight": 600,
+        "stance": "neutral",
+        "role_type": "influencer",
+        "speech": "这波操作失误真是让大家“捡到便宜”了 品牌这次可真是“大放血”啊",
+        "ts": 1778311839
+      },
+      {
+        "round": 1,
+        "name": "资深财经评论员",
+        "persona": "讨论此事件背后的经济影响",
+        "weight": 700,
+        "stance": "neutral",
+        "role_type": "influencer",
+        "speech": "哎这失误真是让人头疼啊，品牌得好好处理不然损失太大了",
+        "ts": 1778311841
+      },
+      {
+        "round": 1,
+        "name": "法律博主",
+        "persona": "解析合同法下商家是否有权取消订单",
+        "weight": 500,
+        "stance": "neutral",
+        "role_type": "influencer",
+        "speech": "卧槽这失误也太大了吧！品牌这次真是亏惨了！",
+        "ts": 1778311843
+      },
+      {
+        "round": 1,
+        "name": "普通消费者A",
+        "persona": "分享自己下单经历，期待发货",
+        "weight": 400,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "哈哈这波失误真是让人哭笑不得啊😂品牌赶紧想想办法吧！",
+        "ts": 1778311844
+      },
+      {
+        "round": 1,
+        "name": "羊毛党B",
+        "persona": "得意于自己的‘战果’，认为应该发货",
+        "weight": 300,
+        "stance": "hostile",
+        "role_type": "bystander",
+        "speech": "你们说的内部核查是啥意思啊？是不是想赖账不发货啊！",
+        "ts": 1778311846
+      },
+      {
+        "round": 1,
+        "name": "反讽段子手C",
+        "persona": "改编官方话术，讽刺品牌处理方式",
+        "weight": 200,
+        "stance": "hostile",
+        "role_type": "bystander",
+        "speech": "这失误比某宝还离谱吧！人家至少还能发货呢哈哈",
+        "ts": 1778311850
+      },
+      {
+        "round": 1,
+        "name": "本地围观群众D",
+        "persona": "转发相关消息，表达个人看法",
+        "weight": 100,
+        "stance": "neutral",
+        "role_type": "bystander",
+        "speech": "这失误比大熊抱错蜂蜜罐还离谱，品牌这次真是跳进黄河也洗不清了！",
+        "ts": 1778311853
+      },
+      {
+        "round": 1,
+        "name": "品牌死忠粉E",
+        "persona": "长期使用该品牌产品，支持品牌决策",
+        "weight": 900,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "品牌也是人操作难免出错理解一下吧别太苛责了",
+        "ts": 1778311856
+      },
+      {
+        "round": 1,
+        "name": "营销号F",
+        "persona": "带节奏，引导舆论走向",
+        "weight": 500,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "真以为标错价就能赖账不发货了？",
+        "ts": 1778311858
+      },
+      {
+        "round": 1,
+        "name": "科普考据G",
+        "persona": "提供历史案例对比分析",
+        "weight": 600,
+        "stance": "neutral",
+        "role_type": "influencer",
+        "speech": "哎哟品牌真是大气啊这波羊毛党们真是捡到宝了哈哈",
+        "ts": 1778311861
+      },
+      {
+        "round": 1,
+        "name": "网络乐子人H",
+        "persona": "看热闹不嫌事大，改编官方话术娱乐大众",
+        "weight": 300,
+        "stance": "hostile",
+        "role_type": "bystander",
+        "speech": "哎哟这失误真是让人痛心疾首啊品牌这次得好好补救了",
+        "ts": 1778311867
+      },
+      {
+        "round": 1,
+        "name": "对立阵营意见领袖I",
+        "persona": "批评品牌处理不当，呼吁消费者维权",
+        "weight": 700,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "品牌这不是玩不起吗！标错价就想赖账不发货？绝了！",
+        "ts": 1778311870
+      },
+      {
+        "round": 1,
+        "name": "温和认同者J",
+        "persona": "愿意等待调查结果，反对造谣",
+        "weight": 400,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "这波失误真是绝了哈哈 品牌赶紧想想办法吧 😂",
+        "ts": 1778311872
+      },
+      {
+        "round": 2,
+        "name": "电商运营专家",
+        "persona": "分析此类事件对电商品牌的影响",
+        "weight": 600,
+        "stance": "neutral",
+        "role_type": "influencer",
+        "speech": "品牌这次真是大气啊 9.9一箱的纸巾简直良心到家了 😂",
+        "ts": 1778311884
+      },
+      {
+        "round": 2,
+        "name": "资深财经评论员",
+        "persona": "讨论此事件背后的经济影响",
+        "weight": 700,
+        "stance": "neutral",
+        "role_type": "influencer",
+        "speech": "哎这失误真是让人痛心疾首啊 品牌这次得好好补救了 😢",
+        "ts": 1778311890
+      },
+      {
+        "round": 2,
+        "name": "法律博主",
+        "persona": "解析合同法下商家是否有权取消订单",
+        "weight": 500,
+        "stance": "neutral",
+        "role_type": "influencer",
+        "speech": "卧槽这失误也太大了吧！品牌赶紧想办法补救啊！绝了！",
+        "ts": 1778311893
+      },
+      {
+        "round": 2,
+        "name": "普通消费者A",
+        "persona": "分享自己下单经历，期待发货",
+        "weight": 400,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "这波失误真是大了去了 品牌赶紧想办法吧 我先搬个板凳看戏 😂👀",
+        "ts": 1778311897
+      },
+      {
+        "round": 2,
+        "name": "羊毛党B",
+        "persona": "得意于自己的‘战果’，认为应该发货",
+        "weight": 300,
+        "stance": "hostile",
+        "role_type": "bystander",
+        "speech": "品牌玩不起就别搞活动啊 标错价怪谁呢自己没检查好还赖别人",
+        "ts": 1778311902
+      },
+      {
+        "round": 2,
+        "name": "反讽段子手C",
+        "persona": "改编官方话术，讽刺品牌处理方式",
+        "weight": 200,
+        "stance": "hostile",
+        "role_type": "bystander",
+        "speech": "别的品牌标错价都能大方发货这次怎么就玩不起了呢真是大开眼界了",
+        "ts": 1778311904
+      },
+      {
+        "round": 2,
+        "name": "本地围观群众D",
+        "persona": "转发相关消息，表达个人看法",
+        "weight": 100,
+        "stance": "neutral",
+        "role_type": "bystander",
+        "speech": "这失误就像把大象塞进冰箱里 结果发现冰箱门没关好 大象跑了 😂🐘",
+        "ts": 1778311908
+      },
+      {
+        "round": 2,
+        "name": "品牌死忠粉E",
+        "persona": "长期使用该品牌产品，支持品牌决策",
+        "weight": 900,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "品牌失误确实挺严重的 但运营新人也得吸取教训 不能全怪品牌吧",
+        "ts": 1778311910
+      },
+      {
+        "round": 2,
+        "name": "营销号F",
+        "persona": "带节奏，引导舆论走向",
+        "weight": 500,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "失误这么大还怪别人？自己不检查清楚吗？",
+        "ts": 1778311911
+      },
+      {
+        "round": 2,
+        "name": "科普考据G",
+        "persona": "提供历史案例对比分析",
+        "weight": 600,
+        "stance": "neutral",
+        "role_type": "influencer",
+        "speech": "品牌这次真是大气啊 9.9一箱的纸巾简直是慈善家级别的操作 😂👏",
+        "ts": 1778311914
+      },
+      {
+        "round": 2,
+        "name": "网络乐子人H",
+        "persona": "看热闹不嫌事大，改编官方话术娱乐大众",
+        "weight": 300,
+        "stance": "hostile",
+        "role_type": "bystander",
+        "speech": "哎这失误真是让人痛心疾首啊 品牌这次得好好补救了 不然真要凉凉了 😢",
+        "ts": 1778311918
+      },
+      {
+        "round": 2,
+        "name": "对立阵营意见领袖I",
+        "persona": "批评品牌处理不当，呼吁消费者维权",
+        "weight": 700,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "品牌玩不起就别搞活动啊！标错价怪谁呢！自己没检查好还赖别人！绝了！",
+        "ts": 1778311920
+      },
+      {
+        "round": 2,
+        "name": "温和认同者J",
+        "persona": "愿意等待调查结果，反对造谣",
+        "weight": 400,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "这波失误真是大了去了 品牌赶紧想办法吧 我先搬个板凳看戏 😂👀",
+        "ts": 1778311922
+      },
+      {
+        "round": 2,
+        "name": "硬核打假博主-李明",
+        "persona": "专注于揭露电商虚假促销和价格欺诈行为的知名博主，以详实的数据分析和深入调查著称。",
+        "weight": 500000,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "品牌自己标错价现在还怪别人运营新人背锅？真是无语了！",
+        "ts": 1778311926
+      },
+      {
+        "round": 2,
+        "name": "维权意见领袖-赵晓莉",
+        "persona": "长期活跃在消费者权益保护领域的意见领袖，擅长组织并引导大规模的集体维权行动。",
+        "weight": 100000,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "别的品牌标错价都能大方发货这次怎么就玩不起了呢真是大开眼界了",
+        "ts": 1778311929
+      },
+      {
+        "round": 3,
+        "name": "电商运营专家",
+        "persona": "分析此类事件对电商品牌的影响",
+        "weight": 600,
+        "stance": "neutral",
+        "role_type": "influencer",
+        "speech": "品牌这次真是大气啊 9.9一箱的纸巾简直是慈善家级别的操作 真让人佩服 🙌😂",
+        "ts": 1778311936
+      },
+      {
+        "round": 3,
+        "name": "资深财经评论员",
+        "persona": "讨论此事件背后的经济影响",
+        "weight": 700,
+        "stance": "neutral",
+        "role_type": "influencer",
+        "speech": "哎这失误真是让人痛心疾首啊 品牌这次得好好补救了 不然真要凉凉了 😢",
+        "ts": 1778311938
+      },
+      {
+        "round": 3,
+        "name": "法律博主",
+        "persona": "解析合同法下商家是否有权取消订单",
+        "weight": 500,
+        "stance": "neutral",
+        "role_type": "influencer",
+        "speech": "品牌自己标错价还取消订单？这操作绝了！真牛逼！",
+        "ts": 1778311941
+      },
+      {
+        "round": 3,
+        "name": "普通消费者A",
+        "persona": "分享自己下单经历，期待发货",
+        "weight": 400,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "这波操作真是让人目瞪口呆 品牌赶紧出个声明吧 我搬好小板凳了 😂👀",
+        "ts": 1778311946
+      },
+      {
+        "round": 3,
+        "name": "羊毛党B",
+        "persona": "得意于自己的‘战果’，认为应该发货",
+        "weight": 300,
+        "stance": "hostile",
+        "role_type": "bystander",
+        "speech": "品牌标错价是自己失误凭什么取消订单这不就是欺诈消费者吗",
+        "ts": 1778311948
+      },
+      {
+        "round": 3,
+        "name": "反讽段子手C",
+        "persona": "改编官方话术，讽刺品牌处理方式",
+        "weight": 200,
+        "stance": "hostile",
+        "role_type": "bystander",
+        "speech": "别的品牌标错价都能大方发货这家却玩不起真是丢人现眼啊 😡",
+        "ts": 1778311950
+      },
+      {
+        "round": 3,
+        "name": "本地围观群众D",
+        "persona": "转发相关消息，表达个人看法",
+        "weight": 100,
+        "stance": "neutral",
+        "role_type": "bystander",
+        "speech": "这波操作就像把金子当铜卖还怪别人眼疾手快真是绝了 😂",
+        "ts": 1778311953
+      },
+      {
+        "round": 3,
+        "name": "品牌死忠粉E",
+        "persona": "长期使用该品牌产品，支持品牌决策",
+        "weight": 900,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "这波失误确实严重希望品牌能妥善处理不然真的很难收场",
+        "ts": 1778311955
+      },
+      {
+        "round": 3,
+        "name": "营销号F",
+        "persona": "带节奏，引导舆论走向",
+        "weight": 500,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "标错价还取消订单这不就是耍赖吗？",
+        "ts": 1778311957
+      },
+      {
+        "round": 3,
+        "name": "科普考据G",
+        "persona": "提供历史案例对比分析",
+        "weight": 600,
+        "stance": "neutral",
+        "role_type": "influencer",
+        "speech": "品牌这次真是大方啊 取消订单还说自己是慈善家 真让人佩服 😂👏",
+        "ts": 1778311963
+      },
+      {
+        "round": 3,
+        "name": "网络乐子人H",
+        "persona": "看热闹不嫌事大，改编官方话术娱乐大众",
+        "weight": 300,
+        "stance": "hostile",
+        "role_type": "bystander",
+        "speech": "哎这失误真是让人痛心疾首啊 品牌这次得好好补救了 不然真要凉凉了 😢",
+        "ts": 1778311965
+      },
+      {
+        "round": 3,
+        "name": "对立阵营意见领袖I",
+        "persona": "批评品牌处理不当，呼吁消费者维权",
+        "weight": 700,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "品牌自己标错价还取消订单？这不就是耍赖吗！真丢人！",
+        "ts": 1778311967
+      },
+      {
+        "round": 3,
+        "name": "温和认同者J",
+        "persona": "愿意等待调查结果，反对造谣",
+        "weight": 400,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "这波操作真是绝了 品牌赶紧出个声明吧 我搬好小板凳等瓜吃 🍿👀😂",
+        "ts": 1778311973
+      },
+      {
+        "round": 3,
+        "name": "硬核打假博主-李明",
+        "persona": "专注于揭露电商虚假促销和价格欺诈行为的知名博主，以详实的数据分析和深入调查著称。",
+        "weight": 500000,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "品牌自己说的“运营新人失误”就能当借口？这锅甩得也太随意了吧！",
+        "ts": 1778311979
+      },
+      {
+        "round": 3,
+        "name": "维权意见领袖-赵晓莉",
+        "persona": "长期活跃在消费者权益保护领域的意见领袖，擅长组织并引导大规模的集体维权行动。",
+        "weight": 100000,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "别的品牌标错价都能大方发货这家却玩不起真是丢人现眼啊 竟然还怪别人眼疾手快 😡",
+        "ts": 1778311983
+      },
+      {
+        "round": 4,
+        "name": "品牌官方声明",
+        "persona": "代表公司立场发布正式公告",
+        "weight": 800,
+        "stance": "neutral",
+        "role_type": "official",
+        "speech": "【关于“双十一”标错价事件的情况说明】\n\n针对近期网传的我品牌在“双十一”大促期间因后台设置失误导致商品标价错误一事，我单位高度重视，并迅速成立专项工作组进行调查核实。经过认真核查，确认此次标价错误系电商运营新人操作失误所致。\n\n为维护消费者权益及品牌形象，经慎重考虑，我单位决定采取以下措施：\n\n1. 对于已下单的20万单订单，我们将按照9.9元的价格发货，确保所有订单如期送达。\n2. 为表达对广大消费者的歉意，我们将向每位受影响的用户赠送一份价值50元的品牌优惠券，可在下次购物时使用。\n3. 我们将加强对电商运营团队的培训和管理，避免类似事件再次发生。\n\n感谢广大消费者一直以来的支持与理解。我们深知此次事件给部分消费者带来了不便，对此深表歉意。未来，我们将继续努力提升服务质量，为消费者提供更优质的产品和体验。\n\n特此声明。\n\n某国民级老牌纸巾品牌\n2023年11月X日",
+        "ts": 1778312038
+      },
+      {
+        "round": 4,
+        "name": "电商运营专家",
+        "persona": "分析此类事件对电商品牌的影响",
+        "weight": 600,
+        "stance": "neutral",
+        "role_type": "influencer",
+        "speech": "卧槽真发货还送优惠券，这格局大到我都想给品牌当水军了 🤣👏",
+        "ts": 1778312043
+      },
+      {
+        "round": 4,
+        "name": "资深财经评论员",
+        "persona": "讨论此事件背后的经济影响",
+        "weight": 700,
+        "stance": "neutral",
+        "role_type": "influencer",
+        "speech": "哎这失误真是让人痛心疾首啊，没想到品牌这么有担当，我服了！👏",
+        "ts": 1778312045
+      },
+      {
+        "round": 4,
+        "name": "法律博主",
+        "persona": "解析合同法下商家是否有权取消订单",
+        "weight": 500,
+        "stance": "neutral",
+        "role_type": "influencer",
+        "speech": "卧槽真发货还送优惠券，这品牌绝了！牛逼克拉斯！",
+        "ts": 1778312050
+      },
+      {
+        "round": 4,
+        "name": "普通消费者A",
+        "persona": "分享自己下单经历，期待发货",
+        "weight": 400,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "这波操作太秀了，9.9元发货还送优惠券，我直接respect 👏👏👏",
+        "ts": 1778312054
+      },
+      {
+        "round": 4,
+        "name": "羊毛党B",
+        "persona": "得意于自己的‘战果’，认为应该发货",
+        "weight": 300,
+        "stance": "hostile",
+        "role_type": "bystander",
+        "speech": "9.9元发货还送优惠券，这“慎重考虑”真是让人服气啊！",
+        "ts": 1778312058
+      },
+      {
+        "round": 4,
+        "name": "反讽段子手C",
+        "persona": "改编官方话术，讽刺品牌处理方式",
+        "weight": 200,
+        "stance": "hostile",
+        "role_type": "bystander",
+        "speech": "这品牌真汉子，不像某些品牌一出事就甩锅，9.9元发货还送券，格局大到我无话可说！",
+        "ts": 1778312062
+      },
+      {
+        "round": 4,
+        "name": "本地围观群众D",
+        "persona": "转发相关消息，表达个人看法",
+        "weight": 100,
+        "stance": "neutral",
+        "role_type": "bystander",
+        "speech": "这品牌真像是一只大熊，不仅给了蜂蜜还送了一罐糖，这波操作简直甜到掉牙！",
+        "ts": 1778312067
+      },
+      {
+        "round": 4,
+        "name": "品牌死忠粉E",
+        "persona": "长期使用该品牌产品，支持品牌决策",
+        "weight": 900,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "这品牌处理得当，9.9元发货加送优惠券，确实值得称赞。",
+        "ts": 1778312069
+      },
+      {
+        "round": 4,
+        "name": "营销号F",
+        "persona": "带节奏，引导舆论走向",
+        "weight": 500,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "这品牌真这么大气？9.9元发货还送券，服了！",
+        "ts": 1778312073
+      },
+      {
+        "round": 4,
+        "name": "科普考据G",
+        "persona": "提供历史案例对比分析",
+        "weight": 600,
+        "stance": "neutral",
+        "role_type": "influencer",
+        "speech": "这品牌真大方，9.9元发货还送券，我都想给他们磕一个了！😂👏",
+        "ts": 1778312076
+      },
+      {
+        "round": 4,
+        "name": "网络乐子人H",
+        "persona": "看热闹不嫌事大，改编官方话术娱乐大众",
+        "weight": 300,
+        "stance": "hostile",
+        "role_type": "bystander",
+        "speech": "哎，这失误真是让人痛心疾首啊，没想到品牌这么有担当，我服了！👏",
+        "ts": 1778312079
+      },
+      {
+        "round": 4,
+        "name": "对立阵营意见领袖I",
+        "persona": "批评品牌处理不当，呼吁消费者维权",
+        "weight": 700,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "卧槽这品牌真汉子，9.9元发货还送券，绝了！牛逼！👏👏👏",
+        "ts": 1778312082
+      },
+      {
+        "round": 4,
+        "name": "温和认同者J",
+        "persona": "愿意等待调查结果，反对造谣",
+        "weight": 400,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "卧槽这品牌真够意思，9.9元发货还送券，我直接看戏吃瓜了 😂👏",
+        "ts": 1778312085
+      },
+      {
+        "round": 4,
+        "name": "硬核打假博主-李明",
+        "persona": "专注于揭露电商虚假促销和价格欺诈行为的知名博主，以详实的数据分析和深入调查著称。",
+        "weight": 500000,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "卧槽“慎重考虑”这词用得绝了，真发货还送券，这品牌是真汉子！👏👏👏",
+        "ts": 1778312092
+      },
+      {
+        "round": 4,
+        "name": "维权意见领袖-赵晓莉",
+        "persona": "长期活跃在消费者权益保护领域的意见领袖，擅长组织并引导大规模的集体维权行动。",
+        "weight": 100000,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "卧槽这品牌真汉子，9.9元发货还送券，不像某些品牌一出事就甩锅！👏👏👏",
+        "ts": 1778312095
+      }
+    ],
+    "report_json": {
+      "fatal_focus": "网民集火攻击的最核心点在于品牌是否会以标错价为由强行取消订单、拒绝发货，以及品牌是否能够承担起责任并妥善处理此次事件。",
+      "scores": {
+        "legal": {
+          "score": 3,
+          "reason": "虽然法律上商家有权因重大误解而撤销合同，但若选择强行取消订单可能会引发大规模消费者维权诉讼，增加法律风险。"
+        },
+        "business": {
+          "score": 4,
+          "reason": "预计直接经济损失高达近两千万元，且短期内可能会影响销量和客户信任度，但通过积极应对可以挽回部分损失。"
+        },
+        "reputation": {
+          "score": 3,
+          "reason": "品牌声誉在事件初期受到较大影响，但通过及时且负责任的处理方式，可以有效缓解负面情绪，恢复品牌形象。"
+        }
+      },
+      "rewrite_suggestion": "尊敬的消费者们：\n\n首先，我们对此次“双十一”大促期间因后台设置失误导致商品标价错误一事表示深深的歉意。我们深知这一失误给广大消费者带来了不便，并对大家的信任和支持感到无比感激。\n\n经过慎重考虑，我们决定采取以下措施：\n1. 对于已下单的20万单订单，我们将按照9.9元的价格发货，确保所有订单如期送达。\n2. 为表达对广大消费者的歉意，我们将向每位受影响的用户赠送一份价值50元的品牌优惠券，可在下次购物时使用。\n3. 我们将加强对电商运营团队的培训和管理，避免类似事件再次发生。\n\n感谢大家的理解与支持。未来，我们将继续努力提升服务质量，为消费者提供更优质的产品和体验。\n\n特此声明。\n\n某国民级老牌纸巾品牌\n2023年11月X日"
+    }
   }
 ]

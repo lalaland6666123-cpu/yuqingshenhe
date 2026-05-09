@@ -1334,6 +1334,10 @@ def generate_report(event_desc, network_mood, pr_draft, visual_risk_desc, logs):
 
 def main():
     st.set_page_config(page_title="智能文案审查系统", layout="wide")
+    
+    # 初始化 session state
+    if "sim_report" not in st.session_state:
+        st.session_state.sim_report = None
     st.markdown(
         """
 <style>
@@ -1565,6 +1569,7 @@ def main():
         prog.progress(90, text="生成审查报告...")
         with tab2:
             st.subheader("舆情体检报告")
+            # 存入缓存
             report = generate_report(
                 event_desc_enhanced,
                 final_network_mood,
@@ -1572,6 +1577,7 @@ def main():
                 visual_risk_desc,
                 logs,
             )
+            st.session_state.sim_report = report
             if report.get("_parse_error"):
                 st.error(f"❌ 体检报告解析失败：{report.get('_parse_error')}")
                 raw_text = report.get("_raw", "")
@@ -1617,7 +1623,50 @@ def main():
                     logs,
                     report,
                 )
-        prog.progress(100, text="生成审查报告...")
+        prog.empty()  # 执行完毕后自动隐藏进度条
+    elif st.session_state.sim_report:
+        # 用户切换页面或点删除按钮时，不重新跑，直接读取上次的报告
+        with tab2:
+            st.subheader("舆情体检报告")
+            report = st.session_state.sim_report
+            if report.get("_parse_error"):
+                st.error(f"❌ 体检报告解析失败：{report.get('_parse_error')}")
+                raw_text = report.get("_raw", "")
+                if raw_text:
+                    st.code(raw_text)
+            else:
+                fatal_focus = report.get("fatal_focus", "未识别到明确集火点。")
+                scores = report.get("scores", {})
+                legal = scores.get("legal", {"score": "?", "reason": "暂无说明"})
+                business = scores.get("business", {"score": "?", "reason": "暂无说明"})
+                reputation = scores.get("reputation", {"score": "?", "reason": "暂无说明"})
+                rewrite_suggestion = report.get(
+                    "rewrite_suggestion", "暂无建议稿，请稍后重试。"
+                )
+
+                st.error(f"💥 被攻击焦点 / 视觉雷点：\n\n> {fatal_focus}")
+
+                col1, col2, col3 = st.columns(3)
+                with col1:
+                    st.markdown(
+                        f"### LEGAL\n# {legal.get('score', '?')}\n"
+                        f"<span style='color:gray;font-size:14px'>↑ {legal.get('reason', '暂无说明')}</span>",
+                        unsafe_allow_html=True,
+                    )
+                with col2:
+                    st.markdown(
+                        f"### BUSINESS\n# {business.get('score', '?')}\n"
+                        f"<span style='color:gray;font-size:14px'>↑ {business.get('reason', '暂无说明')}</span>",
+                        unsafe_allow_html=True,
+                    )
+                with col3:
+                    st.markdown(
+                        f"### REPUTATION\n# {reputation.get('score', '?')}\n"
+                        f"<span style='color:gray;font-size:14px'>↑ {reputation.get('reason', '暂无说明')}</span>",
+                        unsafe_allow_html=True,
+                    )
+
+                st.success(f"📝 安全优化建议稿：\n\n{rewrite_suggestion}")
     else:
         with tab1:
             st.info("请先在左侧输入信息，再点击上方“开始审查”。")
