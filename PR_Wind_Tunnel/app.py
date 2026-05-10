@@ -1732,39 +1732,40 @@ def main():
 
     st.title("智能文案审查系统")
 
-    # 主操作按钮放到页面中间最显眼的位置
-    _c1, c2, _c3 = st.columns([1, 1.2, 1])
-    with c2:
-        st.markdown('<div data-testid="main-action">', unsafe_allow_html=True)
-        run_btn = st.button("开始审查", type="primary", use_container_width=True)
-        st.markdown("</div>", unsafe_allow_html=True)
-
     with st.sidebar:
         st.header("输入区")
-        event_desc = st.text_area(
-            "事件描述",
-            height=140,
-            placeholder="请在这里输入你需要审查的文案，或者上传相关的图片和视频材料",
-        )
-        network_mood = st.text_area(
-            "网络情绪",
-            height=120,
-            placeholder="例：愤怒、讽刺、站队明显、扩散加速…",
-        )
-        pr_draft = st.text_area(
-            "公关草稿",
-            height=180,
-            placeholder="例：我们关注到相关反馈，正在核查…",
-        )
-        hot_topics = st.text_area(
-            "🌐 当前互联网敏感热点 (选填，用逗号分隔)",
-            height=72,
-            placeholder="例如：姜萍学术造假事件、某企业996猝死事件...",
-        )
-        uploaded_file = st.file_uploader(
-            "📸/🎥 上传涉事公关物料 (图片或短视频)",
-            type=["jpg", "jpeg", "png", "mp4", "mov"],
-        )
+        
+        # 👇 核心修改：增加表单环境
+        with st.form("input_form"):
+            event_desc = st.text_area(
+                "事件描述",
+                height=140,
+                placeholder="请在这里输入你需要审查的文案，或者上传相关的图片和视频材料",
+            )
+            network_mood = st.text_area(
+                "网络情绪",
+                height=120,
+                placeholder="例：愤怒、讽刺、站队明显、扩散加速…",
+            )
+            pr_draft = st.text_area(
+                "公关草稿",
+                height=180,
+                placeholder="例：我们关注到相关反馈，正在核查…",
+            )
+            hot_topics = st.text_area(
+                "🌐 当前互联网敏感热点 (选填，用逗号分隔)",
+                height=72,
+                placeholder="例如：姜萍学术造假事件、某企业996猝死事件...",
+            )
+            uploaded_file = st.file_uploader(
+                "📸/🎥 上传涉事公关物料 (图片或短视频)",
+                type=["jpg", "jpeg", "png", "mp4", "mov"],
+            )
+            
+            # 👇 将执行按钮变为"表单提交按钮"，放在这里！
+            run_btn = st.form_submit_button("🚀 开始审查", type="primary", use_container_width=True)
+        
+        # 文件预览逻辑放在表单外部，实现即时预览
         if uploaded_file is not None:
             mime_type = uploaded_file.type or ""
             if mime_type.startswith("image"):
@@ -1975,7 +1976,7 @@ def main():
                 st.success(f"📝 安全优化建议稿：\n\n{rewrite_suggestion}")
     else:
         with tab1:
-            st.info("请先在左侧输入信息，再点击上方“开始审查”。")
+            st.info("请先在左侧输入信息，再点击左侧“开始审查”。")
         with tab2:
             st.info("推演完成后，这里会展示体检报告。")
 
