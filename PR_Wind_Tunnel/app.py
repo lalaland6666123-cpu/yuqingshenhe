@@ -205,7 +205,37 @@ ANALYZE_VISUAL_RISK_PROMPT = (
 )
 
 
-def analyze_visual_risk(uploaded_file):
+def _verify_risk_quality(risk_text, event_desc=""):
+    """自检核心雷点质量：评估是否足够精准、尖锐、具有代表性"""
+    system_prompt = (
+        "你是公关质检员。请对给定的公关雷点分析进行质量评估。"
+        "评估标准：1）是否精准定位到最致命的雷点（而非泛泛而谈）；2）是否一针见血、言辞犀利；3）是否具体到涉事主体的某个具体行为/话语/视觉细节。"
+        "只输出 JSON：{\"score\": 1-5的整数, \"reason\": \"评分理由\", \"need_retry\": true或false}"
+    )
+    user_prompt = (
+        f"事件背景：{event_desc or '无'}\n\n"
+        f"待评估的雷点分析：{risk_text}\n\n"
+        "请严格评估质量。如果得分低于4分或需要重试，请指出不足。"
+    )
+    try:
+        resp = client.chat.completions.create(
+            model=MODEL_NAME,
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt},
+            ],
+            temperature=0.1,
+            max_tokens=200,
+        )
+        raw = (resp.choices[0].message.content if resp.choices else "") or ""
+        cleaned = raw.replace("```json", "").replace("```", "").strip()
+        parsed = json.loads(cleaned)
+        return parsed
+    except Exception:
+        return {"score": 3, "reason": "评估失败，默认需要重试", "need_retry": True}
+
+
+def analyze_visual_risk(uploaded_file, event_desc="", max_retries=2):
     if uploaded_file is None:
         return ""
 
@@ -229,45 +259,79 @@ def analyze_visual_risk(uploaded_file):
             "type": "image_url",
             "image_url": {"url": f"data:{mime_type};base64,{base64_data}"},
         }
-    try:
-        resp = client.chat.completions.create(
-            model=VL_MODEL_NAME,
-            messages=[
-                {
-                    "role": "system",
-                    "content": "你是一位极其敏锐且言辞犀利的资深公关风控专家，擅长从视觉物料中发现致命的公关雷点。",
-                },
-                {
-                    "role": "user",
-                    "content": [
-                        media_content,
-                        {
-                            "type": "text",
-                            "text": ANALYZE_VISUAL_RISK_PROMPT,
-                        },
-                    ],
-                },
-            ],
-            temperature=0.2,
-            max_tokens=4096,
-            extra_body={
-                "enable_thinking": True,
-                "thinking_budget": 10240,
-            },
+
+    # 如果有事件描述，将其加入 prompt
+    base_prompt = ANALYZE_VISUAL_RISK_PROMPT
+    if event_desc and event_desc.strip():
+        base_prompt = (
+            f"【事件背景描述】：{event_desc.strip()}\n\n"
+            "请结合以上背景，审视下方视觉物料，分析其中可能存在的公关雷点。\n\n"
+            + ANALYZE_VISUAL_RISK_PROMPT
         )
-        raw_content = (resp.choices[0].message.content if resp.choices else "") or ""
-        raw_content = raw_content.strip()
-        match = re.search(r"\{.*\}", raw_content, re.DOTALL)
-        clean_json_str = match.group(0) if match else raw_content
+
+    last_risk = ""
+    for attempt in range(max_retries + 1):
+        # 如果是重试，增加质检反馈到 prompt 中
+        current_prompt = base_prompt
+        if attempt > 0 and last_risk:
+            quality_check = _verify_risk_quality(last_risk, event_desc)
+            if not quality_check.get("need_retry", True):
+                # 质量合格，直接返回
+                return last_risk
+            feedback = quality_check.get("reason", "分析不够精准")
+            current_prompt = (
+                f"【上一次分析质量评估反馈】：{feedback}\n\n"
+                "请根据以上反馈，重新审视视觉物料，给出更精准、更尖锐的核心雷点分析。\n\n"
+                + base_prompt
+            )
+
         try:
-            parsed = json.loads(clean_json_str)
-            if isinstance(parsed, dict):
-                return str(parsed.get("visual_risks", "")).strip()
-        except Exception:
-            pass
-        return raw_content.replace("\n", " ")
-    except Exception as e:
-        return f"视觉分析失败：{e}"
+            resp = client.chat.completions.create(
+                model=VL_MODEL_NAME,
+                messages=[
+                    {
+                        "role": "system",
+                        "content": "你是一位极其敏锐且言辞犀利的资深公关风控专家，擅长从视觉物料中发现致命的公关雷点。",
+                    },
+                    {
+                        "role": "user",
+                        "content": [
+                            media_content,
+                            {
+                                "type": "text",
+                                "text": current_prompt,
+                            },
+                        ],
+                    },
+                ],
+                temperature=0.2 if attempt == 0 else 0.3,
+                max_tokens=4096,
+                extra_body={
+                    "enable_thinking": True,
+                    "thinking_budget": 10240,
+                },
+            )
+            raw_content = (resp.choices[0].message.content if resp.choices else "") or ""
+            raw_content = raw_content.strip()
+            match = re.search(r"\{.*\}", raw_content, re.DOTALL)
+            clean_json_str = match.group(0) if match else raw_content
+            try:
+                parsed = json.loads(clean_json_str)
+                if isinstance(parsed, dict):
+                    last_risk = str(parsed.get("visual_risks", "")).strip()
+                    if last_risk:
+                        continue  # 进入下一次质检循环
+            except Exception:
+                pass
+            last_risk = raw_content.replace("\n", " ")
+        except Exception as e:
+            if attempt == 0:
+                return f"视觉分析失败：{e}"
+            # 重试失败，返回上一次结果
+            break
+
+    # 所有重试结束后，返回最后一次结果
+    return last_risk if last_risk else "视觉分析未返回有效结果"
 
 
 def auto_generate_context_from_image(uploaded_file):
@@ -497,22 +561,24 @@ def generate_seed_roster(event_desc, network_mood, pr_draft):
         "请先判断事件的性质（政务、商业、娱乐圈或社会热点），再生成 10~14 个种子智能体；角色必须与性质严格匹配。"
         "阵容须呈现「全网热议、多方混战」：覆盖锐评大V、路透搬运、本地围观、反讽段子手、科普考据、对立阵营意见领袖、行业观察、营销号带节奏等多路网民画像，立场与权重拉开梯度，禁止几张嘴同质化复读。"
         "【乐子人强制规则】：你的名单中**必须包含 2~3 名「网络乐子人/反串黑段子手/阴阳怪气网民」**，他们看热闹不嫌事大，专门喜欢改编官方话术。"
-        "请先评估该事件的【公关防御难度】。"
+        "请先评估该事件的【公关防御难度】（低/中/高/极高），并说明判断依据（如涉事主体过往公信力、事件敏感度、视觉物料冲击力等）。"
         "【强制支持者规则】除「极其恶劣的政务造假/公然作秀糊弄公众」（如一眼假的官方PS通报、政务通报造假）外，"
         "无论风险多高，种子阵容中**必须至少包含 1 名 stance 为 supportive 的角色**："
         "商业语境须为「品牌死忠粉/口味粉/长期用户」，代表危机爆发初期仍站队的一方；"
         "政务（非上述极端造假）语境可为「仍愿意等候调查、反对造谣的温和认同者」，不得使用饭圈话术。"
         "每个智能体字段：name, persona, weight, stance, role_type。"
-        "weight 必须是 100~1000 的整数。"
+        "weight 必须是 100~1000 的整数，代表该角色在舆情场中的声量权重。"
         "stance 仅可为 supportive/neutral/hostile。"
         "role_type 仅可为 official（官方/涉事主体口径）、influencer（大V或强意见领袖）、bystander（路人或围观者）。"
         "请返回如下 JSON 结构："
         "{"
         '  "master_agent_reasoning": {'
-        '    "trigger_anchor": "一句话概括当前事件最核心的舆情毒点",'
-        '    "rag_evidence": "结合匹配到的历史案例，指出历史规律",'
-        '    "strategy_argument": "基于上述论据，解释你为什么配置接下来的这些角色阵营",'
-        '    "evolution_prediction": "用一句话预判舆情演化的最可能分支"'
+        '    "trigger_anchor": "一句话精准概括当前事件最核心的舆情引爆点（必须具体到涉事主体的某个具体行为/话语/视觉细节）",'
+        '    "crisis_nature": "明确判定事件性质（政务/商业/娱乐/社会），并简述判定依据",'
+        '    "defense_difficulty": "评估公关防御难度（低/中/高/极高），并给出1-2句判断依据",'
+        '    "rag_evidence": "若匹配到历史案例，指出该案例的核心教训；若无匹配，说明本次为新型/独立事件",'
+        '    "strategy_argument": "详细阐述你的排兵布阵逻辑：为什么配置这些角色？各阵营如何相互作用推动舆情演化？重点指出哪些角色会形成对线、哪些角色会带节奏、哪些角色会反转局势。不少于50字。",'
+        '    "evolution_prediction": "用一句话预判舆情演化的最可能分支（如：官方强硬回应→网民更愤怒→倒逼第三方介入；或官方诚恳道歉+赔偿→情绪缓和→部分网民转为支持）"'
         "  },"
         '  "roster": [ {现有的角色结构} ]'
         "}"
@@ -653,6 +719,8 @@ def generate_seed_roster(event_desc, network_mood, pr_draft):
     return {
         "master_agent_reasoning": {
             "trigger_anchor": str(mr.get("trigger_anchor", "") or "").strip(),
+            "crisis_nature": str(mr.get("crisis_nature", "") or "").strip(),
+            "defense_difficulty": str(mr.get("defense_difficulty", "") or "").strip(),
             "rag_evidence": str(mr.get("rag_evidence", "") or "").strip(),
             "strategy_argument": str(mr.get("strategy_argument", "") or "").strip(),
             "evolution_prediction": str(mr.get("evolution_prediction", "") or "").strip(),
@@ -1801,7 +1869,8 @@ def main():
             final_network_mood = auto_ctx.get("auto_sentiment", "").strip()
             visual_risk_desc = auto_ctx.get("visual_risks", "").strip()
         elif has_file_input:
-            visual_risk_desc = analyze_visual_risk(uploaded_file).strip()
+            # 将用户输入的事件描述传给视觉分析智能体，让它结合背景分析
+            visual_risk_desc = analyze_visual_risk(uploaded_file, event_desc).strip()
 
         event_desc_enhanced = final_event_desc or "网络出现了一起争议事件，舆情迅速升温。"
         if visual_risk_desc.strip():
@@ -1827,6 +1896,8 @@ def main():
                     f"{matched_case.get('title', '历史案例')}"
                     "】高度相似！已将历史网民情绪与官方应对策略注入沙盘底层逻辑。"
                 )
+            else:
+                st.info("🔍 未找到高度适配的历史案例，本次推演将跳过历史记忆注入，直接基于当前事件进行沙盘模拟。")
             if zeitgeist_result.get("risk_level") == "高":
                 st.warning(
                     f"📡 宏观环境警告：{zeitgeist_result.get('collateral_damage_warning', '')}"
@@ -1857,8 +1928,184 @@ def main():
 
             st.markdown("### 🧠 Master Agent 逻辑自证中枢")
             render_cyber_graph(master_reasoning or {})
-            st.markdown("#### Seed Roster（种子智能体）")
-            st.json(agents)
+            
+            # 🌟 种子智能体阵容展示 - 包含角色选择理由、立场与权重说明
+            st.markdown("### 👥 Seed Roster（种子智能体阵容）")
+            
+            # 显示 Master Agent 详细推理
+            mr = master_reasoning if isinstance(master_reasoning, dict) else {}
+            
+            # 舆情引爆点
+            trigger = mr.get("trigger_anchor", "")
+            # 事件性质判定
+            nature = mr.get("crisis_nature", "")
+            # 防御难度评估
+            difficulty = mr.get("defense_difficulty", "")
+            # 历史论据
+            rag = mr.get("rag_evidence", "")
+            # 排兵布阵逻辑
+            strategy = mr.get("strategy_argument", "")
+            # 演化预测
+            evolution = mr.get("evolution_prediction", "")
+            
+            # 第一行：引爆点 + 事件性质 + 防御难度
+            col_r1, col_r2, col_r3 = st.columns(3)
+            with col_r1:
+                if trigger:
+                    st.error(f"💣 **舆情引爆点**\n\n{html.escape(trigger)}")
+            with col_r2:
+                if nature:
+                    st.warning(f"🏷️ **事件性质判定**\n\n{html.escape(nature)}")
+            with col_r3:
+                if difficulty:
+                    st.info(f"🛡️ **防御难度评估**\n\n{html.escape(difficulty)}")
+            
+            # 第二行：历史论据 + 排兵布阵逻辑
+            if rag or strategy:
+                st.markdown("#### 📋 Master Agent 排兵布阵逻辑")
+                col_s1, col_s2 = st.columns([1, 2])
+                with col_s1:
+                    if rag:
+                        st.markdown(f"**📚 历史论据**\n\n{html.escape(rag)}")
+                with col_s2:
+                    if strategy:
+                        st.markdown(f"**⚔️ 角色配置逻辑**\n\n{html.escape(strategy)}")
+            
+            # 第三行：演化预测
+            if evolution:
+                st.markdown(f"""
+<div style="background:linear-gradient(135deg,#1a1a2e 0%,#16213e 100%);border:1px solid #0f3460;
+border-radius:10px;padding:14px 18px;margin:14px 0 18px 0;box-shadow:0 4px 18px rgba(15,52,96,0.4);color:#e2e8f0;">
+<p style="margin:0 0 8px 0;font-weight:700;color:#60a5fa !important;font-size:15px;">
+🔮 Master Agent 舆情演化预测
+</p>
+<p style="margin:0;font-size:14px;line-height:1.65;color:#cbd5e1;">{html.escape(evolution)}</p>
+</div>
+""", unsafe_allow_html=True)
+            
+            st.markdown(f"**共生成 {len(agents)} 个种子智能体**")
+            
+            # 立场分布说明
+            stance_counts = {"supportive": 0, "neutral": 0, "hostile": 0}
+            role_counts = {"official": 0, "influencer": 0, "bystander": 0}
+            for a in agents:
+                s = a.get("stance", "neutral")
+                r = a.get("role_type", "bystander")
+                if s in stance_counts:
+                    stance_counts[s] += 1
+                if r in role_counts:
+                    role_counts[r] += 1
+            
+            st.markdown("#### 📊 阵容结构概览")
+            
+            # 使用 HTML 网格布局，更紧凑
+            st.markdown(
+                f"""
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:8px 0;">
+<div style="background:#f8fafc;border-radius:8px;padding:12px 14px;border:1px solid #e2e8f0;">
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+<span style="font-size:18px;">🤝</span>
+<span style="font-size:13px;color:#64748b;font-weight:600;">支持者</span>
+<span style="font-size:11px;color:#94a3b8;">(supportive)</span>
+</div>
+<div style="font-size:24px;font-weight:700;color:#22c55e;">{stance_counts['supportive']} 人</div>
+</div>
+<div style="background:#f8fafc;border-radius:8px;padding:12px 14px;border:1px solid #e2e8f0;">
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+<span style="font-size:18px;">😐</span>
+<span style="font-size:13px;color:#64748b;font-weight:600;">中立者</span>
+<span style="font-size:11px;color:#94a3b8;">(neutral)</span>
+</div>
+<div style="font-size:24px;font-weight:700;color:#6b7280;">{stance_counts['neutral']} 人</div>
+</div>
+<div style="background:#f8fafc;border-radius:8px;padding:12px 14px;border:1px solid #e2e8f0;">
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+<span style="font-size:18px;">😡</span>
+<span style="font-size:13px;color:#64748b;font-weight:600;">反对者</span>
+<span style="font-size:11px;color:#94a3b8;">(hostile)</span>
+</div>
+<div style="font-size:24px;font-weight:700;color:#ef4444;">{stance_counts['hostile']} 人</div>
+</div>
+<div style="background:#f8fafc;border-radius:8px;padding:12px 14px;border:1px solid #e2e8f0;">
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+<span style="font-size:18px;">👔</span>
+<span style="font-size:13px;color:#64748b;font-weight:600;">官方</span>
+<span style="font-size:11px;color:#94a3b8;">(official)</span>
+</div>
+<div style="font-size:24px;font-weight:700;color:#3b82f6;">{role_counts['official']} 人</div>
+</div>
+<div style="background:#f8fafc;border-radius:8px;padding:12px 14px;border:1px solid #e2e8f0;">
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+<span style="font-size:18px;">📢</span>
+<span style="font-size:13px;color:#64748b;font-weight:600;">大V</span>
+<span style="font-size:11px;color:#94a3b8;">(influencer)</span>
+</div>
+<div style="font-size:24px;font-weight:700;color:#f59e0b;">{role_counts['influencer']} 人</div>
+</div>
+<div style="background:#f8fafc;border-radius:8px;padding:12px 14px;border:1px solid #e2e8f0;">
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+<span style="font-size:18px;">👤</span>
+<span style="font-size:13px;color:#64748b;font-weight:600;">路人</span>
+<span style="font-size:11px;color:#94a3b8;">(bystander)</span>
+</div>
+<div style="font-size:24px;font-weight:700;color:#8b5cf6;">{role_counts['bystander']} 人</div>
+</div>
+</div>
+""",
+                unsafe_allow_html=True,
+            )
+            
+            # 每个智能体的详细说明卡片
+            st.markdown("#### 🃏 智能体详情卡")
+            for idx, agent in enumerate(agents, 1):
+                name = agent.get("name", "匿名")
+                persona = agent.get("persona", "")
+                weight = agent.get("weight", 300)
+                stance = agent.get("stance", "neutral")
+                role_type = agent.get("role_type", "bystander")
+                
+                # 立场说明
+                stance_desc = {
+                    "supportive": "🤝 **支持者**：危机初期仍愿意为品牌/官方辩护",
+                    "neutral": "😐 **中立者**：观望态度或理中客立场",
+                    "hostile": "😡 **反对者**：持批判、维权或敌对立场"
+                }.get(stance, "😐 中立者")
+                
+                # 角色类型说明
+                role_desc = {
+                    "official": "👔 **官方**：涉事主体或指定发言人，发言具有权威性和正式性",
+                    "influencer": "📢 **大V**：强意见领袖，拥有大量粉丝，言论传播力强",
+                    "bystander": "👤 **路人**：普通网民或围观者，代表大众情绪"
+                }.get(role_type, "👤 路人")
+                
+                # 权重等级说明
+                if weight >= 800:
+                    weight_level = "🔴 超高权重（800-1000）：头部大V，言论极易引发跟风"
+                elif weight >= 500:
+                    weight_level = "🟡 中高权重（500-799）：活跃账号，有一定传播力"
+                else:
+                    weight_level = "🟢 普通权重（100-499）：路人网民，代表沉默大多数"
+                
+                stance_color = {"supportive": "#22c55e", "neutral": "#6b7280", "hostile": "#ef4444"}.get(stance, "#6b7280")
+                stance_bg = {"supportive": "#143a24", "neutral": "#1f2937", "hostile": "#3f1d1d"}.get(stance, "#1f2937")
+                
+                st.markdown(
+                    f"""
+<div style="background:{stance_bg};border-left:5px solid {stance_color};
+border-radius:10px;padding:16px 18px;margin:10px 0;box-shadow:0 3px 12px rgba(0,0,0,0.25);">
+<div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
+<strong style="font-size:16px;color:#f3f4f6;">{idx}. {html.escape(name)}</strong>
+</div>
+<div style="font-size:14px;color:#d1d5db;line-height:1.7;">
+<p style="margin:4px 0;"><strong>人设定位：</strong>{html.escape(persona)}</p>
+<p style="margin:4px 0;"><strong>立场：</strong>{stance_desc}</p>
+<p style="margin:4px 0;"><strong>角色类型：</strong>{role_desc}</p>
+<p style="margin:4px 0;"><strong>影响力权重：</strong>`{weight}` → {weight_level}</p>
+</div>
+</div>
+""",
+                    unsafe_allow_html=True,
+                )
             logs = run_dynamic_sandbox(
                 event_desc_enhanced,
                 final_network_mood,
