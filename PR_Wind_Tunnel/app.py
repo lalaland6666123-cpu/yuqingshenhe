@@ -11,7 +11,10 @@ import streamlit as st
 import streamlit.components.v1 as components
 from openai import OpenAI
 
-from config import MODEL_NAME, QWEN_API_KEY, QWEN_BASE_URL, VL_MODEL_NAME
+from config import (
+    MODEL_NAME, TEXT_API_KEY, TEXT_BASE_URL,
+    VL_MODEL_NAME, VL_API_KEY, VL_BASE_URL,
+)
 
 
 HISTORY_FILE = "history_records.json"
@@ -19,7 +22,8 @@ HISTORY_FILE = "history_records.json"
 # 种子阵容人数上限；过小沙盘冷清，过大则每轮全员发言的 LLM 调用与耗时显著增加。
 SEED_ROSTER_CAP = 14
 
-client = OpenAI(api_key=QWEN_API_KEY, base_url=QWEN_BASE_URL)
+text_client = OpenAI(api_key=TEXT_API_KEY, base_url=TEXT_BASE_URL)
+vl_client = OpenAI(api_key=VL_API_KEY, base_url=VL_BASE_URL)
 
 CASE_DATABASE = []
 CASE_INDEX = []
@@ -86,7 +90,7 @@ def retrieve_similar_case(event_desc):
         f"历史案例索引（JSON）：\n{json.dumps(CASE_INDEX, ensure_ascii=False)}"
     )
     try:
-        resp = client.chat.completions.create(
+        resp = text_client.chat.completions.create(
             model=MODEL_NAME,
             messages=[
                 {"role": "system", "content": system_prompt},
@@ -177,7 +181,7 @@ def chat_llm(
     else:
         final_system_prompt = f"{system_prompt}\n\n{MANDATORY_CHAT_RULE}"
     try:
-        resp = client.chat.completions.create(
+        resp = text_client.chat.completions.create(
             model=MODEL_NAME,
             messages=[
                 {"role": "system", "content": final_system_prompt},
@@ -230,7 +234,7 @@ def analyze_visual_risk(uploaded_file):
             "image_url": {"url": f"data:{mime_type};base64,{base64_data}"},
         }
     try:
-        resp = client.chat.completions.create(
+        resp = vl_client.chat.completions.create(
             model=VL_MODEL_NAME,
             messages=[
                 {
@@ -305,7 +309,7 @@ def auto_generate_context_from_image(uploaded_file):
     )
 
     try:
-        resp = client.chat.completions.create(
+        resp = vl_client.chat.completions.create(
             model=VL_MODEL_NAME,
             messages=[
                 {
@@ -372,7 +376,7 @@ OFFICIAL_OUTPUT_FORMAT_HARD = (
 
 def _llm_json_array(system_prompt, user_prompt, max_tokens=600, temperature=0.45):
     try:
-        resp = client.chat.completions.create(
+        resp = text_client.chat.completions.create(
             model=MODEL_NAME,
             messages=[
                 {"role": "system", "content": system_prompt},
@@ -741,7 +745,7 @@ def generate_round3_swarm_danmaku_text(event_desc, network_mood, pr_draft, logs)
         "请立即输出 8～10 行弹幕。"
     )
     try:
-        resp = client.chat.completions.create(
+        resp = text_client.chat.completions.create(
             model=MODEL_NAME,
             messages=[
                 {"role": "system", "content": system_prompt},
@@ -1316,7 +1320,7 @@ def generate_report(event_desc, network_mood, pr_draft, visual_risk_desc, logs):
         f"完整4轮沙盘日志：{json.dumps(logs, ensure_ascii=False)}"
     )
     try:
-        resp = client.chat.completions.create(
+        resp = text_client.chat.completions.create(
             model=MODEL_NAME,
             messages=[
                 {"role": "system", "content": system_prompt},
