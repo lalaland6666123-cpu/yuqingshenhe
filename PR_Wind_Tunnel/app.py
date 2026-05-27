@@ -4,6 +4,7 @@ import os
 import time
 import base64
 import re
+import random
 from datetime import datetime
 
 import openai
@@ -1359,8 +1360,34 @@ def run_dynamic_sandbox(
 
                     speech = chat_llm(system_prompt, user_prompt, max_tokens=150)
                     speech = re.sub(r"#.*?#", "", speech or "").strip()
-                    if not speech:
-                        speech = "……（看了看广场，欲言又止）"
+                    
+                    # 动态兜底机制：如果LLM没输出，根据不同立场随机给出生动的反应
+                    if not speech or "系统波动" in speech:
+                        stance_fallback = agent.get("stance", "neutral")
+                        if stance_fallback == "hostile":
+                            fallbacks = [
+                                "气笑了，懒得骂了。",
+                                "能看到这文案，人类没有希望了",
+                                "我已经分不清是纯度太高还是反讽了",
+                                "我故意找茬都想不出来",
+                                "已经截图保存了，写文案的厉害，盖章通过的更是不得了。"
+                            ]
+                        elif stance_fallback == "supportive":
+                            fallbacks = [
+                                "水深啊，这明显是对手搞了小动作",
+                                "哪有对错无非是某些媒体造热点搞流量。",
+                                "就继续严于律人宽以待己吧",
+                                "先观望吧，我相信最终会给大家一个解释的。"
+                            ]
+                        else:
+                            fallbacks = [
+                                "这集真神了",
+                                "同龄人：偷偷笑； 高手：差点绷住；我：轻松绷住",
+                                "我最讨厌的就是事后道歉！",
+                                " 痴情的黑子呀[大哭]请再等一世吧",
+                                
+                            ]
+                        speech = random.choice(fallbacks)
                     render_animated_bubble(agent, speech, round_idx)
 
                 logs.append(
