@@ -811,7 +811,7 @@ def get_avatar_emoji(role_type, stance, persona, name):
 
 
 def render_animated_bubble(agent, text, round_idx):
-    """渲染带有像素风 NPC 小人和滑入动画效果的聊天气泡"""
+    """渲染带有像素风 NPC 小人和滑入动画效果的聊天气泡（支持直接点击修改文本）"""
     import urllib.parse
     
     rt = agent.get("role_type", "bystander")
@@ -819,8 +819,6 @@ def render_animated_bubble(agent, text, round_idx):
     persona = str(agent.get("persona", "") or "")
     name = str(agent.get("name", "NPC") or "NPC")
 
-    # 🌟 核心改动：使用 DiceBear 像素接口替换原来的 Emoji 头像
-    # 这样这里的头像和下面广场上的小人就完全对应上了
     safe_name = urllib.parse.quote(name)
     avatar_url = f"https://api.dicebear.com/9.x/pixel-art/svg?seed={safe_name}"
 
@@ -845,11 +843,8 @@ def render_animated_bubble(agent, text, round_idx):
             100% { opacity: 1; transform: translateY(0) scale(1); }
         }
         .plaza-character-container {
-            display: flex;
-            flex-direction: column;
-            align-items: var(--align-items);
-            animation: plazaPopIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-            margin-bottom: 20px;
+            display: flex; flex-direction: column; align-items: var(--align-items);
+            animation: plazaPopIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; margin-bottom: 20px;
         }
         .plaza-bubble-header {
             font-size: 12px; color: #9ca3af; margin-bottom: 4px; display: flex; gap: 8px; flex-wrap: wrap;
@@ -857,32 +852,29 @@ def render_animated_bubble(agent, text, round_idx):
         .plaza-main-content {
             display: flex; align-items: flex-start; gap: 12px; flex-direction: var(--flex-dir);
         }
-        
-        /* 🌟 针对像素图片的 CSS 优化 */
         .plaza-pixel-avatar {
-            width: 56px;
-            height: 56px;
-            image-rendering: pixelated; /* 强制像素颗粒感，不模糊 */
+            width: 56px; height: 56px; image-rendering: pixelated; 
             filter: drop-shadow(0 4px 6px rgba(0,0,0,0.4));
             animation: plazaAvatarFloat 2.5s ease-in-out infinite alternate;
         }
-        
         @keyframes plazaAvatarFloat {
             0% { transform: translateY(0px); }
             100% { transform: translateY(-6px); }
         }
         
+        /* 🌟 核心：为气泡添加可编辑的交互效果 */
         .plaza-chat-bubble {
-            background-color: var(--bg-color);
-            border-left: 4px solid var(--border-color);
-            color: #f3f4f6;
-            padding: 12px 16px;
-            border-radius: 12px;
-            max-width: 85%;
-            font-size: 15px;
-            line-height: 1.6;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            white-space: pre-wrap;
+            background-color: var(--bg-color); border-left: 4px solid var(--border-color);
+            color: #f3f4f6; padding: 12px 16px; border-radius: 12px; max-width: 85%;
+            font-size: 15px; line-height: 1.6; box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            white-space: pre-wrap; transition: all 0.2s;
+        }
+        .plaza-chat-bubble:hover {
+            filter: brightness(1.15); cursor: text;
+        }
+        .plaza-chat-bubble:focus {
+            outline: 2px dashed rgba(255,255,255,0.6);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
         }
     </style>
     """
@@ -890,7 +882,6 @@ def render_animated_bubble(agent, text, round_idx):
     safe_text = html.escape(text or "")
     persona_preview = persona[:15] + ("…" if len(persona) > 15 else "")
 
-    # 这里把原本的 <div class="plaza-avatar">{avatar}</div> 换成了 <img> 标签
     html_code = f"""
     {animation_css}
     <div class="plaza-character-container" style="--align-items: {align_items};">
@@ -902,7 +893,8 @@ def render_animated_bubble(agent, text, round_idx):
         </div>
         <div class="plaza-main-content" style="--flex-dir: {flex_dir};">
             <img class="plaza-pixel-avatar" src="{avatar_url}" alt="avatar">
-            <div class="plaza-chat-bubble" style="--bg-color: {bg_color}; --border-color: {border_color};">{safe_text}</div>
+            <!-- 🌟 核心：加入 contenteditable="true" 让气泡变成沉浸式输入框 -->
+            <div class="plaza-chat-bubble" contenteditable="true" spellcheck="false" style="--bg-color: {bg_color}; --border-color: {border_color};">{safe_text}</div>
         </div>
     </div>
     """
@@ -916,11 +908,22 @@ def render_official_announcement(agent, text, round_idx, phase_label):
         f"Round {round_idx} ｜ {phase_label}"
     )
     safe = html.escape(text or "")
+    
+    # 🌟 核心：加入 contenteditable="true" 和聚焦时的发光 CSS
     st.markdown(
         f"""
-<div style="background:#1e3a8a;color:#f8fafc;padding:16px 18px;border-radius:8px;
+<style>
+.editable-official:focus {{
+    outline: 2px solid #93c5fd !important;
+    background: #1e40af !important;
+    cursor: text;
+}}
+.editable-official:hover {{ filter: brightness(1.1); cursor: pointer; }}
+</style>
+<div class="editable-official" contenteditable="true" spellcheck="false" 
+style="background:#1e3a8a;color:#f8fafc;padding:16px 18px;border-radius:8px;
 border-left:8px solid #60a5fa;margin:8px 0 20px 0;font-size:15px;line-height:1.65;
-box-shadow:0 2px 8px rgba(30,58,138,0.35);">
+box-shadow:0 2px 8px rgba(30,58,138,0.35); transition: all 0.2s;">
 <div style="white-space:pre-wrap;">{safe}</div>
 </div>
 """,
@@ -1840,7 +1843,19 @@ def main():
                     f"\n\n视觉雷点：{visual_risk_desc}"
                 )
             if visual_risk_desc.strip():
-                st.warning(f"视觉情报局雷点：{visual_risk_desc}")
+                safe_vr = html.escape(visual_risk_desc)
+                st.markdown(f"""
+                <style>
+                .editable-warning:focus {{ outline: 2px dashed #f59e0b !important; background: #fffbeb !important; cursor: text; }}
+                .editable-warning:hover {{ filter: brightness(0.96); cursor: pointer; }}
+                </style>
+                <div class="editable-warning" contenteditable="true" spellcheck="false" 
+                style="background:#fffbeb; color:#92400e; padding:16px; border-radius:8px; 
+                border-left:6px solid #f59e0b; margin-bottom:16px; font-size:15px; 
+                line-height:1.6; transition:all 0.2s; box-shadow:0 2px 4px rgba(0,0,0,0.05);">
+                <strong>⚠️ 视觉情报局雷点：</strong><br><br>{safe_vr}
+                </div>
+                """, unsafe_allow_html=True)
 
             seed_pack = generate_seed_roster(
                 event_desc_enhanced, final_network_mood, final_pr_draft
@@ -1891,38 +1906,73 @@ def main():
                 if raw_text:
                     st.code(raw_text)
             else:
-                fatal_focus = report.get("fatal_focus", "未识别到明确集火点。")
+                # 提取并安全转义数据
                 scores = report.get("scores", {})
-                legal = scores.get("legal", {"score": "?", "reason": "暂无说明"})
-                business = scores.get("business", {"score": "?", "reason": "暂无说明"})
-                reputation = scores.get("reputation", {"score": "?", "reason": "暂无说明"})
-                rewrite_suggestion = report.get(
-                    "rewrite_suggestion", "暂无建议稿，请稍后重试。"
-                )
+                safe_fatal = html.escape(report.get('fatal_focus', '—'))
+                
+                leg_s = html.escape(str(scores.get("legal", {}).get("score", "?")))
+                leg_r = html.escape(str(scores.get("legal", {}).get("reason", "暂无说明")))
+                
+                bus_s = html.escape(str(scores.get("business", {}).get("score", "?")))
+                bus_r = html.escape(str(scores.get("business", {}).get("reason", "暂无说明")))
+                
+                rep_s = html.escape(str(scores.get("reputation", {}).get("score", "?")))
+                rep_r = html.escape(str(scores.get("reputation", {}).get("reason", "暂无说明")))
 
-                st.error(f"💥 被攻击焦点 / 视觉雷点：\n\n> {fatal_focus}")
+                # 渲染可编辑的红色警告框 + 可编辑的三个评分卡片
+                report_html = f"""
+                <style>
+                /* 被攻击焦点样式 */
+                .editable-fatal:focus {{ outline: 2px dashed #ef4444 !important; background: #fef2f2 !important; cursor: text; }}
+                .editable-fatal:hover {{ filter: brightness(0.96); cursor: pointer; }}
+                
+                /* 评分卡片布局与样式 */
+                .metric-container {{ display: flex; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }}
+                .metric-card {{
+                    flex: 1; min-width: 200px; background: #ffffff; padding: 16px 20px; border-radius: 8px;
+                    box-shadow: 0 2px 6px rgba(0,0,0,0.06); border: 1px solid #e5e7eb;
+                    transition: all 0.2s;
+                }}
+                .metric-card:hover {{ box-shadow: 0 4px 12px rgba(0,0,0,0.12); cursor: pointer; border-color: #d1d5db; }}
+                .metric-card:focus-within {{ outline: 2px dashed #3b82f6; border-color: transparent; cursor: text; }}
+                
+                .m-title {{ font-size: 14px; color: #6b7280; font-weight: 600; margin-bottom: 4px; }}
+                .m-score {{ font-size: 36px; color: #111827; font-weight: 700; margin-bottom: 4px; line-height: 1.2; }}
+                .m-reason {{ font-size: 14px; color: #ef4444; font-weight: 500; display: flex; align-items: center; gap: 4px; }}
+                </style>
 
-                col1, col2, col3 = st.columns(3)
-                with col1:
-                    st.markdown(
-                        f"### LEGAL\n# {legal.get('score', '?')}\n"
-                        f"<span style='color:gray;font-size:14px'>↑ {legal.get('reason', '暂无说明')}</span>",
-                        unsafe_allow_html=True,
-                    )
-                with col2:
-                    st.markdown(
-                        f"### BUSINESS\n# {business.get('score', '?')}\n"
-                        f"<span style='color:gray;font-size:14px'>↑ {business.get('reason', '暂无说明')}</span>",
-                        unsafe_allow_html=True,
-                    )
-                with col3:
-                    st.markdown(
-                        f"### REPUTATION\n# {reputation.get('score', '?')}\n"
-                        f"<span style='color:gray;font-size:14px'>↑ {reputation.get('reason', '暂无说明')}</span>",
-                        unsafe_allow_html=True,
-                    )
+                <!-- 1. 可编辑的红色攻击焦点框 -->
+                <div class="editable-fatal" contenteditable="true" spellcheck="false" 
+                style="background:#fef2f2; color:#991b1b; padding:16px; border-radius:8px; 
+                border-left:6px solid #ef4444; margin-bottom:20px; font-size:15px; 
+                line-height:1.6; transition:all 0.2s; box-shadow:0 2px 4px rgba(0,0,0,0.05);">
+                <strong>💥 被攻击焦点 / 视觉雷点：</strong><br><br>{safe_fatal}
+                </div>
 
-                st.success(f"📝 安全优化建议稿：\n\n{rewrite_suggestion}")
+                <!-- 2. 可编辑的三个评分看板 -->
+                <div class="metric-container">
+                    <div class="metric-card" contenteditable="true" spellcheck="false">
+                        <div class="m-title">LEGAL 法律风险</div>
+                        <div class="m-score">{leg_s}</div>
+                        <div class="m-reason">↑ {leg_r}</div>
+                    </div>
+                    <div class="metric-card" contenteditable="true" spellcheck="false">
+                        <div class="m-title">BUSINESS 商业影响</div>
+                        <div class="m-score">{bus_s}</div>
+                        <div class="m-reason">↑ {bus_r}</div>
+                    </div>
+                    <div class="metric-card" contenteditable="true" spellcheck="false">
+                        <div class="m-title">REPUTATION 声誉损毁</div>
+                        <div class="m-score">{rep_s}</div>
+                        <div class="m-reason">↑ {rep_r}</div>
+                    </div>
+                </div>
+                """
+                
+                st.markdown(report_html, unsafe_allow_html=True)
+
+                safe_suggest = report.get('rewrite_suggestion', '—')
+                st.markdown(safe_suggest, unsafe_allow_html=True)
 
                 save_test_record(
                     event_desc_enhanced,
@@ -1942,38 +1992,73 @@ def main():
                 if raw_text:
                     st.code(raw_text)
             else:
-                fatal_focus = report.get("fatal_focus", "未识别到明确集火点。")
+                # 提取并安全转义数据
                 scores = report.get("scores", {})
-                legal = scores.get("legal", {"score": "?", "reason": "暂无说明"})
-                business = scores.get("business", {"score": "?", "reason": "暂无说明"})
-                reputation = scores.get("reputation", {"score": "?", "reason": "暂无说明"})
-                rewrite_suggestion = report.get(
-                    "rewrite_suggestion", "暂无建议稿，请稍后重试。"
-                )
+                safe_fatal = html.escape(report.get('fatal_focus', '—'))
+                
+                leg_s = html.escape(str(scores.get("legal", {}).get("score", "?")))
+                leg_r = html.escape(str(scores.get("legal", {}).get("reason", "暂无说明")))
+                
+                bus_s = html.escape(str(scores.get("business", {}).get("score", "?")))
+                bus_r = html.escape(str(scores.get("business", {}).get("reason", "暂无说明")))
+                
+                rep_s = html.escape(str(scores.get("reputation", {}).get("score", "?")))
+                rep_r = html.escape(str(scores.get("reputation", {}).get("reason", "暂无说明")))
 
-                st.error(f"💥 被攻击焦点 / 视觉雷点：\n\n> {fatal_focus}")
+                # 渲染可编辑的红色警告框 + 可编辑的三个评分卡片
+                report_html = f"""
+                <style>
+                /* 被攻击焦点样式 */
+                .editable-fatal:focus {{ outline: 2px dashed #ef4444 !important; background: #fef2f2 !important; cursor: text; }}
+                .editable-fatal:hover {{ filter: brightness(0.96); cursor: pointer; }}
+                
+                /* 评分卡片布局与样式 */
+                .metric-container {{ display: flex; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }}
+                .metric-card {{
+                    flex: 1; min-width: 200px; background: #ffffff; padding: 16px 20px; border-radius: 8px;
+                    box-shadow: 0 2px 6px rgba(0,0,0,0.06); border: 1px solid #e5e7eb;
+                    transition: all 0.2s;
+                }}
+                .metric-card:hover {{ box-shadow: 0 4px 12px rgba(0,0,0,0.12); cursor: pointer; border-color: #d1d5db; }}
+                .metric-card:focus-within {{ outline: 2px dashed #3b82f6; border-color: transparent; cursor: text; }}
+                
+                .m-title {{ font-size: 14px; color: #6b7280; font-weight: 600; margin-bottom: 4px; }}
+                .m-score {{ font-size: 36px; color: #111827; font-weight: 700; margin-bottom: 4px; line-height: 1.2; }}
+                .m-reason {{ font-size: 14px; color: #ef4444; font-weight: 500; display: flex; align-items: center; gap: 4px; }}
+                </style>
 
-                col1, col2, col3 = st.columns(3)
-                with col1:
-                    st.markdown(
-                        f"### LEGAL\n# {legal.get('score', '?')}\n"
-                        f"<span style='color:gray;font-size:14px'>↑ {legal.get('reason', '暂无说明')}</span>",
-                        unsafe_allow_html=True,
-                    )
-                with col2:
-                    st.markdown(
-                        f"### BUSINESS\n# {business.get('score', '?')}\n"
-                        f"<span style='color:gray;font-size:14px'>↑ {business.get('reason', '暂无说明')}</span>",
-                        unsafe_allow_html=True,
-                    )
-                with col3:
-                    st.markdown(
-                        f"### REPUTATION\n# {reputation.get('score', '?')}\n"
-                        f"<span style='color:gray;font-size:14px'>↑ {reputation.get('reason', '暂无说明')}</span>",
-                        unsafe_allow_html=True,
-                    )
+                <!-- 1. 可编辑的红色攻击焦点框 -->
+                <div class="editable-fatal" contenteditable="true" spellcheck="false" 
+                style="background:#fef2f2; color:#991b1b; padding:16px; border-radius:8px; 
+                border-left:6px solid #ef4444; margin-bottom:20px; font-size:15px; 
+                line-height:1.6; transition:all 0.2s; box-shadow:0 2px 4px rgba(0,0,0,0.05);">
+                <strong>💥 被攻击焦点 / 视觉雷点：</strong><br><br>{safe_fatal}
+                </div>
 
-                st.success(f"📝 安全优化建议稿：\n\n{rewrite_suggestion}")
+                <!-- 2. 可编辑的三个评分看板 -->
+                <div class="metric-container">
+                    <div class="metric-card" contenteditable="true" spellcheck="false">
+                        <div class="m-title">LEGAL 法律风险</div>
+                        <div class="m-score">{leg_s}</div>
+                        <div class="m-reason">↑ {leg_r}</div>
+                    </div>
+                    <div class="metric-card" contenteditable="true" spellcheck="false">
+                        <div class="m-title">BUSINESS 商业影响</div>
+                        <div class="m-score">{bus_s}</div>
+                        <div class="m-reason">↑ {bus_r}</div>
+                    </div>
+                    <div class="metric-card" contenteditable="true" spellcheck="false">
+                        <div class="m-title">REPUTATION 声誉损毁</div>
+                        <div class="m-score">{rep_s}</div>
+                        <div class="m-reason">↑ {rep_r}</div>
+                    </div>
+                </div>
+                """
+                
+                st.markdown(report_html, unsafe_allow_html=True)
+
+                safe_suggest = report.get('rewrite_suggestion', '—')
+                st.markdown(safe_suggest, unsafe_allow_html=True)
     else:
         with tab1:
             st.info("请先在左侧输入信息，再点击左侧“开始审查”。")
