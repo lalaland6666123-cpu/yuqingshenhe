@@ -1,0 +1,6 @@
+openai>=1.0.0
+streamlit>=1.28.0
+numpy>=1.24.0
+jieba>=0.42.1
+rank_bm25>=0.2.2
+sentence_transformers>=2.2.0

@@ -16,6 +16,7 @@ from config import (
     VL_MODEL_NAME, VL_API_KEY, VL_BASE_URL,
 )
 
+from retrieval import HybridRetriever
 
 HISTORY_FILE = "history_records.json"
 
@@ -27,6 +28,17 @@ vl_client = OpenAI(api_key=VL_API_KEY, base_url=VL_BASE_URL)
 
 CASE_DATABASE = []
 CASE_INDEX = []
+
+# ---- 混合检索器: 启动时加载一次 ----
+_retriever = None
+
+
+def _get_retriever():
+    """延迟加载 + 缓存混合检索器"""
+    global _retriever
+    if _retriever is None:
+        _retriever = HybridRetriever()
+    return _retriever
 
 
 def stream_markdown_effect(container, text, prefix="", suffix="", speed=0.03):
@@ -76,7 +88,72 @@ def _load_case_study_database():
 _load_case_study_database()
 
 
-def retrieve_similar_case(event_desc):
+def retrieve_similar_case(event_desc, top_k=10):
+    """混合检索: BM25 + Embedding → Top-K → LLM 精排 → 最佳匹配
+
+    如果混合检索器不可用，回退到旧的纯 LLM 方式。
+    """
+    if not CASE_DATABASE or not event_desc.strip():
+        return None
+
+    retriever = _get_retriever()
+    if not retriever.case_ids or retriever.case_ids != [c["id"] for c in CASE_DATABASE]:
+        # 案例库有更新，重建索引
+        retriever.build(CASE_DATABASE)
+
+    # 阶段 1: 混合检索 Top-K
+    try:
+        candidates = retriever.search(event_desc, top_k=top_k)
+    except Exception:
+        return _retrieve_similar_case_fallback(event_desc)
+
+    if not candidates:
+        return _retrieve_similar_case_fallback(event_desc)
+
+    # 阶段 2: LLM 精排 (仅发送 Top-K 候选, 大幅降低 token 消耗)
+    candidate_texts = [
+        f"[{r['case']['id']}] {r['case']['title']} ({r['case']['crisis_type']})\n"
+        f"事件: {r['case'].get('description', '')[:200]}\n"
+        f"舆论: {r['case'].get('public_reaction', '')[:150]}"
+        for r in candidates
+    ]
+    system_prompt = (
+        "你是一个资深舆情档案管理员。请分析当前的事件背景，"
+        "从以下候选案例中选出在【舆情性质、网民情绪或公关难点】上最相似的一个。"
+        "只输出案例 ID（如 case_1），不要解释或 Markdown。"
+    )
+    user_prompt = (
+        f"当前事件背景：{event_desc[:500]}\n\n"
+        f"候选案例：\n" + "\n\n".join(candidate_texts)
+    )
+    try:
+        resp = text_client.chat.completions.create(
+            model=MODEL_NAME,
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt},
+            ],
+            temperature=0.2,
+            max_tokens=32,
+        )
+        raw = (resp.choices[0].message.content if resp.choices else "") or ""
+    except Exception:
+        # LLM 精排失败, 回退到纯向量检索 Top-1
+        return candidates[0]["case"]
+
+    raw_stripped = raw.strip()
+    m = re.search(r"case_[a-z0-9_]+", raw_stripped, re.I)
+    if m:
+        cid = m.group(0)
+        for item in CASE_DATABASE:
+            if item.get("id") == cid:
+                return item
+    # LLM 没选出, 返回向量检索 Top-1
+    return candidates[0]["case"]
+
+
+def _retrieve_similar_case_fallback(event_desc):
+    """旧版纯 LLM 方案, 作为 fallback"""
     if not CASE_INDEX or not event_desc.strip():
         return None
     system_prompt = (
@@ -180,23 +257,27 @@ def chat_llm(
         final_system_prompt = system_prompt
     else:
         final_system_prompt = f"{system_prompt}\n\n{MANDATORY_CHAT_RULE}"
-    try:
-        resp = text_client.chat.completions.create(
-            model=MODEL_NAME,
-            messages=[
-                {"role": "system", "content": final_system_prompt},
-                {"role": "user", "content": user_prompt},
-            ],
-            temperature=0.9,
-            max_tokens=max_tokens,
-        )
-        content = resp.choices[0].message.content if resp.choices else ""
-        out = (content or "").strip()
-        if collapse_newlines:
-            out = out.replace("\n", " ")
-        return out
-    except Exception as e:
-        return f"系统波动中，先别急！({e})"
+    out = ""
+    for attempt in range(2):
+        try:
+            resp = text_client.chat.completions.create(
+                model=MODEL_NAME,
+                messages=[
+                    {"role": "system", "content": final_system_prompt},
+                    {"role": "user", "content": user_prompt},
+                ],
+                temperature=0.9 if attempt == 0 else 1.0,
+                max_tokens=max_tokens,
+            )
+            content = resp.choices[0].message.content if resp.choices else ""
+            out = (content or "").strip()
+            if collapse_newlines:
+                out = out.replace("\n", " ")
+            if out:
+                break
+        except Exception as e:
+            out = f"系统波动中，先别急！({e})"
+    return out
 
 
 ANALYZE_VISUAL_RISK_PROMPT = (
@@ -1186,6 +1267,8 @@ def run_dynamic_sandbox(
                         skip_mandatory_chat_rule=True,
                         collapse_newlines=False,
                     )
+                    if not speech.strip():
+                        speech = "【关于事件的初步说明】\n我单位已关注到相关舆情，正在核实情况，后续将及时公布调查结果。"
                     phase = "初步定调" if round_idx == 1 else "最终通报"
                     render_official_announcement(agent, speech, round_idx, phase)
                 else:
@@ -1276,6 +1359,8 @@ def run_dynamic_sandbox(
 
                     speech = chat_llm(system_prompt, user_prompt, max_tokens=150)
                     speech = re.sub(r"#.*?#", "", speech or "").strip()
+                    if not speech:
+                        speech = "……（看了看广场，欲言又止）"
                     render_animated_bubble(agent, speech, round_idx)
 
                 logs.append(
