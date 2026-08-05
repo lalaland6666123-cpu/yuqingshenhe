@@ -1,0 +1,34 @@
+# Model files (auto-downloaded from HuggingFace)
+models/
+
+# Python virtual environment
+venv/
+.venv/
+env/
+.env/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+
+# IDE
+.idea/
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+*.egg
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Environment variables
+.env
+.env.local

@@ -1,6 +1,6 @@
 
 # ===== 文字模型配置 =====
-TEXT_API_KEY = "sk-8955a58247804a6d9ca0785624b4e3f0"
+TEXT_API_KEY = "sk-8c6bd3a10984475daf0dd1ccabd72e49"
 TEXT_BASE_URL = "https://api.deepseek.com"
 MODEL_NAME = "deepseek-v4-pro"
 

@@ -1,3 +1,4 @@
+import asyncio
 import html
 import json
 import os
@@ -10,7 +11,7 @@ from datetime import datetime
 import openai
 import streamlit as st
 import streamlit.components.v1 as components
-from openai import OpenAI
+from openai import AsyncOpenAI, OpenAI
 
 from config import (
     MODEL_NAME, TEXT_API_KEY, TEXT_BASE_URL,
@@ -25,6 +26,7 @@ HISTORY_FILE = "history_records.json"
 SEED_ROSTER_CAP = 14
 
 text_client = OpenAI(api_key=TEXT_API_KEY, base_url=TEXT_BASE_URL)
+async_text_client = AsyncOpenAI(api_key=TEXT_API_KEY, base_url=TEXT_BASE_URL)
 vl_client = OpenAI(api_key=VL_API_KEY, base_url=VL_BASE_URL)
 
 CASE_DATABASE = []
@@ -262,6 +264,41 @@ def chat_llm(
     for attempt in range(2):
         try:
             resp = text_client.chat.completions.create(
+                model=MODEL_NAME,
+                messages=[
+                    {"role": "system", "content": final_system_prompt},
+                    {"role": "user", "content": user_prompt},
+                ],
+                temperature=0.9 if attempt == 0 else 1.0,
+                max_tokens=max_tokens,
+            )
+            content = resp.choices[0].message.content if resp.choices else ""
+            out = (content or "").strip()
+            if collapse_newlines:
+                out = out.replace("\n", " ")
+            if out:
+                break
+        except Exception as e:
+            out = f"系统波动中，先别急！({e})"
+    return out
+
+
+async def async_chat_llm(
+    system_prompt,
+    user_prompt,
+    max_tokens,
+    skip_mandatory_chat_rule=False,
+    collapse_newlines=True,
+):
+    """异步版 chat_llm：用于沙盘同轮 Agent 并发发言。"""
+    if skip_mandatory_chat_rule:
+        final_system_prompt = system_prompt
+    else:
+        final_system_prompt = f"{system_prompt}\n\n{MANDATORY_CHAT_RULE}"
+    out = ""
+    for attempt in range(2):
+        try:
+            resp = await async_text_client.chat.completions.create(
                 model=MODEL_NAME,
                 messages=[
                     {"role": "system", "content": final_system_prompt},
@@ -1142,6 +1179,213 @@ def render_cyber_graph(reasoning_data):
     components.html(html_code, height=470)
 
 
+async def _agent_turn_async(
+    agent,
+    i,
+    event_desc,
+    network_mood,
+    pr_draft,
+    logs,
+    round_idx,
+    matched_case,
+    zeitgeist_result,
+    TEXT_STYLES,
+    latest_catalyst_speech,
+):
+    """单个 Agent 的异步发言：构建 prompt → 调用 async_chat_llm → 返回结果字典。
+
+    此函数仅读取 logs（不写入），因此同一轮的多个 Agent 可安全并发。
+    """
+    rt_agent = agent.get("role_type", "bystander")
+
+    context_text = build_plaza_context(event_desc, logs[-8:])
+
+    if round_idx == 3 and rt_agent != "official":
+        context_text += (
+            "\n--- 广场态势 ---\n"
+            "本话题下，上一轮的代表性高赞口径已出现。请独立发帖，严禁带#话题标签#，严禁@人吵架。"
+        )
+        if latest_catalyst_speech:
+            context_text += (
+                "\n（广场高热切口摘录：）\n「" + latest_catalyst_speech + "」"
+            )
+
+    if round_idx == 4:
+        if rt_agent == "official":
+            context_text += (
+                "\n【结局回合·官方】：发布最终蓝底白字通报，须正视舆情，清晰写明【具体的处理结果】（如是否发货、怎么处理涉事人员、怎么赔偿等）。"
+            )
+        else:
+            round4_official_speech = ""
+            for row in reversed(logs):
+                if row["round"] == 4 and row["role_type"] == "official":
+                    round4_official_speech = row["speech"]
+                    break
+            if round4_official_speech:
+                context_text += (
+                    f"\n\n🚨【突发！官方刚刚发布了最终大结局通报】：\n「{round4_official_speech}」\n🚨\n"
+                    "【最高指令】：请立刻仔细阅读上方通报里的具体处理结果！"
+                    "如果官方做出了实质让步、真金白银赔偿或严惩了坏人，你必须立刻'黑转粉（变脸夸奖）'；"
+                    "如果官方还在找借口敷衍，请继续痛骂！"
+                )
+            else:
+                context_text += "\n【最高指令】：看一眼广场态势，给出你最后的总结性表态。"
+
+    macro_bg = ""
+    if zeitgeist_result and str(zeitgeist_result.get("risk_level", "")).strip() == "高":
+        zw = (zeitgeist_result.get("collateral_damage_warning") or "").strip()
+        if zw:
+            macro_bg = (
+                f"【大环境背景】：近期敏感热点（{zw}）让网民极度暴躁。你的文本需自然借题发挥。"
+            )
+
+    if rt_agent == "official":
+        rag_tail = _rag_official_memory_tail(matched_case) if matched_case else ""
+        system_prompt = (
+            f"你执笔官方身份：{agent['name']}（{agent['persona']}）。"
+            f"{OFFICIAL_OUTPUT_FORMAT_HARD}"
+            f"{macro_bg}{rag_tail}"
+        )
+        round_instruction = (
+            "Round1：发布首份【情况说明】，定调、核查。"
+            if round_idx == 1
+            else "Round4：发布终版通报，必须包含【具体的最终处置措施】。"
+        )
+        user_prompt = (
+            f"{context_text}\n情绪：{network_mood}\n参考草稿：{pr_draft}\n{round_instruction}"
+        )
+        speech = await async_chat_llm(
+            system_prompt,
+            user_prompt,
+            max_tokens=400,
+            skip_mandatory_chat_rule=True,
+            collapse_newlines=False,
+        )
+        if not speech.strip():
+            speech = "【关于事件的初步说明】\n我单位已关注到相关舆情，正在核实情况，后续将及时公布调查结果。"
+        return {
+            "agent": agent,
+            "speech": speech,
+            "is_official": True,
+            "phase": "初步定调" if round_idx == 1 else "最终通报",
+        }
+    else:
+        _troll_blob = f"{agent.get('persona', '')}{agent.get('name', '')}"
+        is_troll = any(
+            k in _troll_blob
+            for k in (
+                "乐子人",
+                "段子",
+                "反串",
+                "嘲讽",
+                "梗",
+                "阴阳怪气",
+                "吃瓜",
+            )
+        )
+        troll_snippet = ""
+        if is_troll:
+            troll_snippet = (
+                "【专属被动】提取涉事方话术中离谱的词语直接改编成段子或梗嘲讽（若结局是大反转的极好公关，则改为造梗式夸奖）。"
+            )
+
+        if round_idx == 4:
+            # 第四轮必须彻底解除立场锁定，否则模型会被前面的设定掣肘
+            agent["stance"] = "neutral"
+            personality_law = (
+                "【进入结局阶段，你的原有立场已作废！】\n"
+                "请完全依据官方的最新处理结果来决定态度。如果结果好，请抛弃成见狠狠夸；如果结果烂，请往死里骂！展现真实网友的墙头草属性！"
+            )
+        else:
+            personality_law = (
+                f"【人设与立场绝对锁死】：你的立场是 {agent.get('stance', 'neutral')} ！"
+                "若为 hostile，必须疯狂输出敌意；"
+                "若为 neutral，装作纯路人理中客；"
+                "若为 supportive，绝对不能跟着骂，必须尽力洗地或嘴硬。"
+            )
+
+        forced_style = TEXT_STYLES[i % len(TEXT_STYLES)]
+
+        spiral_snippet = ""
+        if agent.get("stance") == "supportive":
+            if round_idx == 1:
+                spiral_snippet = "【Round1】理直气壮为品牌辩护。"
+            elif round_idx == 2:
+                spiral_snippet = "【Round2】舆论失控，开始和稀泥、转移话题。"
+            elif round_idx == 3:
+                spiral_snippet = "【Round3】感到心累，发出老粉的叹息，但不骂品牌。"
+
+        rag_crowd = _rag_crowd_memory_tail(matched_case) if matched_case else ""
+        round4_law = ROUND4_FINAL_BEHAVIOR_LAW if round_idx == 4 else ""
+
+        system_prompt = (
+            f"账号：{agent['name']}。人设：{agent['persona']}。"
+            f"{personality_law}"
+            f"{troll_snippet}"
+            f"{macro_bg}{spiral_snippet}{round4_law}{rag_crowd}"
+        )
+
+        round_instruction = (
+            "Round1：试探性发帖观察。"
+            if round_idx == 1
+            else "Round2：强化观点输出。"
+            if round_idx == 2
+            else "Round3：焦灼对撞，输出点评。"
+            if round_idx == 3
+            else "Round4：看结局定态度。"
+        )
+
+        # 并发模式下不再有「本轮已发言者」的实时反灌，
+        # TEXT_STYLES + 广场上下文已提供足够差异化。
+        anti_echo = (
+            f"\n🟢 必须严格遵守分配给你的风格格式：{forced_style}"
+        )
+
+        user_prompt = (
+            f"{context_text}\n"
+            f"网络情绪：{network_mood}\n"
+            f"事件/官方草稿：{pr_draft}\n"
+            f"{round_instruction}\n"
+            f"{PLAZA_SQUARE_RULE}\n"
+            "【强警告】：输出内容中不允许出现任何类似 #xxx# 的话题标签！直接输出说话内容即可！"
+            f"{anti_echo}"
+        )
+
+        speech = await async_chat_llm(system_prompt, user_prompt, max_tokens=150)
+        speech = re.sub(r"#.*?#", "", speech or "").strip()
+
+        # 动态兜底机制：如果LLM没输出，根据不同立场随机给出生动的反应
+        if not speech or "系统波动" in speech:
+            stance_fallback = agent.get("stance", "neutral")
+            if stance_fallback == "hostile":
+                fallbacks = [
+                    "气笑了，懒得骂了。",
+                    "能看到这文案，人类没有希望了",
+                    "我已经分不清是纯度太高还是反讽了",
+                    "我故意找茬都想不出来",
+                    "已经截图保存了，写文案的厉害，盖章通过的更是不得了。",
+                ]
+            elif stance_fallback == "supportive":
+                fallbacks = [
+                    "水深啊，这明显是对手搞了小动作",
+                    "哪有对错无非是某些媒体造热点搞流量。",
+                    "就继续严于律人宽以待己吧",
+                    "先观望吧，我相信最终会给大家一个解释的。",
+                ]
+            else:
+                fallbacks = [
+                    "这集真神了",
+                    "同龄人：偷偷笑； 高手：差点绷住；我：轻松绷住",
+                    "我最讨厌的就是事后道歉！",
+                    " 痴情的黑子呀[大哭]请再等一世吧",
+                ]
+            speech = random.choice(fallbacks)
+
+        return {
+            "agent": agent,
+            "speech": speech,
+            "is_official": False,
+        }
 def run_dynamic_sandbox(
     event_desc,
     network_mood,
@@ -1150,6 +1394,7 @@ def run_dynamic_sandbox(
     zeitgeist_result=None,
     matched_case=None,
 ):
+    """舆情沙盘推演：同轮 Agent 并发发言，大幅缩短端到端耗时。"""
     logs = []
     primary_catalyst_name = ""
     catalyst_names = set()
@@ -1167,9 +1412,31 @@ def run_dynamic_sandbox(
         "【句式强制：高冷理中客】用居高临下、类似专家点评的客观冷漠语气。",
     ]
 
+    # ── 构建单轮并发协程 ──────────────────────────────────────────
+    async def _run_agents_concurrently(agent_list):
+        """对 agent_list 中所有 (i, agent) 并发调用 _agent_turn_async。"""
+        tasks = [
+            _agent_turn_async(
+                agent,
+                idx,
+                event_desc,
+                network_mood,
+                pr_draft,
+                logs,
+                round_idx,
+                matched_case,
+                zeitgeist_result,
+                TEXT_STYLES,
+                latest_catalyst_speech,
+            )
+            for idx, agent in agent_list
+        ]
+        return await asyncio.gather(*tasks, return_exceptions=True)
+
     for round_idx in range(1, 5):
         st.markdown(f"### Round {round_idx}")
 
+        # ── Round 2：注入催化剂 Agent ─────────────────────────────
         if round_idx == 2:
             catalyst_specs = generate_dynamic_catalyst_agents(event_desc, network_mood)
             injected = []
@@ -1192,6 +1459,7 @@ def run_dynamic_sandbox(
                 f"对立节点「{injected[0]['name']}」「{injected[1]['name']}」已空降战场！"
             )
 
+        # ── 提取上轮催化剂高赞切口（Round 3+ 使用）────────────────
         latest_catalyst_speech = ""
         if round_idx >= 3 and primary_catalyst_name:
             for row in reversed(logs):
@@ -1204,225 +1472,117 @@ def run_dynamic_sandbox(
                         latest_catalyst_speech = row["speech"]
                         break
 
-        current_round_responses = []
-
+        # ── 筛选本轮发言的 Agent ──────────────────────────────────
+        round_agents = []
         for i, agent in enumerate(agents):
-                rt_agent = agent.get("role_type", "bystander")
-                if rt_agent == "official" and round_idx not in (1, 4):
-                    continue
+            rt_agent = agent.get("role_type", "bystander")
+            if rt_agent == "official" and round_idx not in (1, 4):
+                continue
+            round_agents.append((i, agent))
 
-                context_text = build_plaza_context(event_desc, logs[-8:])
+        if not round_agents:
+            continue
 
-                if round_idx == 3 and rt_agent != "official":
-                    context_text += (
-                        "\n--- 广场态势 ---\n"
-                        "本话题下，上一轮的代表性高赞口径已出现。请独立发帖，严禁带#话题标签#，严禁@人吵架。"
+        # ── 并发执行（Round 4 官方先独奏，其余后并发）────────────
+        if round_idx == 4:
+            official_agents = [
+                (i, a) for i, a in round_agents if a.get("role_type") == "official"
+            ]
+            other_agents = [
+                (i, a) for i, a in round_agents if a.get("role_type") != "official"
+            ]
+
+            # Phase 1：官方独白（其声明需注入后续 Agent 上下文）
+            for i, agent in official_agents:
+                result = asyncio.run(
+                    _agent_turn_async(
+                        agent,
+                        i,
+                        event_desc,
+                        network_mood,
+                        pr_draft,
+                        logs,
+                        round_idx,
+                        matched_case,
+                        zeitgeist_result,
+                        TEXT_STYLES,
+                        latest_catalyst_speech,
                     )
-                    if latest_catalyst_speech:
-                        context_text += (
-                            "\n（广场高热切口摘录：）\n「" + latest_catalyst_speech + "」"
-                        )
-
-                if round_idx == 4:
-                    if rt_agent == "official":
-                        context_text += (
-                            "\n【结局回合·官方】：发布最终蓝底白字通报，须正视舆情，清晰写明【具体的处理结果】（如是否发货、怎么处理涉事人员、怎么赔偿等）。"
-                        )
-                    else:
-                        # 动态提取本轮官方刚刚发出的通报
-                        round4_official_speech = ""
-                        for row in reversed(logs):
-                            if row["round"] == 4 and row["role_type"] == "official":
-                                round4_official_speech = row["speech"]
-                                break
-                        
-                        if round4_official_speech:
-                            context_text += (
-                                f"\n\n🚨【突发！官方刚刚发布了最终大结局通报】：\n「{round4_official_speech}」\n🚨\n"
-                                "【最高指令】：请立刻仔细阅读上方通报里的具体处理结果！"
-                                "如果官方做出了实质让步、真金白银赔偿或严惩了坏人，你必须立刻‘黑转粉（变脸夸奖）’；"
-                                "如果官方还在找借口敷衍，请继续痛骂！"
-                            )
-                        else:
-                            context_text += "\n【最高指令】：看一眼广场态势，给出你最后的总结性表态。"
-
-                macro_bg = ""
-                if zeitgeist_result and str(zeitgeist_result.get("risk_level", "")).strip() == "高":
-                    zw = (zeitgeist_result.get("collateral_damage_warning") or "").strip()
-                    if zw:
-                        macro_bg = (
-                            f"【大环境背景】：近期敏感热点（{zw}）让网民极度暴躁。你的文本需自然借题发挥。"
-                        )
-
-                if rt_agent == "official":
-                    rag_tail = _rag_official_memory_tail(matched_case) if matched_case else ""
-                    system_prompt = (
-                        f"你执笔官方身份：{agent['name']}（{agent['persona']}）。"
-                        f"{OFFICIAL_OUTPUT_FORMAT_HARD}"
-                        f"{macro_bg}{rag_tail}"
-                    )
-                    round_instruction = (
-                        "Round1：发布首份【情况说明】，定调、核查。"
-                        if round_idx == 1
-                        else "Round4：发布终版通报，必须包含【具体的最终处置措施】。"
-                    )
-                    user_prompt = (
-                        f"{context_text}\n情绪：{network_mood}\n参考草稿：{pr_draft}\n{round_instruction}"
-                    )
-                    speech = chat_llm(
-                        system_prompt,
-                        user_prompt,
-                        max_tokens=400,
-                        skip_mandatory_chat_rule=True,
-                        collapse_newlines=False,
-                    )
-                    if not speech.strip():
-                        speech = "【关于事件的初步说明】\n我单位已关注到相关舆情，正在核实情况，后续将及时公布调查结果。"
-                    phase = "初步定调" if round_idx == 1 else "最终通报"
-                    render_official_announcement(agent, speech, round_idx, phase)
-                else:
-                    _troll_blob = f"{agent.get('persona', '')}{agent.get('name', '')}"
-                    is_troll = any(
-                        k in _troll_blob
-                        for k in (
-                            "乐子人",
-                            "段子",
-                            "反串",
-                            "嘲讽",
-                            "梗",
-                            "阴阳怪气",
-                            "吃瓜",
-                        )
-                    )
-                    troll_snippet = ""
-                    if is_troll:
-                        troll_snippet = (
-                            "【专属被动】提取涉事方话术中离谱的词语直接改编成段子或梗嘲讽（若结局是大反转的极好公关，则改为造梗式夸奖）。"
-                        )
-
-                    if round_idx == 4:
-                        # 第四轮必须彻底解除立场锁定，否则模型会被前面的设定掣肘
-                        agent['stance'] = 'neutral' # 强行解除底层立场锁定
-                        personality_law = (
-                            "【进入结局阶段，你的原有立场已作废！】\n"
-                            "请完全依据官方的最新处理结果来决定态度。如果结果好，请抛弃成见狠狠夸；如果结果烂，请往死里骂！展现真实网友的墙头草属性！"
-                        )
-                    else:
-                        personality_law = (
-                            f"【人设与立场绝对锁死】：你的立场是 {agent.get('stance', 'neutral')} ！"
-                            "若为 hostile，必须疯狂输出敌意；"
-                            "若为 neutral，装作纯路人理中客；"
-                            "若为 supportive，绝对不能跟着骂，必须尽力洗地或嘴硬。"
-                        )
-
-                    forced_style = TEXT_STYLES[i % len(TEXT_STYLES)]
-
-                    spiral_snippet = ""
-                    if agent.get("stance") == "supportive":
-                        if round_idx == 1:
-                            spiral_snippet = "【Round1】理直气壮为品牌辩护。"
-                        elif round_idx == 2:
-                            spiral_snippet = "【Round2】舆论失控，开始和稀泥、转移话题。"
-                        elif round_idx == 3:
-                            spiral_snippet = "【Round3】感到心累，发出老粉的叹息，但不骂品牌。"
-
-                    rag_crowd = _rag_crowd_memory_tail(matched_case) if matched_case else ""
-                    round4_law = ROUND4_FINAL_BEHAVIOR_LAW if round_idx == 4 else ""
-
-                    system_prompt = (
-                        f"账号：{agent['name']}。人设：{agent['persona']}。"
-                        f"{personality_law}"
-                        f"{troll_snippet}"
-                        f"{macro_bg}{spiral_snippet}{round4_law}{rag_crowd}"
-                    )
-
-                    round_instruction = (
-                        "Round1：试探性发帖观察。"
-                        if round_idx == 1
-                        else "Round2：强化观点输出。"
-                        if round_idx == 2
-                        else "Round3：焦灼对撞，输出点评。"
-                        if round_idx == 3
-                        else "Round4：看结局定态度。"
-                    )
-
-                    if current_round_responses:
-                        joined = "\n".join(current_round_responses)
-                        anti_echo = (
-                            "\n【系统防碰撞最高指令：严禁排比复读！】\n"
-                            f"前面人的发言：\n{joined}\n"
-                            "🔴 绝对禁止使用与上方类似的切入角度和句式！\n"
-                            f"🟢 必须严格遵守分配给你的风格格式：{forced_style}"
-                        )
-                    else:
-                        anti_echo = (
-                            f"\n🟢 必须严格遵守分配给你的风格格式：{forced_style}"
-                        )
-
-                    user_prompt = (
-                        f"{context_text}\n"
-                        f"网络情绪：{network_mood}\n"
-                        f"事件/官方草稿：{pr_draft}\n"
-                        f"{round_instruction}\n"
-                        f"{PLAZA_SQUARE_RULE}\n"
-                        "【强警告】：输出内容中不允许出现任何类似 #xxx# 的话题标签！直接输出说话内容即可！"
-                        f"{anti_echo}"
-                    )
-
-                    speech = chat_llm(system_prompt, user_prompt, max_tokens=150)
-                    speech = re.sub(r"#.*?#", "", speech or "").strip()
-                    
-                    # 动态兜底机制：如果LLM没输出，根据不同立场随机给出生动的反应
-                    if not speech or "系统波动" in speech:
-                        stance_fallback = agent.get("stance", "neutral")
-                        if stance_fallback == "hostile":
-                            fallbacks = [
-                                "气笑了，懒得骂了。",
-                                "能看到这文案，人类没有希望了",
-                                "我已经分不清是纯度太高还是反讽了",
-                                "我故意找茬都想不出来",
-                                "已经截图保存了，写文案的厉害，盖章通过的更是不得了。"
-                            ]
-                        elif stance_fallback == "supportive":
-                            fallbacks = [
-                                "水深啊，这明显是对手搞了小动作",
-                                "哪有对错无非是某些媒体造热点搞流量。",
-                                "就继续严于律人宽以待己吧",
-                                "先观望吧，我相信最终会给大家一个解释的。"
-                            ]
-                        else:
-                            fallbacks = [
-                                "这集真神了",
-                                "同龄人：偷偷笑； 高手：差点绷住；我：轻松绷住",
-                                "我最讨厌的就是事后道歉！",
-                                " 痴情的黑子呀[大哭]请再等一世吧",
-                                
-                            ]
-                        speech = random.choice(fallbacks)
-                    render_animated_bubble(agent, speech, round_idx)
-
+                )
                 logs.append(
                     {
                         "round": round_idx,
                         "name": agent["name"],
                         "persona": agent["persona"],
                         "weight": agent["weight"],
-                        "stance": agent["stance"],
+                        "stance": agent.get("stance", "neutral"),
                         "role_type": agent.get("role_type", "bystander"),
+                        "speech": result["speech"],
+                        "ts": int(time.time()),
+                    }
+                )
+                render_official_announcement(
+                    agent, result["speech"], round_idx, result["phase"]
+                )
+
+            # Phase 2：其余 Agent 并发围观官方通报
+            if other_agents:
+                results = asyncio.run(_run_agents_concurrently(other_agents))
+                for result in results:
+                    if isinstance(result, Exception):
+                        continue
+                    agent_ref = result["agent"]
+                    speech = result["speech"]
+                    logs.append(
+                        {
+                            "round": round_idx,
+                            "name": agent_ref["name"],
+                            "persona": agent_ref["persona"],
+                            "weight": agent_ref["weight"],
+                            "stance": agent_ref.get("stance", "neutral"),
+                            "role_type": agent_ref.get("role_type", "bystander"),
+                            "speech": speech,
+                            "ts": int(time.time()),
+                        }
+                    )
+                    render_animated_bubble(agent_ref, speech, round_idx)
+        else:
+            # Round 1–3：全阵容并发
+            results = asyncio.run(_run_agents_concurrently(round_agents))
+            for result in results:
+                if isinstance(result, Exception):
+                    continue
+                agent_ref = result["agent"]
+                speech = result["speech"]
+                logs.append(
+                    {
+                        "round": round_idx,
+                        "name": agent_ref["name"],
+                        "persona": agent_ref["persona"],
+                        "weight": agent_ref["weight"],
+                        "stance": agent_ref.get("stance", "neutral"),
+                        "role_type": agent_ref.get("role_type", "bystander"),
                         "speech": speech,
                         "ts": int(time.time()),
                     }
                 )
-                current_round_responses.append(f"@{agent['name']}：{speech}")
+                if result.get("is_official"):
+                    render_official_announcement(
+                        agent_ref, speech, round_idx, result["phase"]
+                    )
+                else:
+                    render_animated_bubble(agent_ref, speech, round_idx)
 
+        # ── Round 3 弹幕风暴 ──────────────────────────────────────
         if round_idx == 3:
             swarm_raw = generate_round3_swarm_danmaku_text(
                 event_desc, network_mood, pr_draft, logs
             )
             render_round3_swarm_danmaku_ui(swarm_raw)
+            # 将弹幕作为特殊节点存入日志，以备刷新重绘
+            logs.append({"round": 3, "role_type": "system_danmaku", "speech": swarm_raw})
 
     return logs
-
 
 def generate_report(event_desc, network_mood, pr_draft, visual_risk_desc, logs):
     system_prompt = (
@@ -1764,10 +1924,80 @@ def render_ai_town_replay(agents, logs):
     components.html(html_code, height=770)
 
 
+def restore_tab1_ui(data):
+    """瞬间重绘 Tab 1 的所有 UI 状态（完全脱离 LLM 调用）"""
+    st.subheader("舆情动态级联沙盘")
+
+    # 1. 还原顶部提示框
+    if data.get("matched_case"):
+        st.success(
+            "📚 触发历史记忆：系统检测到当前事件与【"
+            f"{data['matched_case'].get('title', '历史案例')}"
+            "】高度相似！已将历史网民情绪与官方应对策略注入沙盘底层逻辑。"
+        )
+    if data.get("zeitgeist_result", {}).get("risk_level") == "高":
+        st.warning(
+            f"📡 宏观环境警告：{data['zeitgeist_result'].get('collateral_damage_warning', '')}"
+        )
+    if data.get("auto_generated"):
+        st.info(
+            "👁️ 系统已自动从视觉物料中提取事件背景与视觉雷点..."
+        )
+    if data.get("visual_risk_desc"):
+        safe_vr = html.escape(data["visual_risk_desc"])
+        st.markdown(f"""
+        <style>
+        .editable-warning:focus {{ outline: 2px dashed #f59e0b !important; background: #fffbeb !important; cursor: text; }}
+        .editable-warning:hover {{ filter: brightness(0.96); cursor: pointer; }}
+        </style>
+        <div class="editable-warning" contenteditable="true" spellcheck="false"
+        style="background:#fffbeb; color:#92400e; padding:16px; border-radius:8px;
+        border-left:6px solid #f59e0b; margin-bottom:16px; font-size:15px;
+        line-height:1.6; transition:all 0.2s; box-shadow:0 2px 4px rgba(0,0,0,0.05);">
+        <strong>⚠️ 视觉情报局雷点：</strong><br><br>{safe_vr}
+        </div>
+        """, unsafe_allow_html=True)
+
+    # 2. 还原 Master Agent 推演图
+    st.markdown("### 🧠 Master Agent 逻辑自证中枢")
+    render_cyber_graph(data.get("master_reasoning", {}))
+    st.markdown("#### Seed Roster（种子智能体）")
+    st.json(data.get("agents", []))
+
+    # 3. 还原各轮对线记录与气泡
+    logs = data.get("logs", [])
+    for round_idx in range(1, 5):
+        round_logs = [log for log in logs if log.get("round") == round_idx]
+        if not round_logs:
+            continue
+
+        st.markdown(f"### Round {round_idx}")
+        for log in round_logs:
+            if log.get("role_type") == "system_danmaku":
+                render_round3_swarm_danmaku_ui(log.get("speech"))
+            elif log.get("role_type") == "official":
+                phase = "初步定调" if round_idx == 1 else "最终通报"
+                render_official_announcement(log, log.get("speech"), round_idx, phase)
+            else:
+                mock_agent = {
+                    "name": log.get("name"),
+                    "persona": log.get("persona"),
+                    "stance": log.get("stance"),
+                    "role_type": log.get("role_type"),
+                }
+                render_animated_bubble(mock_agent, log.get("speech"), round_idx)
+
+    # 4. 还原 AI 小镇
+    st.markdown("### 🗺️ 广场态势可视化 (像素 RPG 视角)")
+    render_ai_town_replay(data.get("agents", []), logs)
+
+
 def main():
     st.set_page_config(page_title="智能文案审查系统", layout="wide")
     
     # 初始化 session state
+    if "sandbox_data" not in st.session_state:
+        st.session_state.sandbox_data = None
     if "sim_report" not in st.session_state:
         st.session_state.sim_report = None
     st.markdown(
@@ -2015,6 +2245,17 @@ def main():
             st.markdown("### 🗺️ 广场态势可视化 (像素 RPG 视角)")
             render_ai_town_replay(agents, logs)
 
+            # 👇 核心防丢失机制：所有数据装进保险箱
+            st.session_state.sandbox_data = {
+                "matched_case": matched_case,
+                "zeitgeist_result": zeitgeist_result,
+                "auto_generated": auto_generated,
+                "visual_risk_desc": visual_risk_desc,
+                "master_reasoning": master_reasoning,
+                "agents": agents,
+                "logs": logs,
+            }
+
         prog.progress(90, text="生成审查报告...")
         with tab2:
             st.subheader("舆情体检报告")
@@ -2108,12 +2349,20 @@ def main():
                     report,
                 )
         prog.empty()  # 执行完毕后自动隐藏进度条
-    elif st.session_state.sim_report:
-        # 用户切换页面或点删除按钮时，不重新跑，直接读取上次的报告
+    # ==========================================
+    # 分支 B：页面发生刷新，且存在历史数据（瞬间从 State 中恢复，不调 LLM）
+    # ==========================================
+    elif st.session_state.sandbox_data is not None:
+        data = st.session_state.sandbox_data
+        with tab1:
+            restore_tab1_ui(data)
+
         with tab2:
             st.subheader("舆情体检报告")
             report = st.session_state.sim_report
-            if report.get("_parse_error"):
+            if report is None:
+                st.info("推演完成后，这里会展示体检报告。")
+            elif report.get("_parse_error"):
                 st.error(f"❌ 体检报告解析失败：{report.get('_parse_error')}")
                 raw_text = report.get("_raw", "")
                 if raw_text:
@@ -2122,13 +2371,13 @@ def main():
                 # 提取并安全转义数据
                 scores = report.get("scores", {})
                 safe_fatal = html.escape(report.get('fatal_focus', '—'))
-                
+
                 leg_s = html.escape(str(scores.get("legal", {}).get("score", "?")))
                 leg_r = html.escape(str(scores.get("legal", {}).get("reason", "暂无说明")))
-                
+
                 bus_s = html.escape(str(scores.get("business", {}).get("score", "?")))
                 bus_r = html.escape(str(scores.get("business", {}).get("reason", "暂无说明")))
-                
+
                 rep_s = html.escape(str(scores.get("reputation", {}).get("score", "?")))
                 rep_r = html.escape(str(scores.get("reputation", {}).get("reason", "暂无说明")))
 
@@ -2138,7 +2387,7 @@ def main():
                 /* 被攻击焦点样式 */
                 .editable-fatal:focus {{ outline: 2px dashed #ef4444 !important; background: #fef2f2 !important; cursor: text; }}
                 .editable-fatal:hover {{ filter: brightness(0.96); cursor: pointer; }}
-                
+
                 /* 评分卡片布局与样式 */
                 .metric-container {{ display: flex; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }}
                 .metric-card {{
@@ -2148,16 +2397,16 @@ def main():
                 }}
                 .metric-card:hover {{ box-shadow: 0 4px 12px rgba(0,0,0,0.12); cursor: pointer; border-color: #d1d5db; }}
                 .metric-card:focus-within {{ outline: 2px dashed #3b82f6; border-color: transparent; cursor: text; }}
-                
+
                 .m-title {{ font-size: 14px; color: #6b7280; font-weight: 600; margin-bottom: 4px; }}
                 .m-score {{ font-size: 36px; color: #111827; font-weight: 700; margin-bottom: 4px; line-height: 1.2; }}
                 .m-reason {{ font-size: 14px; color: #ef4444; font-weight: 500; display: flex; align-items: center; gap: 4px; }}
                 </style>
 
                 <!-- 1. 可编辑的红色攻击焦点框 -->
-                <div class="editable-fatal" contenteditable="true" spellcheck="false" 
-                style="background:#fef2f2; color:#991b1b; padding:16px; border-radius:8px; 
-                border-left:6px solid #ef4444; margin-bottom:20px; font-size:15px; 
+                <div class="editable-fatal" contenteditable="true" spellcheck="false"
+                style="background:#fef2f2; color:#991b1b; padding:16px; border-radius:8px;
+                border-left:6px solid #ef4444; margin-bottom:20px; font-size:15px;
                 line-height:1.6; transition:all 0.2s; box-shadow:0 2px 4px rgba(0,0,0,0.05);">
                 <strong>💥 被攻击焦点 / 视觉雷点：</strong><br><br>{safe_fatal}
                 </div>
@@ -2181,7 +2430,7 @@ def main():
                     </div>
                 </div>
                 """
-                
+
                 st.markdown(report_html, unsafe_allow_html=True)
 
                 safe_suggest = report.get('rewrite_suggestion', '—')
