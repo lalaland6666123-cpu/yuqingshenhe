@@ -1463,12 +1463,12 @@ def run_dynamic_sandbox(
         latest_catalyst_speech = ""
         if round_idx >= 3 and primary_catalyst_name:
             for row in reversed(logs):
-                if row["round"] == (round_idx - 1) and row["name"] == primary_catalyst_name:
+                if row.get("round") == (round_idx - 1) and row.get("name") == primary_catalyst_name:
                     latest_catalyst_speech = row["speech"]
                     break
             if not latest_catalyst_speech and catalyst_names:
                 for row in reversed(logs):
-                    if row["round"] == (round_idx - 1) and row["name"] in catalyst_names:
+                    if row.get("round") == (round_idx - 1) and row.get("name") in catalyst_names:
                         latest_catalyst_speech = row["speech"]
                         break
 
@@ -1680,7 +1680,7 @@ def render_ai_town_replay(agents, logs):
         """
 
     safe_logs = json.dumps([{
-        "name": log["name"],
+        "name": log.get("name", "系统"),
         "speech": log["speech"],
         "round": log["round"]
     } for log in logs], ensure_ascii=False)
