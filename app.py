@@ -11,16 +11,27 @@ import streamlit as st
 import streamlit.components.v1 as components
 from openai import OpenAI
 
-from config import MODEL_NAME, QWEN_API_KEY, QWEN_BASE_URL, VL_MODEL_NAME
+from config import (
+    DEEPSEEK_API_KEY, DEEPSEEK_BASE_URL, DEEPSEEK_MODEL_NAME, MODEL_NAME,
+    QWEN_API_KEY, QWEN_BASE_URL, VL_MODEL_NAME,
+    TEMP_ANALYSIS, TEMP_SEED_ROSTER, TEMP_REPORT, TEMP_CATALYST,
+    TEMP_ZEITGEIST, TEMP_SANDBOX_CHAT, TEMP_DEFAULT,
+)
+from rag_engine import get_rag_engine, ensure_indexes
+from spread_model import map_agents_to_model_params, simulate, render_spread_chart
+from evaluator import evaluate
 
 
 HISTORY_FILE = "history_records.json"
 
 
-client = OpenAI(api_key=QWEN_API_KEY, base_url=QWEN_BASE_URL)
+deepseek_client = OpenAI(api_key=DEEPSEEK_API_KEY, base_url=DEEPSEEK_BASE_URL)
+qwen_client = OpenAI(api_key=QWEN_API_KEY, base_url=QWEN_BASE_URL)
+# 向后兼容别名 — 文本调用走 DeepSeek
+client = deepseek_client
 
-CASE_DATABASE = []
-CASE_INDEX = []
+# 初始化 RAG 检索引擎（首次启动自动构建 ChromaDB 索引）
+ensure_indexes()
 
 
 def stream_markdown_effect(container, text, prefix="", suffix="", speed=0.03):
@@ -29,97 +40,71 @@ def stream_markdown_effect(container, text, prefix="", suffix="", speed=0.03):
     displayed_text = ""
     for char in text or "":
         displayed_text += char
-        # 加上一个闪烁的光标 ▌ 增加赛博科技感
         placeholder.markdown(f"{prefix}{displayed_text}▌{suffix}")
         time.sleep(speed)
-    # 结束后移除光标
     placeholder.markdown(f"{prefix}{displayed_text}{suffix}")
 
 
-def _load_case_study_database():
-    global CASE_DATABASE, CASE_INDEX
-    base_dir = os.path.dirname(os.path.abspath(__file__))
-    candidates = [
-        os.path.join(base_dir, "case_studies.json"),
-        os.path.join(os.path.dirname(base_dir), "case_studies.json"),
-    ]
-    CASE_DATABASE = []
-    CASE_INDEX = []
-    for path in candidates:
-        if not os.path.isfile(path):
-            continue
-        try:
-            with open(path, "r", encoding="utf-8") as f:
-                data = json.load(f)
-            if not isinstance(data, list):
-                continue
-            CASE_DATABASE = [c for c in data if isinstance(c, dict)]
-            CASE_INDEX = [
-                {
-                    "id": c.get("id"),
-                    "title": c.get("title"),
-                    "crisis_type": c.get("crisis_type"),
-                }
-                for c in CASE_DATABASE
-            ]
-            return
-        except Exception:
-            continue
-
-
-_load_case_study_database()
-
-
 def retrieve_similar_case(event_desc):
-    if not CASE_INDEX or not event_desc.strip():
+    """使用 RAG 向量检索替代 LLM 肉眼挑案例"""
+    if not event_desc or not event_desc.strip():
         return None
-    system_prompt = (
-        "你是一个资深舆情档案管理员。请分析当前的事件背景，并从提供的历史案例索引库中，"
-        "找出一个在【舆情性质、网民情绪或公关难点】上最相似的案例。"
-        "如果找到，请直接输出该案例的完整 ID（如 case_1）；如果没有高度相似的，输出 none。"
-        "只输出一行内容：要么是形如 case_1 的 ID，要么是单词 none，不要标点、解释或 Markdown。"
-    )
-    user_prompt = (
-        f"当前事件背景：{event_desc}\n\n"
-        f"历史案例索引（JSON）：\n{json.dumps(CASE_INDEX, ensure_ascii=False)}"
-    )
     try:
-        resp = client.chat.completions.create(
-            model=MODEL_NAME,
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_prompt},
-            ],
-            temperature=0.2,
-            max_tokens=32,
-        )
-        raw = (resp.choices[0].message.content if resp.choices else "") or ""
+        rag = get_rag_engine()
+        return rag.retrieve_similar_case(event_desc)
     except Exception:
         return None
-    raw_stripped = raw.strip()
-    if not raw_stripped:
-        return None
-    low = raw_stripped.lower()
-    if re.fullmatch(r"none\s*", low) or low.startswith("none"):
-        return None
-    m = re.search(r"case_[a-z0-9_]+", raw_stripped, re.I)
-    if not m:
-        return None
-    cid = m.group(0)
-    for item in CASE_DATABASE:
-        if item.get("id") == cid:
-            return item
-    return None
 
 
 MANDATORY_CHAT_RULE = (
-    "最高指令：严禁使用首先其次、作为一名等书面语！"
-    "必须输出20字以内的口语化弹幕！带情绪！严禁换行！"
+    "最高指令：严禁使用「首先其次」「作为一名」「综上所述」等书面语！"
+    "必须输出50字以内的口语化弹幕！带情绪！严禁换行！"
 )
 
 
 def _history_file_path():
     return os.path.join(os.path.dirname(os.path.abspath(__file__)), HISTORY_FILE)
+
+
+def _promote_to_case_library(case_dict):
+    """将用户确认的历史测试记录提升到知识库 (case_studies.json)"""
+    import shutil
+
+    case_path = os.path.join("data", "case_studies.json")
+    # 备份
+    backup_path = case_path + ".bak"
+    try:
+        shutil.copy2(case_path, backup_path)
+    except Exception:
+        pass
+
+    cases = []
+    if os.path.exists(case_path):
+        try:
+            with open(case_path, "r", encoding="utf-8") as f:
+                cases = json.load(f)
+        except Exception:
+            cases = []
+    if not isinstance(cases, list):
+        cases = []
+
+    # 避免重复 ID
+    existing_ids = {c.get("id", "") for c in cases if isinstance(c, dict)}
+    if case_dict.get("id") in existing_ids:
+        case_dict["id"] = case_dict["id"] + "_" + datetime.now().strftime("%H%M%S")
+
+    cases.append(case_dict)
+    with open(case_path, "w", encoding="utf-8") as f:
+        json.dump(cases, f, ensure_ascii=False, indent=4)
+    print(f"[History] Promoted to case library: {case_dict.get('title', '')[:50]}")
+
+    # 重建 ChromaDB 索引（使新案例立即可检索）
+    try:
+        from rag_engine import get_rag_engine
+        engine = get_rag_engine()
+        engine.build_index("case_studies", case_path)
+    except Exception as e:
+        print(f"[History] Re-index failed (non-critical): {e}")
 
 
 def save_test_record(event_desc, visual_risks, sandbox_log, report_json):
@@ -181,7 +166,7 @@ def chat_llm(
                 {"role": "system", "content": final_system_prompt},
                 {"role": "user", "content": user_prompt},
             ],
-            temperature=0.9,
+            temperature=TEMP_SANDBOX_CHAT,
             max_tokens=max_tokens,
         )
         content = resp.choices[0].message.content if resp.choices else ""
@@ -228,7 +213,7 @@ def analyze_visual_risk(uploaded_file):
             "image_url": {"url": f"data:{mime_type};base64,{base64_data}"},
         }
     try:
-        resp = client.chat.completions.create(
+        resp = qwen_client.chat.completions.create(
             model=VL_MODEL_NAME,
             messages=[
                 {
@@ -246,7 +231,7 @@ def analyze_visual_risk(uploaded_file):
                     ],
                 },
             ],
-            temperature=0.2,
+            temperature=TEMP_ANALYSIS,
             max_tokens=4096,
             extra_body={
                 "enable_thinking": True,
@@ -303,7 +288,7 @@ def auto_generate_context_from_image(uploaded_file):
     )
 
     try:
-        resp = client.chat.completions.create(
+        resp = qwen_client.chat.completions.create(
             model=VL_MODEL_NAME,
             messages=[
                 {
@@ -321,7 +306,7 @@ def auto_generate_context_from_image(uploaded_file):
                     ],
                 },
             ],
-            temperature=0.2,
+            temperature=TEMP_ANALYSIS,
             max_tokens=4096,
             extra_body={
                 "enable_thinking": True,
@@ -369,7 +354,7 @@ OFFICIAL_OUTPUT_FORMAT_HARD = (
 )
 
 
-def _llm_json_array(system_prompt, user_prompt, max_tokens=600, temperature=0.45):
+def _llm_json_array(system_prompt, user_prompt, max_tokens=600, temperature=TEMP_ZEITGEIST):
     try:
         resp = client.chat.completions.create(
             model=MODEL_NAME,
@@ -461,7 +446,7 @@ def generate_dynamic_catalyst_agents(event_desc, network_mood):
         f"网络情绪：{network_mood}\n"
         "请输出上述 JSON 数组。"
     )
-    raw = _llm_json_array(system_prompt, user_prompt, max_tokens=400, temperature=0.55)
+    raw = _llm_json_array(system_prompt, user_prompt, max_tokens=400, temperature=TEMP_CATALYST)
     roster = safe_json_loads(raw, default_value=[])
     if not isinstance(roster, list):
         roster = []
@@ -489,44 +474,70 @@ def generate_dynamic_catalyst_agents(event_desc, network_mood):
     return out[:2]
 
 
-def generate_seed_roster(event_desc, network_mood, pr_draft):
+def generate_seed_roster(event_desc, network_mood, pr_draft, rag_result=None):
+    # Build RAG context for master agent — v2.0 分类框架优先
+    rag_context_block = ""
+    if rag_result:
+        # v2.0: 从 rag_engine 获取分类框架上下文
+        try:
+            rag = get_rag_engine()
+            rag_context_block = rag.format_master_agent_context(rag_result)
+        except Exception:
+            pass
+
+        # 兼容旧 RAG 证据（红线/黑词简短版）
+        if not rag_context_block:
+            red_lines = rag_result.get("red_lines", [])
+            similar = rag_result.get("similar_cases", [])
+            black_words = rag_result.get("black_words", [])
+            if red_lines:
+                rl_hit = red_lines[0]
+                rag_context_block += (
+                    "Redline hit: " + str(rl_hit.get("source","")) + " [" + str(rl_hit.get("category",""))
+                    + "] severity=" + str(rl_hit.get("severity","?")) + "/5. "
+                )
+            if black_words:
+                bw_hits = [str(bw.get("word","")) for bw in black_words[:3]]
+                rag_context_block += "High-risk phrases: " + ", ".join(bw_hits) + "."
+
     system_prompt = (
-        "你是舆情模拟引擎，只输出 JSON。"
-        "你现在是全局总控智能体(Master Agent)。在生成具体角色前，你必须先阐述你的排兵布阵逻辑。"
-        "请先判断事件的性质（政务、商业、娱乐圈或社会热点），再生成 2~3 个种子智能体；角色必须与性质严格匹配。"
-        "请先评估该事件的【公关防御难度】。"
-        "【强制支持者规则】除「极其恶劣的政务造假/公然作秀糊弄公众」（如一眼假的官方PS通报、政务通报造假）外，"
-        "无论风险多高，种子阵容中**必须恰好包含 1 名 stance 为 supportive 的角色**："
-        "商业语境须为「品牌死忠粉/口味粉/长期用户」，代表危机爆发初期仍站队的一方；"
-        "政务（非上述极端造假）语境可为「仍愿意等候调查、反对造谣的温和认同者」，不得使用饭圈话术。"
-        "仅当事件同时满足：政务属性 + 上述极端造假/作秀性质时，才允许完全不生成 supportive，其余立场以 hostile 与少量 neutral 为主。"
-        "若属有争议、有粉丝基础的商业或娱乐事件，可在「1 名 supportive 早期支持者」之外，再按常理分配 hostile/neutral，禁止凭空出现大规模洗地军团。"
-        "若为政务事件：必须生成类似「当地宣传部门」「涉事单位回应人」及群众侧角色，绝对不能出现「品牌客服」等商业错位话术（但允许前述 1 名非饭圈 supportive）。"
-        "若为商业事件：可生成「品牌公关」「消费者」「行业观察者」等，且须含 1 名 supportive 老粉/口味粉。"
-        "若为娱乐圈或社会热点：生成符合该圈层语境的角色。"
-        "每个智能体字段：name, persona, weight, stance, role_type。"
-        "weight 必须是 100~1000 的整数。"
-        "stance 仅可为 supportive/neutral/hostile。"
-        "role_type 仅可为 official（官方/涉事主体口径）、influencer（大V或强意见领袖）、bystander（路人或围观者）。"
-        "请返回如下 JSON 结构："
-        '{'
-        '  "master_agent_reasoning": {'
-        '    "trigger_anchor": "一句话概括当前事件最核心的舆情毒点（如：视觉中发现‘像狗一样’的侮辱性词汇）",'
-        '    "rag_evidence": "结合匹配到的历史案例（如：李佳琦事件），指出历史规律（如：此类傲慢会引发网民极度背刺感，产生400%负面情绪）",'
-        '    "strategy_argument": "基于上述论据，解释你为什么配置接下来的这些角色阵营（如：因此本局配置80%极端敌意角色，测试系统压力阈值）",'
-        '    "evolution_prediction": "用一句话预判舆情演化的最可能分支（如：大V二次剪辑扩散->品牌被扣傲慢帽子->官方通报被嘲讽甩锅）"'
-        "  },"
-        '  "roster": [ {现有的角色结构} ]'
-        "}"
-        "只允许输出上述 JSON 对象，禁止 Markdown、禁止解释。"
+        "你是舆情模拟引擎，只输出 JSON。\n"
+        "你现在是全局总控智能体(Master Agent)。\n\n"
+        # ── v2.0: 分类框架驱动的排兵布阵 ──
+        "【审查框架】你收到的「危机模式识别」是基于系统化分类框架（8大类40+子类）匹配的结果。\n"
+        "请根据匹配到的危机模式，确定事件的本质性质——不是简单分为'商业/政务/娱乐'，而是从以下维度判断：\n"
+        "1. 核心危机类型（责任推卸/傲慢冒犯/欺骗造假/冷漠拖延/对抗升级/安全问题/价值观触碰/领导者失言）\n"
+        "2. 触发子类型（如：甩锅给外包 OR 教育消费者 OR 模板化道歉）\n"
+        "3. 风险等级映射到角色配置（高风险→更多hostile，有价值观问题→需要道德评判者）\n\n"
+        "【角色配置指南】\n"
+        "- 责任推卸型危机 → 种子中必须有1名'较真考据党'（hostile bystander），专盯责任归属\n"
+        "- 傲慢冒犯型危机 → 种子中必须有1名'被刺痛的路人'（hostile bystander），代表被冒犯的群体\n"
+        "- 安全型危机 → 种子中必须有1名'恐慌消费者'（hostile bystander），传播安全焦虑\n"
+        "- 冷漠拖延型危机 → 种子中必须有1名'催促追责者'（hostile influencer），施压官方回应\n\n"
+        "【强制支持者规则】除「极其恶劣的政务造假/公然作秀糊弄公众」外，"
+        "无论风险多高，种子阵容中**必须恰好包含 1 名 stance 为 supportive 的角色**。"
+        "商业语境须为「品牌死忠粉/口味粉/长期用户」；政务语境可为「仍愿意等候调查的温和认同者」，不得使用饭圈话术。"
+        "仅当政务属性 + 极端造假/作秀时，才允许完全不生成 supportive。\n\n"
+        "每个智能体字段：name, persona, weight(100~1000整数), stance(supportive/neutral/hostile), "
+        "role_type(official/influencer/bystander)。\n\n"
+        "返回 JSON："
+        '{"master_agent_reasoning": {'
+        '"crisis_type": "从分类框架中识别的主类型",'
+        '"trigger_anchor": "核心舆情毒点——具体到哪个子类型的哪个触发词",'
+        '"rag_evidence": "分类框架匹配到的模式名称和风险等级",'
+        '"strategy_argument": "为什么选择这些角色——每个角色的配置理由",'
+        '"evolution_prediction": "舆情演化预判——基于当前模式的典型发展路径"'
+        '}, "roster": [...]}'
+        "\n只允许输出 JSON，禁止 Markdown。"
     )
     user_prompt = (
         f"事件描述：{event_desc}\n"
         f"网络情绪：{network_mood}\n"
         f"公关草稿：{pr_draft}\n"
-        "请严格按要求输出上述 JSON 对象。"
+        f"系统知识库分析：{rag_context_block or '无特殊命中'}\n"
+        "请按要求输出 JSON。注意：crisis_type 字段必须从系统知识库匹配到的类型中选择。"
     )
-    raw = _llm_json_array(system_prompt, user_prompt, max_tokens=700, temperature=0.4)
+    raw = _llm_json_array(system_prompt, user_prompt, max_tokens=700, temperature=TEMP_SEED_ROSTER)
     parsed = safe_json_loads(raw, default_value={})
 
     master_agent_reasoning = {}
@@ -639,29 +650,35 @@ def generate_seed_roster(event_desc, network_mood, pr_draft):
 
 def render_master_agent_dashboard(master_agent_reasoning):
     mr = master_agent_reasoning or {}
+    crisis_type = str(mr.get("crisis_type", "") or "").strip() or "（未识别）"
     trigger_anchor = str(mr.get("trigger_anchor", "") or "").strip() or "（未提供锚点）"
     rag_evidence = str(mr.get("rag_evidence", "") or "").strip() or "（未提供论据）"
     strategy_argument = (
         str(mr.get("strategy_argument", "") or "").strip() or "（未提供论点）"
     )
+    evolution_prediction = str(mr.get("evolution_prediction", "") or "").strip() or "（未预判）"
 
     st.markdown("### 🧠 Master Agent 逻辑自证中枢")
     with st.container():
-        col1, col2, col3 = st.columns(3)
+        col1, col2, col3, col4 = st.columns(4)
         with col1:
-            st.info(f"📍 **多模态语义锚点**\n\n{trigger_anchor}")
+            st.info(f"🏷️ **危机类型判定**\n\n{crisis_type}")
         with col2:
-            st.warning(f"📚 **历史论据映射 (RAG)**\n\n{rag_evidence}")
+            st.info(f"📍 **核心语义锚点**\n\n{trigger_anchor}")
         with col3:
-            st.success(f"⚙️ **阵营推演策略 (Argument)**\n\n{strategy_argument}")
+            st.warning(f"📚 **分类框架匹配**\n\n{rag_evidence}")
+        with col4:
+            st.success(f"⚙️ **阵营推演策略**\n\n{strategy_argument}")
 
         st.markdown(
             f"""
 ```log
-[System] 深度识别完成：定位多模态语义风险点 -> {trigger_anchor}
-[RAG_Match] 触发历史记忆关联 -> {rag_evidence}
-[Master_Agent] 执行角色阵营装载 -> {strategy_argument}
-[Status] 逻辑自证闭环完成。沙盘推演引擎启动...
+[Taxonomy] 危机分类框架命中 -> {crisis_type}
+[Trigger]  多模态语义锚点定位 -> {trigger_anchor}
+[RAG]      知识库模式匹配完成 -> {rag_evidence}
+[Strategy] 角色阵营装载执行   -> {strategy_argument}
+[Predict]  舆情演化路径预判   -> {evolution_prediction}
+[Status]   逻辑自证闭环完成。沙盘推演引擎启动...
 ```
 """
         )
@@ -681,7 +698,7 @@ def analyze_macro_zeitgeist(event_desc, visual_risks, hot_topics):
         f"当前互联网敏感热点（用户填写）：{ht}\n"
         "请只输出上述 JSON 对象，不要 Markdown。"
     )
-    raw = _llm_json_array(system_prompt, user_prompt, max_tokens=400, temperature=0.35)
+    raw = _llm_json_array(system_prompt, user_prompt, max_tokens=400, temperature=TEMP_REPORT)
     cleaned = (raw or "").replace("```json", "").replace("```", "").strip()
     m = re.search(r"\{.*\}", cleaned, re.DOTALL)
     if m:
@@ -698,58 +715,6 @@ def analyze_macro_zeitgeist(event_desc, visual_risks, hot_topics):
         return {"risk_level": rl, "collateral_damage_warning": warn}
     except Exception:
         return fallback
-
-
-def generate_round3_swarm_danmaku_text(event_desc, network_mood, pr_draft, logs):
-    system_prompt = (
-        "你是一个汇聚成千上万路人跟帖的弹幕生成器，只输出弹幕列表本身。"
-        "最高指令：你现在代表成千上万的吃瓜网民和暴怒群众。"
-        "请仔细阅读用户提供的沙盘对线记录与事件背景，然后一口气输出 8 到 10 条极短（每条 15 字以内）、"
-        "情绪各异、立场分化的网友跟帖弹幕。"
-        "不要任何多余的说明、标题或开场白；每条弹幕单独占一行；每行必须以破折号「—」开头（全角破折号）。"
-        "模拟微博热搜彻底炸锅的刷屏效果。"
-    )
-    user_prompt = (
-        f"当前热搜话题：{event_desc}\n"
-        f"网络情绪底色：{network_mood}\n"
-        f"公关方公开表态：{pr_draft}\n"
-        f"沙盘对线日志（JSON）：{json.dumps(logs, ensure_ascii=False)}\n"
-        "请立即输出 8～10 行弹幕。"
-    )
-    try:
-        resp = client.chat.completions.create(
-            model=MODEL_NAME,
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_prompt},
-            ],
-            temperature=0.92,
-            max_tokens=500,
-        )
-        return (resp.choices[0].message.content if resp.choices else "") or ""
-    except Exception as e:
-        return f"—弹幕生成失败：{e}"
-
-
-def render_round3_swarm_danmaku_ui(raw_text):
-    lines = [ln.strip() for ln in (raw_text or "").splitlines() if ln.strip()]
-    if not lines:
-        lines = ["—（暂无弹幕）"]
-    body = "\n".join(lines[:14])
-    safe = html.escape(body)
-    st.markdown(
-        f"""
-<div style="background:linear-gradient(135deg,#1c1917 0%,#450a0a 100%);border:1px solid #dc2626;
-border-radius:10px;padding:14px 16px;margin:12px 0 20px 0;box-shadow:0 4px 18px rgba(220,38,38,0.25);">
-<p style="margin:0 0 10px 0;font-weight:700;color:#fecaca;font-size:16px;">
-🚀 【全网情绪沸腾 / 实时弹幕涌入】
-</p>
-<pre style="white-space:pre-wrap;font-size:12.5px;line-height:1.65;margin:0;color:#fee2e2;
-font-family:system-ui,sans-serif;">{safe}</pre>
-</div>
-""",
-        unsafe_allow_html=True,
-    )
 
 
 def build_plaza_context(event_desc, logs_rows):
@@ -803,27 +768,58 @@ def render_agent_bubble(agent, text, round_idx):
     )
 
 
-def _rag_official_memory_tail(matched_case):
-    pr = str(matched_case.get("pr_response") or "")
-    res = str(matched_case.get("pr_result") or "")
-    return (
-        "【公关错题本警告】：历史上在处理相似危机时，官方曾做出如下应对：『"
-        f"{pr}"
-        "』，导致了『"
-        f"{res}"
-        "』的后果。请你作为当前的官方，深刻反思这个失败/成功的教训。"
-        "你可以选择重蹈覆辙（傲慢/甩锅），或者给出更聪明的声明！"
-    )
 
+def _build_rag_context_for_role(rag_result, agent_role):
+    """
+    v2.0: 根据 Agent 角色构建 RAG 上下文。
+    优先使用分类框架 + 审查清单，降级为传统红线/黑词/恶评。
+    - official: 审查清单(阶段1-4) + 分类框架 + 红线
+    - influencer: 定性+找茬清单(阶段1-3) + 分类框架 + 恶评风格
+    - bystander: 感受清单(阶段2-3) + 分类框架 + 恶评风格
+    """
+    if not rag_result:
+        return ""
+    try:
+        rag = get_rag_engine()
+        ctx = rag.format_context_for_agent(rag_result)
+        if ctx.strip():
+            return ctx
+    except Exception:
+        pass
 
-def _rag_crowd_memory_tail(matched_case):
-    pub = str(matched_case.get("public_reaction") or "")
-    return (
-        "【真实情绪参考】：在历史上极其相似的事件中，真实网民的反应是：『"
-        f"{pub}"
-        "』。请你吸收这种真实存在的愤怒点、痛点和阴阳怪气的切入点，结合当前事件狠狠地发帖！"
-    )
+    # 降级：使用传统格式化
+    parts = []
+    red_lines = rag_result.get("red_lines", [])
+    if red_lines and agent_role == "official":
+        rl_texts = []
+        for rl in red_lines[:3]:
+            rl_texts.append(
+                "• " + str(rl.get("source","")) + " [" + str(rl.get("category","")) + "] "
+                + "severity=" + str(rl.get("severity","?")) + "/5"
+                + " - penalty: " + str(rl.get("penalty",""))
+            )
+        parts.append("【法律红线警告】你的通报措辞必须规避：\n" + "\n".join(rl_texts))
 
+    hate_comments = rag_result.get("hate_comments", [])
+    if hate_comments and agent_role != "official":
+        hc_texts = []
+        for hc in hate_comments[:5]:
+            hc_texts.append(
+                "• 「" + str(hc.get("content","")) + "」(likes:" + str(hc.get("likes_count","?"))
+                + " emotion:" + str(hc.get("emotion_type","")) + ")"
+            )
+        parts.append("【网民恶评风格参考】吸收修辞风格与情绪切入角度，但不要原样复制：\n" + "\n".join(hc_texts))
+
+    black_words = rag_result.get("black_words", [])
+    if black_words:
+        bw_texts = []
+        for bw in black_words[:3]:
+            bw_texts.append(
+                "• 「" + str(bw.get("word","")) + "」 - "
+                + str(bw.get("why_it_exploded",""))[:120]
+            )
+        parts.append("【高危措辞预警】请规避以下词汇/句式：\n" + "\n".join(bw_texts))
+    return "\n\n".join(parts)
 
 ROUND4_FINAL_BEHAVIOR_LAW = (
     "【终局行为法则（反杠精警告）】：\n"
@@ -924,10 +920,15 @@ def run_dynamic_sandbox(
     agents,
     zeitgeist_result=None,
     matched_case=None,
+    rag_result=None,
 ):
     logs = []
     primary_catalyst_name = ""
     catalyst_names = set()
+
+    # RAG context snippets for different agent types
+    rag_context = _build_rag_context_for_role(rag_result, "official") if rag_result else ""
+    rag_crowd_context = _build_rag_context_for_role(rag_result, "influencer") if rag_result else ""
 
     for round_idx in range(1, 5):
         st.markdown(f"### Round {round_idx}")
@@ -1011,17 +1012,20 @@ def run_dynamic_sandbox(
                     )
 
             if rt_agent == "official":
-                rag_tail = (
-                    _rag_official_memory_tail(matched_case)
-                    if matched_case
-                    else ""
-                )
                 system_prompt = (
-                    f"你执笔对外口径的官方身份：{agent['name']}（{agent['persona']}）。"
-                    "你只负责机构通报文本，不参与网民互怼，也不使用聊天语气。"
-                    f"{OFFICIAL_OUTPUT_FORMAT_HARD}"
-                    f"{macro_bg}"
-                    f"{rag_tail}"
+                    "【审查框架 · 官方通报撰写指南】\n"
+                    "请参照上方「审查清单」逐项检查你的通报文本。重点注意：\n"
+                    "1. 是否有「甩锅」措辞？（外包/临时工/第三方/个别员工）→ 绝对禁用\n"
+                    "2. 是否有「傲慢」措辞？（教育消费者/嫌贵/层次）→ 绝对禁用\n"
+                    "3. 是否有「模板化」措辞？（高度重视/深表歉意/举一反三不带行动）→ 需要具体化\n"
+                    "4. 危机模式匹配告知：请阅读上方「危机模式匹配」部分，确认你理解了当前事件的危机类型\n"
+                    "5. 按照「审查清单」第4阶段的策略建议输出改写方案\n"
+                    "\n"
+                    + f"你执笔对外口径的官方身份：{agent['name']}（{agent['persona']}）。"
+                    + "你只负责机构通报文本，不参与网民互怼，也不使用聊天语气。"
+                    + f"{OFFICIAL_OUTPUT_FORMAT_HARD}"
+                    + f"{macro_bg}"
+                    + f"{rag_context}"
                 )
                 if round_idx == 1:
                     round_instruction = (
@@ -1047,39 +1051,34 @@ def run_dynamic_sandbox(
                 phase = "初步定调" if round_idx == 1 else "最终通报"
                 render_official_announcement(agent, speech, round_idx, phase)
             else:
-                spiral_snippet = ""
+                # Dynamic pressure based on round phase, not hardcoded behavior
+                pressure_level = {1: "初期", 2: "升温", 3: "爆发", 4: "终局"}.get(round_idx, "")
+                spiral_snippet = (
+                    f"【舆论态势·Round{round_idx}】当前处于话题{pressure_level}阶段。"
+                    "请基于上方广场中已有的声音，判断此刻的主流风向和你应持的情绪强度。"
+                )
                 if agent.get("stance") == "supportive":
-                    if round_idx == 1:
-                        spiral_snippet = (
-                            "【沉默的螺旋·Round1】你是品牌的死忠粉或长期支持者，你认为这只是一点小问题或小误会，"
-                            "请理直气壮地为品牌/当事方辩护（例如：只要好吃/好用就行，管那么多干嘛、别上纲上线）。"
-                        )
-                    elif round_idx == 2:
-                        spiral_snippet = (
-                            "【沉默的螺旋·Round2】大V已经下场带节奏，全网都在骂。你的底气开始不足，"
-                            "语气变得犹豫，试图和稀泥或转移话题，不再像上一轮那样硬气。"
-                        )
-                    elif round_idx == 3:
-                        spiral_snippet = (
-                            "【沉默的螺旋·Round3】舆论已经彻底失控。你感到害怕和无力，作为曾经的支持者，"
-                            "发出一句失望的叹息，或表示不想再管了、心累了。"
-                        )
-                rag_crowd = ""
-                if matched_case and rt_agent in ("bystander", "influencer"):
-                    rag_crowd = _rag_crowd_memory_tail(matched_case)
+                    spiral_snippet += (
+                        "作为少数派支持者，你会在主流敌意中感受到越来越大的表达压力，"
+                        "但你的反应应是自然的、符合人设的，而非机械地按轮次认输。"
+                    )
                 round4_law = ROUND4_FINAL_BEHAVIOR_LAW if round_idx == 4 else ""
                 system_prompt = (
-                    f"账号人设：{agent['name']}。"
-                    f"人设摘要：{agent['persona']}。"
-                    f"立场倾向：{agent['stance']}。"
-                    f"传播权重：{agent['weight']}。"
-                    f"身份类型：{rt_agent}（非机构通报账号）。"
-                    "你在微博类公开广场的话题链路下独立发帖，不是微信群聊，也不是私聊。"
-                    f"{macro_bg}"
-                    f"{spiral_snippet}"
-                    f"{round4_law}"
-                    "发言须符合人设，与同话题下其他贴文风避免雷同套话。"
-                    f"{rag_crowd}"
+                    f"账号：{agent['name']}（{agent['persona']}）。"
+                    + f"立场：{agent['stance']}。身份：{rt_agent}。"
+                    + "你在微博公开广场独立发帖，不是群聊或私聊。"
+                    + "【发言框架 · 请从以下角度切入】"
+                    + "阅读上方的「危机模式匹配」和「审查清单」，然后选择一个角度切入："
+                    + "- 责任推卸模式 → 追问：为什么每次都是别人的错？"
+                    + "- 傲慢冒犯模式 → 表达被刺痛感：我是你的用户，你却看不起我？"
+                    + "- 冷漠拖延模式 → 催促：还需要多少天才有一个像样的回应？"
+                    + "- 欺骗造假模式 → 用证据追问：你说的和做的一样吗？"
+                    + "- 安全模式 → 表达恐慌愤怒：这是人命关天的事！"
+                    + "注意：前面人已经说过的角度不要再重复。"
+                    + f"{macro_bg}"
+                    + f"{spiral_snippet}"
+                    + f"{round4_law}"
+                    + f"{rag_crowd_context}"
                 )
                 round_instruction = "请发布一条广场动态（单条，勿换行堆砌长文）。"
                 if round_idx == 1:
@@ -1095,9 +1094,9 @@ def run_dynamic_sandbox(
                 if current_round_responses:
                     joined = "\n".join(current_round_responses)
                     anti_echo = (
-                        "\n【最高优先级警告】以下是刚才别人发的帖子（本回合内已出现）：\n"
+                        "\n【防雷同警告】广场上本轮已出现的其他声音：\n"
                         f"{joined}\n"
-                        "你绝对不能重复他们的句式和核心词！你必须找一个全新的切入点！"
+                        "你绝对不能重复上述声音的句式和核心词！你必须找一个全新的切入点。"
                         "例如：别人骂态度，你就骂价格；别人骂质量，你就谈知情权；别人骂品牌，你就谈童年滤镜破灭。"
                         "请输出极具个人特色的独立观点！"
                     )
@@ -1127,62 +1126,58 @@ def run_dynamic_sandbox(
                     "ts": int(time.time()),
                 }
             )
-            current_round_responses.append(f"@{agent['name']}：{speech}")
+            current_round_responses.append(f"「{speech}」")
 
-        if round_idx == 3:
-            swarm_raw = generate_round3_swarm_danmaku_text(
-                event_desc, network_mood, pr_draft, logs
-            )
-            render_round3_swarm_danmaku_ui(swarm_raw)
 
     return logs
 
 
-def generate_report(event_desc, network_mood, pr_draft, visual_risk_desc, logs):
-    system_prompt = (
-        "你现在是年薪百万的顶级危机公关总监。请审阅刚才的舆情沙盘推演日志，并给出结构化的定损报告。"
-        "请直接输出合法的 JSON，格式如下："
-        "{"
-        '"fatal_focus":"一针见血地指出网民集火攻击的最核心点（是某句傲慢的文案，还是某个糟糕的视觉细节）",'
-        '"scores":{'
-        '"legal":{"score":1到5的整数,"reason":"简短说明法律风险"},'
-        '"business":{"score":1到5的整数,"reason":"简短说明商业/销量影响"},'
-        '"reputation":{"score":1到5的整数,"reason":"简短说明品牌声誉损毁度"}'
-        "},"
-        '"rewrite_suggestion":"基于以上雷点，给出一份姿态诚恳、完美避坑的官方回应或文案修改建议（不少于100字）。"'
-        "}"
-    )
-    user_prompt = (
-        f"事件描述：{event_desc}\n"
-        f"视觉雷点：{visual_risk_desc or '无'}\n"
-        f"网络情绪：{network_mood}\n"
-        f"公关草稿：{pr_draft}\n"
-        f"完整4轮沙盘日志：{json.dumps(logs, ensure_ascii=False)}"
-    )
+def generate_report(event_desc, network_mood, pr_draft, visual_risk_desc, logs,
+                    rag_result=None, spread_result=None):
+    """混合评估：确定性算法评分 + LLM 仅生成改写建议"""
+    # Step 1: 确定性评分（不依赖 LLM）
     try:
-        resp = client.chat.completions.create(
-            model=MODEL_NAME,
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_prompt},
-            ],
-            temperature=0.4,
-            max_tokens=1200,
-        )
-        raw = resp.choices[0].message.content if resp.choices else ""
+        report = evaluate(event_desc, rag_result or {}, spread_result)
     except Exception as e:
-        return {"_parse_error": f"报告生成失败：{str(e)}"}
+        return {"_parse_error": f"确定性评估失败：{str(e)}"}
 
-    cleaned = (raw or "").replace("```json", "").replace("```", "").strip()
+    # Step 2: LLM 仅负责文案改写建议（LLM 真正的价值所在）
+    fatal = report.get("fatal_focus", "")
+    legal_score = report["scores"]["legal"]["score"]
+    legal_reason = report["scores"]["legal"]["reason"]
+    rep_score = report["scores"]["reputation"]["score"]
+
+    rewrite_system = (
+        "你是一位资深危机公关文案专家。请基于系统识别到的风险点，"
+        "为当事方撰写一份姿态诚恳、完美避坑的官方回应或文案修改建议。"
+        "输出纯文本（不要 JSON、不要 Markdown 代码块），不少于 80 字。"
+        f"已知：法律风险评分 {legal_score}/5（{legal_reason}），"
+        f"声誉风险评分 {rep_score}/5。"
+    )
+    rewrite_user = (
+        f"事件背景：{event_desc}\n"
+        f"视觉雷点：{visual_risk_desc or '无'}\n"
+        f"被攻击焦点：{fatal}\n"
+        f"原始公关草稿（需改写）：{pr_draft or '无'}\n"
+        "请输出改写后的安全文案："
+    )
     try:
-        parsed = json.loads(cleaned)
-        if not isinstance(parsed, dict):
-            raise ValueError("报告不是 JSON 对象")
-        if "fatal_focus" not in parsed or "scores" not in parsed or "rewrite_suggestion" not in parsed:
-            raise ValueError("报告字段缺失")
-        return parsed
-    except Exception as e:
-        return {"_parse_error": f"报告 JSON 解析失败：{str(e)}", "_raw": cleaned[:800]}
+        resp = deepseek_client.chat.completions.create(
+            model=DEEPSEEK_MODEL_NAME,
+            messages=[
+                {"role": "system", "content": rewrite_system},
+                {"role": "user", "content": rewrite_user},
+            ],
+            temperature=TEMP_REPORT,
+            max_tokens=800,
+        )
+        rewrite = (resp.choices[0].message.content if resp.choices else "") or ""
+        rewrite = rewrite.strip().replace("```", "")
+    except Exception:
+        rewrite = "（改写建议生成失败，请稍后重试）"
+
+    report["rewrite_suggestion"] = rewrite
+    return report
 
 
 def main():
@@ -1365,6 +1360,15 @@ def main():
 
         matched_case = retrieve_similar_case(event_desc_enhanced)
 
+        # RAG 多库联合检索 (v2.0: 分类框架 + 关键词匹配 + 向量检索)
+        try:
+            rag = get_rag_engine()
+            rag_result = rag.retrieve_v2(event_desc_enhanced)
+        except Exception:
+            rag_result = {"red_lines": [], "black_words": [], "hate_comments": [],
+                          "similar_cases": [], "pattern_matches": [], "template_matches": [],
+                          "audit_checklist": []}
+
         prog.progress(70, text="综合评估风险中...")
         with tab1:
             st.subheader("舆情动态级联沙盘")
@@ -1389,7 +1393,7 @@ def main():
                 st.warning(f"视觉情报局雷点：{visual_risk_desc}")
 
             seed_pack = generate_seed_roster(
-                event_desc_enhanced, final_network_mood, final_pr_draft
+                event_desc_enhanced, final_network_mood, final_pr_draft, rag_result=rag_result
             )
             master_reasoning = (
                 seed_pack.get("master_agent_reasoning", {})
@@ -1413,7 +1417,21 @@ def main():
                 agents,
                 zeitgeist_result=zeitgeist_result,
                 matched_case=matched_case,
+                rag_result=rag_result,
             )
+
+            # 传播动力学模拟
+            st.markdown("---")
+            st.markdown("### 📈 SIR 传播动力学预测")
+            params = map_agents_to_model_params(agents)
+            spread_result = simulate(params, rounds=4)
+            render_spread_chart(spread_result)
+
+            # 展示 RAG 检索结果
+            rag_ctx = get_rag_engine().format_context_for_agent(rag_result)
+            if rag_ctx.strip():
+                with st.expander("🔍 RAG 知识库检索结果", expanded=False):
+                    st.markdown(rag_ctx)
 
         prog.progress(90, text="生成审查报告...")
         with tab2:
@@ -1424,6 +1442,8 @@ def main():
                 final_pr_draft,
                 visual_risk_desc,
                 logs,
+                rag_result=rag_result,
+                spread_result=spread_result,
             )
             if report.get("_parse_error"):
                 st.error(f"❌ 体检报告解析失败：{report.get('_parse_error')}")
@@ -1479,54 +1499,247 @@ def main():
 
     with tab3:
         st.subheader("🗂️ 历史测试档案")
+
         hist_path = _history_file_path()
         if not os.path.exists(hist_path):
-            st.info("暂无历史测试记录。")
+            st.info("暂无历史测试记录。运行审查后会自动保存。")
         else:
             try:
                 with open(hist_path, "r", encoding="utf-8") as f:
                     records = json.load(f)
             except Exception:
                 records = None
+
             if not isinstance(records, list) or len(records) == 0:
-                st.info("暂无历史测试记录。")
+                st.info("暂无历史测试记录。运行审查后会自动保存。")
             else:
                 n = len(records)
-                for display_idx, rec in enumerate(reversed(records)):
-                    actual_idx = n - 1 - display_idx
+
+                # ---- 统计仪表盘 ----
+                all_legal = []
+                all_biz = []
+                all_rep = []
+                for rec in records:
+                    rpt = rec.get("report_json") or {}
+                    scores = rpt.get("scores") or {}
+                    ls = scores.get("legal", {}).get("score")
+                    bs = scores.get("business", {}).get("score")
+                    rs = scores.get("reputation", {}).get("score")
+                    if isinstance(ls, (int, float)):
+                        all_legal.append(ls)
+                    if isinstance(bs, (int, float)):
+                        all_biz.append(bs)
+                    if isinstance(rs, (int, float)):
+                        all_rep.append(rs)
+
+                c1, c2, c3, c4 = st.columns(4)
+                with c1:
+                    st.metric("总测试数", n)
+                with c2:
+                    avg_legal = round(sum(all_legal) / max(len(all_legal), 1), 1)
+                    st.metric("平均法律风险", f"{avg_legal}/5")
+                with c3:
+                    avg_rep = round(sum(all_rep) / max(len(all_rep), 1), 1)
+                    st.metric("平均声誉风险", f"{avg_rep}/5")
+                with c4:
+                    latest_ts = records[-1].get("timestamp", "—")[:10] if records else "—"
+                    st.metric("最近测试", latest_ts)
+
+                # ---- 搜索 & 筛选 ----
+                st.markdown("---")
+                search_col1, search_col2 = st.columns([3, 1])
+                with search_col1:
+                    search_term = st.text_input(
+                        "🔍 搜索历史记录",
+                        placeholder="输入事件关键词、危机类型或日期搜索...",
+                        key="hist_search",
+                    )
+                with search_col2:
+                    sort_order = st.selectbox(
+                        "排序",
+                        ["最新优先", "最早优先", "法律风险最高", "声誉风险最高"],
+                        key="hist_sort",
+                    )
+
+                # ---- 过滤 ----
+                filtered = []
+                for i, rec in enumerate(records):
+                    if search_term:
+                        ed = str(rec.get("event_desc", "") or "")
+                        rpt = rec.get("report_json") or {}
+                        fatal = str(rpt.get("fatal_focus", "") or "")
+                        ts = str(rec.get("timestamp", "") or "")
+                        combined = ed + fatal + ts
+                        if search_term.lower() not in combined.lower():
+                            continue
+                    filtered.append((i, rec))
+
+                # ---- 排序 ----
+                if sort_order == "最早优先":
+                    filtered = list(reversed(filtered))
+                elif sort_order == "法律风险最高":
+                    filtered.sort(
+                        key=lambda x: (x[1].get("report_json") or {}).get("scores", {}).get("legal", {}).get("score", 0),
+                        reverse=True,
+                    )
+                elif sort_order == "声誉风险最高":
+                    filtered.sort(
+                        key=lambda x: (x[1].get("report_json") or {}).get("scores", {}).get("reputation", {}).get("score", 0),
+                        reverse=True,
+                    )
+                # 默认: 最新优先 (records 已经是最新在后的顺序，filtered 保持了原始顺序即最早在前 → 需要反转)
+
+                st.caption(f"共 {n} 条记录，当前显示 {len(filtered)} 条")
+
+                # ---- 记录列表 ----
+                for display_idx, (actual_idx, rec) in enumerate(filtered):
                     rpt = rec.get("report_json") or {}
                     ed = str(rec.get("event_desc", "") or "")
                     fatal = str(rpt.get("fatal_focus", "") or "")
-                    case_preview = ed[:20] + "…" if len(ed) > 20 else (ed or "无")
-                    fatal_preview = fatal[:10] + "…" if len(fatal) > 10 else (fatal or "无")
-                    title = f"🗂️ 案例：{case_preview} | 致命点：{fatal_preview}"
+                    ts = str(rec.get("timestamp", "") or "")
+
+                    # 截取预览
+                    case_preview = ed[:40] + "…" if len(ed) > 40 else (ed or "无描述")
+                    fatal_preview = fatal[:20] + "…" if len(fatal) > 20 else (fatal or "无")
+
+                    # 风险评分徽章
+                    scores = rpt.get("scores") or {}
+                    leg_s = scores.get("legal", {}).get("score", "?")
+                    biz_s = scores.get("business", {}).get("score", "?")
+                    rep_s = scores.get("reputation", {}).get("score", "?")
+
+                    def _risk_badge(score):
+                        if isinstance(score, (int, float)):
+                            if score >= 4:
+                                return f"🔴 {score}"
+                            elif score >= 3:
+                                return f"🟠 {score}"
+                            elif score >= 2:
+                                return f"🟡 {score}"
+                            return f"🟢 {score}"
+                        return f"⚪ {score}"
+
+                    title = (
+                        f"{_risk_badge(rep_s)} 声誉 | "
+                        f"{_risk_badge(leg_s)} 法律 | "
+                        f"{_risk_badge(biz_s)} 商业  —  "
+                        f"🗂️ {case_preview}"
+                    )
+
                     with st.expander(title):
-                        st.markdown(f"**事件背景**\n\n{rec.get('event_desc', '—')}")
+                        # 元数据行
+                        st.caption(f"📅 {ts} ｜ 🎯 致命点：{fatal_preview}")
+
+                        # 事件背景
+                        st.markdown("**事件背景**")
+                        st.text(ed[:500] + ("…" if len(ed) > 500 else ""))
+
+                        # 视觉雷点
                         vr = (rec.get("visual_risks") or "").strip()
                         if vr:
-                            st.markdown(f"**视觉雷点**\n\n{vr}")
-                        else:
-                            st.markdown("**视觉雷点**\n\n（无）")
+                            st.markdown("**视觉雷点**")
+                            st.text(vr[:300])
+
+                        # 三维评分
+                        col_s1, col_s2, col_s3 = st.columns(3)
+                        with col_s1:
+                            st.metric("LEGAL", leg_s)
+                        with col_s2:
+                            st.metric("BUSINESS", biz_s)
+                        with col_s3:
+                            st.metric("REPUTATION", rep_s)
+
+                        # 优化建议
+                        rewrite = rpt.get("rewrite_suggestion", "—")
+                        if rewrite and rewrite != "—":
+                            st.markdown("**优化建议**")
+                            st.info(rewrite[:400])
+
+                        # 操作按钮行
+                        btn_col1, btn_col2, btn_col3 = st.columns([1, 1, 2])
+                        with btn_col1:
+                            if st.button("🗑️ 删除", key=f"del_hist_{actual_idx}"):
+                                records.pop(actual_idx)
+                                with open(hist_path, "w", encoding="utf-8") as f:
+                                    json.dump(records, f, ensure_ascii=False, indent=2)
+                                st.rerun()
+                        with btn_col2:
+                            if st.button("📋 添加到知识库", key=f"promote_{actual_idx}"):
+                                # 将本次测试转化为知识库案例
+                                new_case = {
+                                    "id": f"case_promoted_{ts[:10]}_{actual_idx}",
+                                    "title": case_preview.replace("…", ""),
+                                    "crisis_type": fatal_preview.replace("…", "") or "用户测试案例",
+                                    "description": ed[:300],
+                                    "public_reaction": f"模拟推演结果 — 法律风险:{leg_s}/5, 声誉风险:{rep_s}/5",
+                                    "pr_response": str(rpt.get("rewrite_suggestion", ""))[:300],
+                                    "pr_result": f"自动提升自历史测试 #{actual_idx}",
+                                    "source": "user_promoted",
+                                }
+                                _promote_to_case_library(new_case)
+                                st.success(f"✅ 已添加到案例库 (ID: {new_case['id']})")
+                                st.rerun()
+                        with btn_col3:
+                            # 导出单条记录
+                            record_json = json.dumps(rec, ensure_ascii=False, indent=2)
+                            st.download_button(
+                                "💾 导出",
+                                data=record_json,
+                                file_name=f"pr_audit_{ts[:10]}_{actual_idx}.json",
+                                mime="application/json",
+                                key=f"export_{actual_idx}",
+                            )
+
+                # ---- 批量操作 ----
+                st.markdown("---")
+                bulk_col1, bulk_col2, bulk_col3 = st.columns(3)
+                with bulk_col1:
+                    if st.button("🗑️ 清空全部记录", type="secondary", key="clear_all_hist"):
+                        st.session_state["confirm_clear"] = True
+                with bulk_col2:
+                    all_json = json.dumps(records, ensure_ascii=False, indent=2)
+                    st.download_button(
+                        "💾 导出全部记录 (JSON)",
+                        data=all_json,
+                        file_name=f"pr_audit_all_{datetime.now().strftime('%Y%m%d')}.json",
+                        mime="application/json",
+                        key="export_all",
+                    )
+                with bulk_col3:
+                    # CSV 导出（精简版）
+                    csv_lines = ["时间,事件摘要,法律风险,商业风险,声誉风险,致命点"]
+                    for rec in records:
+                        rpt = rec.get("report_json") or {}
                         scores = rpt.get("scores") or {}
-                        leg = scores.get("legal", {})
-                        bus = scores.get("business", {})
-                        rep = scores.get("reputation", {})
-                        st.markdown(
-                            "**风险定损**\n\n"
-                            f"- LEGAL：**{leg.get('score', '?')}**\n"
-                            f"- BUSINESS：**{bus.get('score', '?')}**\n"
-                            f"- REPUTATION：**{rep.get('score', '?')}**"
+                        csv_lines.append(
+                            f"\"{rec.get('timestamp','')}\","
+                            f"\"{str(rec.get('event_desc',''))[:60].replace(chr(10),' ')}\","
+                            f"{scores.get('legal',{}).get('score','?')},"
+                            f"{scores.get('business',{}).get('score','?')},"
+                            f"{scores.get('reputation',{}).get('score','?')},"
+                            f"\"{str(rpt.get('fatal_focus',''))[:60]}\""
                         )
-                        st.markdown(
-                            f"**优化建议**\n\n{rpt.get('rewrite_suggestion', '—')}"
-                        )
-                        if st.button(
-                            "🗑️ 删除此记录",
-                            key=f"del_hist_{actual_idx}",
-                        ):
-                            records.pop(actual_idx)
+                    st.download_button(
+                        "📊 导出全部记录 (CSV)",
+                        data="\n".join(csv_lines),
+                        file_name=f"pr_audit_all_{datetime.now().strftime('%Y%m%d')}.csv",
+                        mime="text/csv",
+                        key="export_csv",
+                    )
+
+                # 二次确认清空
+                if st.session_state.get("confirm_clear"):
+                    st.error("⚠️ 确认清空所有 {n} 条历史记录？此操作不可撤销！")
+                    c1, c2 = st.columns(2)
+                    with c1:
+                        if st.button("✅ 确认清空", type="primary"):
                             with open(hist_path, "w", encoding="utf-8") as f:
-                                json.dump(records, f, ensure_ascii=False, indent=2)
+                                json.dump([], f)
+                            st.session_state["confirm_clear"] = False
+                            st.rerun()
+                    with c2:
+                        if st.button("❌ 取消"):
+                            st.session_state["confirm_clear"] = False
                             st.rerun()
 
 

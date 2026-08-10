@@ -1,0 +1,22 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# IDE
+.vscode/
+.idea/
+
+# Environment
+.env
+.env.local
+
+# OS
+Thumbs.db
+.DS_Store
+
+# ChromaDB vector index (rebuildable from JSON sources)
+data/chroma_db/
+
+# Data files that should not be committed
+# config.py contains API keys

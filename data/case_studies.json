@@ -1,6 +1,4 @@
-# 这里存放真实的公关危机历史知识库
-CLASSIC_CASES = [
-    # ==================== 一、餐饮食品行业 ====================
+[
     {
         "id": "case_1",
         "title": "李佳琦直播间“眉笔哪李贵了”事件",
@@ -181,8 +179,6 @@ CLASSIC_CASES = [
         "pr_response": "星巴克发布声明：“我们对此事给公众带来的困扰深表歉意，涉事门店已与民警沟通并达成谅解，我们将加强员工培训。”",
         "pr_result": "品牌遭遇前所未有的舆论危机，多地门店遭抵制。"
     },
-
-    # ==================== 二、互联网与科技行业 ====================
     {
         "id": "case_21",
         "title": "小米“雷氏营销”争议事件",
@@ -273,8 +269,6 @@ CLASSIC_CASES = [
         "pr_response": "平台紧急升级防沉迷系统：“即日起，所有未成年人账号每日游戏时间限制为1小时，节假日2小时，并全面接入公安实名认证系统。”",
         "pr_result": "涉及青少年的业务，政治正确高于商业利益。"
     },
-
-    # ==================== 三、快消与零售行业 ====================
     {
         "id": "case_31",
         "title": "American Eagle“白人女孩”代言争议",
@@ -365,8 +359,6 @@ CLASSIC_CASES = [
         "pr_response": "三只松鼠道歉：“广告模特妆容是基于产品特点设计的，绝无任何辱华意图，已紧急下架广告。”",
         "pr_result": "已造成严重声誉损害。"
     },
-
-    # ==================== 四、出行与旅游行业 ====================
     {
         "id": "case_41",
         "title": "七匹狼“河南续面”网暴事件",
@@ -394,8 +386,6 @@ CLASSIC_CASES = [
         "pr_response": "涉事酒店道歉：“涉事员工已被停职，我们将开展全员卫生培训，引入第三方监管机制。”",
         "pr_result": "行业整体形象受损。"
     },
-
-    # ==================== 五、文娱与体育行业 ====================
     {
         "id": "case_44",
         "title": "戛纳获奖作品“AI伪造”事件",
@@ -423,8 +413,6 @@ CLASSIC_CASES = [
         "pr_response": "平台声明：“节目停播整改，坚决反对浪费行为。”",
         "pr_result": "选秀模式被全面整改。"
     },
-
-    # ==================== 六、金融与房地产行业 ====================
     {
         "id": "case_47",
         "title": "群邑中国“8.2亿收贿案”",
@@ -452,8 +440,6 @@ CLASSIC_CASES = [
         "pr_response": "房企声明：“公司正在积极筹措资金，确保保交楼，恳请业主给予时间。”",
         "pr_result": "政府介入保交楼。"
     },
-
-    # ==================== 七、汽车制造行业 ====================
     {
         "id": "case_50",
         "title": "蔚来“电池自燃”事件",
@@ -472,8 +458,6 @@ CLASSIC_CASES = [
         "pr_response": "小鹏道歉：“因供应链问题导致芯片混用，我们为受影响车主提供终身质保和积分补偿。”",
         "pr_result": "信誉受损。"
     },
-
-    # ==================== 八、医美与健康行业 ====================
     {
         "id": "case_52",
         "title": "爱康国宾“十年体检未预警肾癌”事件",
@@ -483,8 +467,6 @@ CLASSIC_CASES = [
         "pr_response": "爱康国宾起诉张晓玲侵犯名誉权，索赔1000万。CEO张黎刚称：“别指望几百块体检查出所有病。”",
         "pr_result": "案件移送法院处理，体检行业信任危机。"
     },
-
-    # ==================== 九、职场与企业文化行业 ====================
     {
         "id": "case_53",
         "title": "雀巢CEO“办公室恋情”被解雇",
@@ -503,11 +485,6 @@ CLASSIC_CASES = [
         "pr_response": "俞敏洪未直接回应，新东方未发布官方声明。",
         "pr_result": "品牌价值观一致性受到质疑。"
     },
-# 这里存放真实的公关危机历史知识库（续）
-# ==================== 新增案例：追溯更早年份（2011-2025）====================
-
-# 一、2011-2012年经典危机案例
-
     {
         "id": "case_55",
         "title": "家乐福“价格欺诈”事件",
@@ -580,9 +557,6 @@ CLASSIC_CASES = [
         "pr_response": "事故当晚奥的斯发声明：“将配合相关部门查明原因并全力做好善后工作，对事件影响表示最深切的歉意。”此后，除发言人外保持沉默，对召回的询问回应：“正与相关部门配合调查，无法就此事作出进一步评论。”[citation:10]",
         "pr_result": "沉默被指推卸责任，品牌形象严重受损。"
     },
-
-    # 二、2013-2019年知名危机案例
-
     {
         "id": "case_63",
         "title": "耐克“气垫门”事件",
@@ -655,9 +629,6 @@ CLASSIC_CASES = [
         "pr_response": "LG连续7天拒绝回应，导致“翻新门”登上热搜榜首。[citation:5]",
         "pr_result": "被中国家用电器协会列入“不诚信企业黑名单”，空调品类销量同比下滑。"
     },
-
-    # 三、2023-2025年新增案例
-
     {
         "id": "case_71",
         "title": "宝马MINI“冰淇淋事件”",
@@ -892,7 +863,6 @@ CLASSIC_CASES = [
         "pr_response": "赛力斯委托北京中机车辆司法鉴定中心出具报告称“车辆无异常”，而车主委托的南粤鉴定公司得出相反结论。案件将于2025年6月开庭。[citation:6]",
         "pr_result": "鉴定争议未平息，品牌卷入诉讼。"
     },
-    # ==================== 十、正向公关与化危为机典范 ====================
     {
         "id": "case_97",
         "title": "鸿星尔克“破产式捐款”引发野性消费",
@@ -929,7 +899,6 @@ CLASSIC_CASES = [
         "pr_response": "胖东来不仅令涉事商户停业整改并罚款10万元，辞退两名监管不力的主管。最震撼的是：主动对购买过该批次擀面皮的8833名顾客，每人补偿1000元，总补偿金额达883.3万元。",
         "pr_result": "被网友称为“公关界的天花板”、“降维打击”。用极高昂的代价买到了无价的品牌信任度，央媒发文点赞，让“胖东来式标准”成为中国零售业的神话。"
     },
-    # ==================== 十一、神级逆转与教科书级正向公关 ====================
     {
         "id": "case_101",
         "title": "腾讯“逗鹅冤”（老干妈乌龙诉讼事件）",
@@ -993,45 +962,4 @@ CLASSIC_CASES = [
         "pr_response": "理想汽车CEO李想没有妥协或冷处理，而是在朋友圈发表极其强硬的声明：“虽然身处黑暗，但是我仍然选择光明...对于有组织的违法犯罪行为，我们已经在用法律的武器处理中。”随后理想正式起诉多名黑水军。",
         "pr_result": "在面对突破道德底线的恶意攻击时，“硬刚”反而是最好的防守。这种强硬姿态稳住了核心团队和忠实车主的信心，成功扭转了被动挨打的局面。"
     }
-    ]
-import json
-import os
-import sys
-
-DATA_DIR = "data"
-os.makedirs(DATA_DIR, exist_ok=True)
-
-# 1. 写入案例库
-case_path = os.path.join(DATA_DIR, "case_studies.json")
-with open(case_path, "w", encoding="utf-8") as f:
-    json.dump(CLASSIC_CASES, f, ensure_ascii=False, indent=4)
-print(f"[OK] case_studies.json -> {case_path}  |  {len(CLASSIC_CASES)} cases")
-
-# 2. 验证其余三个知识库 JSON 文件
-libs = {
-    "red_line_library.json": "绝对红线库",
-    "black_words_library.json": "黑词与烂梗库",
-    "hate_comments_library.json": "网民恶评库",
-}
-for filename, label in libs.items():
-    path = os.path.join(DATA_DIR, filename)
-    if not os.path.exists(path):
-        print(f"[WARN] {label} ({filename}) missing, please create manually.")
-    else:
-        try:
-            with open(path, "r", encoding="utf-8") as f:
-                data = json.load(f)
-            print(f"[OK] {label} -> {path}  |  {len(data)} records")
-        except Exception as e:
-            print(f"[ERR] {label} parse failed: {e}")
-
-# 3. 构建 ChromaDB 向量索引
-print("\n--- Building vector indexes ---")
-try:
-    from rag_engine import get_rag_engine
-    engine = get_rag_engine()
-    engine.build_all(DATA_DIR)
-    print("[OK] ChromaDB vector indexes built successfully")
-except Exception as e:
-    print(f"[ERR] Vector index build failed: {e}")
-    print("  Please check: pip install chromadb sentence-transformers")
+]

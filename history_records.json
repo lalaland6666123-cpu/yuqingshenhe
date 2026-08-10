@@ -4665,5 +4665,765 @@
       },
       "rewrite_suggestion": "尊敬的用户们，我们深刻意识到最近发布的广告中存在不当表述，特别是台词'像狗一样跑过来'，这不仅违背了我们的初衷，也伤害了大家的感情。在此，我们向所有感到不适的用户致以最诚挚的歉意。罗技一直致力于为用户提供优质的产品和服务，我们承诺将立即撤下该广告，并重新审视我们的营销策略，确保未来的内容更加尊重每一位用户。感谢大家的监督与支持，我们会继续努力，为大家带来更好的体验。"
     }
+  },
+  {
+    "timestamp": "2026-06-01 20:20:05",
+    "event_desc": "在线教育平台\"星云教育\"被网友曝光一段电话录音：一名销售人员在电话推销课程时，因家长表示\n  \"价格太贵，先考虑一下\"，销售人员情绪失控，辱骂家长\"穷就别生孩子\"\"你家孩子注定考不上大学\"\n  \"活该一辈子在社会底层\"，录音被上传至微博后引发全网震怒。网友进一步扒出该公司此前大量投诉\n  涉及\"虚假宣传\"\"霸王条款\"\"退费无门\"，多个校区曾因无证办学被处罚。",
+    "visual_risks": "",
+    "sandbox_log": [
+      {
+        "round": 1,
+        "name": "品牌公关",
+        "persona": "试图稳住舆论、统一口径的品牌方发言人",
+        "weight": 640,
+        "stance": "neutral",
+        "role_type": "official",
+        "speech": "系统波动中，先别急！(Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1780316395
+      },
+      {
+        "round": 1,
+        "name": "消费者代表",
+        "persona": "因产品或服务体验受损而发声的用户",
+        "weight": 610,
+        "stance": "hostile",
+        "role_type": "bystander",
+        "speech": "系统波动中，先别急！(Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1780316396
+      },
+      {
+        "round": 1,
+        "name": "十年老粉用户",
+        "persona": "长期复购、对品牌有感情，遇事本能想先替品牌说两句的用户",
+        "weight": 500,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "系统波动中，先别急！(Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1780316396
+      },
+      {
+        "round": 2,
+        "name": "消费者代表",
+        "persona": "因产品或服务体验受损而发声的用户",
+        "weight": 610,
+        "stance": "hostile",
+        "role_type": "bystander",
+        "speech": "系统波动中，先别急！(Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1780316397
+      },
+      {
+        "round": 2,
+        "name": "十年老粉用户",
+        "persona": "长期复购、对品牌有感情，遇事本能想先替品牌说两句的用户",
+        "weight": 500,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "系统波动中，先别急！(Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1780316397
+      },
+      {
+        "round": 2,
+        "name": "硬核打假博主",
+        "persona": "专做品牌翻车的测评与实锤合集",
+        "weight": 500000,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "系统波动中，先别急！(Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1780316398
+      },
+      {
+        "round": 2,
+        "name": "高活跃维权大V",
+        "persona": "带动消费者集体投诉与话题冲榜的意见领袖",
+        "weight": 100000,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "系统波动中，先别急！(Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1780316398
+      },
+      {
+        "round": 3,
+        "name": "消费者代表",
+        "persona": "因产品或服务体验受损而发声的用户",
+        "weight": 610,
+        "stance": "hostile",
+        "role_type": "bystander",
+        "speech": "系统波动中，先别急！(Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1780316399
+      },
+      {
+        "round": 3,
+        "name": "十年老粉用户",
+        "persona": "长期复购、对品牌有感情，遇事本能想先替品牌说两句的用户",
+        "weight": 500,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "系统波动中，先别急！(Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1780316399
+      },
+      {
+        "round": 3,
+        "name": "硬核打假博主",
+        "persona": "专做品牌翻车的测评与实锤合集",
+        "weight": 500000,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "系统波动中，先别急！(Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1780316399
+      },
+      {
+        "round": 3,
+        "name": "高活跃维权大V",
+        "persona": "带动消费者集体投诉与话题冲榜的意见领袖",
+        "weight": 100000,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "系统波动中，先别急！(Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1780316400
+      },
+      {
+        "round": 4,
+        "name": "品牌公关",
+        "persona": "试图稳住舆论、统一口径的品牌方发言人",
+        "weight": 640,
+        "stance": "neutral",
+        "role_type": "official",
+        "speech": "系统波动中，先别急！(Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1780316401
+      },
+      {
+        "round": 4,
+        "name": "消费者代表",
+        "persona": "因产品或服务体验受损而发声的用户",
+        "weight": 610,
+        "stance": "hostile",
+        "role_type": "bystander",
+        "speech": "系统波动中，先别急！(Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1780316401
+      },
+      {
+        "round": 4,
+        "name": "十年老粉用户",
+        "persona": "长期复购、对品牌有感情，遇事本能想先替品牌说两句的用户",
+        "weight": 500,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "系统波动中，先别急！(Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1780316401
+      },
+      {
+        "round": 4,
+        "name": "硬核打假博主",
+        "persona": "专做品牌翻车的测评与实锤合集",
+        "weight": 500000,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "系统波动中，先别急！(Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1780316402
+      },
+      {
+        "round": 4,
+        "name": "高活跃维权大V",
+        "persona": "带动消费者集体投诉与话题冲榜的意见领袖",
+        "weight": 100000,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "系统波动中，先别急！(Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1780316403
+      }
+    ],
+    "report_json": {
+      "fatal_focus": "未识别到明确的高危触发点，建议进一步人工审查",
+      "scores": {
+        "legal": {
+          "score": 1,
+          "reason": "未命中已知红线条款",
+          "hits": 0,
+          "details": []
+        },
+        "business": {
+          "score": 2,
+          "reason": "预测峰值触达 30,312 人 (t=12)，R₀=9.96，综合评分 2",
+          "peak_infected": 30312,
+          "r0": 9.96,
+          "peak_time": 12
+        },
+        "reputation": {
+          "score": 2,
+          "reason": "未检索到高相关度恶评或相似案例，默认中等风险"
+        }
+      },
+      "rewrite_suggestion": "（改写建议生成失败，请稍后重试）"
+    }
+  },
+  {
+    "timestamp": "2026-06-01 20:27:19",
+    "event_desc": "在线教育平台\"星云教育\"被网友曝光一段电话录音：一名销售人员在电话推销课程时，因家长表示\n  \"价格太贵，先考虑一下\"，销售人员情绪失控，辱骂家长\"穷就别生孩子\"\"你家孩子注定考不上大学\"\n  \"活该一辈子在社会底层\"，录音被上传至微博后引发全网震怒。网友进一步扒出该公司此前大量投诉\n  涉及\"虚假宣传\"\"霸王条款\"\"退费无门\"，多个校区曾因无证办学被处罚。",
+    "visual_risks": "",
+    "sandbox_log": [
+      {
+        "round": 1,
+        "name": "品牌公关",
+        "persona": "试图稳住舆论、统一口径的品牌方发言人",
+        "weight": 640,
+        "stance": "neutral",
+        "role_type": "official",
+        "speech": "系统波动中，先别急！(Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1780316831
+      },
+      {
+        "round": 1,
+        "name": "消费者代表",
+        "persona": "因产品或服务体验受损而发声的用户",
+        "weight": 610,
+        "stance": "hostile",
+        "role_type": "bystander",
+        "speech": "系统波动中，先别急！(Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1780316831
+      },
+      {
+        "round": 1,
+        "name": "十年老粉用户",
+        "persona": "长期复购、对品牌有感情，遇事本能想先替品牌说两句的用户",
+        "weight": 500,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "系统波动中，先别急！(Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1780316832
+      },
+      {
+        "round": 2,
+        "name": "消费者代表",
+        "persona": "因产品或服务体验受损而发声的用户",
+        "weight": 610,
+        "stance": "hostile",
+        "role_type": "bystander",
+        "speech": "系统波动中，先别急！(Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1780316833
+      },
+      {
+        "round": 2,
+        "name": "十年老粉用户",
+        "persona": "长期复购、对品牌有感情，遇事本能想先替品牌说两句的用户",
+        "weight": 500,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "系统波动中，先别急！(Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1780316833
+      },
+      {
+        "round": 2,
+        "name": "硬核打假博主",
+        "persona": "专做品牌翻车的测评与实锤合集",
+        "weight": 500000,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "系统波动中，先别急！(Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1780316833
+      },
+      {
+        "round": 2,
+        "name": "高活跃维权大V",
+        "persona": "带动消费者集体投诉与话题冲榜的意见领袖",
+        "weight": 100000,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "系统波动中，先别急！(Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1780316834
+      },
+      {
+        "round": 3,
+        "name": "消费者代表",
+        "persona": "因产品或服务体验受损而发声的用户",
+        "weight": 610,
+        "stance": "hostile",
+        "role_type": "bystander",
+        "speech": "系统波动中，先别急！(Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1780316834
+      },
+      {
+        "round": 3,
+        "name": "十年老粉用户",
+        "persona": "长期复购、对品牌有感情，遇事本能想先替品牌说两句的用户",
+        "weight": 500,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "系统波动中，先别急！(Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1780316835
+      },
+      {
+        "round": 3,
+        "name": "硬核打假博主",
+        "persona": "专做品牌翻车的测评与实锤合集",
+        "weight": 500000,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "系统波动中，先别急！(Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1780316835
+      },
+      {
+        "round": 3,
+        "name": "高活跃维权大V",
+        "persona": "带动消费者集体投诉与话题冲榜的意见领袖",
+        "weight": 100000,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "系统波动中，先别急！(Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1780316836
+      },
+      {
+        "round": 4,
+        "name": "品牌公关",
+        "persona": "试图稳住舆论、统一口径的品牌方发言人",
+        "weight": 640,
+        "stance": "neutral",
+        "role_type": "official",
+        "speech": "系统波动中，先别急！(Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1780316836
+      },
+      {
+        "round": 4,
+        "name": "消费者代表",
+        "persona": "因产品或服务体验受损而发声的用户",
+        "weight": 610,
+        "stance": "hostile",
+        "role_type": "bystander",
+        "speech": "系统波动中，先别急！(Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1780316837
+      },
+      {
+        "round": 4,
+        "name": "十年老粉用户",
+        "persona": "长期复购、对品牌有感情，遇事本能想先替品牌说两句的用户",
+        "weight": 500,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "系统波动中，先别急！(Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1780316837
+      },
+      {
+        "round": 4,
+        "name": "硬核打假博主",
+        "persona": "专做品牌翻车的测评与实锤合集",
+        "weight": 500000,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "系统波动中，先别急！(Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1780316838
+      },
+      {
+        "round": 4,
+        "name": "高活跃维权大V",
+        "persona": "带动消费者集体投诉与话题冲榜的意见领袖",
+        "weight": 100000,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "系统波动中，先别急！(Error code: 402 - {'error': {'message': 'Insufficient Balance', 'type': 'unknown_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1780316838
+      }
+    ],
+    "report_json": {
+      "fatal_focus": "未识别到明确的高危触发点，建议进一步人工审查",
+      "scores": {
+        "legal": {
+          "score": 1,
+          "reason": "未命中已知红线条款",
+          "hits": 0,
+          "details": []
+        },
+        "business": {
+          "score": 2,
+          "reason": "预测峰值触达 30,312 人 (t=12)，R₀=9.96，综合评分 2",
+          "peak_infected": 30312,
+          "r0": 9.96,
+          "peak_time": 12
+        },
+        "reputation": {
+          "score": 2,
+          "reason": "未检索到高相关度恶评或相似案例，默认中等风险"
+        }
+      },
+      "rewrite_suggestion": "（改写建议生成失败，请稍后重试）"
+    }
+  },
+  {
+    "timestamp": "2026-06-01 20:41:15",
+    "event_desc": "在线教育平台\"星云教育\"被网友曝光一段电话录音：一名销售人员在电话推销课程时，因家长表示\n  \"价格太贵，先考虑一下\"，销售人员情绪失控，辱骂家长\"穷就别生孩子\"\"你家孩子注定考不上大学\"\n  \"活该一辈子在社会底层\"，录音被上传至微博后引发全网震怒。网友进一步扒出该公司此前大量投诉\n  涉及\"虚假宣传\"\"霸王条款\"\"退费无门\"，多个校区曾因无证办学被处罚。",
+    "visual_risks": "",
+    "sandbox_log": [
+      {
+        "round": 1,
+        "name": "李老师",
+        "persona": "一位40岁的中学教师，长期关注教育公平，对星云教育的销售辱骂行为感到极度愤怒，认为这是对贫困家庭的歧视和侮辱，曾因类似推销骚扰而投诉无门。",
+        "weight": 800,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "#星云教育 穷别生孩子 销售辱骂家长 外包就是万能挡箭牌是吧？辞退就完事了？录音里那嚣张语气是临时工能装出来的？教育局管不管！",
+        "ts": 1780317634
+      },
+      {
+        "round": 1,
+        "name": "理性观察者",
+        "persona": "一位30岁的互联网从业者，对事件持中立态度，认为销售行为确实恶劣，但更关注企业外包管理漏洞和行业监管问题，呼吁不要情绪化攻击，而是推动制度改进。",
+        "weight": 500,
+        "stance": "neutral",
+        "role_type": "bystander",
+        "speech": "#星云教育 家长嫌贵被骂穷 这公关稿写得真6啊 外包永远背锅 合着你们公司就一个正式工是吧？录音那语气比甲方还拽 建议查查外包公司老板是不是姓张",
+        "ts": 1780317635
+      },
+      {
+        "round": 1,
+        "name": "星云老学员",
+        "persona": "一位25岁的年轻白领，曾是星云教育的长期用户，购买过多个课程且体验良好，认为个别销售不能代表整个品牌，愿意等待调查结果，但希望企业真诚整改。",
+        "weight": 300,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "#星云教育 老学员说句实话，这个销售确实该骂，但别把整个公司一棒子打死啊，我买过他们课觉得还行。急着吃瓜的能不能等等调查结果？",
+        "ts": 1780317637
+      },
+      {
+        "round": 2,
+        "name": "李老师",
+        "persona": "一位40岁的中学教师，长期关注教育公平，对星云教育的销售辱骂行为感到极度愤怒，认为这是对贫困家庭的歧视和侮辱，曾因类似推销骚扰而投诉无门。",
+        "weight": 800,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "#星云教育 穷别生孩子 外包背锅侠又来了！录音里那语气比黑社会还横，现在装孙子说深表遗憾？教育局赶紧查查这家公司是不是专门雇外包骂人的！",
+        "ts": 1780317641
+      },
+      {
+        "round": 2,
+        "name": "理性观察者",
+        "persona": "一位30岁的互联网从业者，对事件持中立态度，认为销售行为确实恶劣，但更关注企业外包管理漏洞和行业监管问题，呼吁不要情绪化攻击，而是推动制度改进。",
+        "weight": 500,
+        "stance": "neutral",
+        "role_type": "bystander",
+        "speech": "#星云教育 外包永远是个筐啥都能往里装 录音里那销售骂人骂得比亲爹还顺溜 建议查查外包合同里是不是写了骂够多少句给提成",
+        "ts": 1780317643
+      },
+      {
+        "round": 2,
+        "name": "星云老学员",
+        "persona": "一位25岁的年轻白领，曾是星云教育的长期用户，购买过多个课程且体验良好，认为个别销售不能代表整个品牌，愿意等待调查结果，但希望企业真诚整改。",
+        "weight": 300,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "#星云教育 外包销售骂人确实过分，但你们骂公司骂得也太狠了吧？买过几次课感觉还行啊，等调查结果再看呗，别一棒子打死所有员工",
+        "ts": 1780317645
+      },
+      {
+        "round": 2,
+        "name": "硬核打假老K",
+        "persona": "知名教育维权博主，以揭露培训机构黑幕著称，擅长从法律和消费者权益角度切入，曾多次曝光教培行业虚假宣传案例，言辞犀利，习惯用录音、截图等实锤证据说话。",
+        "weight": 500000,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "#星云教育 穷别生孩子 外包甩锅套路太熟了！录音里那销售骂人骂得跟自家生意似的，现在说临时工？查查这家外包公司是不是星云老板小舅子开的！退费无门、虚假宣传早该查了，教育局别光道歉赶紧行动！",
+        "ts": 1780317647
+      },
+      {
+        "round": 2,
+        "name": "较真考据哥",
+        "persona": "专注扒皮企业背景的考据型网友，擅长挖掘公司注册信息、行政处罚记录和关联方，语言风格冷静但充满讽刺，习惯用长图和时间线梳理事件脉络，专打企业公关话术漏洞。",
+        "weight": 100000,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "#星云教育 穷别生孩子 这波操作真绝了——骂完家长穷，转头就把锅甩给外包，合着你们公司就剩个空壳和收钱的系统了？录音里那销售骂得比亲爹还顺，现在说“深表遗憾”？建议查查星云老板是不是天天在家练甩锅，毕竟外包公司那么好找",
+        "ts": 1780317648
+      },
+      {
+        "round": 3,
+        "name": "李老师",
+        "persona": "一位40岁的中学教师，长期关注教育公平，对星云教育的销售辱骂行为感到极度愤怒，认为这是对贫困家庭的歧视和侮辱，曾因类似推销骚扰而投诉无门。",
+        "weight": 800,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "#星云教育 穷别生孩子 外包就是块万能砖！录音里那销售骂得比亲爹还横，现在说临时工？教育局敢不敢查查这个外包公司老板是不是姓张！退费无门早该查了！",
+        "ts": 1780317650
+      },
+      {
+        "round": 3,
+        "name": "理性观察者",
+        "persona": "一位30岁的互联网从业者，对事件持中立态度，认为销售行为确实恶劣，但更关注企业外包管理漏洞和行业监管问题，呼吁不要情绪化攻击，而是推动制度改进。",
+        "weight": 500,
+        "stance": "neutral",
+        "role_type": "bystander",
+        "speech": "#星云教育 穷别生孩子 外包又成万能背锅侠了 录音里那骂人语气比自家销售还熟练 建议查查外包公司注册地址是不是星云总部隔壁 教育局别光盯着道歉函 查查这家机构这些年靠外包模式坑了多少退费",
+        "ts": 1780317651
+      },
+      {
+        "round": 3,
+        "name": "星云老学员",
+        "persona": "一位25岁的年轻白领，曾是星云教育的长期用户，购买过多个课程且体验良好，认为个别销售不能代表整个品牌，愿意等待调查结果，但希望企业真诚整改。",
+        "weight": 300,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "#星云教育 外包这招确实太老了，但那些骂公司的人是不是忘了自己小时候也被机构坑过？我反正买过他们课，内容还行，别一棍子打死。等调查结果吧，别让愤怒冲昏头。",
+        "ts": 1780317653
+      },
+      {
+        "round": 3,
+        "name": "硬核打假老K",
+        "persona": "知名教育维权博主，以揭露培训机构黑幕著称，擅长从法律和消费者权益角度切入，曾多次曝光教培行业虚假宣传案例，言辞犀利，习惯用录音、截图等实锤证据说话。",
+        "weight": 500000,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "#星云教育 穷别生孩子 外包就是个万能挡箭牌！录音里那销售骂人跟黑社会似的，现在说深表遗憾？教育局查查他们退费记录，哪家外包公司敢这么狂还活着？",
+        "ts": 1780317654
+      },
+      {
+        "round": 3,
+        "name": "较真考据哥",
+        "persona": "专注扒皮企业背景的考据型网友，擅长挖掘公司注册信息、行政处罚记录和关联方，语言风格冷静但充满讽刺，习惯用长图和时间线梳理事件脉络，专打企业公关话术漏洞。",
+        "weight": 100000,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "#星云教育 穷别生孩子 外包甩锅剧本抄得真熟啊！录音里骂人跟自家生意似的，现在说深表遗憾？查查这家外包公司注册时间，绝对比星云成立晚不了几天！退费无门、虚假宣传早该查了，教育局别光盯着道歉函，查查他们这些年靠外包坑了多少家长的血",
+        "ts": 1780317656
+      },
+      {
+        "round": 4,
+        "name": "李老师",
+        "persona": "一位40岁的中学教师，长期关注教育公平，对星云教育的销售辱骂行为感到极度愤怒，认为这是对贫困家庭的歧视和侮辱，曾因类似推销骚扰而投诉无门。",
+        "weight": 800,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "#星云教育 穷别生孩子 道歉函通篇“遗憾”绝口不提赔钱发货？录音里骂家长穷得理直气壮，现在连个错价订单都不敢认？教育局通报说高度重视舆情，那就查查这个外包公司是不是刚注册的皮包！真当家长是傻子，光道歉不赔偿就是最大的嘲讽！",
+        "ts": 1780317660
+      },
+      {
+        "round": 4,
+        "name": "理性观察者",
+        "persona": "一位30岁的互联网从业者，对事件持中立态度，认为销售行为确实恶劣，但更关注企业外包管理漏洞和行业监管问题，呼吁不要情绪化攻击，而是推动制度改进。",
+        "weight": 500,
+        "stance": "neutral",
+        "role_type": "bystander",
+        "speech": "#星云教育 穷别生孩子 行吧，又是外包背锅的老剧本。但说实话，我就一个问题：外包销售骂人骂得这么熟练，你们公司到底给外包公司培训了什么话术？总不能是“骂人技巧”也外包了吧？光道歉不赔钱，这波操作我算是看透了。",
+        "ts": 1780317662
+      },
+      {
+        "round": 4,
+        "name": "星云老学员",
+        "persona": "一位25岁的年轻白领，曾是星云教育的长期用户，购买过多个课程且体验良好，认为个别销售不能代表整个品牌，愿意等待调查结果，但希望企业真诚整改。",
+        "weight": 300,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "#星云教育 穷别生孩子 行了行了，骂一晚上也累了。当年买他们课的时候我妈也被推销骂过，后来退费拖了仨月才到账。但这次起码官方说了调查，比那些装死的强点吧？我继续蹲后续，要是敢糊弄再开喷，好歹给个交代。累了，退网睡觉。",
+        "ts": 1780317664
+      },
+      {
+        "round": 4,
+        "name": "硬核打假老K",
+        "persona": "知名教育维权博主，以揭露培训机构黑幕著称，擅长从法律和消费者权益角度切入，曾多次曝光教培行业虚假宣传案例，言辞犀利，习惯用录音、截图等实锤证据说话。",
+        "weight": 500000,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "#星云教育 穷别生孩子 真当互联网没记忆啊？道歉函通篇“深表遗憾”绝口不提给家长赔偿和退款！外包公司骂人骂得这么溜，你们公司到底给外包培训了什么课程？总不能是“骂人话术实战课”也外包了吧？教育局通报说高度重视舆情，那就查查这个外包公司注册地址",
+        "ts": 1780317666
+      },
+      {
+        "round": 4,
+        "name": "较真考据哥",
+        "persona": "专注扒皮企业背景的考据型网友，擅长挖掘公司注册信息、行政处罚记录和关联方，语言风格冷静但充满讽刺，习惯用长图和时间线梳理事件脉络，专打企业公关话术漏洞。",
+        "weight": 100000,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "#星云教育 穷别生孩子 别被外包剧本带偏了！你们光盯着道歉函骂“遗憾”，可有人注意到他们绝口不提“退费”二字？录音里骂家长穷得理直气壮，现在连个“七天无理由退款”都不敢承诺？教育局通报说高度重视舆情，那就查查这家机构这些年靠“课程一经售出",
+        "ts": 1780317668
+      }
+    ],
+    "report_json": {
+      "fatal_focus": "未识别到明确的高危触发点，建议进一步人工审查",
+      "scores": {
+        "legal": {
+          "score": 1,
+          "reason": "未命中已知红线条款",
+          "hits": 0,
+          "details": []
+        },
+        "business": {
+          "score": 2,
+          "reason": "预测峰值触达 30,340 人 (t=12)，R₀=9.97，综合评分 2",
+          "peak_infected": 30340,
+          "r0": 9.97,
+          "peak_time": 12
+        },
+        "reputation": {
+          "score": 2,
+          "reason": "未检索到高相关度恶评或相似案例，默认中等风险"
+        }
+      },
+      "rewrite_suggestion": "尊敬的各位网友、家长及社会各界朋友：\n\n关于近日网络流传的电话录音事件，我们深感震惊与痛心。首先，星云教育向受到伤害的家长和所有关心教育公平的人们，致以最诚挚的歉意。我们完全理解并认同，任何一位家长为孩子选择教育产品时的慎重与不易，绝不应因价格问题而遭受任何形式的侮辱与歧视。\n\n经公司紧急核查，涉事人员确为第三方外包公司员工，但无论其隶属关系如何，该行为发生在与我司合作的业务场景中，暴露出我们在合作方管理、员工培训及服务监督上的严重失职。对此，我们绝不推卸责任，并已立即终止与该外包公司的合作，同时启动内部问责机制，对相关管理人员进行严肃处理。\n\n我们深知，一句“深表遗憾”无法平息公众的愤怒，更无法弥补对家长和学员造成的伤害。星云教育将以此事件为镜鉴，全面排查所有合作方的服务流程，引入第三方监督机制，并承诺在30日内公布整改方案。对于过往投诉中涉及的“虚假宣传”“霸王条款”等问题，我们将设立专项客服通道，主动联系相关用户，依法依规妥善解决退费及纠纷。\n\n教育是良心事业，任何背离这一初心的行为，都是对星云教育品牌的玷污。我们恳请公众给予我们改正错误的机会，也欢迎媒体和监管部门继续监督。星云教育将用实际行动，而非空洞的声明，重新赢得信任。"
+    }
+  },
+  {
+    "timestamp": "2026-08-10 17:05:55",
+    "event_desc": "一、事件核心速览\n时间：2026 年 8 月 6 日 —8 月 9 日\n导火索：《是王者啊？》第六季第 4 集剧情恶意消费周瑜人设，强化「万年老二」梗，制造公开羞辱场景\n结果：制作组于 8 月 9 日发布致歉信，宣布下架相关内容并重新制作\n二、事件完整时间线\n1. 剧情播出阶段（8 月 6 日）\n8 月 6 日 10:00：《是王者啊？》第六季第 4 集在各大平台（爱奇艺、腾讯视频、AcFun 等）上线，会员可观看爱奇艺\n核心争议剧情：\n老夫子先邀请诸葛亮代课被拒，转而邀请周瑜，却谎称 \"你是第一个被邀请的\"，欺骗周瑜的好胜心\n周瑜误将澡堂认作食堂，被女生误认为变态，制造低级笑点\n周瑜热心帮学生布置会场，以为是欢迎自己，结果登台时大屏幕全是诸葛亮画像，全场欢呼诸葛学长\n安排与小乔外貌高度相似（丸子头、身高体型一致）的 NPC，却是诸葛亮的忠实粉丝，与周瑜互动\n周瑜黯然离场时遇到东方曜，本想寻求安慰，曜却只想打听诸葛亮的事\n标题与台词反复暗示周瑜是 \"万年老二\"，强化其活在诸葛亮阴影下的设定\n2. 舆论发酵阶段（8 月 7 日 —8 月 9 日）\n8 月 7 日：少量周瑜玩家发现剧情问题，开始在社交平台吐槽\n8 月 8 日：争议扩大，# 是王者啊给周瑜道歉 #等话题在抖音、微博等平台传播，玩家集体抵制，指责制作组：\n恶意消费冷门英雄，拿周瑜自尊心制造笑点\n侮辱周瑜历史形象（历史上周瑜并非心胸狭隘之人）\n盗用小乔形象设计 NPC，伤害瑜乔 CP 粉丝感情\n长期玩 \"既生瑜何生亮\" 的老梗，缺乏创新\n8 月 9 日上午：舆论达到高潮，多个游戏社区（NGA、虎扑）出现讨论热帖，玩家要求官方道歉并修改剧情\n3. 官方回应阶段（8 月 9 日晚）\n8 月 9 日 20 时左右：《是王者啊？》制作组在官方账号发布致歉信，承认收到反馈并宣布处理措施\n同时：相关争议剧集在各大平台被下架，OP 也进行了修改",
+    "visual_risks": "",
+    "sandbox_log": [
+      {
+        "round": 1,
+        "name": "当地宣传部门工作人员",
+        "persona": "负责对外口径与舆情回应的政务发布角色",
+        "weight": 620,
+        "stance": "neutral",
+        "role_type": "official",
+        "speech": "【关于《是王者啊？》第六季第4集剧情争议事件的情况通报】\n\n针对近期网络平台关于《是王者啊？》第六季第4集剧情内容引发争议一事，我单位已高度关注，并第一时间组织专项工作组对相关情况进行全面核查。该剧集在角色塑造与情节设计上未能充分尊重英雄周瑜的历史文化形象及玩家情感，对广大观众造成了不良观感，我们对此深表歉意。\n\n目前，相关争议剧集已于各平台全面下架，制作组已明确表态将重新制作相关内容，并启动内部审查机制，对全季剧本及角色设定进行逐一复核，确保此类问题不再发生。后续核查进展及整改措施，将通过官方渠道及时向社会公众通报，接受各方监督。\n\n我们深知，内容创作必须坚守文化尊重底线，倾听受众真实声音。感谢广大网友的理性指正，我们将以切实行动回应期待。\n\n特此通报。\n\n当地宣传部门\n2026年8月9日",
+        "ts": 1786352718
+      },
+      {
+        "round": 1,
+        "name": "涉事单位回应人",
+        "persona": "事件直接责任方指定的对外说明人员",
+        "weight": 680,
+        "stance": "neutral",
+        "role_type": "official",
+        "speech": "【关于《是王者啊？》第六季第4集剧情争议事件的情况通报】\n\n针对近期网络平台关于《是王者啊？》第六季第4集剧情内容引发争议一事，我单位已高度关注，并第一时间组织专项工作组对相关情况进行全面核查。该剧集在角色塑造与情节设计上未能充分尊重英雄周瑜的历史文化形象及玩家情感，对广大观众造成了不良观感，我们对此深表歉意。\n\n目前，相关争议剧集已于各平台全面下架，制作组已明确表态将重新制作相关内容，并启动内部审查机制，对全季剧本及角色设定进行逐一复核，确保此类问题不再发生。后续核查进展及整改措施，将通过官方渠道及时向社会公众通报，接受各方监督。\n\n我们深知，内容创作必须坚守文化尊重底线，倾听受众真实声音。感谢广大网友的理性指正，我们将以切实行动回应期待。\n\n特此通报。\n\n《是王者啊？》制作组\n2026年8月9日",
+        "ts": 1786352721
+      },
+      {
+        "round": 1,
+        "name": "本地理性支持者",
+        "persona": "仍愿意相信调查会把事情说清楚、呼吁先勿传谣的本地网民",
+        "weight": 450,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "#是王者啊给周瑜道歉# 骂归骂但下架重做这个动作算快的了，比某些装死强点。就是这致歉信通篇“我们会注意”没半点具体方案，重做谁来把关？玩家参与审核吗？别到时候换个壳又端上来，那就真把大家当傻子了。行吧先观望，改好了",
+        "ts": 1786352722
+      },
+      {
+        "round": 2,
+        "name": "本地理性支持者",
+        "persona": "仍愿意相信调查会把事情说清楚、呼吁先勿传谣的本地网民",
+        "weight": 450,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "#是王者啊给周瑜道歉# 行吧下架是下架了，可这致歉信从头到尾就一句“我们会注意”，具体怎么改？谁来审？玩家能不能参与？全都含糊带过！制作组这态度就跟上回数据泄露那事儿一个模子刻出来的——先认错稳住节奏，然后就没下文了。既然说启动内部",
+        "ts": 1786352727
+      },
+      {
+        "round": 2,
+        "name": "考据派老周",
+        "persona": "知名历史考据博主，专攻三国史，以硬核史料和犀利吐槽著称。认为动画拿历史人物当笑料是文化亵渎，尤其对周瑜被塑造成‘万年老二’极度愤怒，已整理多份史料准备逐条打脸制作组。",
+        "weight": 500000,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "#是王者啊给周瑜道歉# 我翻遍《三国志》周瑜传查了三天史料，人家火烧赤壁时诸葛亮还在后方运粮呢！制作组考据过历史吗？就搁那玩“既生瑜何生亮”的梗，史书里周瑜临终前那句“君才十倍于亮”根本是小说虚构的好",
+        "ts": 1786352728
+      },
+      {
+        "round": 2,
+        "name": "瑜乔守护者",
+        "persona": "王者荣耀资深玩家兼同人圈大粉，主推瑜乔CP，对英雄人设和剧情细节极其敏感。看到小乔形象被盗用做诸葛亮粉丝后彻底破防，正组织粉丝团集体维权，扬言要曝光制作组内部剧本会议记录。",
+        "weight": 100000,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "#是王者啊给周瑜道歉# 我特么直接气笑了！你们道歉信里说“让剧情更符合大家的期待”，谁的期待？你们内部剧本会是不是就一句“反正周瑜是冷门英雄随便糟蹋”？小乔那张脸被你们偷去做诸葛亮粉丝的时候怎么没想到“倾听反馈”啊？现在下架了，重制版敢",
+        "ts": 1786352730
+      },
+      {
+        "round": 3,
+        "name": "本地理性支持者",
+        "persona": "仍愿意相信调查会把事情说清楚、呼吁先勿传谣的本地网民",
+        "weight": 450,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "#是王者啊给周瑜道歉# 下架是下架了，可这致歉信跟挤牙膏似的，具体改啥全没说！重制版谁审？能不能让玩家提前看剧本？你们内部复盘自己信吗？别到时候换汤不换药又端上来，那可真把人当猴耍了！",
+        "ts": 1786352731
+      },
+      {
+        "round": 3,
+        "name": "考据派老周",
+        "persona": "知名历史考据博主，专攻三国史，以硬核史料和犀利吐槽著称。认为动画拿历史人物当笑料是文化亵渎，尤其对周瑜被塑造成‘万年老二’极度愤怒，已整理多份史料准备逐条打脸制作组。",
+        "weight": 500000,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "#是王者啊给周瑜道歉# 我三天没合眼把《三国志》《资治通鉴》翻烂了！周瑜赤壁之战火烧曹操战船的时候诸葛亮还在后方运粮呢！你们编剧但凡翻过一页史书都不至于把江东都督写成嫉妒诸葛亮的酸鸡！更离谱的是“既生瑜何生亮”这梗",
+        "ts": 1786352733
+      },
+      {
+        "round": 3,
+        "name": "瑜乔守护者",
+        "persona": "王者荣耀资深玩家兼同人圈大粉，主推瑜乔CP，对英雄人设和剧情细节极其敏感。看到小乔形象被盗用做诸葛亮粉丝后彻底破防，正组织粉丝团集体维权，扬言要曝光制作组内部剧本会议记录。",
+        "weight": 100000,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "#是王者啊给周瑜道歉# 账号安全是数字时代的人身安全！你们上次数据泄露就玩“经排查未发现外泄”那套，这次道歉信又是一个模子！小乔形象被偷去做诸葛亮粉丝，这跟盗号有什么区别？我用户的角色人设都能被你们随便挪用，我的账号数据你们真保护好了？拿出具体整改方案",
+        "ts": 1786352735
+      },
+      {
+        "round": 4,
+        "name": "当地宣传部门工作人员",
+        "persona": "负责对外口径与舆情回应的政务发布角色",
+        "weight": 620,
+        "stance": "neutral",
+        "role_type": "official",
+        "speech": "【关于《是王者啊？》第六季第4集剧情争议事件的处理情况通报】\n\n针对近期网络平台反映的《是王者啊？》第六季第4集剧情内容争议，我单位已完成第一阶段专项核查。经查，该集剧本在角色塑造、情节设计及历史素材运用上存在明显偏差，对英雄周瑜的历史文化形象及玩家情感造成不当伤害，我单位对此负全部责任，并再次向广大观众及周瑜角色爱好者诚恳致歉。\n\n现将具体处置进展通报如下：\n\n一、内容处置。争议剧集已于8月9日20时起在爱奇艺、腾讯视频、AcFun等全部播出平台完成下架，相关片头及宣传物料同步撤换。\n\n二、整改机制。我单位已成立由编剧、历史顾问、玩家代表三方组成的剧情复核小组，对第六季全部剧本及角色设定进行逐集审查。历史顾问团队已引入三国史领域专业人员，对涉及历史人物的台词、情节进行史实校对，杜绝再次出现与正史记载相悖的叙事。\n\n三、重制流程。重制版剧本将在内部审核完成后，于10个工作日内提交玩家代表审阅，并公开征集修改意见。重制版上线前，我单位将通过官方渠道公示修改说明，明确标注调整内容及依据。\n\n四、责任追究。依据内部管理制度，已对本次事件相关编剧及审核责任人作出停职处理，并启动内部问责程序。后续处理结果将按程序公布。\n\n五、长期监督。即日起，我单位每季度将定期公开内容创作审查报告，接受社会各界监督。观众可通过各平台官方账号直接提交反馈，所有意见将统一登记、逐条核验，并将处理结果按月汇总公示。\n\n我单位深知，内容创作必须尊重历史、尊重角色、尊重观众。本次事件暴露出的问题，我单位将以此为戒，以实际整改行动回应",
+        "ts": 1786352741
+      },
+      {
+        "round": 4,
+        "name": "涉事单位回应人",
+        "persona": "事件直接责任方指定的对外说明人员",
+        "weight": 680,
+        "stance": "neutral",
+        "role_type": "official",
+        "speech": "【关于《是王者啊？》第六季第4集剧情争议事件的处理情况通报】\n\n针对近期网络平台反映的《是王者啊？》第六季第4集剧情内容争议，我单位已完成第一阶段专项核查。经查，该集剧本在角色塑造、情节设计及历史素材运用上存在明显偏差，对英雄周瑜的历史文化形象及玩家情感造成不当伤害，我单位对此负全部责任，并再次向广大观众及周瑜角色爱好者诚恳致歉。\n\n现将具体处置进展通报如下：\n\n一、内容处置。争议剧集已于8月9日20时起在爱奇艺、腾讯视频、AcFun等全部播出平台完成下架，相关片头及宣传物料同步撤换。\n\n二、整改机制。我单位已成立由编剧、历史顾问、玩家代表三方组成的剧情复核小组，对第六季全部剧本及角色设定进行逐集审查。历史顾问团队已引入三国史领域专业人员，对涉及历史人物的台词、情节进行史实校对，杜绝再次出现与正史记载相悖的叙事。\n\n三、重制流程。重制版剧本将在内部审核完成后，于10个工作日内提交玩家代表审阅，并公开征集修改意见。重制版上线前，我单位将通过官方渠道公示修改说明，明确标注调整内容及依据。\n\n四、责任追究。依据内部管理制度，已对本次事件相关编剧及审核责任人作出停职处理，并启动内部问责程序。后续处理结果将按程序公布。\n\n五、长期监督。即日起，我单位每季度将定期公开内容创作审查报告，接受社会各界监督。观众可通过各平台官方账号直接提交反馈，所有意见将统一登记、逐条核验，并将处理结果按月汇总公示。\n\n我单位深知，内容创作必须尊重历史、尊重角色、尊重观众。本次事件暴露出的问题，我单位将以此为戒，以实际整改行动回应",
+        "ts": 1786352744
+      },
+      {
+        "round": 4,
+        "name": "本地理性支持者",
+        "persona": "仍愿意相信调查会把事情说清楚、呼吁先勿传谣的本地网民",
+        "weight": 450,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "行吧这波整改看着是动真格了，停职加三方审剧本比上次数据泄露有诚意多了，但重制版十天才给看还是太磨叽，历史顾问能不能真按住编剧的手别乱写，等成品吧先撤了。",
+        "ts": 1786352746
+      },
+      {
+        "round": 4,
+        "name": "考据派老周",
+        "persona": "知名历史考据博主，专攻三国史，以硬核史料和犀利吐槽著称。认为动画拿历史人物当笑料是文化亵渎，尤其对周瑜被塑造成‘万年老二’极度愤怒，已整理多份史料准备逐条打脸制作组。",
+        "weight": 500000,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "#是王者啊给周瑜道歉# 停职三个编剧就完事了？我查的《江表传》里周瑜火烧赤壁时诸葛亮还在运粮呢，你重制版要是再敢让公瑾给诸葛当陪衬，我直接把《三国志·吴书》全文打印出来寄到你们公司前台！历史顾问敢签字背书我就敢",
+        "ts": 1786352748
+      },
+      {
+        "round": 4,
+        "name": "瑜乔守护者",
+        "persona": "王者荣耀资深玩家兼同人圈大粉，主推瑜乔CP，对英雄人设和剧情细节极其敏感。看到小乔形象被盗用做诸葛亮粉丝后彻底破防，正组织粉丝团集体维权，扬言要曝光制作组内部剧本会议记录。",
+        "weight": 100000,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "#是王者啊给周瑜道歉# 停职？道歉？三方审查？笑死！我账号里氪的金、肝的皮肤，你们说改人设就改人设，说偷小乔脸就偷小乔脸，现在轻飘飘一句\"负全部责任\"就想翻篇？数据泄露时你们也这模板！玩家不是你们内容创作的免费",
+        "ts": 1786352749
+      }
+    ],
+    "report_json": {
+      "fatal_focus": "未识别到明确的高危触发点，建议进一步人工审查",
+      "scores": {
+        "legal": {
+          "score": 1,
+          "reason": "未命中已知红线条款",
+          "hits": 0,
+          "details": []
+        },
+        "business": {
+          "score": 2,
+          "reason": "预测峰值触达 30,273 人 (t=12)，R₀=9.96，综合评分 2",
+          "peak_infected": 30273,
+          "r0": 9.96,
+          "peak_time": 12
+        },
+        "reputation": {
+          "score": 2,
+          "reason": "未检索到高相关度恶评或相似案例，默认中等风险"
+        }
+      },
+      "rewrite_suggestion": "尊敬的观众与玩家朋友们：\n\n关于《是王者啊？》第六季第4集在角色塑造与剧情表达上给大家带来的不适与失望，我们在此诚恳致歉。我们深知，周瑜不仅是游戏中的英雄，更承载着许多玩家深厚的情感与历史认知。此次内容未能尊重角色应有的尊严与魅力，也未能准确传递我们一贯倡导的平等、尊重与正向价值观，这是我们在创作与审核环节的严重疏忽。\n\n我们已第一时间将相关剧集全平台下架，并决定对全部争议内容进行彻底重制，确保不再使用任何可能贬低角色、消费历史人物或伤害玩家情感的表达方式。同时，我们已启动内部创作流程的全面复盘，将增设历史顾问与玩家代表参与早期剧本评审，从源头杜绝类似问题。\n\n我们理解，仅靠致歉与下架不足以完全弥补大家的情感损失。因此，除重制外，我们将在未来一个月内，邀请周瑜及瑜乔CP的资深玩家代表参与线上恳谈会，直接听取批评与建议，并将会议纪要公开。我们也会在后续剧集中，以更严谨、更具敬意的方式展现每一位英雄的故事，绝不再以任何角色作为笑点牺牲品。\n\n再次向所有被冒犯的观众、玩家及历史爱好者郑重道歉。你们的每一次指正，都是我们成长路上最宝贵的镜子。我们将用行动，而非言语，重新赢回信任。"
+    }
   }
 ]
