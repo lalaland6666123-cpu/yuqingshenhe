@@ -531,7 +531,8 @@ class RAGEngine:
                 lines.append(f"  □ [{item['id']}] {item['task']}")
                 if item.get("guide"):
                     lines.append(f"     💡 {item['guide']}")
-        lines.append("\n【重要】请在你的输出中逐一回应以上清单项，标注对应的编号。")
+        lines.append("\n【注意】以上是内部思考工具——逐项过脑思考即可，"
+                     "**严禁在你的发言/通报正文中输出 [todo_xxx] 编号标签**。这些编号不能出现在最终文本里。")
         return "\n".join(lines)
 
     def format_context_for_agent(self, result: dict) -> str:

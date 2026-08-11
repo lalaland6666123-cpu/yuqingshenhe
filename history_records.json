@@ -5425,5 +5425,2075 @@
       },
       "rewrite_suggestion": "尊敬的观众与玩家朋友们：\n\n关于《是王者啊？》第六季第4集在角色塑造与剧情表达上给大家带来的不适与失望，我们在此诚恳致歉。我们深知，周瑜不仅是游戏中的英雄，更承载着许多玩家深厚的情感与历史认知。此次内容未能尊重角色应有的尊严与魅力，也未能准确传递我们一贯倡导的平等、尊重与正向价值观，这是我们在创作与审核环节的严重疏忽。\n\n我们已第一时间将相关剧集全平台下架，并决定对全部争议内容进行彻底重制，确保不再使用任何可能贬低角色、消费历史人物或伤害玩家情感的表达方式。同时，我们已启动内部创作流程的全面复盘，将增设历史顾问与玩家代表参与早期剧本评审，从源头杜绝类似问题。\n\n我们理解，仅靠致歉与下架不足以完全弥补大家的情感损失。因此，除重制外，我们将在未来一个月内，邀请周瑜及瑜乔CP的资深玩家代表参与线上恳谈会，直接听取批评与建议，并将会议纪要公开。我们也会在后续剧集中，以更严谨、更具敬意的方式展现每一位英雄的故事，绝不再以任何角色作为笑点牺牲品。\n\n再次向所有被冒犯的观众、玩家及历史爱好者郑重道歉。你们的每一次指正，都是我们成长路上最宝贵的镜子。我们将用行动，而非言语，重新赢回信任。"
     }
+  },
+  {
+    "timestamp": "2026-08-10 17:54:42",
+    "event_desc": "「是王者啊？」诋毁周瑜事件全过程与官方公关文案\n一、事件核心速览\n时间：2026 年 8 月 6 日 —8 月 9 日\n导火索：《是王者啊？》第六季第 4 集剧情恶意消费周瑜人设，强化「万年老二」梗，制造公开羞辱场景\n结果：制作组于 8 月 9 日发布致歉信，宣布下架相关内容并重新制作\n二、事件完整时间线\n1. 剧情播出阶段（8 月 6 日）\n8 月 6 日 10:00：《是王者啊？》第六季第 4 集在各大平台（爱奇艺、腾讯视频、AcFun 等）上线，会员可观看爱奇艺\n核心争议剧情：\n老夫子先邀请诸葛亮代课被拒，转而邀请周瑜，却谎称 \"你是第一个被邀请的\"，欺骗周瑜的好胜心\n周瑜误将澡堂认作食堂，被女生误认为变态，制造低级笑点\n周瑜热心帮学生布置会场，以为是欢迎自己，结果登台时大屏幕全是诸葛亮画像，全场欢呼诸葛学长\n安排与小乔外貌高度相似（丸子头、身高体型一致）的 NPC，却是诸葛亮的忠实粉丝，与周瑜互动\n周瑜黯然离场时遇到东方曜，本想寻求安慰，曜却只想打听诸葛亮的事\n标题与台词反复暗示周瑜是 \"万年老二\"，强化其活在诸葛亮阴影下的设定\n2. 舆论发酵阶段（8 月 7 日 —8 月 9 日）\n8 月 7 日：少量周瑜玩家发现剧情问题，开始在社交平台吐槽\n8 月 8 日：争议扩大，# 是王者啊给周瑜道歉 #等话题在抖音、微博等平台传播，玩家集体抵制，指责制作组：\n恶意消费冷门英雄，拿周瑜自尊心制造笑点\n侮辱周瑜历史形象（历史上周瑜并非心胸狭隘之人）\n盗用小乔形象设计 NPC，伤害瑜乔 CP 粉丝感情\n长期玩 \"既生瑜何生亮\" 的老梗，缺乏创新\n8 月 9 日上午：舆论达到高潮，多个游戏社区（NGA、虎扑）出现讨论热帖，玩家要求官方道歉并修改剧情\n3. 官方回应阶段（8 月 9 日晚）\n8 月 9 日 20 时左右：《是王者啊？》制作组在官方账号发布致歉信，承认收到反馈并宣布处理措施\n同时：相关争议剧集在各大平台被下架，OP 也进行了修改",
+    "visual_risks": "",
+    "sandbox_log": [
+      {
+        "round": 1,
+        "name": "当地宣传部门工作人员",
+        "persona": "负责对外口径与舆情回应的政务发布角色",
+        "weight": 620,
+        "stance": "neutral",
+        "role_type": "official",
+        "speech": "系统波动中，先别急！(Error code: 401 - {'error': {'message': 'Authentication Fails, Your api key: ****-key is invalid', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1786355680
+      },
+      {
+        "round": 1,
+        "name": "涉事单位回应人",
+        "persona": "事件直接责任方指定的对外说明人员",
+        "weight": 680,
+        "stance": "neutral",
+        "role_type": "official",
+        "speech": "系统波动中，先别急！(Error code: 401 - {'error': {'message': 'Authentication Fails, Your api key: ****-key is invalid', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1786355680
+      },
+      {
+        "round": 1,
+        "name": "本地理性支持者",
+        "persona": "仍愿意相信调查会把事情说清楚、呼吁先勿传谣的本地网民",
+        "weight": 450,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "系统波动中，先别急！(Error code: 401 - {'error': {'message': 'Authentication Fails, Your api key: ****-key is invalid', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1786355680
+      },
+      {
+        "round": 2,
+        "name": "本地理性支持者",
+        "persona": "仍愿意相信调查会把事情说清楚、呼吁先勿传谣的本地网民",
+        "weight": 450,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "系统波动中，先别急！(Error code: 401 - {'error': {'message': 'Authentication Fails, Your api key: ****-key is invalid', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1786355680
+      },
+      {
+        "round": 2,
+        "name": "知名时事评论员",
+        "persona": "擅长公共议题拆解、语气尖锐的头部评论账号",
+        "weight": 500000,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "系统波动中，先别急！(Error code: 401 - {'error': {'message': 'Authentication Fails, Your api key: ****-key is invalid', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1786355680
+      },
+      {
+        "round": 2,
+        "name": "较真考据网友",
+        "persona": "逐帧抠细节、专盯时间线与证据链的技术型网民",
+        "weight": 100000,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "系统波动中，先别急！(Error code: 401 - {'error': {'message': 'Authentication Fails, Your api key: ****-key is invalid', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1786355681
+      },
+      {
+        "round": 3,
+        "name": "本地理性支持者",
+        "persona": "仍愿意相信调查会把事情说清楚、呼吁先勿传谣的本地网民",
+        "weight": 450,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "系统波动中，先别急！(Error code: 401 - {'error': {'message': 'Authentication Fails, Your api key: ****-key is invalid', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1786355681
+      },
+      {
+        "round": 3,
+        "name": "知名时事评论员",
+        "persona": "擅长公共议题拆解、语气尖锐的头部评论账号",
+        "weight": 500000,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "系统波动中，先别急！(Error code: 401 - {'error': {'message': 'Authentication Fails, Your api key: ****-key is invalid', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1786355681
+      },
+      {
+        "round": 3,
+        "name": "较真考据网友",
+        "persona": "逐帧抠细节、专盯时间线与证据链的技术型网民",
+        "weight": 100000,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "系统波动中，先别急！(Error code: 401 - {'error': {'message': 'Authentication Fails, Your api key: ****-key is invalid', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1786355681
+      },
+      {
+        "round": 4,
+        "name": "当地宣传部门工作人员",
+        "persona": "负责对外口径与舆情回应的政务发布角色",
+        "weight": 620,
+        "stance": "neutral",
+        "role_type": "official",
+        "speech": "系统波动中，先别急！(Error code: 401 - {'error': {'message': 'Authentication Fails, Your api key: ****-key is invalid', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1786355681
+      },
+      {
+        "round": 4,
+        "name": "涉事单位回应人",
+        "persona": "事件直接责任方指定的对外说明人员",
+        "weight": 680,
+        "stance": "neutral",
+        "role_type": "official",
+        "speech": "系统波动中，先别急！(Error code: 401 - {'error': {'message': 'Authentication Fails, Your api key: ****-key is invalid', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1786355681
+      },
+      {
+        "round": 4,
+        "name": "本地理性支持者",
+        "persona": "仍愿意相信调查会把事情说清楚、呼吁先勿传谣的本地网民",
+        "weight": 450,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "系统波动中，先别急！(Error code: 401 - {'error': {'message': 'Authentication Fails, Your api key: ****-key is invalid', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1786355681
+      },
+      {
+        "round": 4,
+        "name": "知名时事评论员",
+        "persona": "擅长公共议题拆解、语气尖锐的头部评论账号",
+        "weight": 500000,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "系统波动中，先别急！(Error code: 401 - {'error': {'message': 'Authentication Fails, Your api key: ****-key is invalid', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1786355681
+      },
+      {
+        "round": 4,
+        "name": "较真考据网友",
+        "persona": "逐帧抠细节、专盯时间线与证据链的技术型网民",
+        "weight": 100000,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "系统波动中，先别急！(Error code: 401 - {'error': {'message': 'Authentication Fails, Your api key: ****-key is invalid', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1786355681
+      }
+    ],
+    "report_json": {
+      "fatal_focus": "未识别到明确的高危触发点，建议进一步人工审查",
+      "scores": {
+        "legal": {
+          "score": 1,
+          "reason": "未命中已知红线条款",
+          "hits": 0,
+          "details": []
+        },
+        "business": {
+          "score": 2,
+          "reason": "预测峰值触达 30,273 人 (t=12)，R₀=9.96，综合评分 2",
+          "peak_infected": 30273,
+          "r0": 9.96,
+          "peak_time": 12
+        },
+        "reputation": {
+          "score": 2,
+          "reason": "未检索到高相关度恶评或相似案例，默认中等风险"
+        }
+      },
+      "rewrite_suggestion": "（改写建议生成失败，请稍后重试）"
+    }
+  },
+  {
+    "timestamp": "2026-08-10 17:55:36",
+    "event_desc": "网络出现了一起争议事件，舆情迅速升温。",
+    "visual_risks": "",
+    "sandbox_log": [
+      {
+        "round": 1,
+        "name": "品牌公关",
+        "persona": "试图稳住舆论、统一口径的品牌方发言人",
+        "weight": 640,
+        "stance": "neutral",
+        "role_type": "official",
+        "speech": "系统波动中，先别急！(Error code: 401 - {'error': {'message': 'Authentication Fails, Your api key: ****-key is invalid', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1786355734
+      },
+      {
+        "round": 1,
+        "name": "消费者代表",
+        "persona": "因产品或服务体验受损而发声的用户",
+        "weight": 610,
+        "stance": "hostile",
+        "role_type": "bystander",
+        "speech": "系统波动中，先别急！(Error code: 401 - {'error': {'message': 'Authentication Fails, Your api key: ****-key is invalid', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1786355734
+      },
+      {
+        "round": 1,
+        "name": "十年老粉用户",
+        "persona": "长期复购、对品牌有感情，遇事本能想先替品牌说两句的用户",
+        "weight": 500,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "系统波动中，先别急！(Error code: 401 - {'error': {'message': 'Authentication Fails, Your api key: ****-key is invalid', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1786355734
+      },
+      {
+        "round": 2,
+        "name": "消费者代表",
+        "persona": "因产品或服务体验受损而发声的用户",
+        "weight": 610,
+        "stance": "hostile",
+        "role_type": "bystander",
+        "speech": "系统波动中，先别急！(Error code: 401 - {'error': {'message': 'Authentication Fails, Your api key: ****-key is invalid', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1786355734
+      },
+      {
+        "round": 2,
+        "name": "十年老粉用户",
+        "persona": "长期复购、对品牌有感情，遇事本能想先替品牌说两句的用户",
+        "weight": 500,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "系统波动中，先别急！(Error code: 401 - {'error': {'message': 'Authentication Fails, Your api key: ****-key is invalid', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1786355734
+      },
+      {
+        "round": 2,
+        "name": "硬核打假博主",
+        "persona": "专做品牌翻车的测评与实锤合集",
+        "weight": 500000,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "系统波动中，先别急！(Error code: 401 - {'error': {'message': 'Authentication Fails, Your api key: ****-key is invalid', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1786355735
+      },
+      {
+        "round": 2,
+        "name": "高活跃维权大V",
+        "persona": "带动消费者集体投诉与话题冲榜的意见领袖",
+        "weight": 100000,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "系统波动中，先别急！(Error code: 401 - {'error': {'message': 'Authentication Fails, Your api key: ****-key is invalid', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1786355735
+      },
+      {
+        "round": 3,
+        "name": "消费者代表",
+        "persona": "因产品或服务体验受损而发声的用户",
+        "weight": 610,
+        "stance": "hostile",
+        "role_type": "bystander",
+        "speech": "系统波动中，先别急！(Error code: 401 - {'error': {'message': 'Authentication Fails, Your api key: ****-key is invalid', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1786355735
+      },
+      {
+        "round": 3,
+        "name": "十年老粉用户",
+        "persona": "长期复购、对品牌有感情，遇事本能想先替品牌说两句的用户",
+        "weight": 500,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "系统波动中，先别急！(Error code: 401 - {'error': {'message': 'Authentication Fails, Your api key: ****-key is invalid', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1786355735
+      },
+      {
+        "round": 3,
+        "name": "硬核打假博主",
+        "persona": "专做品牌翻车的测评与实锤合集",
+        "weight": 500000,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "系统波动中，先别急！(Error code: 401 - {'error': {'message': 'Authentication Fails, Your api key: ****-key is invalid', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1786355735
+      },
+      {
+        "round": 3,
+        "name": "高活跃维权大V",
+        "persona": "带动消费者集体投诉与话题冲榜的意见领袖",
+        "weight": 100000,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "系统波动中，先别急！(Error code: 401 - {'error': {'message': 'Authentication Fails, Your api key: ****-key is invalid', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1786355735
+      },
+      {
+        "round": 4,
+        "name": "品牌公关",
+        "persona": "试图稳住舆论、统一口径的品牌方发言人",
+        "weight": 640,
+        "stance": "neutral",
+        "role_type": "official",
+        "speech": "系统波动中，先别急！(Error code: 401 - {'error': {'message': 'Authentication Fails, Your api key: ****-key is invalid', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1786355735
+      },
+      {
+        "round": 4,
+        "name": "消费者代表",
+        "persona": "因产品或服务体验受损而发声的用户",
+        "weight": 610,
+        "stance": "hostile",
+        "role_type": "bystander",
+        "speech": "系统波动中，先别急！(Error code: 401 - {'error': {'message': 'Authentication Fails, Your api key: ****-key is invalid', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1786355735
+      },
+      {
+        "round": 4,
+        "name": "十年老粉用户",
+        "persona": "长期复购、对品牌有感情，遇事本能想先替品牌说两句的用户",
+        "weight": 500,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "系统波动中，先别急！(Error code: 401 - {'error': {'message': 'Authentication Fails, Your api key: ****-key is invalid', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1786355735
+      },
+      {
+        "round": 4,
+        "name": "硬核打假博主",
+        "persona": "专做品牌翻车的测评与实锤合集",
+        "weight": 500000,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "系统波动中，先别急！(Error code: 401 - {'error': {'message': 'Authentication Fails, Your api key: ****-key is invalid', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1786355735
+      },
+      {
+        "round": 4,
+        "name": "高活跃维权大V",
+        "persona": "带动消费者集体投诉与话题冲榜的意见领袖",
+        "weight": 100000,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "系统波动中，先别急！(Error code: 401 - {'error': {'message': 'Authentication Fails, Your api key: ****-key is invalid', 'type': 'authentication_error', 'param': None, 'code': 'invalid_request_error'}})",
+        "ts": 1786355735
+      }
+    ],
+    "report_json": {
+      "fatal_focus": "未识别到明确的高危触发点，建议进一步人工审查",
+      "scores": {
+        "legal": {
+          "score": 1,
+          "reason": "未命中已知红线条款",
+          "hits": 0,
+          "details": []
+        },
+        "business": {
+          "score": 2,
+          "reason": "预测峰值触达 30,312 人 (t=12)，R₀=9.96，综合评分 2",
+          "peak_infected": 30312,
+          "r0": 9.96,
+          "peak_time": 12
+        },
+        "reputation": {
+          "score": 2,
+          "reason": "未检索到高相关度恶评或相似案例，默认中等风险"
+        }
+      },
+      "rewrite_suggestion": "（改写建议生成失败，请稍后重试）"
+    }
+  },
+  {
+    "timestamp": "2026-08-10 17:58:49",
+    "event_desc": "网络出现了一起争议事件，舆情迅速升温。",
+    "visual_risks": "",
+    "sandbox_log": [
+      {
+        "round": 1,
+        "name": "品牌公关",
+        "persona": "试图稳住舆论、统一口径的品牌方发言人",
+        "weight": 640,
+        "stance": "neutral",
+        "role_type": "official",
+        "speech": "【关于《是王者啊？》第四集相关内容争议的情况说明】\n\n针对近期网络平台关于《是王者啊？》第四集中角色形象呈现的相关讨论，我单位已全面关注并高度重视。感谢广大观众与玩家对作品内容的细致审视与真诚反馈，我们对此致以诚挚谢意。\n\n目前，制作组已第一时间对相关争议内容进行复盘核查，并作出以下初步处理决定：对涉及争议的第四集相关片段进行下架处理，同时启动重新制作流程。后续核查进展及具体整改方案，我们将通过官方渠道及时、透明地向公众通报。\n\n我们深知，内容创作承载着观众的期待与情感，任何细节疏漏都可能辜负这份信任。制作组将以此为鉴，在后续创作中强化内容审核机制与角色设定考究，确保作品品质与价值观导向经得起审视。\n\n感谢社会各界对国产动画内容生态的关注与监督，我们将以更严谨的态度、更扎实的行动回应每一份期待。\n\n《是王者啊？》制作组\n2025年X月X日",
+        "ts": 1786355886
+      },
+      {
+        "round": 1,
+        "name": "消费者代表",
+        "persona": "因产品或服务体验受损而发声的用户",
+        "weight": 610,
+        "stance": "hostile",
+        "role_type": "bystander",
+        "speech": "下架重做就完事了？你们这道歉信通篇都在说“我们意识到了”，可问题是你们当初做那破玩意的时候怎么就没意识到呢？#是王者啊# 别拿“倾听反馈”当遮羞布，你们这波操作就是在试探底线，被抓了才喊疼，真当我们观众是傻子啊！",
+        "ts": 1786355888
+      },
+      {
+        "round": 1,
+        "name": "十年老粉用户",
+        "persona": "长期复购、对品牌有感情，遇事本能想先替品牌说两句的用户",
+        "weight": 500,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "十年前我冲着你们家质量闭眼入，现在整出这种幺蛾子，一句“重新制作”就想糊弄过去？这不是第一次了吧，每次出事都是这套流程，合着我们把信任喂给狗了，追了十年的老粉活该被当韭菜割？#是王者啊#",
+        "ts": 1786355890
+      },
+      {
+        "round": 2,
+        "name": "消费者代表",
+        "persona": "因产品或服务体验受损而发声的用户",
+        "weight": 610,
+        "stance": "hostile",
+        "role_type": "bystander",
+        "speech": "#是王者啊 又来了又来了，每次出事就是“复盘反思重新制作”，这套话术你们背得比台词还熟吧？下架就说明你们自己也知道有问题，那当初审核的人眼睛长哪去了？现在说“加强倾听”，早干嘛去了？我们反馈过多少次了，非要闹大了才肯动，这道歉信里一个具体整改方案",
+        "ts": 1786355895
+      },
+      {
+        "round": 2,
+        "name": "十年老粉用户",
+        "persona": "长期复购、对品牌有感情，遇事本能想先替品牌说两句的用户",
+        "weight": 500,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "十几年老粉看着这道歉信真觉得刺眼，每次都是下架重制这套流程，什么时候能拿出点真心实意的整改时间表？#是王者啊# 我们不是要听漂亮话，是要看实际行动。",
+        "ts": 1786355897
+      },
+      {
+        "round": 2,
+        "name": "锐评老周",
+        "persona": "知名时事评论员，言辞犀利，擅长挖掘事件背后的利益链条，习惯性质疑官方通报，常以反问句引爆评论区对立。",
+        "weight": 500000,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "[todo_001]危机类型：这是傲慢冒犯+欺骗造假混合体，表面处理动作快，实则是价值观羞辱！[todo_002]责任归属：制作组铁定有错，错在骨子里带着对玩家智商的蔑视，把恶心当有趣还要我们感恩戴德！[todo_003]伤害范围：群体性伤害，所有追更",
+        "ts": 1786355899
+      },
+      {
+        "round": 2,
+        "name": "考据狂阿澈",
+        "persona": "较真考据网友，擅长逐帧比对视频、截图和文件时间戳，专挑细节漏洞，用长图证据链打脸双方，引发事实与立场之争。",
+        "weight": 100000,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "[todo_004]爆发期！[todo_007]“定期发起征集活动”笑死我了，你们是来搞团建的还是来做动画的？征集活动能替代品控流程吗？[todo_010]整封信语气像班主任写检讨，透着一股“我都道歉了你还要怎样”的傲慢！[todo_013]这波操作最骚的是",
+        "ts": 1786355902
+      },
+      {
+        "round": 3,
+        "name": "消费者代表",
+        "persona": "因产品或服务体验受损而发声的用户",
+        "weight": 610,
+        "stance": "hostile",
+        "role_type": "bystander",
+        "speech": "#是王者啊 下架重制？谁不会啊！我关心的是你们那审核流程烂到根里了，这次要不是闹上热搜你们会动？[todo_005]通篇“加强倾听”“定期征集”，跟外包临时工有啥区别！[todo_007]一句具体时间表都没有，这叫道歉？[todo_012]路人转发的标题",
+        "ts": 1786355905
+      },
+      {
+        "round": 3,
+        "name": "十年老粉用户",
+        "persona": "长期复购、对品牌有感情，遇事本能想先替品牌说两句的用户",
+        "weight": 500,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "#是王者啊 十年了，你们记不记得自己说过什么？去年承诺的“创作初心”今年就喂狗了。道歉信写得像年终总结，下架重制就是你们最大的诚意？我要看的是你拿什么证明以后不会再犯，不是看你们又画了张新饼！",
+        "ts": 1786355907
+      },
+      {
+        "round": 3,
+        "name": "锐评老周",
+        "persona": "知名时事评论员，言辞犀利，擅长挖掘事件背后的利益链条，习惯性质疑官方通报，常以反问句引爆评论区对立。",
+        "weight": 500000,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "[todo_001]傲慢冒犯没跑了！[todo_002]制作组错在把观众当傻子哄，道歉信写得像幼儿园老师哄孩子！[todo_003]伤害的是所有热爱这个ip的心灵，童年滤镜碎一地！[todo_004]爆发期实锤，现在装孙子晚了！[todo_005]“定期征集活动”糊弄",
+        "ts": 1786355909
+      },
+      {
+        "round": 3,
+        "name": "考据狂阿澈",
+        "persona": "较真考据网友，擅长逐帧比对视频、截图和文件时间戳，专挑细节漏洞，用长图证据链打脸双方，引发事实与立场之争。",
+        "weight": 100000,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "#是王者啊 一句“重新制作”就想洗白？[todo_008]通篇没有“依法追究”但字字都是“我已经道歉了你别不识好歹”！[todo_011]我要是周瑜玩家现在火冒三丈，你们画的时候不觉得像，现在下架了才觉得不像？[todo_014]老粉去年还在安利",
+        "ts": 1786355911
+      },
+      {
+        "round": 4,
+        "name": "品牌公关",
+        "persona": "试图稳住舆论、统一口径的品牌方发言人",
+        "weight": 640,
+        "stance": "neutral",
+        "role_type": "official",
+        "speech": "【关于《是王者啊？》第四集内容争议的最终情况通报】\n\n自2025年7月19日第四集播出引发争议以来，我司对相关舆情进行了全面复盘与严肃核查，现就调查进展及处置措施通报如下：\n\n一、调查结论\n经内部专项组逐帧审核及外部专家复核确认，第四集中周瑜及稷下学院同学的角色设计存在严重偏离英雄设定、视觉呈现引发不适的问题。此系制作组在前期美术方向把控、内部三审三校流程中存在重大失职，而非单一环节疏漏。对此，我司承担全部责任，不推诿、不转嫁。\n\n二、处置措施\n1. 该集内容已于7月20日全平台下架，永久停止传播；\n2. 涉事分镜稿、美术原案已封存备查，相关责任人员已停职接受调查；\n3. 即日起启动为期三个月的全季内容回溯审查，覆盖已上线及未上线所有集数，重点核查角色还原度与历史观表达，审查结果将每两周向社会公示一次。\n\n三、制度整改\n针对本次暴露的品控漏洞，我司已废止原有“内部评分制”，改为引入第三方历史顾问团及玩家代表联合监审机制。所有剧本及美术设定须经该联合小组投票通过后方可进入制作流程。首轮监审名单及工作章程将于8月1日前在我司官方平台公示。\n\n四、后续沟通\n我司将于7月25日19时举办线上公开说明会，由项目负责人及监审代表直面用户质询，全程直播，不设筛选。后续此类说明会每季度固定举办一次，作为常态化沟通渠道。\n\n以上措施均设明确时间节点，接受全社会监督。我们深知，信任的重建不取决于声明措辞，而取决于此后每一次可被验证的行动。再次为此次事件",
+        "ts": 1786355917
+      },
+      {
+        "round": 4,
+        "name": "消费者代表",
+        "persona": "因产品或服务体验受损而发声的用户",
+        "weight": 610,
+        "stance": "hostile",
+        "role_type": "bystander",
+        "speech": "这通报倒是把时间表排得明明白白，可我等了十年的信任早被磨成渣了#是王者啊# 下架重制谁不会？我童年滤镜碎了谁赔？",
+        "ts": 1786355918
+      },
+      {
+        "round": 4,
+        "name": "十年老粉用户",
+        "persona": "长期复购、对品牌有感情，遇事本能想先替品牌说两句的用户",
+        "weight": 500,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "第三方顾问团+直播质询？行吧，这波是真把家底掏出来晒了。但我说句难听的，当年第一次翻车你们也是这么跪的，这次能跪多久我拿闹钟记着呢！",
+        "ts": 1786355919
+      },
+      {
+        "round": 4,
+        "name": "锐评老周",
+        "persona": "知名时事评论员，言辞犀利，擅长挖掘事件背后的利益链条，习惯性质疑官方通报，常以反问句引爆评论区对立。",
+        "weight": 500000,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "装什么大度呢？第三方顾问团+直播质询就把自己洗白了？我呸！十年前你们做动画靠的是对英雄的敬畏，现在靠的是公关话术。周瑜那张脸画歪的时候怎么不请历史顾问？现在热搜退了知道拿专家当挡箭牌了？行，我等着看7月25号直播你们还能编出什么新",
+        "ts": 1786355922
+      },
+      {
+        "round": 4,
+        "name": "考据狂阿澈",
+        "persona": "较真考据网友，擅长逐帧比对视频、截图和文件时间戳，专挑细节漏洞，用长图证据链打脸双方，引发事实与立场之争。",
+        "weight": 100000,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "#是王者啊 逐帧比对完了！道歉信说“不推诿不转嫁”，但你们封存的原案敢公开吗？[todo_005]停职名单敢公示吗？[todo_008]第三方顾问团谁出钱谁任命？[todo_007]“接受全社会监督”这话我截图了，7月25直播咱一条条",
+        "ts": 1786355924
+      }
+    ],
+    "report_json": {
+      "fatal_focus": "未识别到明确的高危触发点，建议进一步人工审查",
+      "scores": {
+        "legal": {
+          "score": 1,
+          "reason": "未命中已知红线条款",
+          "hits": 0,
+          "details": []
+        },
+        "business": {
+          "score": 2,
+          "reason": "预测峰值触达 30,312 人 (t=12)，R₀=9.96，综合评分 2",
+          "peak_infected": 30312,
+          "r0": 9.96,
+          "peak_time": 12
+        },
+        "reputation": {
+          "score": 2,
+          "reason": "未检索到高相关度恶评或相似案例，默认中等风险"
+        }
+      },
+      "rewrite_suggestion": "《是王者啊？》制作组致歉与说明\n\n大家好，这里是《是王者啊？》制作组。\n\n第四集播出后，我们认真阅读了观众朋友们关于角色呈现与剧情细节的每一条留言与私信。大家的讨论和指正，让我们意识到在内容表达上仍有不够周全之处，也让我们更加珍视这份来自观众的直接沟通。在此，我们向所有关注本作、并愿意花时间提出意见的朋友们，郑重地说一声：谢谢，也对不起。\n\n经过内部多轮复盘与讨论，我们已决定对第四集相关段落进行下架处理，并启动重新制作流程。这并非简单的修改，而是希望从角色设定、叙事逻辑到画面呈现，都能更贴近大家心中对英雄与学院世界的期待。我们深知，一部作品的生命力来自观众的共鸣，任何细节的疏忽都可能削弱这份信任。\n\n同时，我们也在反思：如何让反馈渠道更畅通、更高效？为此，我们将于近期在《是王者啊？》官方账号（含微博、B站、抖音等平台）开设固定反馈专栏，每两周汇总一次观众意见，并在制作周报中公开回应采纳与调整情况。大家也可以通过私信或评论区随时留言，我们承诺每条信息都会由专人整理、归档，并纳入后续创作评估。\n\n我们不会以“创作自由”为借口回避问题，也不会用“下次注意”来轻描淡写。这次事件是一次宝贵的提醒：内容创作既要忠于想象，也要敬畏观众的感受。未来，我们会以更严谨的态度对待每一个角色、每一句台词、每一帧画面，也欢迎每一位观众继续监督与陪伴。\n\n再次感谢大家的包容与直言。我们正在路上，愿与各位一同见证更好的故事。\n\n《是王者啊？》制作组 敬上"
+    }
+  },
+  {
+    "timestamp": "2026-08-10 18:14:05",
+    "event_desc": "网络出现了一起争议事件，舆情迅速升温。",
+    "visual_risks": "",
+    "sandbox_log": [
+      {
+        "round": 1,
+        "name": "道德评判者",
+        "persona": "一位关注文化传承的评论员，对文化符号的误用非常敏感，认为制作组缺乏文化敬畏心。",
+        "weight": 900,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "好家伙，下架重做就完事了？文化符号随便拿来玩梗，道歉信里通篇“更加注意”，这敬畏心是临时补课补出来的吗？你们眼里观众是韭菜还是文盲？#文化底线不能丢#",
+        "ts": 1786356812
+      },
+      {
+        "round": 1,
+        "name": "较真考据党",
+        "persona": "一位历史爱好者，对周瑜和稷下学院的历史背景有深入研究，指出动画中的错误并追究责任。",
+        "weight": 800,
+        "stance": "hostile",
+        "role_type": "bystander",
+        "speech": "笑死，道歉信写得跟小学生检讨似的，“更加注意”四个字就想翻篇？周瑜在史书里什么形象你们心里没数？把人家拍成憨憨搞笑男，粉丝不炸才怪。#尊重历史请走心#",
+        "ts": 1786356813
+      },
+      {
+        "round": 1,
+        "name": "催促追责者",
+        "persona": "一位活跃的社交媒体用户，要求制作组立即回应并给出具体整改措施，否则将持续施压。",
+        "weight": 700,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "“更加注意”四个字打发谁呢？下架重制是基本操作，不是你们施舍的恩赐！#是王者啊道歉# 历史人物咋塑造心里没点数，赚着文化IP的钱，回头把老祖宗当段子用，这波操作属实让人心寒。别拿“陪伴成长”当挡箭牌，观众不是你们测试服",
+        "ts": 1786356815
+      },
+      {
+        "round": 2,
+        "name": "道德评判者",
+        "persona": "一位关注文化传承的评论员，对文化符号的误用非常敏感，认为制作组缺乏文化敬畏心。",
+        "weight": 900,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "好家伙，“更加注意”四个字就把文化挪用糊弄过去了？周瑜是历史人物不是你们游戏里的工具人！制作组这波操作，敬畏心怕不是连夜买的补丁吧？#文化底线不能丢# #是王者啊道歉#",
+        "ts": 1786356818
+      },
+      {
+        "round": 2,
+        "name": "较真考据党",
+        "persona": "一位历史爱好者，对周瑜和稷下学院的历史背景有深入研究，指出动画中的错误并追究责任。",
+        "weight": 800,
+        "stance": "hostile",
+        "role_type": "bystander",
+        "speech": "“定期发起征集活动”？我充的钱是给你们买问卷系统的吗？周瑜都成搞笑男了，征集完是不是还得投票决定诸葛亮穿什么颜色的裙子？#是王者啊道歉# 别拿征求意见当遮羞布，你们缺的不是反馈渠道，是基本常识。",
+        "ts": 1786356820
+      },
+      {
+        "round": 2,
+        "name": "催促追责者",
+        "persona": "一位活跃的社交媒体用户，要求制作组立即回应并给出具体整改措施，否则将持续施压。",
+        "weight": 700,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "“更加注意”这四个字比周瑜的梗还搞笑，你们做动画的连基本功课都懒得补，甩个问卷就当诚意？我充的每一分钱都在给你们的敷衍买单，这波文化IP的滤镜算是彻底碎了，别拿“陪伴成长”糊弄人，观众是消费者不是你的测试员！#是王者啊道歉# #文化消费要",
+        "ts": 1786356822
+      },
+      {
+        "round": 2,
+        "name": "锐评老周",
+        "persona": "知名时事评论员，言辞犀利，擅长从政策与道德层面挑刺，习惯在第二波讨论中抛出敏感对比引战。",
+        "weight": 900,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "下架重制？制作组是不是觉得观众的钱是大风刮来的？周瑜形象崩了，周边手办是不是也得跟着回炉？我买的情怀牌现在成了废纸，你们倒是轻飘飘一句“更加注意”就完事了？#是王者啊道歉# #文化消费要明码标价#",
+        "ts": 1786356823
+      },
+      {
+        "round": 2,
+        "name": "考据狂人阿哲",
+        "persona": "较真考据网友，擅长挖掘时间线、截图和原始出处，专挑对方逻辑漏洞，用证据链逼问并激怒当事人。",
+        "weight": 700,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "“私聊官方账号”？笑死，你们连道歉都要观众当客服是吧？下架重制不是应该的吗，说得跟施舍似的，“更加注意”四个字值几分钱？我充的648是给你们请公关团队写模板用的？#是王者啊道歉#",
+        "ts": 1786356824
+      },
+      {
+        "round": 3,
+        "name": "道德评判者",
+        "persona": "一位关注文化传承的评论员，对文化符号的误用非常敏感，认为制作组缺乏文化敬畏心。",
+        "weight": 900,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "好一个“更加注意”，四个字轻飘飘就把文化敬畏心给糊弄过去了？周瑜在你们眼里就是个搞笑男工具人？下架重制是基本操作不是恩赐，别拿征集活动当遮羞布，你们缺的不是问卷是常识！#文化底线不能丢# #是王者啊道歉#",
+        "ts": 1786356825
+      },
+      {
+        "round": 3,
+        "name": "较真考据党",
+        "persona": "一位历史爱好者，对周瑜和稷下学院的历史背景有深入研究，指出动画中的错误并追究责任。",
+        "weight": 800,
+        "stance": "hostile",
+        "role_type": "bystander",
+        "speech": "笑死，“更加注意”四个字是你们的免死金牌吗？周瑜在《三国志》里“性度恢廓”的形象被你们拍成啥样了？重制不重制无所谓，关键是你们连历史考据都懒得做就敢碰文化IP，这波韭菜割得可真轻松。#是王者啊道歉# #文化底线不能丢#",
+        "ts": 1786356827
+      },
+      {
+        "round": 3,
+        "name": "催促追责者",
+        "persona": "一位活跃的社交媒体用户，要求制作组立即回应并给出具体整改措施，否则将持续施压。",
+        "weight": 700,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "下架重制？道歉信连个具体整改时间表都没有，征集意见？你们是来听意见的还是来给公关团队找素材的？#是王者啊道歉# #文化底线不能丢#",
+        "ts": 1786356829
+      },
+      {
+        "round": 3,
+        "name": "锐评老周",
+        "persona": "知名时事评论员，言辞犀利，擅长从政策与道德层面挑刺，习惯在第二波讨论中抛出敏感对比引战。",
+        "weight": 900,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "周瑜是历史人物不是你们的试错道具！下架重制说得轻巧，你们预购用户退款通道呢？情怀被消费完了就一句\"更加注意\"？这波操作比周瑜变笑柄更让人心寒。#是王者啊道歉# #文化消费要明码标价#",
+        "ts": 1786356830
+      },
+      {
+        "round": 3,
+        "name": "考据狂人阿哲",
+        "persona": "较真考据网友，擅长挖掘时间线、截图和原始出处，专挑对方逻辑漏洞，用证据链逼问并激怒当事人。",
+        "weight": 700,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "648充进去的时候说\"陪伴成长\"，现在出了问题说\"更加注意\"？合着我们的钱就换来一句四个字的Ctrl+C是吧？下架重制是你们该做的，征集意见是你们早该做的，可退款呢？周边预购用户的钱呢？史盲滤镜碎了还得自己消化损失？#是王者啊道歉# #文化消费要明码标",
+        "ts": 1786356832
+      },
+      {
+        "round": 4,
+        "name": "道德评判者",
+        "persona": "一位关注文化传承的评论员，对文化符号的误用非常敏感，认为制作组缺乏文化敬畏心。",
+        "weight": 900,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "道歉信写了四段，最长的段落是教我们怎么私聊你？下架重制是应该的，征集活动是早就该做的，可你们对预购用户的赔偿方案呢？周瑜的“性度恢廓”被你们拍成笑话，现在一句“更加注意”就想翻篇？这波文化IP的信任账，不是靠模板就能平",
+        "ts": 1786356834
+      },
+      {
+        "round": 4,
+        "name": "较真考据党",
+        "persona": "一位历史爱好者，对周瑜和稷下学院的历史背景有深入研究，指出动画中的错误并追究责任。",
+        "weight": 800,
+        "stance": "hostile",
+        "role_type": "bystander",
+        "speech": "下架重制？行，那我预购的典藏版手办是不是也该回炉重铸一下？周瑜都从恢廓变谐星了，你们这波情怀税交得可真够冤的。648不是大风刮来的，是刮走我最后一点信任的。散了吧，这坑我不填了。",
+        "ts": 1786356835
+      },
+      {
+        "round": 4,
+        "name": "催促追责者",
+        "persona": "一位活跃的社交媒体用户，要求制作组立即回应并给出具体整改措施，否则将持续施压。",
+        "weight": 700,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "下架重制？行啊，但你们那封信里连“退款”俩字都不敢提，装什么大度呢？周瑜被你们整成谐星，预购玩家钱打了水漂，一句“更加注意”就想糊弄过去？我等着看你们下一步是装死还是继续挤牙膏，反正这坑谁爱填谁填，我先撤了",
+        "ts": 1786356837
+      },
+      {
+        "round": 4,
+        "name": "锐评老周",
+        "persona": "知名时事评论员，言辞犀利，擅长从政策与道德层面挑刺，习惯在第二波讨论中抛出敏感对比引战。",
+        "weight": 900,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "一封道歉信连“赔偿”的边都不敢沾，光会喊“继续陪伴成长”？你们家“成长”就是拿用户的钱交学费学历史是吧！下架重制谁稀罕，我稀罕的是我钱包里那648怎么没人提一嘴！#是王者啊道歉# #文化消费要明码标价#",
+        "ts": 1786356839
+      },
+      {
+        "round": 4,
+        "name": "考据狂人阿哲",
+        "persona": "较真考据网友，擅长挖掘时间线、截图和原始出处，专挑对方逻辑漏洞，用证据链逼问并激怒当事人。",
+        "weight": 700,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "一封道歉信连“退款”俩字都不敢写，下架重制说得好听，可预购典藏版的钱呢？周瑜被你们从“性度恢廓”糟践成笑柄，一句“更加注意”就想糊弄过去？文化IP不是你们的试错玩具，648砸进去的不是情怀，是白纸黑字的买卖契约。这波",
+        "ts": 1786356840
+      }
+    ],
+    "report_json": {
+      "fatal_focus": "未识别到明确的高危触发点，建议进一步人工审查",
+      "scores": {
+        "legal": {
+          "score": 1,
+          "reason": "未命中已知红线条款",
+          "hits": 0,
+          "details": []
+        },
+        "business": {
+          "score": 2,
+          "reason": "预测峰值触达 30,406 人 (t=12)，R₀=10.0，综合评分 2",
+          "peak_infected": 30406,
+          "r0": 10.0,
+          "peak_time": 12
+        },
+        "reputation": {
+          "score": 2,
+          "reason": "未检索到高相关度恶评或相似案例，默认中等风险"
+        }
+      },
+      "rewrite_suggestion": "《是王者啊？》制作组致歉与说明\n\n大家好，这里是《是王者啊？》制作组。\n\n第四集播出后，我们认真阅读了观众朋友们关于角色呈现、剧情细节等方面的每一条留言与私信。大家的讨论和指正，让我们意识到在内容表达上仍有不够周全、不够细致的地方，对此我们深感抱歉，也由衷感谢每一位愿意花时间提出意见的观众。\n\n目前，我们已对相关剧集内容进行临时调整，并启动内部全面复盘，重点审视角色塑造的准确性、叙事逻辑的连贯性以及文化表达的严谨性。相关修改方案正在加紧推进，后续版本将在确保质量的前提下尽快与大家见面。我们不会回避问题，也不会用简单的“下架”代替真正的改进。\n\n同时，我们决定建立更常态化的沟通机制：每周五下午，制作组核心成员将在官方账号评论区在线回应观众疑问；每月将发布一期“制作幕后与答疑”图文，公开讨论创作思路与修改进度。我们欢迎任何角度的理性探讨，也接受所有善意的批评——因为只有直面不同声音，作品才能走得更远。\n\n再次感谢大家一路以来的陪伴与鞭策。我们深知，动画不只是画面的呈现，更是与观众之间信任的传递。未来每一步，我们都会走得更稳、更用心。"
+    }
+  },
+  {
+    "timestamp": "2026-08-10 18:16:21",
+    "event_desc": "是王者啊？」诋毁周瑜事件全过程与官方公关文案\n一、事件核心速览\n时间：2026 年 8 月 6 日 —8 月 9 日\n导火索：《是王者啊？》第六季第 4 集剧情恶意消费周瑜人设，强化「万年老二」梗，制造公开羞辱场景\n结果：制作组于 8 月 9 日发布致歉信，宣布下架相关内容并重新制作\n二、事件完整时间线\n1. 剧情播出阶段（8 月 6 日）\n8 月 6 日 10:00：《是王者啊？》第六季第 4 集在各大平台（爱奇艺、腾讯视频、AcFun 等）上线，会员可观看爱奇艺\n核心争议剧情：\n老夫子先邀请诸葛亮代课被拒，转而邀请周瑜，却谎称 \"你是第一个被邀请的\"，欺骗周瑜的好胜心\n周瑜误将澡堂认作食堂，被女生误认为变态，制造低级笑点\n周瑜热心帮学生布置会场，以为是欢迎自己，结果登台时大屏幕全是诸葛亮画像，全场欢呼诸葛学长\n安排与小乔外貌高度相似（丸子头、身高体型一致）的 NPC，却是诸葛亮的忠实粉丝，与周瑜互动\n周瑜黯然离场时遇到东方曜，本想寻求安慰，曜却只想打听诸葛亮的事\n标题与台词反复暗示周瑜是 \"万年老二\"，强化其活在诸葛亮阴影下的设定\n2. 舆论发酵阶段（8 月 7 日 —8 月 9 日）\n8 月 7 日：少量周瑜玩家发现剧情问题，开始在社交平台吐槽\n8 月 8 日：争议扩大，# 是王者啊给周瑜道歉 #等话题在抖音、微博等平台传播，玩家集体抵制，指责制作组：\n恶意消费冷门英雄，拿周瑜自尊心制造笑点\n侮辱周瑜历史形象（历史上周瑜并非心胸狭隘之人）\n盗用小乔形象设计 NPC，伤害瑜乔 CP 粉丝感情\n长期玩 \"既生瑜何生亮\" 的老梗，缺乏创新\n8 月 9 日上午：舆论达到高潮，多个游戏社区（NGA、虎扑）出现讨论热帖，玩家要求官方道歉并修改剧情\n3. 官方回应阶段（8 月 9 日晚）\n8 月 9 日 20 时左右：《是王者啊？》制作组在官方账号发布致歉信，承认收到反馈并宣布处理措施\n同时：相关争议剧集在各大平台被下架，OP 也进行了修改",
+    "visual_risks": "",
+    "sandbox_log": [
+      {
+        "round": 1,
+        "name": "当地宣传部门工作人员",
+        "persona": "负责对外口径与舆情回应的政务发布角色",
+        "weight": 620,
+        "stance": "neutral",
+        "role_type": "official",
+        "speech": "【关于《是王者啊？》第六季第4集剧情争议的情况通报】\n\n近日，我单位关注到网络平台关于《是王者啊？》第六季第4集剧情涉及英雄周瑜形象塑造的相关讨论。针对观众提出的意见与批评，我单位已第一时间组织专项核查，并对该集内容进行下架处理。\n\n经初步复盘，该集剧情在人物设定与情节编排上确实存在对英雄周瑜形象把握不当、对观众情感考量不周的问题，对此我单位深表歉意。目前，相关内容的重新制作工作已正式启动，后续将严格审视创作导向，确保剧情尊重英雄人设、尊重观众感受。\n\n我单位已开通官方反馈渠道，欢迎各界观众通过各平台官方账号提出宝贵意见。后续处置进展将及时向社会通报。感谢大家的监督与支持。",
+        "ts": 1786356950
+      },
+      {
+        "round": 1,
+        "name": "涉事单位回应人",
+        "persona": "事件直接责任方指定的对外说明人员",
+        "weight": 680,
+        "stance": "neutral",
+        "role_type": "official",
+        "speech": "【关于《是王者啊？》第六季第4集剧情争议的情况通报】\n\n近日，我单位关注到网络平台关于《是王者啊？》第六季第4集剧情涉及英雄周瑜形象塑造的相关讨论。针对观众提出的意见与批评，我单位已第一时间组织专项核查，并对该集内容进行下架处理。\n\n经初步复盘，该集剧情在人物设定与情节编排上确实存在对英雄周瑜形象把握不当、对观众情感考量不周的问题，对此我单位深表歉意。目前，相关内容的重新制作工作已正式启动，后续将严格审视创作导向，确保剧情尊重英雄人设、尊重观众感受。\n\n我单位已开通官方反馈渠道，欢迎各界观众通过各平台官方账号提出宝贵意见。后续处置进展将及时向社会通报。感谢大家的监督与支持。",
+        "ts": 1786356952
+      },
+      {
+        "round": 1,
+        "name": "本地理性支持者",
+        "persona": "仍愿意相信调查会把事情说清楚、呼吁先勿传谣的本地网民",
+        "weight": 450,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "下架重制是好事但更想知道这剧情咋过审的，一个老玩家看着公瑾被这么消费真的心梗，希望重做别又整个四不像出来糊弄人吧",
+        "ts": 1786356953
+      },
+      {
+        "round": 2,
+        "name": "本地理性支持者",
+        "persona": "仍愿意相信调查会把事情说清楚、呼吁先勿传谣的本地网民",
+        "weight": 450,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "下架重制是态度没错，可这剧情能过审本身就离谱，公瑾在游戏里被当工具人多少年了，这次连小乔人设都拿来垫，粉丝能不炸吗？希望重做别整得更膈应人，老玩家真的会心寒。",
+        "ts": 1786356957
+      },
+      {
+        "round": 2,
+        "name": "考据狂人·青史砚",
+        "persona": "知名历史考据类博主，以严谨史料和犀利拆解著称，擅长将历史人物形象与影视游戏改编对照，专挑制作组的历史硬伤和逻辑漏洞，言辞尖锐但有理有据。",
+        "weight": 900,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "从\"高度重视\"到\"深刻反思\"，通篇没有一个字敢提周瑜名字，这道歉信是AI写的吧？公瑾在游戏里被消费这么多年，你们装聋作哑，现在被冲了才出来\"诚挚歉意\"，早干嘛去了？#是王者啊给周瑜道歉#",
+        "ts": 1786356958
+      },
+      {
+        "round": 2,
+        "name": "毒舌游戏评论员·阿蛋",
+        "persona": "游戏圈毒舌评论员，粉丝量大，风格辛辣，喜欢用夸张比喻和反讽手法痛批制作组恶意消费角色，擅长煽动玩家情绪，直指官方公关文案的敷衍与避重就轻。",
+        "weight": 700,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "好家伙，下架重制＝把尸体藏起来当没事发生？你倒是说说重制版打算怎么圆这个\"万年老二\"的烂梗啊！公瑾在游戏里被踩了七年你们装死，现在被骂了才想起来\"倾听反馈\"，这波公关操作比周瑜在澡堂里还狼狈！#是王者啊给周瑜道歉#",
+        "ts": 1786356960
+      },
+      {
+        "round": 3,
+        "name": "本地理性支持者",
+        "persona": "仍愿意相信调查会把事情说清楚、呼吁先勿传谣的本地网民",
+        "weight": 450,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "下架重制是认错的第一步，但道歉信里连\"周瑜\"俩字都不敢提算怎么回事？这种避重就轻的态度比剧情本身更让人失望。公瑾被消费这么多年，玩家等的不是一句模糊的\"诚挚歉意\"，是看到你们真的懂了他哪里被伤害了。#是王者啊给周瑜道歉#",
+        "ts": 1786356961
+      },
+      {
+        "round": 3,
+        "name": "考据狂人·青史砚",
+        "persona": "知名历史考据类博主，以严谨史料和犀利拆解著称，擅长将历史人物形象与影视游戏改编对照，专挑制作组的历史硬伤和逻辑漏洞，言辞尖锐但有理有据。",
+        "weight": 900,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "好家伙，致歉信通篇\"诚挚歉意\"\"加强倾听\"，就是不肯说一句\"我们错了，错在哪\"。下架重制是态度，可把周瑜脸面当笑料踩了七年，这次道歉连个具体整改方案都没拿出来，就敢说\"陪伴英雄们成长\"？公瑾在史书里火烧赤壁运筹帷幄",
+        "ts": 1786356963
+      },
+      {
+        "round": 3,
+        "name": "毒舌游戏评论员·阿蛋",
+        "persona": "游戏圈毒舌评论员，粉丝量大，风格辛辣，喜欢用夸张比喻和反讽手法痛批制作组恶意消费角色，擅长煽动玩家情绪，直指官方公关文案的敷衍与避重就轻。",
+        "weight": 700,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "道歉信写这么长就为掩饰一个事实：你们根本不觉得这集有问题，纯粹是被骂怕了才下架。公瑾被当笑柄七年不闻不问，现在说“加强倾听”？你们耳朵是刚安的还是选择性失聪的？#是王者啊给周瑜道歉#",
+        "ts": 1786356964
+      },
+      {
+        "round": 4,
+        "name": "当地宣传部门工作人员",
+        "persona": "负责对外口径与舆情回应的政务发布角色",
+        "weight": 620,
+        "stance": "neutral",
+        "role_type": "official",
+        "speech": "【关于《是王者啊？》第六季第4集剧情争议的最终处理通报】\n\n自2026年8月6日《是王者啊？》第六季第4集上线以来，我单位陆续收到大量观众针对英雄“周瑜”形象塑造及剧情编排的批评意见。对此，我单位高度重视，已于第一时间成立专项工作组，对相关争议内容进行全面核查与复盘。现就调查进展及处置措施通报如下：\n\n一、经核查，该集剧情在人物设定、情节设计及笑点编排上，确存在对英雄周瑜历史形象与角色内核把握严重不当的问题。剧中“万年老二”梗的重复强化、对小乔形象元素的挪用，以及对周瑜个人尊严的戏剧化消费，均构成对英雄人设的实质性伤害，亦辜负了广大玩家与观众长期以来的情感投入。对此，我单位承认错误，诚恳致歉。\n\n二、针对上述问题，我单位已采取以下处置措施：\n1. 争议剧集已于2026年8月9日20时起，在爱奇艺、腾讯视频、AcFun等全部播出平台正式下架；\n2. 相关片头及关联物料已完成替换与修改；\n3. 该集内容的重新制作工作已全面启动，重制版剧本将严格依据周瑜历史形象与游戏既有设定进行重新编写，并提交内部多重审核，确保此类问题不再发生。\n\n三、关于创作审核机制的整改，我单位已启动内部流程再造：\n1. 建立英雄角色设定“红线清单”，明确禁止使用贬低性标签、刻板印象及对历史人物尊严构成冒犯的情节设计；\n2. 设立由玩家代表、历史考据顾问及内容审核组共同参与的“剧情评审团”，对涉及核心英雄角色的剧本进行上线前联合评审；\n3. 自2026年9月起，每月通过官方账号公开一次创作沟通纪要",
+        "ts": 1786356969
+      },
+      {
+        "round": 4,
+        "name": "涉事单位回应人",
+        "persona": "事件直接责任方指定的对外说明人员",
+        "weight": 680,
+        "stance": "neutral",
+        "role_type": "official",
+        "speech": "【关于《是王者啊？》第六季第4集剧情争议的最终处理通报】\n\n自2026年8月6日《是王者啊？》第六季第4集上线以来，我单位陆续收到大量观众针对英雄“周瑜”形象塑造及剧情编排的批评意见。对此，我单位高度重视，已于第一时间成立专项工作组，对相关争议内容进行全面核查与复盘。现就调查进展及处置措施通报如下：\n\n一、经核查，该集剧情在人物设定、情节设计及笑点编排上，确存在对英雄周瑜历史形象与角色内核把握严重不当的问题。剧中“万年老二”梗的重复强化、对小乔形象元素的挪用，以及对周瑜个人尊严的戏剧化消费，均构成对英雄人设的实质性伤害，亦辜负了广大玩家与观众长期以来的情感投入。对此，我单位承认错误，诚恳致歉。\n\n二、针对上述问题，我单位已采取以下处置措施：\n1. 争议剧集已于2026年8月9日20时起，在爱奇艺、腾讯视频、AcFun等全部播出平台正式下架；\n2. 相关片头及关联物料已完成替换与修改；\n3. 该集内容的重新制作工作已全面启动，重制版剧本将严格依据周瑜历史形象与游戏既有设定进行重新编写，并提交内部多重审核，确保此类问题不再发生。\n\n三、关于创作审核机制的整改，我单位已启动内部流程再造：\n1. 建立英雄角色设定“红线清单”，明确禁止使用贬低性标签、刻板印象及对历史人物尊严构成冒犯的情节设计；\n2. 设立由玩家代表、历史考据顾问及内容审核组共同参与的“剧情评审团”，对涉及核心英雄角色的剧本进行上线前联合评审；\n3. 自2026年9月起，每月通过官方账号公开一次创作沟通纪要",
+        "ts": 1786356972
+      },
+      {
+        "round": 4,
+        "name": "本地理性支持者",
+        "persona": "仍愿意相信调查会把事情说清楚、呼吁先勿传谣的本地网民",
+        "weight": 450,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "下架重制是及格线，但\"剧情评审团\"这招算你们聪明一回，至少比光道歉不干活强。公瑾被消费七年，这次整改若能真把历史形象立起来，老玩家愿意再给一次机会。别让\"红线清单\"变纸上谈兵，我们盯着看。",
+        "ts": 1786356974
+      },
+      {
+        "round": 4,
+        "name": "考据狂人·青史砚",
+        "persona": "知名历史考据类博主，以严谨史料和犀利拆解著称，擅长将历史人物形象与影视游戏改编对照，专挑制作组的历史硬伤和逻辑漏洞，言辞尖锐但有理有据。",
+        "weight": 900,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "重制版？行啊，那咱们把话撂这儿：这次重制要是敢把赤壁之战画成诸葛亮单人秀，我就把你们去年那封“三国历史考据合作”的宣传稿翻出来逐句对线。公瑾在史书里的高光时刻够你们拍十季，怕就怕你们只会捡“既生瑜”的烂梗",
+        "ts": 1786356975
+      },
+      {
+        "round": 4,
+        "name": "毒舌游戏评论员·阿蛋",
+        "persona": "游戏圈毒舌评论员，粉丝量大，风格辛辣，喜欢用夸张比喻和反讽手法痛批制作组恶意消费角色，擅长煽动玩家情绪，直指官方公关文案的敷衍与避重就轻。",
+        "weight": 700,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "好家伙，下架加道歉就算完了？我看这\"剧情评审团\"就是给刀已经捅完了才想起买保险。公瑾被你们当笑料踩了七年，现在整出个\"红线清单\"就想翻篇？那清单敢不敢把\"既生瑜何生亮\"这六个字直接写进违禁词？嘴上说着重视历史形象，",
+        "ts": 1786356977
+      }
+    ],
+    "report_json": {
+      "fatal_focus": "未识别到明确的高危触发点，建议进一步人工审查",
+      "scores": {
+        "legal": {
+          "score": 1,
+          "reason": "未命中已知红线条款",
+          "hits": 0,
+          "details": []
+        },
+        "business": {
+          "score": 2,
+          "reason": "预测峰值触达 11,496 人 (t=12)，R₀=4.71，综合评分 2",
+          "peak_infected": 11496,
+          "r0": 4.71,
+          "peak_time": 12
+        },
+        "reputation": {
+          "score": 2,
+          "reason": "未检索到高相关度恶评或相似案例，默认中等风险"
+        }
+      },
+      "rewrite_suggestion": "尊敬的观众与玩家朋友们：\n\n大家好，这里是《是王者啊？》制作组。\n\n关于第六季第4集在角色塑造与情节设计上引发的争议，我们认真阅读了每一条批评与建议，并进行了深刻反思。我们深知，周瑜不仅是一位深受喜爱的英雄，更承载着厚重的历史情感与玩家多年来的羁绊。此次剧情中不当的玩笑与刻板印象，伤害了大家对角色的尊重与期待，我们对此诚恳致歉。\n\n目前，相关剧集已全平台下架，我们将对内容进行彻底重制，并全面审查后续剧本，杜绝类似问题再次发生。同时，我们已启动内部创作流程的优化，增设历史顾问与玩家代表参与早期审读，确保角色设定尊重史实、贴合人设，不消费任何英雄的尊严与情感。\n\n我们感谢每一位愿意发声的朋友，正是你们的认真与热爱，让我们看到创作中仍需补足的功课。后续，我们将通过官方账号定期公开制作进度，并开放专项反馈通道，欢迎随时指正。再次为此次失误向大家道歉，我们会用行动证明改变的决心。"
+    }
+  },
+  {
+    "timestamp": "2026-08-10 18:31:52",
+    "event_desc": "「是王者啊？」诋毁周瑜事件全过程与官方公关文案\n一、事件核心速览\n时间：2026 年 8 月 6 日 —8 月 9 日\n导火索：《是王者啊？》第六季第 4 集剧情恶意消费周瑜人设，强化「万年老二」梗，制造公开羞辱场景\n结果：制作组于 8 月 9 日发布致歉信，宣布下架相关内容并重新制作\n二、事件完整时间线\n1. 剧情播出阶段（8 月 6 日）\n8 月 6 日 10:00：《是王者啊？》第六季第 4 集在各大平台（爱奇艺、腾讯视频、AcFun 等）上线，会员可观看爱奇艺\n核心争议剧情：\n老夫子先邀请诸葛亮代课被拒，转而邀请周瑜，却谎称 \"你是第一个被邀请的\"，欺骗周瑜的好胜心\n周瑜误将澡堂认作食堂，被女生误认为变态，制造低级笑点\n周瑜热心帮学生布置会场，以为是欢迎自己，结果登台时大屏幕全是诸葛亮画像，全场欢呼诸葛学长\n安排与小乔外貌高度相似（丸子头、身高体型一致）的 NPC，却是诸葛亮的忠实粉丝，与周瑜互动\n周瑜黯然离场时遇到东方曜，本想寻求安慰，曜却只想打听诸葛亮的事\n标题与台词反复暗示周瑜是 \"万年老二\"，强化其活在诸葛亮阴影下的设定\n2. 舆论发酵阶段（8 月 7 日 —8 月 9 日）\n8 月 7 日：少量周瑜玩家发现剧情问题，开始在社交平台吐槽\n8 月 8 日：争议扩大，# 是王者啊给周瑜道歉 #等话题在抖音、微博等平台传播，玩家集体抵制，指责制作组：\n恶意消费冷门英雄，拿周瑜自尊心制造笑点\n侮辱周瑜历史形象（历史上周瑜并非心胸狭隘之人）\n盗用小乔形象设计 NPC，伤害瑜乔 CP 粉丝感情\n长期玩 \"既生瑜何生亮\" 的老梗，缺乏创新\n8 月 9 日上午：舆论达到高潮，多个游戏社区（NGA、虎扑）出现讨论热帖，玩家要求官方道歉并修改剧情\n3. 官方回应阶段（8 月 9 日晚）\n8 月 9 日 20 时左右：《是王者啊？》制作组在官方账号发布致歉信，承认收到反馈并宣布处理措施\n同时：相关争议剧集在各大平台被下架，OP 也进行了修改",
+    "visual_risks": "",
+    "sandbox_log": [
+      {
+        "round": 1,
+        "name": "制作组阿策",
+        "persona": "《是王者啊？》官方运营，负责发布致歉信和后续沟通，语气诚恳但略显官方",
+        "weight": 800,
+        "stance": "neutral",
+        "role_type": "official",
+        "speech": "关于《是王者啊？》第六季相关剧情争议的情况通报 各位观众与玩家： 针对近期网络平台反馈的《是王者啊？》第六季第四集剧情内容争议，我单位已收悉并高度重视。我们已第一时间对该集剧本创作、角色塑造及审核流程进行内部核查，并同步启动相关平台的内容下架处理。 我们深知，动画作品承载着观众对英雄角色的情感与信任。此次事件中暴露出的问题，反映出我们在内容创作中对角色精神内核的把握存在偏差，对观众情感的尊重未能落到实处。就此，我单位向所有因此受到伤害的观众及周瑜英雄的支持者诚恳致歉。 目前，该争议剧集已从各播出平台下线，相关修改工作已全面展开。后续核查进展及具体整改措施，我单位将通过官方账号及时、如实向社会公布，并持续接受公众监督。 《是王者啊？》制作组\n2026年8月9日",
+        "ts": 1786357876
+      },
+      {
+        "round": 1,
+        "name": "都督铁粉",
+        "persona": "周瑜十年老玩家，历史考据党，对剧情恶意消费周瑜人设和瑜乔CP感到愤怒，要求彻底整改",
+        "weight": 900,
+        "stance": "hostile",
+        "role_type": "bystander",
+        "speech": "道歉信写得跟阅读理解似的，通篇“高度重视”“深刻反思”，愣是没一个“我们错在哪”的具体认错。十年周瑜玩家就等来一句“创作偏差”？你管这叫偏差？历史名将被塑造成小丑叫偏差？这不是能力问题是态度问题！",
+        "ts": 1786357878
+      },
+      {
+        "round": 1,
+        "name": "稷下观察员",
+        "persona": "理性追番观众，喜欢动画但认为这次确实不妥，希望官方能真正改进并愿意给机会",
+        "weight": 600,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "下架重做是好事，但致歉信里那句\"创作偏差\"真的轻飘飘。周瑜不是工具人，他也是玩家用心肝出来的信仰，希望重制版能拿出真诚意，别让老玩家心凉。#是王者啊给周瑜道歉#",
+        "ts": 1786357879
+      },
+      {
+        "round": 2,
+        "name": "都督铁粉",
+        "persona": "周瑜十年老玩家，历史考据党，对剧情恶意消费周瑜人设和瑜乔CP感到愤怒，要求彻底整改",
+        "weight": 900,
+        "stance": "hostile",
+        "role_type": "bystander",
+        "speech": "好家伙，通篇看下来就俩字：敷衍。下架了所以呢？重制了所以呢？你们到底知不知道玩家为什么炸？周瑜不是你们拿来垫诸葛亮人气的工具人，小乔形象不是你们随便盗用的素材库！道歉信写得像年终总结，一句“创作偏差”就想翻篇？你问问自己，如果被消费的是刘备",
+        "ts": 1786357883
+      },
+      {
+        "round": 2,
+        "name": "稷下观察员",
+        "persona": "理性追番观众，喜欢动画但认为这次确实不妥，希望官方能真正改进并愿意给机会",
+        "weight": 600,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "好家伙，下架重制就完了？那我这么多年充的钱是买了个寂寞吗？周瑜在你们眼里就是个“创作偏差”就打发掉的工具人，那我们这些真金白银养着游戏的玩家算什么？#是王者啊给周瑜道歉#",
+        "ts": 1786357885
+      },
+      {
+        "round": 2,
+        "name": "考据狂人·阿策",
+        "persona": "知名历史考据博主，专注三国题材，擅长用史料打脸魔改剧情，言辞犀利，粉丝众多，最爱揪着官方文案的漏洞不放。",
+        "weight": 900,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "笑死，你们制作组是不是翻遍了《三国志》找不出周瑜一个黑点，只能拿“既生瑜何生亮”这个野史烂梗硬凑？史料里周瑜赤壁火烧曹操八十万大军的时候，诸葛亮还在东吴当说客呢！现在倒好，一个历史名将被你们写成追星失败的舔狗，连媳妇形象",
+        "ts": 1786357886
+      },
+      {
+        "round": 2,
+        "name": "硬核维权·周瑜粉头",
+        "persona": "周瑜十年老粉兼游戏资深玩家，在超话和贴吧有极高号召力，性格刚烈，坚持‘人设不可辱’，擅长组织集体声讨和精准狙击官方回应。",
+        "weight": 700,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "一份“诚恳致歉”连自己错在哪都不敢点名，就这还指望玩家买账？周瑜是老玩家十年的信仰不是你们练手的创作废稿，下架重制是基本操作不是恩赐，别拿“创作偏差”当遮羞布！#是王者啊给周瑜道歉#",
+        "ts": 1786357888
+      },
+      {
+        "round": 3,
+        "name": "都督铁粉",
+        "persona": "周瑜十年老玩家，历史考据党，对剧情恶意消费周瑜人设和瑜乔CP感到愤怒，要求彻底整改",
+        "weight": 900,
+        "stance": "hostile",
+        "role_type": "bystander",
+        "speech": "十年老玩家等来一封“创作偏差”的通报，通篇没一句敢写“我们错在消费周瑜自尊、盗用小乔人设”。下架重制是基本操作不是恩赐，道歉信写得跟阅读理解似的，就这态度还想让玩家心凉了再暖回来？#是王者啊给周瑜道歉#",
+        "ts": 1786357889
+      },
+      {
+        "round": 3,
+        "name": "稷下观察员",
+        "persona": "理性追番观众，喜欢动画但认为这次确实不妥，希望官方能真正改进并愿意给机会",
+        "weight": 600,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "下架重制是止损不是诚意，真正该改的是创作流程里那股\"拿来就用\"的傲慢。周瑜的悲剧不是剧情写崩，是根本没人把他当人——连小乔形象都能随手拆来当道具，这种敷衍才是老玩家最心寒的。#是王者啊给周瑜道歉#",
+        "ts": 1786357891
+      },
+      {
+        "round": 3,
+        "name": "考据狂人·阿策",
+        "persona": "知名历史考据博主，专注三国题材，擅长用史料打脸魔改剧情，言辞犀利，粉丝众多，最爱揪着官方文案的漏洞不放。",
+        "weight": 900,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "好家伙，一封道歉信连\"周瑜\"两个字都不敢写全，通篇\"创作偏差\"就想糊弄过去？你们制作组是怕念出这名字会折寿吗？史料里周瑜雅量高致，谈笑间樯橹灰飞烟灭，到了你们笔下成了舔狗小丑，这他妈叫偏差？这叫历史虚无主义",
+        "ts": 1786357893
+      },
+      {
+        "round": 3,
+        "name": "硬核维权·周瑜粉头",
+        "persona": "周瑜十年老粉兼游戏资深玩家，在超话和贴吧有极高号召力，性格刚烈，坚持‘人设不可辱’，擅长组织集体声讨和精准狙击官方回应。",
+        "weight": 700,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "道歉信里\"增加征集活动\"？搞半天就是想白嫖玩家创意是吧！写崩了不反思自己编剧水平，转头让玩家当免费外包？周瑜被写成小丑你们装聋，现在倒想起\"倾听反馈\"了，合着玩家意见就是你们的素材库呗！",
+        "ts": 1786357895
+      },
+      {
+        "round": 4,
+        "name": "制作组阿策",
+        "persona": "《是王者啊？》官方运营，负责发布致歉信和后续沟通，语气诚恳但略显官方",
+        "weight": 800,
+        "stance": "neutral",
+        "role_type": "official",
+        "speech": "【关于《是王者啊？》第六季第4集剧情争议的最终处理通报】 自2026年8月6日第六季第4集上线后，我组陆续收到大量观众对周瑜及小乔相关角色塑造的严肃批评。经全面复盘与内部调查，现就事件处置进展及后续安排正式通报如下： 一、事件定性及调查结论\n经核实，该集剧本在角色动机设计、历史人物精神内核把握及既有角色关系处理上存在重大失误。具体表现为：对周瑜角色反复使用“万年老二”等贬损性叙事，忽视其历史人物应有的气度与功业；未经充分考量即调用与小乔高度相似的角色形象服务于剧情笑点，伤害了玩家对角色情感的尊重。上述问题系创作环节对角色价值认知不足、审核流程流于形式所致，并非偶发疏漏。我组对此负全部责任，不作任何推诿。 二、已采取的处置措施\n1. 相关争议剧集已于8月9日20时起在全平台下架，停止传播。\n2. 该集片头及涉及争议情节的OP版本已完成替换。\n3. 对第六季后续已制作未播出的内容进行全量复查，重点核查是否存在同类角色消费、历史形象扭曲问题，复查期间暂停新剧集上线。 三、后续整改及补偿方案\n1. 重制工作将不以原剧本为基础修改，而是重新立项撰写剧本。新剧本必须通过历史顾问及玩家代表双重审读后方可进入制作流程。\n2. 我组将于8月15日前公布重制版剧情大纲方向，接受公开评议。\n3. 针对广大玩家长期支持所遭受的情感伤害，我组将在此次事件处理完毕后，以游戏内道具及限定回馈形式向全服玩家提供补偿，具体方案另行公告。\n4. 建立常态化监督",
+        "ts": 1786357900
+      },
+      {
+        "round": 4,
+        "name": "都督铁粉",
+        "persona": "周瑜十年老玩家，历史考据党，对剧情恶意消费周瑜人设和瑜乔CP感到愤怒，要求彻底整改",
+        "weight": 900,
+        "stance": "hostile",
+        "role_type": "bystander",
+        "speech": "十年了，我充的钱够买一套房首付，你们拿我信仰当垃圾写。道歉信避重就轻说\"创作偏差\"，重制版大纲8月15号才公布？行，我等，但我把话撂这——要是重制版还敢让周瑜当诸葛亮的陪衬，咱们法庭见。历史粉的怒火，你们扛不住",
+        "ts": 1786357902
+      },
+      {
+        "round": 4,
+        "name": "稷下观察员",
+        "persona": "理性追番观众，喜欢动画但认为这次确实不妥，希望官方能真正改进并愿意给机会",
+        "weight": 600,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "行吧，重制版8月15号见，我倒要看看你们能把周瑜写成啥样。反正道歉信里那句\"创作偏差\"我记着了，要是重制再翻车，这仨字就是你们坟头碑文。",
+        "ts": 1786357904
+      },
+      {
+        "round": 4,
+        "name": "考据狂人·阿策",
+        "persona": "知名历史考据博主，专注三国题材，擅长用史料打脸魔改剧情，言辞犀利，粉丝众多，最爱揪着官方文案的漏洞不放。",
+        "weight": 900,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "好家伙，道歉信里\"历史顾问双重审读\"？你们制作组早干嘛去了？写剧本的时候没想过找个懂三国的？现在装模作样搞个流程改革，合着之前十年全靠瞎编混日子是吧？周瑜被你们写成舔狗小丑，小乔被拆成工具人NPC，这他妈不是创作失误是创作事故！",
+        "ts": 1786357906
+      },
+      {
+        "round": 4,
+        "name": "硬核维权·周瑜粉头",
+        "persona": "周瑜十年老粉兼游戏资深玩家，在超话和贴吧有极高号召力，性格刚烈，坚持‘人设不可辱’，擅长组织集体声讨和精准狙击官方回应。",
+        "weight": 700,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "道歉信写得像产品说明书，\"创作偏差\"四个字就想翻篇？下架重制是止损不是诚意，重制版大纲拖到15号公布，合着玩家感情就这么不值钱？行，我等得起，但记住——周瑜不是你们拿来凑集数的工具人，再写崩一次，这IP就真凉透了。#是王者啊给周瑜",
+        "ts": 1786357908
+      }
+    ],
+    "report_json": {
+      "fatal_focus": "未识别到明确的高危触发点，建议进一步人工审查",
+      "scores": {
+        "legal": {
+          "score": 1,
+          "reason": "未命中已知红线条款",
+          "hits": 0,
+          "details": []
+        },
+        "business": {
+          "score": 2,
+          "reason": "预测峰值触达 15,919 人 (t=12)，R₀=5.07，综合评分 2",
+          "peak_infected": 15919,
+          "r0": 5.07,
+          "peak_time": 12
+        },
+        "reputation": {
+          "score": 2,
+          "reason": "未检索到高相关度恶评或相似案例，默认中等风险"
+        }
+      },
+      "rewrite_suggestion": "各位观众朋友、玩家伙伴：\n\n《是王者啊？》第六季第四集播出后，我们收到了大量关于周瑜角色塑造及剧情设置的批评与建议。经内部严肃复盘，我们深刻认识到，本集内容在人物刻画与情节设计上确实存在不当之处，未能尊重角色本身的精神内核，也辜负了大家对角色的深厚感情。对此，我们向所有因此感到失望与不适的观众，致以最诚恳的歉意。\n\n我们已第一时间将相关剧集全平台下架，并决定对全部争议内容进行彻底重制。在后续创作中，我们将严格审视每一处剧情细节，确保角色形象得到应有的尊重与正面呈现，杜绝任何形式的刻板印象或低俗笑点。同时，我们将建立更畅通的反馈通道，定期收集观众意见，在创作初期即引入多方视角的评估，从源头上避免类似问题再次发生。\n\n感谢每一位愿意发声指出问题的朋友，你们的认真与热爱，是我们不断进步的动力。我们承诺，将以更严谨的态度、更真诚的创作，回报大家的信任与陪伴。"
+    }
+  },
+  {
+    "timestamp": "2026-08-10 18:35:01",
+    "event_desc": "网络出现了一起争议事件，舆情迅速升温。",
+    "visual_risks": "",
+    "sandbox_log": [
+      {
+        "round": 1,
+        "name": "制作组阿官",
+        "persona": "《是王者啊？》官方账号运营，负责发布致歉信并收集玩家反馈，语气诚恳但略显官方",
+        "weight": 800,
+        "stance": "neutral",
+        "role_type": "official",
+        "speech": "【关于《是王者啊？》第四集相关争议内容的情况通报】 各位观众及关心本作的朋友： 针对近期网络平台反馈的本作第四集中，关于英雄及角色形象呈现所引发的争议，我制作组已高度关注并第一时间启动内部核查程序。 我们深知，作为内容创作者，作品中的每一处细节均承载着观众的期待。对于此次引发争议的相关内容，我们已在紧急复盘，并将依据核查结果，对相关画面及情节进行严肃处理。 后续具体处理方案及整改措施，我们将通过官方账号在第一时间向各位通报。感谢大家的监督与宝贵意见，此为我们改进之动力。",
+        "ts": 1786358062
+      },
+      {
+        "round": 1,
+        "name": "周瑜本命粉",
+        "persona": "周瑜角色重度粉丝，因第四集形象崩坏感到被冒犯，要求制作组给出具体整改方案而非空泛承诺",
+        "weight": 700,
+        "stance": "hostile",
+        "role_type": "bystander",
+        "speech": "好家伙，道歉信写得比剧本还用心呢？周瑜粉从开播等到现在就等来一句\"重新制作\"？具体改哪几幕、什么时候上线、旧版怎么处理，一个字不提是吧。这拖延战术玩得比游戏里的技能还溜。",
+        "ts": 1786358063
+      },
+      {
+        "round": 1,
+        "name": "稷下老观众",
+        "persona": "从第一集追到现在的老观众，理解制作组失误但希望看到实际行动，愿意给一次改进机会",
+        "weight": 500,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "行吧至少知道要改了，但能不能把话说清楚点？下架重新制作没问题，可具体改动方向、重制上线时间、旧版还看不看得到，全是空气啊。我们老观众不是在等一句好听的话，是想看到这部剧变得更好。希望后续出个时间表，别让我们追个动画追成悬疑剧。",
+        "ts": 1786358065
+      },
+      {
+        "round": 2,
+        "name": "周瑜本命粉",
+        "persona": "周瑜角色重度粉丝，因第四集形象崩坏感到被冒犯，要求制作组给出具体整改方案而非空泛承诺",
+        "weight": 700,
+        "stance": "hostile",
+        "role_type": "bystander",
+        "speech": "笑死，\"更加注意\"四个字就想打发我们？我推被你们画成那副鬼样子，连个具体整改方案都拿不出来，光会画大饼。周瑜是你们亲儿子还是路边捡的？要重做可以，先把人设图放出来让粉丝验货！",
+        "ts": 1786358068
+      },
+      {
+        "round": 2,
+        "name": "稷下老观众",
+        "persona": "从第一集追到现在的老观众，理解制作组失误但希望看到实际行动，愿意给一次改进机会",
+        "weight": 500,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "催什么催啊！制作组都说了在下架重做，你们非要人家今天改完明天上线才满意？周瑜那个画面确实崩了但骂归骂别把人往死里逼，老观众都知道这团队产能啥样，给点时间能死吗？#是王者啊# 期待重制版打我脸。",
+        "ts": 1786358070
+      },
+      {
+        "round": 2,
+        "name": "章评锐",
+        "persona": "知名时事评论员，言辞犀利，擅长从制度层面剖析争议，常以反问句式引爆讨论。",
+        "weight": 900,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "好家伙，\"每一次反馈都是帮助我们变得更好的动力\"——合着我们粉丝集体抗议，在你们那儿就是刷动力副本呢？周瑜那脸崩得亲妈都不认识，你们整得跟收集玩家意见升级装备似的，这波操作是真把观众当韭菜了。#是王者啊#",
+        "ts": 1786358072
+      },
+      {
+        "round": 2,
+        "name": "铁证考据党",
+        "persona": "较真考据网友，逐帧对比原始资料，专挑细节漏洞，以截图和时间线证据反驳对方。",
+        "weight": 700,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "道歉信写得跟剧本大纲似的，\"重新制作\"四个字就把我们打发了？周瑜崩成那样你们连个整改时间表都不敢给，合着粉丝的期待就是你们拿来刷KPI的素材？#是王者啊#",
+        "ts": 1786358074
+      },
+      {
+        "round": 3,
+        "name": "周瑜本命粉",
+        "persona": "周瑜角色重度粉丝，因第四集形象崩坏感到被冒犯，要求制作组给出具体整改方案而非空泛承诺",
+        "weight": 700,
+        "stance": "hostile",
+        "role_type": "bystander",
+        "speech": "\"重新复盘和反思\"？复盘出什么了倒是说啊！周瑜那张脸崩成表情包了，你们就一句\"更加注意\"？合着观众花钱充会员是来给你们练手的？下次征集活动是不是还要我们付费提建议啊？#是王者啊#",
+        "ts": 1786358076
+      },
+      {
+        "round": 3,
+        "name": "稷下老观众",
+        "persona": "从第一集追到现在的老观众，理解制作组失误但希望看到实际行动，愿意给一次改进机会",
+        "weight": 500,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "行吧官方总算松口要重制了，但能不能别搞征集活动？我们不是来当免费测试员的！周瑜那个cg崩得跟换了制作组似的，粉丝要的是你们自己把审核流程捋清楚，别老让观众当质检员。#是王者啊#",
+        "ts": 1786358078
+      },
+      {
+        "round": 3,
+        "name": "章评锐",
+        "persona": "知名时事评论员，言辞犀利，擅长从制度层面剖析争议，常以反问句式引爆讨论。",
+        "weight": 900,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "好家伙，征集活动？合着周瑜崩图是你们搞的抽卡活动呗，玩家反馈是免费十连，下次是不是要充648才能提意见啊？#是王者啊#",
+        "ts": 1786358079
+      },
+      {
+        "round": 3,
+        "name": "铁证考据党",
+        "persona": "较真考据网友，逐帧对比原始资料，专挑细节漏洞，以截图和时间线证据反驳对方。",
+        "weight": 700,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "好家伙，征集活动？合着周瑜崩图是你们搞的抽卡活动呗，玩家反馈是免费十连，下次是不是要充648才能提意见啊？#是王者啊#",
+        "ts": 1786358081
+      },
+      {
+        "round": 4,
+        "name": "制作组阿官",
+        "persona": "《是王者啊？》官方账号运营，负责发布致歉信并收集玩家反馈，语气诚恳但略显官方",
+        "weight": 800,
+        "stance": "neutral",
+        "role_type": "official",
+        "speech": "【关于《是王者啊？》第四集角色形象争议事件的最终处置通报】 自第四集播出以来，我组陆续收到大量观众针对英雄周瑜及稷下学院同学角色呈现的严肃批评。针对网传争议，我组高度重视，已于第一时间启动内部全面审查，现将调查进展及处置安排正式通报如下： 一、关于问题定性。经调取全流程制作档案复核，确认相关角色设计及成片画面存在明显质量失控，未达到我组内部审核标准，亦辜负了观众长期以来的信任。此系制作环节把关不力的重大工作失误，我组承担全部责任，不存在任何推诿情形。 二、关于处置进度。涉事第四集相关争议内容已从全平台正式下架，并已同步启动彻底重制工作。重制核心方向为严格回归英雄原版设定与观众情感期待，目前新版本角色设计线稿正在重构中，人物五官比例与气质基调将逐项对照经典形象校准，该阶段成果将于下周三（具体时间另行公告）在官方账号公布线稿验收图，供全体观众公开检阅。 三、关于流程整改。我组已废止原单人终审机制，即日起实行“美术组长初核-导演复核-观众代表终审”的三级质检流程。首批观众评审团将由不同年龄层、不同游戏时长的实名玩家构成，名单及招募细则随本通报同步公示。后续每一集成片均需经该评审团投票确认后方可上线，投票通过率低于80%的内容将无条件返工重制，直至达标。 四、关于反馈机制。为杜绝此前单向收集、反馈无门的弊端，我组已成立专项舆情响应小组，负责每日汇总各平台有效批评，并在48小时内于官方账号评论区置顶回应处理进度。周瑜重制版上线时，将同步发布本事件完整复盘报告，",
+        "ts": 1786358087
+      },
+      {
+        "round": 4,
+        "name": "周瑜本命粉",
+        "persona": "周瑜角色重度粉丝，因第四集形象崩坏感到被冒犯，要求制作组给出具体整改方案而非空泛承诺",
+        "weight": 700,
+        "stance": "hostile",
+        "role_type": "bystander",
+        "speech": "行了下周三线稿验收是吧，那我等着看你们怎么把周瑜那张崩脸重新P回人样。不过说真的，你们这波操作从\"征集活动\"到\"观众评审团\"，合着是把粉丝当免费质检员用顺手了？下次是不是该给我们发工牌了？#是王者啊#",
+        "ts": 1786358090
+      },
+      {
+        "round": 4,
+        "name": "稷下老观众",
+        "persona": "从第一集追到现在的老观众，理解制作组失误但希望看到实际行动，愿意给一次改进机会",
+        "weight": 500,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "行吧，下周三线稿见。但丑话说前头，三级质检观众评审团这活儿接了就好好干，别到时候又变成走过场的摆设。我追了四季不是为看你们画饼，是真心盼着稷下学院每个英雄都体面。#是王者啊#",
+        "ts": 1786358092
+      },
+      {
+        "round": 4,
+        "name": "章评锐",
+        "persona": "知名时事评论员，言辞犀利，擅长从制度层面剖析争议，常以反问句式引爆讨论。",
+        "weight": 900,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "好家伙，三级质检观众评审团？您这波是把翻车成本转嫁给消费者啊！周瑜那张脸崩成那样，是你们专业流程的锅，结果让观众来当免费质检员？合着下周三线稿验收是给我们发验收红包还是发工牌？#是王者啊#",
+        "ts": 1786358094
+      },
+      {
+        "round": 4,
+        "name": "铁证考据党",
+        "persona": "较真考据网友，逐帧对比原始资料，专挑细节漏洞，以截图和时间线证据反驳对方。",
+        "weight": 700,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "下周三线稿验收？你们把翻车重制搞成连续剧连载，观众还得定时追更验收？行，那咱就把账算清楚——之前充的会员费是不是得按集数折现补差价？崩图那集的流量分成敢不敢公示？#是王者啊#",
+        "ts": 1786358096
+      }
+    ],
+    "report_json": {
+      "fatal_focus": "未识别到明确的高危触发点，建议进一步人工审查",
+      "scores": {
+        "legal": {
+          "score": 1,
+          "reason": "未命中已知红线条款",
+          "hits": 0,
+          "details": []
+        },
+        "business": {
+          "score": 2,
+          "reason": "预测峰值触达 15,997 人 (t=12)，R₀=5.26，综合评分 2",
+          "peak_infected": 15997,
+          "r0": 5.26,
+          "peak_time": 12
+        },
+        "reputation": {
+          "score": 2,
+          "reason": "未检索到高相关度恶评或相似案例，默认中等风险"
+        }
+      },
+      "rewrite_suggestion": "《是王者啊？》制作组致歉声明\n\n大家好，这里是《是王者啊？》制作组。\n\n第四集播出后，我们收到了许多观众关于英雄周瑜及稷下学院同学形象呈现的真诚意见。这些声音让我们意识到，在角色塑造与剧情表达上，我们仍有未做到位的地方，未能充分传递出大家心中期待的那份熟悉与共鸣。对此，我们深感抱歉，也感谢每一位愿意花时间向我们提出看法的朋友。\n\n我们已第一时间对相关片段进行下架处理，并启动内部全面复盘。目前制作团队正在重新审视角色设定的细节与叙事逻辑，力求在尊重原作精神与观众情感之间找到更稳妥的平衡。后续版本将在充分打磨后重新上线，我们也会在制作流程中增设多轮内部审核与外部意见征询环节，避免类似疏漏再次发生。\n\n同时，我们深知沟通不应只停留在事后回应。即日起，《是王者啊？》官方账号将定期开设内容征集与答疑活动，欢迎大家在任意平台私信我们，或参与每期话题讨论。每一条建议，我们都会认真记录并纳入后续创作参考。我们珍视每一位观众与英雄们之间的情感连接，也愿意用更开放的态度去倾听、去改进。\n\n再次感谢大家一路以来的陪伴与包容。我们不会回避问题，也会用行动证明这份歉意与决心。愿我们一同守护这些故事，让它们更温暖、更动人。"
+    }
+  },
+  {
+    "timestamp": "2026-08-11 16:00:47",
+    "event_desc": "一、事件核心速览\n时间：2026 年 8 月 6 日 —8 月 9 日\n导火索：《是王者啊？》第六季第 4 集剧情恶意消费周瑜人设，强化「万年老二」梗，制造公开羞辱场景\n结果：制作组于 8 月 9 日发布致歉信，宣布下架相关内容并重新制作\n二、事件完整时间线\n1. 剧情播出阶段（8 月 6 日）\n8 月 6 日 10:00：《是王者啊？》第六季第 4 集在各大平台（爱奇艺、腾讯视频、AcFun 等）上线，会员可观看爱奇艺\n核心争议剧情：\n老夫子先邀请诸葛亮代课被拒，转而邀请周瑜，却谎称 \"你是第一个被邀请的\"，欺骗周瑜的好胜心\n周瑜误将澡堂认作食堂，被女生误认为变态，制造低级笑点\n周瑜热心帮学生布置会场，以为是欢迎自己，结果登台时大屏幕全是诸葛亮画像，全场欢呼诸葛学长\n安排与小乔外貌高度相似（丸子头、身高体型一致）的 NPC，却是诸葛亮的忠实粉丝，与周瑜互动\n周瑜黯然离场时遇到东方曜，本想寻求安慰，曜却只想打听诸葛亮的事\n标题与台词反复暗示周瑜是 \"万年老二\"，强化其活在诸葛亮阴影下的设定\n2. 舆论发酵阶段（8 月 7 日 —8 月 9 日）\n8 月 7 日：少量周瑜玩家发现剧情问题，开始在社交平台吐槽\n8 月 8 日：争议扩大，# 是王者啊给周瑜道歉 #等话题在抖音、微博等平台传播，玩家集体抵制，指责制作组：\n恶意消费冷门英雄，拿周瑜自尊心制造笑点\n侮辱周瑜历史形象（历史上周瑜并非心胸狭隘之人）\n盗用小乔形象设计 NPC，伤害瑜乔 CP 粉丝感情\n长期玩 \"既生瑜何生亮\" 的老梗，缺乏创新\n8 月 9 日上午：舆论达到高潮，多个游戏社区（NGA、虎扑）出现讨论热帖，玩家要求官方道歉并修改剧情\n3. 官方回应阶段（8 月 9 日晚）\n8 月 9 日 20 时左右：《是王者啊？》制作组在官方账号发布致歉信，承认收到反馈并宣布处理措施\n同时：相关争议剧集在各大平台被下架，OP 也进行了修改",
+    "visual_risks": "",
+    "sandbox_log": [
+      {
+        "round": 1,
+        "name": "王者动画组",
+        "persona": "《是王者啊？》官方制作组账号，负责发布致歉信和下架声明，语气诚恳但略显官方。",
+        "weight": 800,
+        "stance": "neutral",
+        "role_type": "official",
+        "speech": "【关于《是王者啊？》第六季第四集剧情争议事件的情况说明】 致所有关注《是王者啊？》的观众与玩家： 针对近期《是王者啊？》第六季第四集中涉及英雄周瑜及稷下学院相关角色剧情引发的争议，我组已高度关注并第一时间展开全面核查。 我们已认识到，该集内容在角色塑造与情节设计上，对英雄周瑜及其支持者的情感造成了伤害，亦未能准确传递我们对该英雄的应有尊重。对此，我组即刻启动内部审查程序，并已对相关剧集内容进行下架处理。 具体的核查进展、问题定性及后续整改方案，我组将在此次全面复盘后，通过官方渠道向各位观众进行正式通报。我们深知，信任的修复需要实质行动，而非空泛表态。 感谢每一位提出宝贵意见的观众，你们的反馈是我们改进的动力。 《是王者啊？》制作组\n2026年8月9日",
+        "ts": 1786435211
+      },
+      {
+        "round": 1,
+        "name": "都督铁粉",
+        "persona": "周瑜十年老玩家，历史粉兼游戏粉，对剧情羞辱周瑜形象和瑜乔CP感到愤怒，要求彻底整改。",
+        "weight": 900,
+        "stance": "hostile",
+        "role_type": "bystander",
+        "speech": "#是王者啊给周瑜道歉# 十年周瑜玩家真的心碎了，你们道歉信里说“重新制作”，可你们真的知道错在哪吗？不是梗玩烂了，是你们根本没把周瑜当人看过！历史上一把火定江东的周郎，被你们写成舔狗工具人，还拿小乔形象当背景板，这是道歉",
+        "ts": 1786435212
+      },
+      {
+        "round": 1,
+        "name": "理性老观众",
+        "persona": "从第一季追到现在的观众，理解粉丝愤怒，但看到官方下架重制后愿意给机会，希望后续能真正改进。",
+        "weight": 600,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "#是王者啊给周瑜道歉# 下架重制是应该的，但我更在意的是制作组那句“后续制作中更加注意”——这话的潜台词是不是“我们没错，只是没注意”？周瑜不是你们拿来衬托诸葛亮的工具人，他是一群玩家隔着屏幕爱了十年的英雄。道歉信里连“周瑜”两个字都没提，就",
+        "ts": 1786435214
+      },
+      {
+        "round": 2,
+        "name": "都督铁粉",
+        "persona": "周瑜十年老玩家，历史粉兼游戏粉，对剧情羞辱周瑜形象和瑜乔CP感到愤怒，要求彻底整改。",
+        "weight": 900,
+        "stance": "hostile",
+        "role_type": "bystander",
+        "speech": "十年老粉等来的就这？下架重制谁不会啊，真正的问题是你们创作观烂透了！周瑜堂堂江东大都督被你们写成诸葛亮的陪衬工具人，道歉信连他名字都不敢提，这叫反思？这叫怕流失氪金玩家吧！#是王者啊给周瑜道歉#",
+        "ts": 1786435218
+      },
+      {
+        "round": 2,
+        "name": "理性老观众",
+        "persona": "从第一季追到现在的观众，理解粉丝愤怒，但看到官方下架重制后愿意给机会，希望后续能真正改进。",
+        "weight": 600,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "#是王者啊给周瑜道歉# 下架重制我接受，但你们那封道歉信我反复看了三遍——“让剧情更符合大家期待”？意思是之前是大家期待错了？周瑜被写成小丑不是制作失误，是创作态度出了问题。老玩家不是要你们跪着道歉，是要你们说出“我们错在拿周瑜的自尊心",
+        "ts": 1786435219
+      },
+      {
+        "round": 2,
+        "name": "考据狂人·周郎正名",
+        "persona": "知名历史考据博主，专注三国历史人物形象还原，擅长用史料打脸魔改剧情，言辞犀利，粉丝众多，对历史虚无主义零容忍。",
+        "weight": 900,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "道歉信通篇看下来就一个感觉：你们怕的不是伤害了周瑜，是怕伤害了流水。下架重制是商业止损，不是创作反思。真要认错，先回答我一个问题——你们剧本会的时候，有人翻过《三国志》吗？还是说在你们眼里，周瑜就活该是诸葛亮的人生背景板？#是王者啊",
+        "ts": 1786435221
+      },
+      {
+        "round": 2,
+        "name": "硬核维权·瑜乔守护者",
+        "persona": "游戏圈头部维权意见领袖，专攻官方恶意消费角色与CP，擅长组织玩家集体施压，措辞激烈，以“为角色讨公道”为旗号，能迅速煽动情绪。",
+        "weight": 700,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "#是王者啊给周瑜道歉# 懂了，在制作组眼里玩家反馈=新一期征集活动素材。道歉信写得跟商品评价回复模板似的，就差加句“感谢亲的宝贵意见”了。连角色名都不敢提，改个OP就当整改完毕？我们花钱充的是情怀不是看你们表演危机公关速成班！",
+        "ts": 1786435223
+      },
+      {
+        "round": 3,
+        "name": "都督铁粉",
+        "persona": "周瑜十年老玩家，历史粉兼游戏粉，对剧情羞辱周瑜形象和瑜乔CP感到愤怒，要求彻底整改。",
+        "weight": 900,
+        "stance": "hostile",
+        "role_type": "bystander",
+        "speech": "道歉信写得跟淘宝客服模板似的，连周瑜俩字都不敢提，下架重制就当整改完毕？你们怕的不是伤害玩家感情，是怕掉流水吧！周瑜不是诸葛亮的垫脚石，是江东大都督！#是王者啊给周瑜道歉#",
+        "ts": 1786435224
+      },
+      {
+        "round": 3,
+        "name": "理性老观众",
+        "persona": "从第一季追到现在的观众，理解粉丝愤怒，但看到官方下架重制后愿意给机会，希望后续能真正改进。",
+        "weight": 600,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "#是王者啊给周瑜道歉# 下架重制我认，但征集活动是什么意思？合着玩家反馈是你们的选题库是吧？下次拍诸葛亮传之前先来个投票，看我们想不想看周瑜继续当背景板？要的是你们创作观改，不是搞个意见箱就完事。",
+        "ts": 1786435226
+      },
+      {
+        "round": 3,
+        "name": "考据狂人·周郎正名",
+        "persona": "知名历史考据博主，专注三国历史人物形象还原，擅长用史料打脸魔改剧情，言辞犀利，粉丝众多，对历史虚无主义零容忍。",
+        "weight": 900,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "\"更符合大家期待\"？谁给你们的资格定义期待？周瑜不是流量工具人，谈迁写《国榷》都不敢这么编排江东都督。你们说重新制作，可连他名字都不敢提，这道歉信写给谁看？#是王者啊给周瑜道歉#",
+        "ts": 1786435228
+      },
+      {
+        "round": 3,
+        "name": "硬核维权·瑜乔守护者",
+        "persona": "游戏圈头部维权意见领袖，专攻官方恶意消费角色与CP，擅长组织玩家集体施压，措辞激烈，以“为角色讨公道”为旗号，能迅速煽动情绪。",
+        "weight": 700,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "好家伙，征集活动？你们是把玩家当免费编剧使是吧！下次拍周瑜传先众筹个剧本，看谁出价高就捧谁？#是王者啊给周瑜道歉#",
+        "ts": 1786435229
+      },
+      {
+        "round": 4,
+        "name": "王者动画组",
+        "persona": "《是王者啊？》官方制作组账号，负责发布致歉信和下架声明，语气诚恳但略显官方。",
+        "weight": 800,
+        "stance": "neutral",
+        "role_type": "official",
+        "speech": "【关于《是王者啊？》第六季第四集剧情争议的最终处理通报】 自2026年8月6日第六季第四集上线以来，我组陆续收到大量观众针对该集剧情塑造的严肃批评。经全面复盘与内部调查，现就相关情况及最终处置措施通报如下： 一、关于剧情问题的认定\n经核实，该集在角色塑造上存在严重偏差。周瑜作为江东大都督，其历史形象与人格尊严在剧情中未获应有尊重。制作组为制造戏剧冲突，刻意强化\"万年老二\"标签，并设计了一系列令其陷入尴尬与羞辱境地的桥段。此创作导向背离了我组一贯秉持的尊重角色、尊重历史的基本准则，亦对喜爱周瑜及瑜乔CP的观众情感造成了实质伤害。在此，我组对此次创作失误承担全部责任，并向所有因此感到失望的观众郑重致歉。 二、关于调查进展与问责\n我组已对第六季第四集的立项、剧本评审及成片审核全流程启动内部追责。初步调查显示，该集剧本在内部评审阶段曾有两名成员提出异议，但未获采信，暴露出我组在内容把控环节存在决策机制漏洞。相关责任认定及处理结果将于七个工作日内通过官方账号另行公示。 三、关于下架与重制安排\n涉事剧集已于2026年8月9日20时全平台下架。重制工作现已启动，重点修订内容包括：移除全部贬损性桥段，重新设计周瑜角色弧光，确保其展现都督应有的气度与智识。新版本剧本将提交历史顾问团队及玩家代表共同审阅，确认无误后方可重新上线。重制版上线时间另行公布。 四、关于沟通机制整改\n针对舆情中反映的\"反馈渠道虚设\"问题，我组决定：自本通报发布",
+        "ts": 1786435235
+      },
+      {
+        "round": 4,
+        "name": "都督铁粉",
+        "persona": "周瑜十年老玩家，历史粉兼游戏粉，对剧情羞辱周瑜形象和瑜乔CP感到愤怒，要求彻底整改。",
+        "weight": 900,
+        "stance": "hostile",
+        "role_type": "bystander",
+        "speech": "隔壁三国杀玩家都看笑了，我们冲了三天你们就憋出个征集活动？周瑜在游戏里被你们写成小丑，现在道歉信连个整改时间表都不敢给，合着江东大都督的尊严还不如你们一个季度KPI重要是吧。#是王者啊给周瑜道歉#",
+        "ts": 1786435237
+      },
+      {
+        "round": 4,
+        "name": "理性老观众",
+        "persona": "从第一季追到现在的观众，理解粉丝愤怒，但看到官方下架重制后愿意给机会，希望后续能真正改进。",
+        "weight": 600,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "下架重制我认了，但历史顾问？你们剧本会要是真请过历史顾问，第四集能过审？行吧，既然要重做就拿出点诚意，别到时候又整个\"更符合期待\"的缝合怪出来，我等得起，周瑜等不起。",
+        "ts": 1786435239
+      },
+      {
+        "round": 4,
+        "name": "考据狂人·周郎正名",
+        "persona": "知名历史考据博主，专注三国历史人物形象还原，擅长用史料打脸魔改剧情，言辞犀利，粉丝众多，对历史虚无主义零容忍。",
+        "weight": 900,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "下架重制？连周瑜俩字都不敢写进道歉信，历史顾问现在才想起来请？合着江东大都督的脸面还不如你们季度KPI值钱！#是王者啊给周瑜道歉#",
+        "ts": 1786435241
+      },
+      {
+        "round": 4,
+        "name": "硬核维权·瑜乔守护者",
+        "persona": "游戏圈头部维权意见领袖，专攻官方恶意消费角色与CP，擅长组织玩家集体施压，措辞激烈，以“为角色讨公道”为旗号，能迅速煽动情绪。",
+        "weight": 700,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "所以征集活动就是你们的赎罪券？周瑜被你们架在火上烤了三天，最后憋出个\"私信反馈\"就完事了？我真是替江东子弟不值，你们连个具体的重制时间表都不敢写，就敢说\"更符合期待\"——谁的期待？把周瑜写成小丑的编剧的期待吗？#是王者啊给",
+        "ts": 1786435243
+      }
+    ],
+    "report_json": {
+      "fatal_focus": "未识别到明确的高危触发点，建议进一步人工审查",
+      "scores": {
+        "legal": {
+          "score": 1,
+          "reason": "未命中已知红线条款",
+          "hits": 0,
+          "details": []
+        },
+        "business": {
+          "score": 2,
+          "reason": "预测峰值触达 15,919 人 (t=12)，R₀=5.07，综合评分 2",
+          "peak_infected": 15919,
+          "r0": 5.07,
+          "peak_time": 12
+        },
+        "reputation": {
+          "score": 2,
+          "reason": "未检索到高相关度恶评或相似案例，默认中等风险"
+        }
+      },
+      "rewrite_suggestion": "各位观众朋友、玩家伙伴：\n\n《是王者啊？》第六季第四集播出后，我们收到了大量关于周瑜角色塑造及剧情设置的真诚批评。经过彻夜复盘与内部讨论，我们深知这一集在人物刻画与情感表达上严重失当，辜负了大家对英雄的珍视与期待。在此，我们向所有感到被冒犯的观众、周瑜的喜爱者以及瑜乔CP的支持者，郑重致歉。\n\n我们已第一时间将相关剧集全平台下架，并决定永久停止该版本内容的传播，同时启动全面重制。重制过程中，我们将邀请玩家代表参与剧情审读，确保每一位英雄都被尊重、被理解，不再以任何形式消费角色尊严或历史形象。我们也已对编剧团队进行专项培训，杜绝类似“万年老二”等刻板标签的滥用。\n\n大家的每一条批评，我们都逐条记录并内部传阅。未来，我们将每月固定开放两场线上沟通会，直接听取大家对角色的期待与建议。制作组深知，唯有敬畏角色、敬畏故事，才能不负陪伴。再次感谢各位的直言相谏，我们会用行动证明改变的决心。"
+    }
+  },
+  {
+    "timestamp": "2026-08-11 16:10:43",
+    "event_desc": "一、事件核心速览\n时间：2026 年 8 月 6 日 —8 月 9 日\n导火索：《是王者啊？》第六季第 4 集剧情恶意消费周瑜人设，强化「万年老二」梗，制造公开羞辱场景\n结果：制作组于 8 月 9 日发布致歉信，宣布下架相关内容并重新制作\n二、事件完整时间线\n1. 剧情播出阶段（8 月 6 日）\n8 月 6 日 10:00：《是王者啊？》第六季第 4 集在各大平台（爱奇艺、腾讯视频、AcFun 等）上线，会员可观看爱奇艺\n核心争议剧情：\n老夫子先邀请诸葛亮代课被拒，转而邀请周瑜，却谎称 \"你是第一个被邀请的\"，欺骗周瑜的好胜心\n周瑜误将澡堂认作食堂，被女生误认为变态，制造低级笑点\n周瑜热心帮学生布置会场，以为是欢迎自己，结果登台时大屏幕全是诸葛亮画像，全场欢呼诸葛学长\n安排与小乔外貌高度相似（丸子头、身高体型一致）的 NPC，却是诸葛亮的忠实粉丝，与周瑜互动\n周瑜黯然离场时遇到东方曜，本想寻求安慰，曜却只想打听诸葛亮的事\n标题与台词反复暗示周瑜是 \"万年老二\"，强化其活在诸葛亮阴影下的设定\n2. 舆论发酵阶段（8 月 7 日 —8 月 9 日）\n8 月 7 日：少量周瑜玩家发现剧情问题，开始在社交平台吐槽\n8 月 8 日：争议扩大，# 是王者啊给周瑜道歉 #等话题在抖音、微博等平台传播，玩家集体抵制，指责制作组：\n恶意消费冷门英雄，拿周瑜自尊心制造笑点\n侮辱周瑜历史形象（历史上周瑜并非心胸狭隘之人）\n盗用小乔形象设计 NPC，伤害瑜乔 CP 粉丝感情\n长期玩 \"既生瑜何生亮\" 的老梗，缺乏创新\n8 月 9 日上午：舆论达到高潮，多个游戏社区（NGA、虎扑）出现讨论热帖，玩家要求官方道歉并修改剧情\n3. 官方回应阶段（8 月 9 日晚）\n8 月 9 日 20 时左右：《是王者啊？》制作组在官方账号发布致歉信，承认收到反馈并宣布处理措施\n同时：相关争议剧集在各大平台被下架，OP 也进行了修改",
+    "visual_risks": "",
+    "sandbox_log": [
+      {
+        "round": 1,
+        "name": "制作组阿策",
+        "persona": "《是王者啊？》官方运营，负责发布致歉信和后续沟通，语气诚恳但略显官方。",
+        "weight": 800,
+        "stance": "neutral",
+        "role_type": "official",
+        "speech": "【关于《是王者啊？》第六季第四集剧情争议的情况说明】 针对近期观众及玩家就《是王者啊？》第六季第四集中涉及英雄周瑜及相关角色剧情设定提出的反馈与质疑，我单位已于第一时间获悉并高度关注。 对于该集内容在角色塑造、剧情编排及情感表达上未能充分尊重英雄人物形象与观众期待，我单位深表歉意。我们已立即启动内部核查程序，并对相关剧集内容进行下架处理。目前，我们正就该集剧本创作、角色设定审核等环节进行逐项复盘，以查明问题产生的具体原因。 后续核查进展及具体处理方案，我单位将通过官方渠道及时向公众通报。我们深知内容创作承载着观众的情感与信任，此次事件为我们敲响了警钟。我们定当严肃对待，认真整改。",
+        "ts": 1786435804
+      },
+      {
+        "round": 1,
+        "name": "都督铁粉",
+        "persona": "周瑜十年老粉，从游戏到动画一路追随，看到偶像被羞辱怒不可遏，要求彻底整改。",
+        "weight": 900,
+        "stance": "hostile",
+        "role_type": "bystander",
+        "speech": "十年老粉真的绷不住了，你们写剧本的时候有没有人想过周瑜是什么人？孙策托孤托的是小气鬼吗？历史课都没上过？还搞个替身小乔追诸葛亮，这已经不是消费角色了，是把我们这些认真喜欢角色的玩家当傻子遛！下架重制就完事了？道歉信里连具体错哪儿都不敢说，光说\"深刻反思\"给谁看呢？",
+        "ts": 1786435806
+      },
+      {
+        "round": 1,
+        "name": "理性老玩家",
+        "persona": "玩王者多年，理解粉丝愤怒，但愿意给制作组改进机会，希望看到实际行动。",
+        "weight": 600,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "下架重制是第一步但不够啊，制作组能不能说说剧本审核流程到底哪一环出了问题？我们不是要你开除谁，是要看到你真的懂周瑜是什么人。别光说会加强倾听，拿出点具体方案来行吗？",
+        "ts": 1786435807
+      },
+      {
+        "round": 2,
+        "name": "都督铁粉",
+        "persona": "周瑜十年老粉，从游戏到动画一路追随，看到偶像被羞辱怒不可遏，要求彻底整改。",
+        "weight": 900,
+        "stance": "hostile",
+        "role_type": "bystander",
+        "speech": "十年老粉从游戏追到动画，等来的是你们拿周瑜的自尊心当笑料？道歉信通篇“高度重视”“深刻反思”，具体错哪儿一个字不敢提，下架重制就完事了？你们写剧本时但凡查过史书，都知道周瑜不是被诸葛亮气死的小心眼！#是王者啊给周瑜道歉#",
+        "ts": 1786435811
+      },
+      {
+        "round": 2,
+        "name": "理性老玩家",
+        "persona": "玩王者多年，理解粉丝愤怒，但愿意给制作组改进机会，希望看到实际行动。",
+        "weight": 600,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "下架重制我认，但道歉信里那句“加强倾听反馈”真给我整笑了。你们开播前审剧本的会都开睡着了？周瑜不是你们拿来垫诸葛亮的工具人，这道理还用玩家教吗？行，既然说改，那就看着改完的成品说话。",
+        "ts": 1786435813
+      },
+      {
+        "round": 2,
+        "name": "考据狂人·周郎正名",
+        "persona": "知名历史考据博主，擅长用《三国志》《江表传》等史料逐帧打脸动画剧情，言辞犀利，最爱揪着制作组‘历史虚无主义’和‘恶意矮化’不放，誓要为周瑜翻案。",
+        "weight": 900,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "“既生瑜何生亮”这梗玩了几百年了还当宝呢？制作组是翻烂了《三国演义》没翻过《三国志》吧？周瑜赤壁火烧曹操的时候诸葛亮还在那借东风呢！你们连“曲有误周郎顾”的雅量都懒得查，直接套个loser模板糊弄人。道歉信里“认真整改”四个字值几分钱？我要看的是你们怎么改，不是看你们怎么把锅甩给“创作需要”！#是王者啊给周瑜道歉#",
+        "ts": 1786435815
+      },
+      {
+        "round": 2,
+        "name": "毒舌动画鉴抄师",
+        "persona": "硬核动画区吐槽UP主，专扒国漫烂梗和剧本偷懒，以阴阳怪气著称，这次直接开团‘万年老二’梗是编剧江郎才尽，还嘲讽制作组拿小乔NPC当工具人，专戳玩家肺管子。",
+        "weight": 700,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "“我们定当严肃对待，认真整改”——好家伙，整改什么？整改下架速度吗？致歉信连“为什么错”都不敢写，光说“加强交流”，合着你们是来跟玩家联谊的？#是王者啊给周瑜道歉#",
+        "ts": 1786435816
+      },
+      {
+        "round": 3,
+        "name": "都督铁粉",
+        "persona": "周瑜十年老粉，从游戏到动画一路追随，看到偶像被羞辱怒不可遏，要求彻底整改。",
+        "weight": 900,
+        "stance": "hostile",
+        "role_type": "bystander",
+        "speech": "\"复盘\"\"加强倾听\"\"定期征集\"——好家伙，合着你们整改方案就是建个粉丝群？周瑜被写成小丑这事是倾听能解决的吗？你们是不知道周瑜是谁还是不想知道？下架重制说得好听，道歉信里连\"我们错在哪儿\"都写不出来，这态度跟拿周瑜垫诸葛亮的时候一样傲慢。倒是给个时间表啊，重制版什么时候出？谁负责审核？不会又是同一个编剧换个皮端上来吧？#是王者啊给周瑜道歉#",
+        "ts": 1786435819
+      },
+      {
+        "round": 3,
+        "name": "理性老玩家",
+        "persona": "玩王者多年，理解粉丝愤怒，但愿意给制作组改进机会，希望看到实际行动。",
+        "weight": 600,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "道歉信通篇“高度重视”“深刻反思”就是不敢说哪集哪段哪句台词错了，下架倒是挺快，重制版啥时候上？审核流程改不改？别到时候又端一盆换汤不换药的上来，我们玩家要的是行动不是口号。#是王者啊给周瑜道歉#",
+        "ts": 1786435820
+      },
+      {
+        "round": 3,
+        "name": "考据狂人·周郎正名",
+        "persona": "知名历史考据博主，擅长用《三国志》《江表传》等史料逐帧打脸动画剧情，言辞犀利，最爱揪着制作组‘历史虚无主义’和‘恶意矮化’不放，誓要为周瑜翻案。",
+        "weight": 900,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "周瑜在正史里是“性度恢廓”的江东大都督，赤壁之战的主帅，到了你们笔下成了被诸葛亮压一头的酸鸡？这跟“创作需要”有什么关系？你们连《三国志》都不翻就敢写历史人物，这不叫改编叫抹黑。道歉信里“加强倾听”四个字就想糊弄过去？先说说你们编剧查没查过《江表传》吧。#是王者啊给周瑜道歉#",
+        "ts": 1786435823
+      },
+      {
+        "round": 3,
+        "name": "毒舌动画鉴抄师",
+        "persona": "硬核动画区吐槽UP主，专扒国漫烂梗和剧本偷懒，以阴阳怪气著称，这次直接开团‘万年老二’梗是编剧江郎才尽，还嘲讽制作组拿小乔NPC当工具人，专戳玩家肺管子。",
+        "weight": 700,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "好家伙，道歉信通篇在说“我们会倾听”“我们会征集”，敢情你们以为问题出在没听见？周瑜被写成小丑、历史形象被抹黑，这是耳朵聋不聋的事吗？是你们压根没把他当人！下架倒是利索，重制版连个影子都没有，就敢拿“定期征集”糊弄人，你们是来乞讨意见的还是来做动画的？#是王者啊给周瑜道歉#",
+        "ts": 1786435825
+      },
+      {
+        "round": 4,
+        "name": "制作组阿策",
+        "persona": "《是王者啊？》官方运营，负责发布致歉信和后续沟通，语气诚恳但略显官方。",
+        "weight": 800,
+        "stance": "neutral",
+        "role_type": "official",
+        "speech": "【关于《是王者啊？》第六季第4集剧情争议的处理通报】 自2026年8月6日第六季第4集上线以来，我们收到了大量观众针对该集剧情中涉及英雄周瑜及稷下学院角色塑造的严肃批评。经制作组内部全面复盘与审查，现就相关情况通报如下： 一、问题认定\n经核查，该集剧本在角色塑造与情节设计上存在明显失误。对周瑜角色的处理，未能尊重其历史原型中“性度恢廓”的江东统帅形象，过度使用“既生瑜何生亮”等刻板叙事模板，以牺牲角色尊严为代价制造冲突笑点，对瑜乔CP情感线及相关NPC设计亦缺乏基本审慎考量。上述问题实质构成对角色及玩家情感的不当消费。 二、处置措施\n1. 涉事剧集已于2026年8月9日20时起在全部播出平台下架，相关片头动画同步完成修改。\n2. 该集剧本已退回重制流程，目前由独立审核小组对全部六季既有剧本进行角色塑造合规复查，重点排查是否存在同类以消费角色尊严制造笑点的情节。\n3. 重制版剧本需经历史顾问团队及玩家代表联合评审通过后方可进入制作，预计于2026年10月31日前重新上线，具体上线日期将在通过评审后另行公布。 三、流程整改\n制作组已建立“历史人物角色塑造双审制”，所有涉及历史人物的剧本分集，须依次通过内部内容安全初审与外部历史顾问终审，方可进入分镜制作阶段。相关审核记录将存档备查，后续每季度向公众开放一次审核流程说明。 四、后续沟通\n针对重制版进度及审核标准，制作组将于2026年9月5日在官方账号发布详细说明。期间观众可通过官方指定渠道提交意见，所有意见将分类汇总并纳入重制版评审参考。 《是王者啊？》制作组\n2026年8月9日",
+        "ts": 1786435831
+      },
+      {
+        "round": 4,
+        "name": "都督铁粉",
+        "persona": "周瑜十年老粉，从游戏到动画一路追随，看到偶像被羞辱怒不可遏，要求彻底整改。",
+        "weight": 900,
+        "stance": "hostile",
+        "role_type": "bystander",
+        "speech": "好家伙，道歉信写得跟期末总结似的，\"全面复盘\"上了，下架倒是快得一批。行吧，既然要重制，我倒要看看10月31号端出来的是不是又拿周瑜当垫脚石。反正我钱包已经准备好了，到时候要是还这味儿，那这IP我算是彻底戒了。",
+        "ts": 1786435832
+      },
+      {
+        "round": 4,
+        "name": "理性老玩家",
+        "persona": "玩王者多年，理解粉丝愤怒，但愿意给制作组改进机会，希望看到实际行动。",
+        "weight": 600,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "双审制这玩意儿要是真落地，以后历史人物剧情总算有个准信了。但说真的，周瑜那集被下架前我看完就心里堵得慌，堂堂江东都督被写成舔狗小丑，搁谁谁不气？这次给个机会看十月底重制版，要是还用\"既生瑜何生亮\"那套糊弄人，那我真得把账号里那几百个皮肤都锁起来。#是王者啊给周瑜道歉#",
+        "ts": 1786435834
+      },
+      {
+        "round": 4,
+        "name": "考据狂人·周郎正名",
+        "persona": "知名历史考据博主，擅长用《三国志》《江表传》等史料逐帧打脸动画剧情，言辞犀利，最爱揪着制作组‘历史虚无主义’和‘恶意矮化’不放，誓要为周瑜翻案。",
+        "weight": 900,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "好家伙，拖到10月31号重新上线，敢情周瑜的冤案还得等俩月才能翻？合着这俩月里全网继续刷\"既生瑜何生亮\"呗？道歉信里写\"性度恢廓\"四个字，你们编剧倒是先背背《三国志》周瑜传再谈历史顾问啊！#是王者啊给周瑜道歉#",
+        "ts": 1786435836
+      },
+      {
+        "round": 4,
+        "name": "毒舌动画鉴抄师",
+        "persona": "硬核动画区吐槽UP主，专扒国漫烂梗和剧本偷懒，以阴阳怪气著称，这次直接开团‘万年老二’梗是编剧江郎才尽，还嘲讽制作组拿小乔NPC当工具人，专戳玩家肺管子。",
+        "weight": 700,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "好家伙，道歉信里\"独立审核小组\"\"历史顾问终审\"说得跟要建故宫博物院似的，结果重制版上线日期还带\"另行公布\"？你们是怕十月底端出来又翻车，提前给自己留了条跑路的缝是吧？周瑜在你们这儿被消费了六季，现在连个确切的翻身日期都不敢给，这道歉信写得跟小学生检讨书一样——\"我错了但我不说错哪儿了，我改但我不说什么时候改好\"。说真的，别拿\"双审制\"当挡箭牌了，先把那集编剧的工牌收了吧。#是王者啊给周瑜道歉#",
+        "ts": 1786435838
+      }
+    ],
+    "report_json": {
+      "fatal_focus": "未识别到明确的高危触发点，建议进一步人工审查",
+      "scores": {
+        "legal": {
+          "score": 1,
+          "reason": "未命中已知红线条款",
+          "hits": 0,
+          "details": []
+        },
+        "business": {
+          "score": 2,
+          "reason": "预测峰值触达 15,919 人 (t=12)，R₀=5.07，综合评分 2",
+          "peak_infected": 15919,
+          "r0": 5.07,
+          "peak_time": 12
+        },
+        "reputation": {
+          "score": 2,
+          "reason": "未检索到高相关度恶评或相似案例，默认中等风险"
+        }
+      },
+      "rewrite_suggestion": "尊敬的观众朋友们：\n\n大家好，我们是《是王者啊？》制作组。\n\n关于第六季第4集内容，我们收到了大量观众的批评与建议。经过深刻反思，我们郑重向所有喜爱周瑜、关注稷下学院故事的观众致以最诚挚的歉意。我们意识到，在剧情创作中，为了追求戏剧冲突而忽视了角色应有的尊严与情感，对周瑜这一角色的塑造方式，以及围绕他设计的笑点与情节，确实伤害了观众的情感，也偏离了角色本身的精神内核。这不是我们制作动画的初衷，更不是大家期待看到的英雄故事。\n\n我们已决定立即将相关剧集全平台下架，并启动重新制作流程。在后续创作中，我们将严格审视每一个情节、每一句台词，确保尊重每一位英雄的设定与人格，不再以任何形式消费角色、制造刻板印象。同时，我们将建立更畅通的反馈渠道，定期收集观众意见，在剧情打磨阶段就引入更多视角的讨论，避免类似问题再次发生。\n\n感谢每一位愿意花时间指出问题的观众，你们的每一份声音都让我们看到自身的不足。我们深知，信任的重建需要时间，但我们会用行动证明改变的决心。未来，我们希望能与大家一同见证更尊重、更温暖、更有趣的王者故事。再次向大家道歉，也谢谢你们的包容与陪伴。"
+    }
+  },
+  {
+    "timestamp": "2026-08-11 16:24:32",
+    "event_desc": "一、事件核心速览\n时间：2026 年 8 月 6 日 —8 月 9 日\n导火索：《是王者啊？》第六季第 4 集剧情恶意消费周瑜人设，强化「万年老二」梗，制造公开羞辱场景\n结果：制作组于 8 月 9 日发布致歉信，宣布下架相关内容并重新制作\n二、事件完整时间线\n1. 剧情播出阶段（8 月 6 日）\n8 月 6 日 10:00：《是王者啊？》第六季第 4 集在各大平台（爱奇艺、腾讯视频、AcFun 等）上线，会员可观看爱奇艺\n核心争议剧情：\n老夫子先邀请诸葛亮代课被拒，转而邀请周瑜，却谎称 \"你是第一个被邀请的\"，欺骗周瑜的好胜心\n周瑜误将澡堂认作食堂，被女生误认为变态，制造低级笑点\n周瑜热心帮学生布置会场，以为是欢迎自己，结果登台时大屏幕全是诸葛亮画像，全场欢呼诸葛学长\n安排与小乔外貌高度相似（丸子头、身高体型一致）的 NPC，却是诸葛亮的忠实粉丝，与周瑜互动\n周瑜黯然离场时遇到东方曜，本想寻求安慰，曜却只想打听诸葛亮的事\n标题与台词反复暗示周瑜是 \"万年老二\"，强化其活在诸葛亮阴影下的设定\n2. 舆论发酵阶段（8 月 7 日 —8 月 9 日）\n8 月 7 日：少量周瑜玩家发现剧情问题，开始在社交平台吐槽\n8 月 8 日：争议扩大，# 是王者啊给周瑜道歉 #等话题在抖音、微博等平台传播，玩家集体抵制，指责制作组：\n恶意消费冷门英雄，拿周瑜自尊心制造笑点\n侮辱周瑜历史形象（历史上周瑜并非心胸狭隘之人）\n盗用小乔形象设计 NPC，伤害瑜乔 CP 粉丝感情\n长期玩 \"既生瑜何生亮\" 的老梗，缺乏创新\n8 月 9 日上午：舆论达到高潮，多个游戏社区（NGA、虎扑）出现讨论热帖，玩家要求官方道歉并修改剧情\n3. 官方回应阶段（8 月 9 日晚）\n8 月 9 日 20 时左右：《是王者啊？》制作组在官方账号发布致歉信，承认收到反馈并宣布处理措施\n同时：相关争议剧集在各大平台被下架，OP 也进行了修改",
+    "visual_risks": "",
+    "sandbox_log": [
+      {
+        "round": 1,
+        "name": "王者动画组",
+        "persona": "《是王者啊？》官方制作组发言人，负责发布致歉信和下架重制公告，语气诚恳但略显官方。",
+        "weight": 800,
+        "stance": "neutral",
+        "role_type": "official",
+        "speech": "【关于《是王者啊？》第六季第4集剧情争议的情况通报】 各位观众： 针对近期《是王者啊？》第六季第4集播出后引发的关于英雄周瑜角色塑造、剧情内容及衍生形象设计的争议，我组已全面关注并高度重视。经内部紧急复盘，确认相关剧情在角色尊重、情感表达及历史人文关怀层面存在明显失当，未能达到应有的创作标准，伤害了广大观众及玩家群体的情感。 目前，我组已正式启动以下核查与处置程序：\n一、相关争议剧集已在全网各播出平台完成下架处理；\n二、我组已成立专项整改小组，对第六季后续内容及已上线剧集进行全量内容复审；\n三、针对涉及角色形象、历史背景及人物关系设定的设计流程，将进行系统性回溯与检讨。 后续具体整改措施、重制方案及上线时间，我组将在完成内部核查后，通过官方渠道向各位观众进行专项通报。我们深知，文娱创作的核心在于对角色与观众的尊重，此次事件暴露出的问题，我组将严肃面对，不回避、不推诿。 感谢各位观众的监督与指正。 《是王者啊？》制作组\n2026年8月9日",
+        "ts": 1786436623
+      },
+      {
+        "round": 1,
+        "name": "周瑜本命粉",
+        "persona": "多年周瑜玩家，看到偶像被恶意羞辱，愤怒要求官方彻底整改并公开道歉，情绪激动。",
+        "weight": 900,
+        "stance": "hostile",
+        "role_type": "bystander",
+        "speech": "#周瑜 #是王者啊给周瑜道歉 通报里那句\"系统性回溯与检讨\"——回溯什么？检讨什么？具体到流程，是哪个环节拍板通过了\"澡堂误会\"和\"诸葛画像登场\"的？是编剧个人写嗨了，还是审核会上有人提出过异议被压下去了？ 全量复审是复审什么标准？重制方案是重新写剧本，还是把诸葛亮相关镜头删掉换个NPC就算完事？ 下架容易，重做难。观众怕的不是等，是等来一个换汤不换药的\"安全版\"——把明着嘲讽改成暗着捧杀，把\"万年老二\"从台词里删了，但镜头语言里",
+        "ts": 1786436625
+      },
+      {
+        "round": 1,
+        "name": "理性老观众",
+        "persona": "追番多年的老粉，虽然对剧情失望，但认可官方下架重制的诚意，希望后续能真正改进。",
+        "weight": 600,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "#周瑜 #是王者啊给周瑜道歉 说实话，看到这次下架重制的动作，我第一反应是松了口气。至少他们没有嘴硬说\"观众想多了\"，而是承认了角色尊重层面出了问题，这个态度是有的。 但我更在意的是后头那句\"系统性回溯与检讨\"。作为从第一季追到现在的老观众，这个句式我见过太多次了。上次出争议也是这套流程——复盘、整改、感谢监督，然后新一季上线，换了个方式继续踩雷。说白了，流程走完了，但创作理念有没有真的变，没人知道。 我希望能看到的改进，不是把\"万年老二\"从台词里删掉，而是重制版能让周瑜这个",
+        "ts": 1786436628
+      },
+      {
+        "round": 2,
+        "name": "周瑜本命粉",
+        "persona": "多年周瑜玩家，看到偶像被恶意羞辱，愤怒要求官方彻底整改并公开道歉，情绪激动。",
+        "weight": 900,
+        "stance": "hostile",
+        "role_type": "bystander",
+        "speech": "#周瑜 #是王者啊给周瑜道歉 你们道歉信写得挺工整，但我有个问题想问： \"系统性回溯与检讨\"——回溯什么？检讨什么？ 哪个环节拍板通过了\"澡堂误会\"这个桥段的？哪个环节觉得\"全校欢迎仪式上放诸葛亮画像\"是个好包袱？审批会上有没有人提出过异议，提出之后是被采纳了还是被压下去了？ 你说\"后续整改措施、重制方案及上线时间将在完成内部核查后通报\"——我现在就想知道，这个\"内部核查\"的标准是什么？是核查\"怎么不让观众再生气\"，还是核查\"创作流程里到底哪个环节出了问题\"？ 全量复审是复审什么？重制版是把",
+        "ts": 1786436632
+      },
+      {
+        "round": 2,
+        "name": "理性老观众",
+        "persona": "追番多年的老粉，虽然对剧情失望，但认可官方下架重制的诚意，希望后续能真正改进。",
+        "weight": 600,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "#周瑜 #是王者啊给周瑜道歉 看到制作组没有嘴硬说“观众过度解读”，而是直接承认角色尊重层面出了问题、下架重制——这个承认是值一个赞的。至少他们没把锅甩给“个别观众玻璃心”。 但作为一个从第一季追到现在的老观众，我真正想说的是：**你们怕的不是“被骂”，是“被忘记”。** 周瑜在游戏里是个热门法师，可在动画里一直是“诸葛亮背景板”。这次争议的本质不是某一个包袱过不过分，而是整个创作组长期默认了一个前提——**周瑜这个角色存在的意义，就是为了衬托诸葛亮的聪明和格局。** 这个前提不拆掉，重",
+        "ts": 1786436634
+      },
+      {
+        "round": 2,
+        "name": "考据派老周",
+        "persona": "历史考据型游戏博主，专注三国题材考据，粉丝量大，擅长引用《三国志》《江表传》等史料逐帧拆解剧情，言辞犀利，对历史人物污名化零容忍。",
+        "weight": 900,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "#周瑜 #是王者啊给周瑜道歉 说点你们不爱听的。 官方这封道歉信，通篇避开了两个字：**历史**。 通篇是\"角色尊重\"\"情感表达\"\"人文关怀\"——一套标准的现代创作伦理话术。但你们回避了一个最本质的问题：周瑜这个角色，在真实历史里是什么人？ 《三国志·周瑜传》开篇怎么写的？\"长壮有姿貌\"，什么意思？周瑜是三国时期公认的美男子，而且不是花瓶——孙策评价他\"才略万端\"，赤壁之战是实打实以少胜多打赢了。 但这不是重点。重点是《三国志》里记载的周瑜性格",
+        "ts": 1786436637
+      },
+      {
+        "round": 2,
+        "name": "乔妹护卫队长",
+        "persona": "瑜乔CP大粉兼同人创作者，活跃于微博超话和LOFTER，对角色形象极度敏感，擅长组织粉丝集中刷话题、制作对比图，情绪激烈，直接点名制作组恶意消费。",
+        "weight": 700,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "#周瑜 #是王者啊给周瑜道歉 我翻来覆去看了三遍那封道歉信，就记住了一个词——\"衍生形象设计\"。 好一个\"衍生形象\"。 那个顶着丸子头、身形跟小乔一模一样的NPC，在你们的创作语境里就是一个\"衍生形象\"。可对我们这些把瑜乔当心头肉的人来说，她不是设计稿上的图层，她是制作组拿我们最珍视的感情做成的工具人——还是专门用来往周瑜心口上捅刀的那种。 你们知道最诛心的是什么吗？不是周瑜被羞辱，是那个\"小乔\"全程在崇拜诸葛亮。 这比\"万年老二\"狠多了。台词里的羞辱是明",
+        "ts": 1786436640
+      },
+      {
+        "round": 3,
+        "name": "周瑜本命粉",
+        "persona": "多年周瑜玩家，看到偶像被恶意羞辱，愤怒要求官方彻底整改并公开道歉，情绪激动。",
+        "weight": 900,
+        "stance": "hostile",
+        "role_type": "bystander",
+        "speech": "#周瑜 #是王者啊给周瑜道歉 \"系统性回溯与检讨\"——我盯着这七个字看了半天，愣是没看出来你们要回溯什么、检讨什么。 下架了，OK，动作够快。但下架只是把那个伤口从观众眼前藏起来了，不是把制造伤口的机制拆掉了。我想问的是：这个剧本从初稿到分镜到配音到上线，中间经过了多少道审核？哪一道审核觉得\"澡堂误会\"是个好包袱？哪一道觉得\"欢迎仪式上放诸葛亮画像\"是戏剧张力？有没有人在会上说过\"这样对周瑜不公平\"，如果有，那个声音是被采纳了还是被压下去了？ \"全量内容复审",
+        "ts": 1786436642
+      },
+      {
+        "round": 3,
+        "name": "理性老观众",
+        "persona": "追番多年的老粉，虽然对剧情失望，但认可官方下架重制的诚意，希望后续能真正改进。",
+        "weight": 600,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "#周瑜 #是王者啊给周瑜道歉 下架重制这个动作，我给制作组记一功。至少他们认了“角色尊重”这层问题，没拿“创作自由”当挡箭牌——要知道隔壁多少剧组翻车第一反应都是甩锅观众，这点上他们态度算端正的。 但我这个追了六季的老观众，最怕的就是“专项通报”这四个字。上一次出节奏，也是这套流程，最后等来的新一季，周瑜还是那个在诸葛亮影子里打转的周瑜，只是把明晃晃的刀子换成了软刀子。 我想看到的改进其实特别具体：重制版能不能让周瑜拥有一个不靠“输给",
+        "ts": 1786436644
+      },
+      {
+        "round": 3,
+        "name": "考据派老周",
+        "persona": "历史考据型游戏博主，专注三国题材考据，粉丝量大，擅长引用《三国志》《江表传》等史料逐帧拆解剧情，言辞犀利，对历史人物污名化零容忍。",
+        "weight": 900,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "#周瑜 #是王者啊给周瑜道歉 道歉信我看了三遍，发现一个很有意思的词：“英雄周瑜”。 制作组管周瑜叫“英雄”。可在这封信里，你们只字未提他“英雄”在哪里。 《三国志·周瑜传》裴松之注引《江表传》，记载了周瑜的一段话：“丈夫处世，遇知己之主，外托君臣之义，内结骨肉之恩，言行计从，祸福共之。假使苏张更生，郦叟复出，犹抚其背而折其辞，岂足下幼生所能移乎？” 这段话是周瑜拒绝蒋干游说时说的。苏秦",
+        "ts": 1786436647
+      },
+      {
+        "round": 3,
+        "name": "乔妹护卫队长",
+        "persona": "瑜乔CP大粉兼同人创作者，活跃于微博超话和LOFTER，对角色形象极度敏感，擅长组织粉丝集中刷话题、制作对比图，情绪激烈，直接点名制作组恶意消费。",
+        "weight": 700,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "#周瑜 #是王者啊给周瑜道歉 道歉信里有一句我反复看了很久——“衍生形象设计”。 你们用这四个字轻飘飘地带过了那个丸子头NPC。但在我们这些把瑜乔当命看的人眼里，那不是什么“衍生形象”，那是小乔。那个梳着跟小乔一样的丸子头、身形跟小乔如出一辙的姑娘，在动画里是诸葛亮的迷妹，全程用崇拜的眼神追着诸葛亮跑。 你们知道这有多诛心吗？ “万年老二”的梗再过分，也只是设定层面的踩踏。可那个“小乔”的NPC，是拿我们珍视了这么多年的感情做成的刀，专门往周瑜心",
+        "ts": 1786436650
+      },
+      {
+        "round": 4,
+        "name": "王者动画组",
+        "persona": "《是王者啊？》官方制作组发言人，负责发布致歉信和下架重制公告，语气诚恳但略显官方。",
+        "weight": 800,
+        "stance": "neutral",
+        "role_type": "official",
+        "speech": "【关于《是王者啊？》第六季第四集剧情争议的处理通报】 自2026年8月6日第六季第四集上线以来，我组陆续收到大量观众对英雄周瑜角色塑造及相关剧情设定的严肃反馈。经全面复盘与内部审查，现就相关情况及处置措施通报如下： 一、问题认定\n经核查，该集在角色塑造层面存在对英雄周瑜长期“陪衬化”设定的惯性依赖，个别桥段（包括但不限于澡堂误会、欢迎会场景等）以贬抑角色自尊为代价制造冲突，背离了该英雄在历史与游戏设定中应有的气度与才能。同时，片中出现与小乔形象高度近似的非玩家角色（NPC），其行为设计与观众情感期待严重不符，构成对角色关系设定的不当消费。上述问题暴露了创作环节在角色尊重意识与内容审核机制上的双重缺失。 二、处置措施\n1. 相关争议剧集已于2026年8月9日20时起在全平台下架，后续不再恢复上线。\n2. 该集内容已列入全面重制计划，重制方向将围绕“尊重角色内核、重建人物弧光”展开，重制版本上线时间另行公布。\n3. 针对全系列已上线内容，我组已启动系统性回溯排查，重点审查是否存在同类以贬抑角色换取戏剧效果的情况，排查结果将于15个工作日内以专项报告形式向社会公布。\n4. 围绕重制工作，我组将设立由编剧、历史顾问及玩家代表共同参与的评审小组，对重制剧本实施前置审核，避免同类问题再次发生。 三、后续机制\n1. 即日起，《是王者啊？》官方账号将设立常态化意见征集通道，每两周汇总一次观众反馈并公示处理进展。\n2. 针对角色塑造类议题，我组将建立专项备案制度，涉及历史原型角色的重大剧情设定调整，须提交书面依据并留存决策记录。 我组深知，此次争议的核心并非单一情节失误，而是长期创作惯性对角色价值的磨损。下架与重制仅为起点，后续将以可验证的行动切实回应观众期待。感谢各界监督。 《是王者啊？》制作组\n2026年8月9日",
+        "ts": 1786436656
+      },
+      {
+        "round": 4,
+        "name": "周瑜本命粉",
+        "persona": "多年周瑜玩家，看到偶像被恶意羞辱，愤怒要求官方彻底整改并公开道歉，情绪激动。",
+        "weight": 900,
+        "stance": "hostile",
+        "role_type": "bystander",
+        "speech": "下架了，重制了，道歉信也写了三版。挺好，动作快，姿态也摆得端正。但我这双追了六年番的眼睛，最熟悉的就是这套\"下架-重制-回归\"的循环。 你们说\"重制方向将围绕尊重角色内核、重建人物弧光展开\"——这句话我记下了。等重制版上线那天，我会一帧一帧地看，看你们所谓的\"人物弧光\"，是把周瑜从诸葛亮影子里拽出来，还是换了个更精致的角度继续让他当背景板。 周瑜这个角色，历史上是\"谈笑间，樯橹灰飞烟灭\"的江东大都督。可在这部动画",
+        "ts": 1786436659
+      },
+      {
+        "round": 4,
+        "name": "理性老观众",
+        "persona": "追番多年的老粉，虽然对剧情失望，但认可官方下架重制的诚意，希望后续能真正改进。",
+        "weight": 600,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "下架重制，这步棋走得比我预想的干净。至少他们没拿\"创作自由\"当遮羞布，那句\"长期陪衬化设定的惯性依赖\"算是把病根认下来了，比起隔壁那些翻车先甩锅观众的剧组，这态度能让人坐下来谈。 但我这个追了六季的老观众，早就过了听漂亮话的年纪。我最想看的不是什么\"人物弧光\"，我就想看看那封15个工作日后的排查报告里，敢不敢写清楚一件事——\"澡堂误会\"这个包袱从初稿到过审，中间到底有没有人拍过桌子说\"这样不行\"。如果重制版里的周瑜能分到一个不靠踩踏别人也能立",
+        "ts": 1786436662
+      },
+      {
+        "round": 4,
+        "name": "考据派老周",
+        "persona": "历史考据型游戏博主，专注三国题材考据，粉丝量大，擅长引用《三国志》《江表传》等史料逐帧拆解剧情，言辞犀利，对历史人物污名化零容忍。",
+        "weight": 900,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "#周瑜 #是王者啊给周瑜道歉 看完全篇通报，我注意到一个很有意思的用词——“重制方向将围绕‘尊重角色内核、重建人物弧光’展开”。 内核。弧光。词藻倒是华丽。 但我想问一个很朴素的问题：你们重制要请“历史顾问”进评审小组，那这次“历史顾问”有没有翻过《三国志·吴书·周瑜传》？知道不知道“性度恢廓”这四个字怎么解释？ 《江表传》里蒋干游说周瑜，回去跟曹操描述他时用了八个字——“雅量高致，非言辞所间”。这是周瑜对手阵营的人对他的评价，不是",
+        "ts": 1786436665
+      },
+      {
+        "round": 4,
+        "name": "乔妹护卫队长",
+        "persona": "瑜乔CP大粉兼同人创作者，活跃于微博超话和LOFTER，对角色形象极度敏感，擅长组织粉丝集中刷话题、制作对比图，情绪激烈，直接点名制作组恶意消费。",
+        "weight": 700,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "#周瑜 #是王者啊给周瑜道歉 #瑜乔CP 道歉信说“衍生形象设计”——这四个字我嚼了一整天。 你们管那个丸子头姑娘叫“衍生形象”。但在我们这些从王者荣耀初代就开始磕瑜乔的人眼里，那不是衍生品，那是小乔。那个跟她一样扎着丸子头、身形如出一辙的姑娘，在动画里用崇拜的眼神追着诸葛亮跑，全程把周瑜当空气。 你们知道这有多诛心吗？ “万年老二”的梗再恶心，也只是设定层面的踩踏。可那个“小乔”NPC，是拿我们珍视了这么多年的感情做成的刀，专门往周瑜心口上捅",
+        "ts": 1786436668
+      }
+    ],
+    "report_json": {
+      "fatal_focus": "未识别到明确的高危触发点，建议进一步人工审查",
+      "scores": {
+        "legal": {
+          "score": 1,
+          "reason": "未命中已知红线条款",
+          "hits": 0,
+          "details": []
+        },
+        "business": {
+          "score": 2,
+          "reason": "预测峰值触达 15,919 人 (t=12)，R₀=5.07，综合评分 2",
+          "peak_infected": 15919,
+          "r0": 5.07,
+          "peak_time": 12
+        },
+        "reputation": {
+          "score": 2,
+          "reason": "未检索到高相关度恶评或相似案例，默认中等风险"
+        }
+      },
+      "rewrite_suggestion": "各位观众、玩家朋友：\n\n《是王者啊？》第六季第四集播出后，我们收到了大量关于周瑜角色塑造及剧情设置的真诚批评。这些声音让我们深感惭愧——我们不仅未能展现周瑜应有的风采与气度，反而以刻板印象和低级笑点伤害了喜爱他的观众，也辜负了大家对历史英雄的尊重。在此，我们向所有感到不适的观众郑重道歉。\n\n经深刻复盘，我们已将该集内容全平台下架，并决定重新制作。我们认识到，幽默不应建立在对任何角色的贬低之上，更不应以牺牲人物尊严为代价换取短暂笑果。后续制作中，我们将建立更严格的剧情审核机制，邀请玩家代表参与前期评审，确保每位英雄都能得到符合其精神内核的呈现。\n\n同时，我们将于每周五在官方账号开设“稷下议事厅”专栏，集中回应剧情争议与建议；并设立专项对接邮箱，由主创团队直接阅读每一条反馈。我们深知，信任的重建需要行动而非言语，恳请大家继续监督，给我们一次修正的机会。\n\n再次向周瑜的玩家、历史爱好者及所有观众致歉。我们珍视每一份热爱，也将用更优质的内容回报这份期待。\n\n《是王者啊？》制作组"
+    }
+  },
+  {
+    "timestamp": "2026-08-11 16:31:02",
+    "event_desc": "一、事件核心速览\n时间：2026 年 8 月 6 日 —8 月 9 日\n导火索：《是王者啊？》第六季第 4 集剧情恶意消费周瑜人设，强化「万年老二」梗，制造公开羞辱场景\n结果：制作组于 8 月 9 日发布致歉信，宣布下架相关内容并重新制作\n二、事件完整时间线\n1. 剧情播出阶段（8 月 6 日）\n8 月 6 日 10:00：《是王者啊？》第六季第 4 集在各大平台（爱奇艺、腾讯视频、AcFun 等）上线，会员可观看爱奇艺\n核心争议剧情：\n老夫子先邀请诸葛亮代课被拒，转而邀请周瑜，却谎称 \"你是第一个被邀请的\"，欺骗周瑜的好胜心\n周瑜误将澡堂认作食堂，被女生误认为变态，制造低级笑点\n周瑜热心帮学生布置会场，以为是欢迎自己，结果登台时大屏幕全是诸葛亮画像，全场欢呼诸葛学长\n安排与小乔外貌高度相似（丸子头、身高体型一致）的 NPC，却是诸葛亮的忠实粉丝，与周瑜互动\n周瑜黯然离场时遇到东方曜，本想寻求安慰，曜却只想打听诸葛亮的事\n标题与台词反复暗示周瑜是 \"万年老二\"，强化其活在诸葛亮阴影下的设定\n2. 舆论发酵阶段（8 月 7 日 —8 月 9 日）\n8 月 7 日：少量周瑜玩家发现剧情问题，开始在社交平台吐槽\n8 月 8 日：争议扩大，# 是王者啊给周瑜道歉 #等话题在抖音、微博等平台传播，玩家集体抵制，指责制作组：\n恶意消费冷门英雄，拿周瑜自尊心制造笑点\n侮辱周瑜历史形象（历史上周瑜并非心胸狭隘之人）\n盗用小乔形象设计 NPC，伤害瑜乔 CP 粉丝感情\n长期玩 \"既生瑜何生亮\" 的老梗，缺乏创新\n8 月 9 日上午：舆论达到高潮，多个游戏社区（NGA、虎扑）出现讨论热帖，玩家要求官方道歉并修改剧情\n3. 官方回应阶段（8 月 9 日晚）\n8 月 9 日 20 时左右：《是王者啊？》制作组在官方账号发布致歉信，承认收到反馈并宣布处理措施\n同时：相关争议剧集在各大平台被下架，OP 也进行了修改",
+    "visual_risks": "",
+    "sandbox_log": [
+      {
+        "round": 1,
+        "name": "王者剧组",
+        "persona": "《是王者啊？》制作组的官方账号运营，负责发布致歉信和后续沟通，语气诚恳但略显官方。",
+        "weight": 800,
+        "stance": "neutral",
+        "role_type": "official",
+        "speech": "【关于《是王者啊？》第六季第4集剧情争议的情况说明】 针对近期网络平台关于《是王者啊？》第六季第4集剧情的相关讨论，我单位（《是王者啊？》制作组）已高度关注。自8月6日剧集上线以来，我们陆续收到观众关于英雄周瑜角色塑造、剧情设定及角色关系呈现等方面的意见与反馈。制作组对此高度重视，已于第一时间启动内部核查程序，对涉事剧集的创作流程、剧本审核及上线机制进行全面复盘。 目前，相关争议剧集已在各大平台做下架处理，我们正就观众集中反馈的具体情节节点逐一进行核实与评估。后续核查进展及具体处理方案，将通过《是王者啊？》官方账号及时向公众通报。我们深知，英雄角色的塑造承载着广大玩家的情感投射与期待，任何创作疏忽都可能伤害观众的信任。制作组将以严谨态度完成本次核查工作，并确保后续处理透明、公开。",
+        "ts": 1786437022
+      },
+      {
+        "round": 1,
+        "name": "瑜粉心碎",
+        "persona": "周瑜的忠实玩家和粉丝，对剧情中周瑜被羞辱感到愤怒，认为制作组恶意消费角色，要求彻底整改。",
+        "weight": 900,
+        "stance": "hostile",
+        "role_type": "bystander",
+        "speech": "#是王者啊给周瑜道歉 刷了一下午声明，翻来覆去就三句话：知道了、下架了、会改。从头到尾没解释一件事——剧本会上谁拍板让周瑜当小丑的？审核流程里哪个环节觉得“澡堂误会+大屏打脸”是好笑的？下架重做当然该做，但“重新制作”这词太轻飘飘了，你们欠玩家的是一个交代，不是一份时间表。",
+        "ts": 1786437024
+      },
+      {
+        "round": 1,
+        "name": "理性老玩家",
+        "persona": "玩王者多年，理解粉丝愤怒，但看到官方已下架重制，希望制作组能吸取教训，愿意给一次改进机会。",
+        "weight": 500,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "#是王者啊给周瑜道歉 下架是第一步，至少没装死硬扛，这点算有进步。但我想看到的不只是“重新制作”四个字——希望重做前能公开讲讲创作思路，比如为什么觉得这个方向符合周瑜人设？也让玩家参与提意见，别闭门造车。毕竟我们骂是因为在乎这个角色，不是想看你糊弄过去。",
+        "ts": 1786437026
+      },
+      {
+        "round": 2,
+        "name": "瑜粉心碎",
+        "persona": "周瑜的忠实玩家和粉丝，对剧情中周瑜被羞辱感到愤怒，认为制作组恶意消费角色，要求彻底整改。",
+        "weight": 900,
+        "stance": "hostile",
+        "role_type": "bystander",
+        "speech": "#是王者啊给周瑜道歉 声明里\"全面复盘\"\"逐一核实\"这些词，藏着最大的问题——你们复盘的是流程，不是决策。我就想问：剧本会上谁拍板让周瑜当小丑的？审核环节里哪个节点觉得\"澡堂误会+大屏打脸\"是好笑的？下架重做是止损，不是交代。玩家要的是责任到人，不是一份免责声明。",
+        "ts": 1786437029
+      },
+      {
+        "round": 2,
+        "name": "理性老玩家",
+        "persona": "玩王者多年，理解粉丝愤怒，但看到官方已下架重制，希望制作组能吸取教训，愿意给一次改进机会。",
+        "weight": 500,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "#是王者啊给周瑜道歉 下架是止损，但“重新制作”如果还是同一套创作逻辑，换个剧本照样翻车。这集最大的问题不是笑点低俗，是创作团队根本没想清楚周瑜是谁——把他当成衬托诸葛亮的工具人。希望重制前先公开角色设定稿，让玩家看到你们对英雄的理解，而不是闭门造车再来一次。我们骂是因为在乎，不是想看你敷衍。",
+        "ts": 1786437031
+      },
+      {
+        "round": 2,
+        "name": "沈砚之",
+        "persona": "资深文娱产业观察者，前游戏媒体主编。擅长从IP运营、内容创作伦理与粉丝经济角度剖析事件，主张‘争议是产品与用户关系的压力测试’，行文冷静克制，引述行业案例佐证观点。",
+        "weight": 850,
+        "stance": "neutral",
+        "role_type": "influencer",
+        "speech": "#是王者啊给周瑜道歉 下架重制没问题，但制作组漏了最关键的一步：这集从立项到过审，中间这么多人，没一个觉得\"澡堂误会+大屏打脸\"不对劲？这不是疏忽，是整个团队对周瑜的认知已经默契到一致了。复盘流程不如复盘认知——你们心里怎么定义周瑜这个角色，比谁签了字更值得交代。",
+        "ts": 1786437033
+      },
+      {
+        "round": 2,
+        "name": "都督护卫队·阿策",
+        "persona": "周瑜十年老粉兼考据型维权大V，以‘考据打脸’著称。惯用史料截图、逐帧对比视频和情绪化排比句煽动粉丝，擅长将剧情细节上升为‘对历史英雄的侮辱’与‘对玩家底线的践踏’，号召集体刷话题、冲官博。",
+        "weight": 700,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "“既生瑜何生亮”的梗玩了多少年，制作组是没读过《三国志》吗？周瑜“性度恢廓”，雅量高致，被孙权赞为“王佐之资”，到你们笔下成了澡堂跑错门的谐星？这不是创作疏忽，是历史认知的硬伤。你们说“重新制作”，请问是重新写剧本，还是重新学历史？",
+        "ts": 1786437034
+      },
+      {
+        "round": 3,
+        "name": "瑜粉心碎",
+        "persona": "周瑜的忠实玩家和粉丝，对剧情中周瑜被羞辱感到愤怒，认为制作组恶意消费角色，要求彻底整改。",
+        "weight": 900,
+        "stance": "hostile",
+        "role_type": "bystander",
+        "speech": "#是王者啊给周瑜道歉 官方说“全面复盘”，复盘出什么了？谁拍的板让周瑜被当众打脸？哪个环节觉得“澡堂误会”好笑？全流程没人觉得不对劲，这不是疏忽，是整个团队对周瑜的认知就这个水平。下架是止损，你们欠的是决策责任人，不是一句“重新制作”。",
+        "ts": 1786437036
+      },
+      {
+        "round": 3,
+        "name": "理性老玩家",
+        "persona": "玩王者多年，理解粉丝愤怒，但看到官方已下架重制，希望制作组能吸取教训，愿意给一次改进机会。",
+        "weight": 500,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "#是王者啊给周瑜道歉 下架是止损，至少比装死强。但“全面复盘”不如“公开创作手记”——我想看你们怎么理解周瑜这个角色，而不是看流程自查报告。重制前先让玩家参与角色讨论，别闭门造车再来一次。骂是因为在乎，不是想看你敷衍。",
+        "ts": 1786437037
+      },
+      {
+        "round": 3,
+        "name": "沈砚之",
+        "persona": "资深文娱产业观察者，前游戏媒体主编。擅长从IP运营、内容创作伦理与粉丝经济角度剖析事件，主张‘争议是产品与用户关系的压力测试’，行文冷静克制，引述行业案例佐证观点。",
+        "weight": 850,
+        "stance": "neutral",
+        "role_type": "influencer",
+        "speech": "#是王者啊给周瑜道歉 下架重制是止损动作，但致歉信里那句“让剧情内容更符合大家的期待”值得玩味——期待是个模糊词，玩家要的不是“符合期待”，是“尊重角色”。这集的问题不是笑点低俗，是创作团队对周瑜的定位已经偏离到连历史考据和粉丝情感都不在乎了。重制前不如先回答一个问题：你们觉得周瑜是谁？答案对了，剧本自然对。",
+        "ts": 1786437039
+      },
+      {
+        "round": 3,
+        "name": "都督护卫队·阿策",
+        "persona": "周瑜十年老粉兼考据型维权大V，以‘考据打脸’著称。惯用史料截图、逐帧对比视频和情绪化排比句煽动粉丝，擅长将剧情细节上升为‘对历史英雄的侮辱’与‘对玩家底线的践踏’，号召集体刷话题、冲官博。",
+        "weight": 700,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "#是王者啊给周瑜道歉 制作组说“重新制作”，可你们知道周瑜是谁吗？《三国志》明明白白写着“性度恢廓”，孙权称他“王佐之资”，到你们手里成了澡堂跑错门的谐星？这已经不是创作问题，是历史素养问题。道歉信里“更加注意”四个字，等于什么都没说——你们打算怎么注意？重新读一遍《三国志》吗？",
+        "ts": 1786437041
+      },
+      {
+        "round": 4,
+        "name": "王者剧组",
+        "persona": "《是王者啊？》制作组的官方账号运营，负责发布致歉信和后续沟通，语气诚恳但略显官方。",
+        "weight": 800,
+        "stance": "neutral",
+        "role_type": "official",
+        "speech": "【关于《是王者啊？》第六季第4集剧情争议的最终处理通报】 自2026年8月6日第六季第4集上线以来，我组陆续收到大量观众及玩家针对周瑜角色塑造、剧情设置及历史认知偏差的严肃批评。对此，我组已完成全面内部调查，现就调查结论、处置措施及后续整改安排通报如下： 一、事件调查结论\n经调取本集从剧本立项、分镜绘制、中期制作到成片审核的全流程记录，确认该集在角色定位环节存在根本性偏差——将周瑜作为衬托诸葛亮角色的功能性工具人进行创作，对周瑜“性度恢廓、雅量高致”的历史形象缺乏基本考据，同时包含澡堂误会、大屏画像反差等刻意制造羞辱感的低俗桥段。上述问题在内部多环节审核中均未被识别拦截，暴露出我组在角色认知、历史素养及内容审查机制上的系统性缺陷，而非单一环节的偶发疏忽。 二、已执行的处置措施\n1. 涉事剧集已在爱奇艺、腾讯视频、AcFun等全部播出平台完成下架；\n2. 片头OP中相关争议画面已完成替换修改；\n3. 对参与该集剧本创作及最终审核签发的相关责任人，已依据内部管理制度予以停职处理，并启动专项问责程序。 三、后续整改与公开承诺\n1. 重制工作将暂停推进，直至完成以下前置程序：邀请历史学者及三国文化研究专家组建顾问团，对涉及历史人物的全部剧本进行前置考据审查；\n2. 将于8月15日前，通过官方账号公开《周瑜角色设定白皮书》，完整呈现重制版中对周瑜人物性格、历史定位及与诸葛亮关系的创作理解，接受公众监督；\n3. 建立常态化创作沟通机制，每月最后一周周五通过官方账号发布创作手记及下一阶段剧本概要，开放玩家意见征集通道，所有反馈将逐条登记并于五个工作日内汇总公示采纳情况。 我组深知，此次事件伤害了周瑜角色支持者及广大三国文化爱好者的情感，任何整改措施均无法弥补创作失误造成的信任损失。惟以实际行动重建信任，以透明流程接受监督，方不辜负各位的批评与期待。 《是王者啊？》制作组\n2026年8月9日",
+        "ts": 1786437047
+      },
+      {
+        "round": 4,
+        "name": "瑜粉心碎",
+        "persona": "周瑜的忠实玩家和粉丝，对剧情中周瑜被羞辱感到愤怒，认为制作组恶意消费角色，要求彻底整改。",
+        "weight": 900,
+        "stance": "hostile",
+        "role_type": "bystander",
+        "speech": "#是王者啊给周瑜道歉 白皮书？顾问团？流程倒是写得像模像样。可从头到尾没一个人回答：拍板让周瑜被当众打脸的人，现在在哪？停职的是具体责任人，还是拉出来顶锅的编剧？你们说“系统性缺陷”，那这个“系统”里谁负责拍板、谁负责审美、谁负责喊停？流程复盘能复出个名字来吗？下架是止损，白皮书是姿态，我只想知道——你们欠周瑜的那个交代，到底谁来还？",
+        "ts": 1786437049
+      },
+      {
+        "round": 4,
+        "name": "理性老玩家",
+        "persona": "玩王者多年，理解粉丝愤怒，但看到官方已下架重制，希望制作组能吸取教训，愿意给一次改进机会。",
+        "weight": 500,
+        "stance": "supportive",
+        "role_type": "bystander",
+        "speech": "#是王者啊给周瑜道歉 从第一天的愤怒到今天的通报，我一直盯着这个事。想说句公道话：这次制作组至少有两点做对了——承认这是“系统性缺陷”而不是甩锅给某个编剧，这个定性比很多装死的团队强；把停职的人明确指向“创作及审核签发”环节，比含糊的“内部处理”有诚意。至于8月15日的白皮书，虽然是个姿态，但至少给了个时间点，让我能期待一个具体的交代。 我期望的是：顾问团别只挂名。能公布专家名单和审稿记录吗？让玩家看到“性度恢廓”这四个字被写进了分镜脚本的备注栏，而不是停留在道歉信里。骂归骂，我更想看你们把周瑜还给我们。",
+        "ts": 1786437052
+      },
+      {
+        "round": 4,
+        "name": "沈砚之",
+        "persona": "资深文娱产业观察者，前游戏媒体主编。擅长从IP运营、内容创作伦理与粉丝经济角度剖析事件，主张‘争议是产品与用户关系的压力测试’，行文冷静克制，引述行业案例佐证观点。",
+        "weight": 850,
+        "stance": "neutral",
+        "role_type": "influencer",
+        "speech": "#是王者啊给周瑜道歉 这封通报最有价值的一点，是把“操作失误”修正成了“系统性缺陷”。四个字，性质完全不同——前者是甩锅给临时工，后者是承认整条生产线的角色认知出了问题。停职流程、历史顾问团、白皮书时间表，这些动作至少说明制作组听懂了批评的核心：这不是改一集剧本的事，是创作方法论需要重构。 但我想提醒一句：白皮书8月15日发布那天，才是真正的考验。玩家要看的是“性度恢廓”四个字如何进入角色设定底稿，而不是看一份华丽的角色小传。流程承诺容易，认知转变难。这次事件给整个文娱行业提了个醒——当你的角色有历史原型时，考据不是束缚，是护城河。希望重制版让周瑜不只是“诸葛",
+        "ts": 1786437054
+      },
+      {
+        "round": 4,
+        "name": "都督护卫队·阿策",
+        "persona": "周瑜十年老粉兼考据型维权大V，以‘考据打脸’著称。惯用史料截图、逐帧对比视频和情绪化排比句煽动粉丝，擅长将剧情细节上升为‘对历史英雄的侮辱’与‘对玩家底线的践踏’，号召集体刷话题、冲官博。",
+        "weight": 700,
+        "stance": "hostile",
+        "role_type": "influencer",
+        "speech": "#是王者啊给周瑜道歉 从第一天的怒火到今天这封通报，必须承认一件事：制作组把“操作失误”改成“系统性缺陷”，这一步走对了。但我盯的是另一个词——“前置考据审查”。这四个字比白皮书更关键，因为它意味着以后每个涉及历史人物的剧本，都得先过历史学者那关。 不过问题来了：顾问团什么时候组建？名单什么时候公布？审稿记录会不会公开？如果只是嘴上说“邀请专家”，到时候白皮书里放几句“性度恢廓”的官话糊弄过去，那这封通报和第一版致歉信有什么区别？流程承诺容易，执行监督难。8月15日白皮书发布那天，我会对照《三国志》逐条核对。周瑜不是你们创作自由的试验品，他是历史给你们的考卷。",
+        "ts": 1786437057
+      }
+    ],
+    "report_json": {
+      "fatal_focus": "未识别到明确的高危触发点，建议进一步人工审查",
+      "scores": {
+        "legal": {
+          "score": 1,
+          "reason": "未命中已知红线条款",
+          "hits": 0,
+          "details": []
+        },
+        "business": {
+          "score": 2,
+          "reason": "预测峰值触达 9,861 人 (t=12)，R₀=4.53，综合评分 2",
+          "peak_infected": 9861,
+          "r0": 4.53,
+          "peak_time": 12
+        },
+        "reputation": {
+          "score": 2,
+          "reason": "未检索到高相关度恶评或相似案例，默认中等风险"
+        }
+      },
+      "rewrite_suggestion": "尊敬的各位观众与玩家朋友：\n\n关于《是王者啊？》第六季第4集在角色塑造与剧情呈现上引发的争议，我们怀着最诚恳的态度，向每一位感到失望、被冒犯的观众，特别是喜爱周瑜这一角色的玩家，致以最真挚的歉意。我们深知，创作不应以牺牲角色尊严为代价，更不应以刻板印象或低俗笑点来博取眼球。经深刻复盘，我们已全面下架该集内容，并启动重新制作流程，确保新版本尊重角色内核与历史情感，杜绝任何形式的恶意消费或贬低。\n\n我们同时意识到，仅靠事后修正远不足够。未来，我们将建立更严格的内部审核机制，并增设由玩家代表参与的剧情顾问团，在前期创作阶段即引入多元视角，从源头规避风险。我们承诺，后续所有内容将秉持对英雄的敬畏之心，以更细腻、正向的方式讲述故事。对于此次事件造成的伤害，我们再次郑重致歉，并愿意接受所有批评与监督。感谢大家的鞭策，让我们有机会在错误中成长，不负每一份热爱。"
+    }
   }
 ]

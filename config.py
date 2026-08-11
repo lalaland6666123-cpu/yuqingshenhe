@@ -1,12 +1,12 @@
 import os
 
 # ========== DeepSeek V4（文案/文本审核）==========
-DEEPSEEK_API_KEY = os.environ.get("DEEPSEEK_API_KEY", "your-deepseek-api-key")
+DEEPSEEK_API_KEY = os.environ.get("DEEPSEEK_API_KEY", "your-deepseek-key")
 DEEPSEEK_BASE_URL = "https://api.deepseek.com"
 DEEPSEEK_MODEL_NAME = "deepseek-chat"
 
 # ========== 千问（图片/视频视觉分析）==========
-QWEN_API_KEY = os.environ.get("QWEN_API_KEY", "your-qwen-api-key")
+QWEN_API_KEY = os.environ.get("QWEN_API_KEY", "your-qwen-key")
 QWEN_BASE_URL = "https://dashscope.aliyuncs.com/compatible-mode/v1"
 QWEN_MODEL_NAME = "qwen-plus"
 VL_MODEL_NAME = "qwen3.5-plus"
