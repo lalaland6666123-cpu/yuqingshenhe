@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PR Wind Tunnel Benchmark Case",
+  "type": "object",
+  "required": ["id", "event_description", "draft_response", "preannotation", "human_annotation"],
+  "properties": {
+    "id": {"type": "string"},
+    "source": {"type": "string"},
+    "annotation_status": {"type": "string"},
+    "scenario": {"type": "string"},
+    "scenario_name": {"type": "string"},
+    "event_description": {"type": "string"},
+    "draft_response": {"type": "string"},
+    "preannotation": {"$ref": "#/$defs/annotation"},
+    "human_annotation": {"anyOf": [{"$ref": "#/$defs/annotation"}, {"type": "null"}]}
+  },
+  "$defs": {
+    "annotation": {
+      "type": "object",
+      "required": ["risk_spans", "crisis_types", "risk_scores", "gold_actions", "failure_tags"],
+      "properties": {
+        "risk_spans": {"type": "array", "items": {"type": "object"}},
+        "crisis_types": {"type": "array", "items": {"type": "string"}},
+        "risk_scores": {"type": "object", "required": ["legal", "business", "reputation"]},
+        "gold_actions": {"type": "array", "items": {"type": "string"}},
+        "failure_tags": {"type": "array", "items": {"type": "string"}}
+      }
+    }
+  }
+}

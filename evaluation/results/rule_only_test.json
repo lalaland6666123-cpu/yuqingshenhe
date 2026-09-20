@@ -1,0 +1,27 @@
+{
+  "baseline": "rule_only",
+  "dataset": "benchmark/test_reviewed.jsonl",
+  "label_source": "human_annotation if present else preannotation",
+  "classification": null,
+  "classification_note": "Skipped: human_crisis_types are broad domains (PR, Legal, Safety), while the rule baseline predicts scenario tags.",
+  "multi_label": null,
+  "decision_accuracy": 1.0,
+  "reputation_score_mae": 1.7083333333333333,
+  "num_cases": 48,
+  "labels": [
+    "Customer Relations",
+    "Legal",
+    "PR",
+    "Reputation",
+    "Safety",
+    "Social Ethical",
+    "arrogance",
+    "blame_shifting",
+    "deception",
+    "discrimination",
+    "governance",
+    "indifference",
+    "privacy",
+    "safety"
+  ]
+}

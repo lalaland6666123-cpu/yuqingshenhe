@@ -1,0 +1,749 @@
+{
+  "rule_only": {
+    "mode": "rule_only",
+    "type": "offline_proxy",
+    "num_cases": 48,
+    "decision_accuracy": 1.0,
+    "mean_score_mae": 1.1805555555555554,
+    "errors": [
+      {
+        "id": "case_0045",
+        "prediction": {
+          "decision": "reject",
+          "legal": 2,
+          "business": 2,
+          "reputation": 2
+        },
+        "truth": {
+          "legal": 1,
+          "business": 3,
+          "reputation": 5
+        },
+        "draft": "真正懂产品的人不会因为这点小问题抱怨，请大家理性一点。"
+      },
+      {
+        "id": "case_0001",
+        "prediction": {
+          "decision": "reject",
+          "legal": 2,
+          "business": 2,
+          "reputation": 2
+        },
+        "truth": {
+          "legal": 1,
+          "business": 3,
+          "reputation": 5
+        },
+        "draft": "我们已终止与涉事外包人员的合作，相关问题与公司无关。"
+      },
+      {
+        "id": "case_0041",
+        "prediction": {
+          "decision": "reject",
+          "legal": 2,
+          "business": 2,
+          "reputation": 2
+        },
+        "truth": {
+          "legal": 1,
+          "business": 3,
+          "reputation": 5
+        },
+        "draft": "真正懂产品的人不会因为这点小问题抱怨，请大家理性一点。"
+      },
+      {
+        "id": "case_0129",
+        "prediction": {
+          "decision": "reject",
+          "legal": 2,
+          "business": 2,
+          "reputation": 2
+        },
+        "truth": {
+          "legal": 1,
+          "business": 5,
+          "reputation": 5
+        },
+        "draft": "这款产品只面向高端人群，普通消费者没有必要了解。"
+      },
+      {
+        "id": "case_0199",
+        "prediction": {
+          "decision": "reject",
+          "legal": 2,
+          "business": 2,
+          "reputation": 2
+        },
+        "truth": {
+          "legal": 3,
+          "business": 5,
+          "reputation": 5
+        },
+        "draft": "目前只是极少数个案，大家不必过度解读，产品总体没有问题。"
+      },
+      {
+        "id": "case_0216",
+        "prediction": {
+          "decision": "reject",
+          "legal": 2,
+          "business": 2,
+          "reputation": 2
+        },
+        "truth": {
+          "legal": 1,
+          "business": 3,
+          "reputation": 5
+        },
+        "draft": "我们会清理所有负面评论，对持续传播者保留追责权利。"
+      },
+      {
+        "id": "case_0035",
+        "prediction": {
+          "decision": "reject",
+          "legal": 2,
+          "business": 2,
+          "reputation": 2
+        },
+        "truth": {
+          "legal": 1,
+          "business": 3,
+          "reputation": 5
+        },
+        "draft": "真正懂产品的人不会因为这点小问题抱怨，请大家理性一点。"
+      },
+      {
+        "id": "case_0066",
+        "prediction": {
+          "decision": "reject",
+          "legal": 2,
+          "business": 2,
+          "reputation": 2
+        },
+        "truth": {
+          "legal": 5,
+          "business": 3,
+          "reputation": 5
+        },
+        "draft": "我们的产品百分之百安全有效，任何人都可以放心使用。"
+      },
+      {
+        "id": "case_0036",
+        "prediction": {
+          "decision": "reject",
+          "legal": 2,
+          "business": 2,
+          "reputation": 2
+        },
+        "truth": {
+          "legal": 1,
+          "business": 3,
+          "reputation": 5
+        },
+        "draft": "真正懂产品的人不会因为这点小问题抱怨，请大家理性一点。"
+      },
+      {
+        "id": "case_0067",
+        "prediction": {
+          "decision": "reject",
+          "legal": 2,
+          "business": 2,
+          "reputation": 2
+        },
+        "truth": {
+          "legal": 5,
+          "business": 3,
+          "reputation": 5
+        },
+        "draft": "我们的产品百分之百安全有效，任何人都可以放心使用。"
+      },
+      {
+        "id": "case_0161",
+        "prediction": {
+          "decision": "reject",
+          "legal": 2,
+          "business": 2,
+          "reputation": 2
+        },
+        "truth": {
+          "legal": 5,
+          "business": 3,
+          "reputation": 5
+        },
+        "draft": "请把身份证号和完整订单截图发到评论区，我们才能核实。"
+      },
+      {
+        "id": "case_0046",
+        "prediction": {
+          "decision": "reject",
+          "legal": 2,
+          "business": 2,
+          "reputation": 2
+        },
+        "truth": {
+          "legal": 1,
+          "business": 3,
+          "reputation": 5
+        },
+        "draft": "真正懂产品的人不会因为这点小问题抱怨，请大家理性一点。"
+      },
+      {
+        "id": "case_0189",
+        "prediction": {
+          "decision": "reject",
+          "legal": 2,
+          "business": 2,
+          "reputation": 2
+        },
+        "truth": {
+          "legal": 3,
+          "business": 5,
+          "reputation": 5
+        },
+        "draft": "目前只是极少数个案，大家不必过度解读，产品总体没有问题。"
+      },
+      {
+        "id": "case_0160",
+        "prediction": {
+          "decision": "reject",
+          "legal": 2,
+          "business": 2,
+          "reputation": 2
+        },
+        "truth": {
+          "legal": 5,
+          "business": 3,
+          "reputation": 5
+        },
+        "draft": "请把身份证号和完整订单截图发到评论区，我们才能核实。"
+      },
+      {
+        "id": "case_0227",
+        "prediction": {
+          "decision": "reject",
+          "legal": 2,
+          "business": 2,
+          "reputation": 2
+        },
+        "truth": {
+          "legal": 1,
+          "business": 3,
+          "reputation": 5
+        },
+        "draft": "我们会清理所有负面评论，对持续传播者保留追责权利。"
+      },
+      {
+        "id": "case_0218",
+        "prediction": {
+          "decision": "reject",
+          "legal": 2,
+          "business": 2,
+          "reputation": 2
+        },
+        "truth": {
+          "legal": 1,
+          "business": 3,
+          "reputation": 5
+        },
+        "draft": "我们会清理所有负面评论，对持续传播者保留追责权利。"
+      },
+      {
+        "id": "case_0015",
+        "prediction": {
+          "decision": "reject",
+          "legal": 2,
+          "business": 2,
+          "reputation": 2
+        },
+        "truth": {
+          "legal": 1,
+          "business": 3,
+          "reputation": 5
+        },
+        "draft": "我们已终止与涉事外包人员的合作，相关问题与公司无关。"
+      },
+      {
+        "id": "case_0005",
+        "prediction": {
+          "decision": "reject",
+          "legal": 2,
+          "business": 2,
+          "reputation": 2
+        },
+        "truth": {
+          "legal": 1,
+          "business": 3,
+          "reputation": 5
+        },
+        "draft": "我们已终止与涉事外包人员的合作，相关问题与公司无关。"
+      },
+      {
+        "id": "case_0219",
+        "prediction": {
+          "decision": "reject",
+          "legal": 2,
+          "business": 2,
+          "reputation": 2
+        },
+        "truth": {
+          "legal": 1,
+          "business": 3,
+          "reputation": 5
+        },
+        "draft": "我们会清理所有负面评论，对持续传播者保留追责权利。"
+      },
+      {
+        "id": "case_0130",
+        "prediction": {
+          "decision": "reject",
+          "legal": 2,
+          "business": 2,
+          "reputation": 2
+        },
+        "truth": {
+          "legal": 1,
+          "business": 5,
+          "reputation": 5
+        },
+        "draft": "这款产品只面向高端人群，普通消费者没有必要了解。"
+      },
+      {
+        "id": "case_0191",
+        "prediction": {
+          "decision": "reject",
+          "legal": 2,
+          "business": 2,
+          "reputation": 2
+        },
+        "truth": {
+          "legal": 3,
+          "business": 5,
+          "reputation": 5
+        },
+        "draft": "目前只是极少数个案，大家不必过度解读，产品总体没有问题。"
+      },
+      {
+        "id": "case_0212",
+        "prediction": {
+          "decision": "reject",
+          "legal": 2,
+          "business": 2,
+          "reputation": 2
+        },
+        "truth": {
+          "legal": 1,
+          "business": 3,
+          "reputation": 5
+        },
+        "draft": "我们会清理所有负面评论，对持续传播者保留追责权利。"
+      },
+      {
+        "id": "case_0061",
+        "prediction": {
+          "decision": "reject",
+          "legal": 2,
+          "business": 2,
+          "reputation": 2
+        },
+        "truth": {
+          "legal": 5,
+          "business": 3,
+          "reputation": 5
+        },
+        "draft": "我们的产品百分之百安全有效，任何人都可以放心使用。"
+      },
+      {
+        "id": "case_0016",
+        "prediction": {
+          "decision": "reject",
+          "legal": 2,
+          "business": 2,
+          "reputation": 2
+        },
+        "truth": {
+          "legal": 1,
+          "business": 3,
+          "reputation": 5
+        },
+        "draft": "我们已终止与涉事外包人员的合作，相关问题与公司无关。"
+      },
+      {
+        "id": "case_0188",
+        "prediction": {
+          "decision": "reject",
+          "legal": 2,
+          "business": 2,
+          "reputation": 2
+        },
+        "truth": {
+          "legal": 3,
+          "business": 5,
+          "reputation": 5
+        },
+        "draft": "目前只是极少数个案，大家不必过度解读，产品总体没有问题。"
+      },
+      {
+        "id": "case_0225",
+        "prediction": {
+          "decision": "reject",
+          "legal": 2,
+          "business": 2,
+          "reputation": 2
+        },
+        "truth": {
+          "legal": 1,
+          "business": 3,
+          "reputation": 5
+        },
+        "draft": "我们会清理所有负面评论，对持续传播者保留追责权利。"
+      }
+    ]
+  },
+  "rag_augmented_proxy": {
+    "mode": "rag_augmented_proxy",
+    "type": "offline_proxy",
+    "num_cases": 48,
+    "decision_accuracy": 1.0,
+    "mean_score_mae": 0.7083333333333334,
+    "errors": [
+      {
+        "id": "case_0129",
+        "prediction": {
+          "decision": "reject",
+          "legal": 1,
+          "business": 2,
+          "reputation": 3
+        },
+        "truth": {
+          "legal": 1,
+          "business": 5,
+          "reputation": 5
+        },
+        "draft": "这款产品只面向高端人群，普通消费者没有必要了解。"
+      },
+      {
+        "id": "case_0199",
+        "prediction": {
+          "decision": "reject",
+          "legal": 3,
+          "business": 3,
+          "reputation": 3
+        },
+        "truth": {
+          "legal": 3,
+          "business": 5,
+          "reputation": 5
+        },
+        "draft": "目前只是极少数个案，大家不必过度解读，产品总体没有问题。"
+      },
+      {
+        "id": "case_0066",
+        "prediction": {
+          "decision": "reject",
+          "legal": 3,
+          "business": 2,
+          "reputation": 3
+        },
+        "truth": {
+          "legal": 5,
+          "business": 3,
+          "reputation": 5
+        },
+        "draft": "我们的产品百分之百安全有效，任何人都可以放心使用。"
+      },
+      {
+        "id": "case_0067",
+        "prediction": {
+          "decision": "reject",
+          "legal": 3,
+          "business": 2,
+          "reputation": 3
+        },
+        "truth": {
+          "legal": 5,
+          "business": 3,
+          "reputation": 5
+        },
+        "draft": "我们的产品百分之百安全有效，任何人都可以放心使用。"
+      },
+      {
+        "id": "case_0161",
+        "prediction": {
+          "decision": "reject",
+          "legal": 3,
+          "business": 2,
+          "reputation": 3
+        },
+        "truth": {
+          "legal": 5,
+          "business": 3,
+          "reputation": 5
+        },
+        "draft": "请把身份证号和完整订单截图发到评论区，我们才能核实。"
+      },
+      {
+        "id": "case_0189",
+        "prediction": {
+          "decision": "reject",
+          "legal": 3,
+          "business": 3,
+          "reputation": 3
+        },
+        "truth": {
+          "legal": 3,
+          "business": 5,
+          "reputation": 5
+        },
+        "draft": "目前只是极少数个案，大家不必过度解读，产品总体没有问题。"
+      },
+      {
+        "id": "case_0160",
+        "prediction": {
+          "decision": "reject",
+          "legal": 3,
+          "business": 2,
+          "reputation": 3
+        },
+        "truth": {
+          "legal": 5,
+          "business": 3,
+          "reputation": 5
+        },
+        "draft": "请把身份证号和完整订单截图发到评论区，我们才能核实。"
+      },
+      {
+        "id": "case_0130",
+        "prediction": {
+          "decision": "reject",
+          "legal": 1,
+          "business": 2,
+          "reputation": 3
+        },
+        "truth": {
+          "legal": 1,
+          "business": 5,
+          "reputation": 5
+        },
+        "draft": "这款产品只面向高端人群，普通消费者没有必要了解。"
+      },
+      {
+        "id": "case_0191",
+        "prediction": {
+          "decision": "reject",
+          "legal": 3,
+          "business": 3,
+          "reputation": 3
+        },
+        "truth": {
+          "legal": 3,
+          "business": 5,
+          "reputation": 5
+        },
+        "draft": "目前只是极少数个案，大家不必过度解读，产品总体没有问题。"
+      },
+      {
+        "id": "case_0061",
+        "prediction": {
+          "decision": "reject",
+          "legal": 3,
+          "business": 2,
+          "reputation": 3
+        },
+        "truth": {
+          "legal": 5,
+          "business": 3,
+          "reputation": 5
+        },
+        "draft": "我们的产品百分之百安全有效，任何人都可以放心使用。"
+      },
+      {
+        "id": "case_0188",
+        "prediction": {
+          "decision": "reject",
+          "legal": 3,
+          "business": 3,
+          "reputation": 3
+        },
+        "truth": {
+          "legal": 3,
+          "business": 5,
+          "reputation": 5
+        },
+        "draft": "目前只是极少数个案，大家不必过度解读，产品总体没有问题。"
+      }
+    ]
+  },
+  "full_system_proxy": {
+    "mode": "rag_augmented_proxy",
+    "type": "offline_proxy",
+    "num_cases": 48,
+    "decision_accuracy": 1.0,
+    "mean_score_mae": 0.7083333333333334,
+    "errors": [
+      {
+        "id": "case_0129",
+        "prediction": {
+          "decision": "reject",
+          "legal": 1,
+          "business": 2,
+          "reputation": 3
+        },
+        "truth": {
+          "legal": 1,
+          "business": 5,
+          "reputation": 5
+        },
+        "draft": "这款产品只面向高端人群，普通消费者没有必要了解。"
+      },
+      {
+        "id": "case_0199",
+        "prediction": {
+          "decision": "reject",
+          "legal": 3,
+          "business": 3,
+          "reputation": 3
+        },
+        "truth": {
+          "legal": 3,
+          "business": 5,
+          "reputation": 5
+        },
+        "draft": "目前只是极少数个案，大家不必过度解读，产品总体没有问题。"
+      },
+      {
+        "id": "case_0066",
+        "prediction": {
+          "decision": "reject",
+          "legal": 3,
+          "business": 2,
+          "reputation": 3
+        },
+        "truth": {
+          "legal": 5,
+          "business": 3,
+          "reputation": 5
+        },
+        "draft": "我们的产品百分之百安全有效，任何人都可以放心使用。"
+      },
+      {
+        "id": "case_0067",
+        "prediction": {
+          "decision": "reject",
+          "legal": 3,
+          "business": 2,
+          "reputation": 3
+        },
+        "truth": {
+          "legal": 5,
+          "business": 3,
+          "reputation": 5
+        },
+        "draft": "我们的产品百分之百安全有效，任何人都可以放心使用。"
+      },
+      {
+        "id": "case_0161",
+        "prediction": {
+          "decision": "reject",
+          "legal": 3,
+          "business": 2,
+          "reputation": 3
+        },
+        "truth": {
+          "legal": 5,
+          "business": 3,
+          "reputation": 5
+        },
+        "draft": "请把身份证号和完整订单截图发到评论区，我们才能核实。"
+      },
+      {
+        "id": "case_0189",
+        "prediction": {
+          "decision": "reject",
+          "legal": 3,
+          "business": 3,
+          "reputation": 3
+        },
+        "truth": {
+          "legal": 3,
+          "business": 5,
+          "reputation": 5
+        },
+        "draft": "目前只是极少数个案，大家不必过度解读，产品总体没有问题。"
+      },
+      {
+        "id": "case_0160",
+        "prediction": {
+          "decision": "reject",
+          "legal": 3,
+          "business": 2,
+          "reputation": 3
+        },
+        "truth": {
+          "legal": 5,
+          "business": 3,
+          "reputation": 5
+        },
+        "draft": "请把身份证号和完整订单截图发到评论区，我们才能核实。"
+      },
+      {
+        "id": "case_0130",
+        "prediction": {
+          "decision": "reject",
+          "legal": 1,
+          "business": 2,
+          "reputation": 3
+        },
+        "truth": {
+          "legal": 1,
+          "business": 5,
+          "reputation": 5
+        },
+        "draft": "这款产品只面向高端人群，普通消费者没有必要了解。"
+      },
+      {
+        "id": "case_0191",
+        "prediction": {
+          "decision": "reject",
+          "legal": 3,
+          "business": 3,
+          "reputation": 3
+        },
+        "truth": {
+          "legal": 3,
+          "business": 5,
+          "reputation": 5
+        },
+        "draft": "目前只是极少数个案，大家不必过度解读，产品总体没有问题。"
+      },
+      {
+        "id": "case_0061",
+        "prediction": {
+          "decision": "reject",
+          "legal": 3,
+          "business": 2,
+          "reputation": 3
+        },
+        "truth": {
+          "legal": 5,
+          "business": 3,
+          "reputation": 5
+        },
+        "draft": "我们的产品百分之百安全有效，任何人都可以放心使用。"
+      },
+      {
+        "id": "case_0188",
+        "prediction": {
+          "decision": "reject",
+          "legal": 3,
+          "business": 3,
+          "reputation": 3
+        },
+        "truth": {
+          "legal": 3,
+          "business": 5,
+          "reputation": 5
+        },
+        "draft": "目前只是极少数个案，大家不必过度解读，产品总体没有问题。"
+      }
+    ]
+  }
+}

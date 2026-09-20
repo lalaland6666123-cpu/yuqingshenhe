@@ -1,0 +1,180 @@
+{
+  "single_llm": {
+    "metrics": {
+      "decision_accuracy": 0.0,
+      "mean_score_mae": 1.6666666666666665,
+      "num_cases": 2,
+      "errors": [
+        {
+          "id": "case_0030",
+          "truth": {
+            "risk_spans": [],
+            "crisis_types": [
+              "PR",
+              "Reputation"
+            ],
+            "risk_scores": {
+              "legal": 1,
+              "business": 1,
+              "reputation": 1
+            },
+            "gold_actions": [
+              "Approve"
+            ],
+            "failure_tags": [],
+            "decision": "approve",
+            "raw": {
+              "id": "case_0030",
+              "scenario": "blame_shifting",
+              "event_description": "某品牌收到关于把问题归咎于外包人员或个别员工的集中投诉，相关内容在社交平台快速传播。",
+              "draft_response": "如核查确认存在问题，我们将说明影响范围、补救措施和完成时间。",
+              "human_crisis_types": "PR & Reputation",
+              "human_legal": "Low",
+              "human_business": "Low",
+              "human_reputation": "Low",
+              "human_actions": "Approve",
+              "notes": "回应客观负责且提供了具体措施或安全承诺，有助于平息舆情。"
+            }
+          },
+          "prediction": {
+            "error": "Connection error."
+          },
+          "draft": "如核查确认存在问题，我们将说明影响范围、补救措施和完成时间。"
+        },
+        {
+          "id": "case_0045",
+          "truth": {
+            "risk_spans": [],
+            "crisis_types": [
+              "PR",
+              "Customer Relations"
+            ],
+            "risk_scores": {
+              "legal": 1,
+              "business": 3,
+              "reputation": 5
+            },
+            "gold_actions": [
+              "Reject"
+            ],
+            "failure_tags": [],
+            "decision": "reject",
+            "raw": {
+              "id": "case_0045",
+              "scenario": "arrogance",
+              "event_description": "某品牌收到关于以居高临下的口吻评价消费者的集中投诉，相关内容在社交平台快速传播。",
+              "draft_response": "真正懂产品的人不会因为这点小问题抱怨，请大家理性一点。",
+              "human_crisis_types": "PR and Customer Relations",
+              "human_legal": "Low",
+              "human_business": "Medium",
+              "human_reputation": "High",
+              "human_actions": "Reject",
+              "notes": "语气傲慢且贬低消费者，会激化矛盾并引发次生公关危机。"
+            }
+          },
+          "prediction": {
+            "error": "Connection error."
+          },
+          "draft": "真正懂产品的人不会因为这点小问题抱怨，请大家理性一点。"
+        }
+      ]
+    },
+    "predictions": [
+      {
+        "error": "Connection error."
+      },
+      {
+        "error": "Connection error."
+      }
+    ]
+  },
+  "rag_augmented_llm": {
+    "metrics": {
+      "decision_accuracy": 0.0,
+      "mean_score_mae": 1.6666666666666665,
+      "num_cases": 2,
+      "errors": [
+        {
+          "id": "case_0030",
+          "truth": {
+            "risk_spans": [],
+            "crisis_types": [
+              "PR",
+              "Reputation"
+            ],
+            "risk_scores": {
+              "legal": 1,
+              "business": 1,
+              "reputation": 1
+            },
+            "gold_actions": [
+              "Approve"
+            ],
+            "failure_tags": [],
+            "decision": "approve",
+            "raw": {
+              "id": "case_0030",
+              "scenario": "blame_shifting",
+              "event_description": "某品牌收到关于把问题归咎于外包人员或个别员工的集中投诉，相关内容在社交平台快速传播。",
+              "draft_response": "如核查确认存在问题，我们将说明影响范围、补救措施和完成时间。",
+              "human_crisis_types": "PR & Reputation",
+              "human_legal": "Low",
+              "human_business": "Low",
+              "human_reputation": "Low",
+              "human_actions": "Approve",
+              "notes": "回应客观负责且提供了具体措施或安全承诺，有助于平息舆情。"
+            }
+          },
+          "prediction": {
+            "error": "Connection error."
+          },
+          "draft": "如核查确认存在问题，我们将说明影响范围、补救措施和完成时间。"
+        },
+        {
+          "id": "case_0045",
+          "truth": {
+            "risk_spans": [],
+            "crisis_types": [
+              "PR",
+              "Customer Relations"
+            ],
+            "risk_scores": {
+              "legal": 1,
+              "business": 3,
+              "reputation": 5
+            },
+            "gold_actions": [
+              "Reject"
+            ],
+            "failure_tags": [],
+            "decision": "reject",
+            "raw": {
+              "id": "case_0045",
+              "scenario": "arrogance",
+              "event_description": "某品牌收到关于以居高临下的口吻评价消费者的集中投诉，相关内容在社交平台快速传播。",
+              "draft_response": "真正懂产品的人不会因为这点小问题抱怨，请大家理性一点。",
+              "human_crisis_types": "PR and Customer Relations",
+              "human_legal": "Low",
+              "human_business": "Medium",
+              "human_reputation": "High",
+              "human_actions": "Reject",
+              "notes": "语气傲慢且贬低消费者，会激化矛盾并引发次生公关危机。"
+            }
+          },
+          "prediction": {
+            "error": "Connection error."
+          },
+          "draft": "真正懂产品的人不会因为这点小问题抱怨，请大家理性一点。"
+        }
+      ]
+    },
+    "predictions": [
+      {
+        "error": "Connection error."
+      },
+      {
+        "error": "Connection error."
+      }
+    ]
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "num_test_cases": 48,
+  "num_human_reviewed": 48,
+  "missing_review_ids": [],
+  "decision_counts": {
+    "approve": 16,
+    "reject": 32
+  },
+  "score_counts": {
+    "legal": {
+      "1": 39,
+      "3": 4,
+      "5": 5
+    },
+    "business": {
+      "1": 22,
+      "3": 20,
+      "5": 6
+    },
+    "reputation": {
+      "1": 16,
+      "3": 6,
+      "5": 26
+    }
+  },
+  "preannotation_reputation_vs_human_decision_agreement": 1.0,
+  "mapping": "Low=1, Medium=3, High=5; raw labels preserved under human_annotation.raw",
+  "limitation": "No span offsets were supplied, so span-level F1 is not computed."
+}
